@@ -313,7 +313,7 @@ class Lightning_Paywall_Public
 	}
 
 	/**
-	 * TODO: Really Paid?
+	 * 
 	 */
 	public function ajax_paid_invoice()
 	{

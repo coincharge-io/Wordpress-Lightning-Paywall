@@ -32,12 +32,6 @@ label {
   margin-top: 8px;
 }
 
-/*table {
-  border: 1px black solid;
-  width: 100%;
-  border-collapse: collapse; 
-  border-spacing: 0;
-}*/
 .section > h1 {
   font-size: 35px;
   margin-bottom: 15px;
@@ -60,14 +54,7 @@ label {
   font-size: 0.9em;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.192);
 }
-/*th, td {
-  width: 25%;
-}*/
 
-/*tr {
-  text-align: center;
-  border: 1px black solid;
-}*/
 .section.table thead tr th {
   background-color: #1d5aa3;
   color: #ffffff;
@@ -95,12 +82,12 @@ label {
 
 td.Expired,
 td.Invalid {
-  background-color: red;
+  background-color: #f53c18;
 }
 td.Processing,
 td.New {
-  background-color: yellow;
+  background-color: #f6b330;
 }
 td.Settled {
-  background-color: green;
+  background-color: #269950;
 }

@@ -170,6 +170,10 @@ class Lightning_Paywall_Admin
 
 		return $value;
 	}
+	/**
+	 * Helper function for extracting permission string from server
+	 */
+
 	public function startsWith($string, $startString)
 	{
 		$len = strlen($startString);
@@ -177,6 +181,10 @@ class Lightning_Paywall_Admin
 		return (substr($string, 0, $len) === $startString);
 	}
 
+
+	/**
+	 * Check if API key contains required permission
+	 */
 	public function checkPermission($list, $permission)
 	{
 		foreach ($list as $perm) {
@@ -186,8 +194,10 @@ class Lightning_Paywall_Admin
 		}
 		return false;
 	}
-
-	public function ajax_check_btcpay_api_work()
+	/**
+	 *	Check connection with a server
+	 */
+	public function ajax_check_greenfield_api_work()
 	{
 
 		if (empty($_POST['auth_key_view']) || empty($_POST['auth_key_create']) || empty($_POST['server_url'])) {
@@ -247,7 +257,10 @@ class Lightning_Paywall_Admin
 		}
 	}
 
-
+	/** 
+	 * Fetch invoices
+	 */
+	 
 	public function get_greenfield_invoices()
 	{
 

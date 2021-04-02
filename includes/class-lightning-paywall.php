@@ -147,7 +147,7 @@ class Lightning_Paywall
 		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_meta_boxes');
 		$this->loader->add_action('save_post', $plugin_admin, 'save_post_settings_meta_box');
 
-		$this->loader->add_action('wp_ajax_lnpw_check_btcpay_api_work', $plugin_admin, 'ajax_check_btcpay_api_work');
+		$this->loader->add_action('wp_ajax_lnpw_check_greenfield_api_work', $plugin_admin, 'ajax_check_greenfield_api_work');
 		$this->loader->add_action('wp_ajax_lnpw_get_greenfield_invoices', $plugin_admin, 'get_greenfield_invoices');
 
 

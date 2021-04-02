@@ -8,7 +8,7 @@
         url: "/wp-admin/admin-ajax.php",
         method: "POST",
         data: {
-          action: "lnpw_check_btcpay_api_work",
+          action: "lnpw_check_greenfield_api_work",
           auth_key_view: $("#lnpw_btcpay_auth_key_view").val(),
           auth_key_create: $("#lnpw_btcpay_auth_key_create").val(),
           server_url: $("#lnpw_btcpay_server_url").val(),
