@@ -32,9 +32,9 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
 
                 <?php foreach ($post_types as $post_type) : ?>
                     <span style="margin-left: 15px; text-transform: capitalize">
-                        <label style="line-height: 1" for="lnpw_enabled_<?= $post_type ?>"><?= $post_type ?></label>
+                        <label style="line-height: 1" for="lnpw_enabled_<?php echo $post_type ?>"><?php echo $post_type ?></label>
 
-                        <input style="margin: 0" type="checkbox" name="lnpw_enabled_post_types[]" id="lnpw_enabled_<?= $post_type ?>" value="<?= $post_type ?>" <?= in_array($post_type, $enabled_post_types) ? 'checked' : ''; ?>>
+                        <input style="margin: 0" type="checkbox" name="lnpw_enabled_post_types[]" id="lnpw_enabled_<?php echo $post_type ?>" value="<?php echo $post_type ?>" <?php echo in_array($post_type, $enabled_post_types) ? 'checked' : ''; ?>>
                     </span>
                 <?php endforeach; ?>
             </div>
@@ -45,7 +45,7 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label for="checkout_title">Checkout title</label>
                     </div>
                     <div class="col-80">
-                        <textarea id="checkout_title" name="lnpw_default_payblock_text"><?= $default_text; ?></textarea>
+                        <textarea id="checkout_title" name="lnpw_default_payblock_text"><?php echo $default_text; ?></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -53,7 +53,7 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label for="checkout_button">Checkout button text</label>
                     </div>
                     <div class="col-80">
-                        <textarea id="checkout_button" name="lnpw_default_payblock_button"><?= $default_button; ?></textarea>
+                        <textarea id="checkout_button" name="lnpw_default_payblock_button"><?php echo $default_button; ?></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -61,7 +61,7 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label for="checkout_info">Checkout price info</label>
                     </div>
                     <div class="col-80">
-                        <textarea id="checkout_info" name="lnpw_default_payblock_info"><?= $default_info; ?></textarea>
+                        <textarea id="checkout_info" name="lnpw_default_payblock_info"><?php echo $default_info; ?></textarea>
                     </div>
                 </div>
             </div>
@@ -72,13 +72,13 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label for="lnpw_default_price">Default price</label>
                     </div>
                     <div class="col-80">
-                        <input required type="number" min=0 placeholder="Default Price" step=1 name="lnpw_default_price" id="lnpw_default_price" value="<?= $default_price ?>">
+                        <input required type="number" min=0 placeholder="Default Price" step=1 name="lnpw_default_price" id="lnpw_default_price" value="<?php echo $default_price ?>">
 
                         <select required name="lnpw_currency" id="lnpw_currency">
                             <option disabled value="">Select currency</option>
                             <?php foreach ($supported_currencies as $currency) : ?>
-                                <option <?= $used_currency === $currency ? 'selected' : ''; ?> value="<?= $currency; ?>">
-                                    <?= $currency; ?>
+                                <option <?php echo $used_currency === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+                                    <?php echo $currency; ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -90,13 +90,13 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label for="lnpw_default_duration">Default duration</label>
                     </div>
                     <div class="col-80">
-                        <input type="number" min="1" placeholder="Default Access Duration" name="lnpw_default_duration" id="lnpw_default_duration" disabled value="<?= $default_duration ?>">
+                        <input type="number" min="1" placeholder="Default Access Duration" name="lnpw_default_duration" id="lnpw_default_duration" disabled value="<?php echo $default_duration ?>">
 
                         <select required name="lnpw_default_duration_type" id="lnpw_default_duration_type">
                             <option disabled value="">Select duration type</option>
                             <?php foreach ($supported_durations as $duration) : ?>
-                                <option <?= $default_duration_type === $duration ? 'selected' : ''; ?> value="<?= $duration; ?>">
-                                    <?= $duration; ?>
+                                <option <?php echo $default_duration_type === $duration ? 'selected' : ''; ?> value="<?php echo $duration; ?>">
+                                    <?php echo $duration; ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -111,8 +111,8 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label>BTCPay Server Url</label>
                     </div>
                     <div class="col-80">
-                        <input type="url" placeholder="BTCPay Server Url" name="lnpw_btcpay_server_url" id="lnpw_btcpay_server_url" value="<?= $btcpay_server_url ?>" style="min-width: 335px;">
-                        <input type="hidden" name="lnpw_btcpay_store_id" id="lnpw_btcpay_store_id" value="<?= $btcpay_store_id ?>">
+                        <input type="url" placeholder="BTCPay Server Url" name="lnpw_btcpay_server_url" id="lnpw_btcpay_server_url" value="<?php echo $btcpay_server_url ?>" style="min-width: 335px;">
+                        <input type="hidden" name="lnpw_btcpay_store_id" id="lnpw_btcpay_store_id" value="<?php echo $btcpay_store_id ?>">
                         <div class="lnpw_generate_api">Generate API keys:<a href="" class="lnpw_auth_key" target="_blank"></a></div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label for="lnpw_btcpay_auth_key_view">BTCPay Server API Key View</label>
                     </div>
                     <div class="col-80">
-                        <input required type="text" placeholder="Auth Key View" name="lnpw_btcpay_auth_key_view" id="lnpw_btcpay_auth_key_view" value="<?= $btcpay_auth_key_view ?>" style="min-width: 500px;">
+                        <input required type="text" placeholder="Auth Key View" name="lnpw_btcpay_auth_key_view" id="lnpw_btcpay_auth_key_view" value="<?php echo $btcpay_auth_key_view ?>" style="min-width: 500px;">
                     </div>
                 </div>
                 <div class="row">
@@ -129,7 +129,7 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                         <label for="lnpw_btcpay_auth_key_create">BTCPay Server API Key Create</label>
                     </div>
                     <div class="col-80">
-                        <input required type="text" placeholder="Auth Key Create" name="lnpw_btcpay_auth_key_create" id="lnpw_btcpay_auth_key_create" value="<?= $btcpay_auth_key_create ?>" style="min-width: 500px;">
+                        <input required type="text" placeholder="Auth Key Create" name="lnpw_btcpay_auth_key_create" id="lnpw_btcpay_auth_key_create" value="<?php echo $btcpay_auth_key_create ?>" style="min-width: 500px;">
                     </div>
                 </div>
             </div>
