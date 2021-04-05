@@ -2,13 +2,21 @@
 
 
 Contributors: coincharge
+
 Donate link: https://coincharge.io/en/contact/
+
 Tags: lightning-paywall, Bitcoin, Lightning, paywall, BTCPay, pay-per-post, pay-per-view, pay-per-content, coincharge, publisher, payment
+
 Requires at least: 5.6
+
 Requires PHP: 7.4
+
 Tested up to: 5.7
+
 Stable tag: 1.0.0
+
 License: GPLv2
+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
