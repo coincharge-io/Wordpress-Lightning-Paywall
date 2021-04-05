@@ -1,4 +1,6 @@
 === Lightning Paywall ===
+
+
 Contributors: coincharge
 Donate link: https://coincharge.io/en/contact/
 Tags: lightning-paywall, Bitcoin, Lightning, paywall, BTCPay, pay-per-post, pay-per-view, pay-per-content, coincharge, publisher, payment

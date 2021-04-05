@@ -73,7 +73,7 @@ class Lightning_Paywall_Public
 		if (empty($_COOKIE['lnpw_' . $post_id])) {
 			return false;
 		}
-
+		
 		$order = get_posts([
 			'post_type'     => 'lnpw_order',
 			'fields'        => 'ids',
@@ -87,7 +87,7 @@ class Lightning_Paywall_Public
 				],
 				[
 					'key'   => 'lnpw_secret',
-					'value' => $_COOKIE['lnpw_' . $post_id],
+					'value' => sanitize_text_field($_COOKIE['lnpw_' . $post_id]),
 				],
 			],
 		]);
@@ -100,7 +100,6 @@ class Lightning_Paywall_Public
 	}
 
 	/**
-	 * TODO: Optimize???
 	 *
 	 * @param  string  $content
 	 *
@@ -108,7 +107,7 @@ class Lightning_Paywall_Public
 	 */
 	public function filter_the_content($content)
 	{
-
+		
 		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true)) {
 			return $content;
 		}
