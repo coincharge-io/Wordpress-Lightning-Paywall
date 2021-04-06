@@ -86,4 +86,22 @@ There is no need to upgrade just yet.
 
 == Screenshots ==
 
-There are no screenshots yet.
+1. Pairing Process
+2. Pairing Process
+3. Pairing Process
+4. Pairing Process
+5. Pairing Process
+6. Pairing Process
+7. Pairing Process
+9. Pairing Process
+10. WPBakery Add Paywall
+11. WPBakery Add Paywall
+12. WPBakery Add Paywall
+13. WPBakery Add Paywall
+14. Change Global Settings
+15. Elementor Add Paywall
+16. Gutenberg Add Paywall
+17. Gutenberg Add Paywall
+18. Shortcode Add Paywall
+19. Shortcode Add Paywall
+
