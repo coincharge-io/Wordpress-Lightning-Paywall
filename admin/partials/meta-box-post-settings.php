@@ -37,22 +37,4 @@ $used_duration       = get_option('lnpw_default_duration');
         </select>
         <p>If field 'default', used default value - <?php echo $used_duration_type; ?></p>
     </div>
-
-    <div>
-        <div>
-            <label for="checkout_view_title">View title</label>
-        </div>
-        <div>
-            <textarea id="checkout_view_title" name=""><?php   ?></textarea>
-        </div>
-    </div>
-    <div>
-        <div>
-            <label for="checkout_view_description">View description</label>
-        </div>
-        <div>
-            <textarea id="checkout_view_description" name=""><?php   ?></textarea>
-        </div>
-    </div>
-
 </div>
