@@ -171,6 +171,7 @@ class Lightning_Paywall
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 		$this->loader->add_shortcode('lnpw_pay_block', $plugin_public, 'render_shortcode_lnpw_pay_block');
+		$this->loader->add_shortcode('lnpw_pay_video_block', $plugin_public, 'render_shortcode_lnpw_pay_view_block');
 
 		$this->loader->add_filter('the_content', $plugin_public, 'filter_the_content', 50);
 
@@ -182,6 +183,8 @@ class Lightning_Paywall
 
 		$this->loader->add_shortcode('lnpw_start_content', $plugin_public, 'render_shortcode_lnpw_start_content');
 		$this->loader->add_shortcode('lnpw_end_content', $plugin_public, 'render_shortcode_lnpw_end_content');
+		$this->loader->add_shortcode('lnpw_start_video', $plugin_public, 'render_shortcode_lnpw_start_video');
+		$this->loader->add_shortcode('lnpw_end_video', $plugin_public, 'render_shortcode_lnpw_end_content');
 	}
 
 	/**

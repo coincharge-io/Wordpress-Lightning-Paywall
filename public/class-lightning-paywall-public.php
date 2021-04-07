@@ -382,6 +382,24 @@ class Lightning_Paywall_Public
 		return $s_data;
 	}
 
+	public function render_shortcode_lnpw_start_video($atts)
+	{
+		$img_preview = plugin_dir_url( __FILE__ ) . 'img/preview.png';
+
+		$atts = shortcode_atts(array(
+			'pay_view_block' => false,
+			'preview' => $img_preview,
+		), $atts);
+
+		$s_data = '<!-- lnpw:start_content -->';
+
+		if ($atts['pay_view_block']) {
+			return do_shortcode("[lnpw_pay_video_block preview={$atts['preview']}]") . $s_data;
+		}
+
+		return $s_data;
+	}
+
 	/**
 	 * @param  array  $atts
 	 *
@@ -403,11 +421,54 @@ class Lightning_Paywall_Public
 		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content()) {
 			return '';
 		}
-
 		ob_start();
 
 		include 'partials/lnpw-pay-block.php';
 
 		return ob_get_clean();
+	}
+	public function render_shortcode_lnpw_pay_view_block($atts)
+	{
+		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content())
+		{
+			return '';
+		}
+		//$img_preview = plugin_dir_url( __FILE__ ) . 'img/preview.png';
+
+		$atts = shortcode_atts(array(
+			'preview' => '',
+		), $atts);
+
+		//data-post_id="<?php echo  get_the_ID(); 
+		ob_start();
+		
+		?>
+		<div class="lnpw_pay">
+		<div class="lnpw_pay__preview">
+		<img src=<?php echo esc_url($atts['preview']); ?> alt="Video preview">
+		</div>
+		<div class="lnpw_pay__content">
+			<h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
+			<p>
+			  <?php echo Lightning_Paywall_Public::get_post_info_string() ?>
+			</p>
+		 </div>
+			<div class="lnpw_pay__footer">
+				<div>
+				  <button type="button" id="lnpw_pay__button" ><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
+				</div>
+			<div class="lnpw_pay__loading">
+				<p class="loading"></p>
+			</div>
+			<div class="lnpw_help">
+				<a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/" target="_blank">Help</a>
+			</div>
+		 </div>
+		</div>
+		<?php
+
+		return ob_get_clean();
+
+
 	}
 }
