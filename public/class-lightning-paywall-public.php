@@ -388,13 +388,15 @@ class Lightning_Paywall_Public
 
 		$atts = shortcode_atts(array(
 			'pay_view_block' => false,
+			'title' => '',
+			'description' => '',
 			'preview' => $img_preview,
 		), $atts);
 
 		$s_data = '<!-- lnpw:start_content -->';
 
 		if ($atts['pay_view_block']) {
-			return do_shortcode("[lnpw_pay_video_block preview={$atts['preview']}]") . $s_data;
+			return do_shortcode("[lnpw_pay_video_block title={$atts['title']} description={$atts['description']} preview={$atts['preview']}]") . $s_data;
 		}
 
 		return $s_data;
@@ -436,6 +438,8 @@ class Lightning_Paywall_Public
 		//$img_preview = plugin_dir_url( __FILE__ ) . 'img/preview.png';
 
 		$atts = shortcode_atts(array(
+			'title' => '',
+			'description' => '',
 			'preview' => '',
 		), $atts);
 
@@ -445,6 +449,8 @@ class Lightning_Paywall_Public
 		?>
 		<div class="lnpw_pay">
 		<div class="lnpw_pay__preview">
+		<h2><?php echo esc_html($atts['title']); ?></h2>
+		<p><?php echo esc_html($atts['description']); ?></p>
 		<img src=<?php echo esc_url($atts['preview']); ?> alt="Video preview">
 		</div>
 		<div class="lnpw_pay__content">
