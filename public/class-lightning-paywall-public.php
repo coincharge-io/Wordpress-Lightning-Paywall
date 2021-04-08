@@ -73,7 +73,7 @@ class Lightning_Paywall_Public
 		if (empty($_COOKIE['lnpw_' . $post_id])) {
 			return false;
 		}
-		
+
 		$order = get_posts([
 			'post_type'     => 'lnpw_order',
 			'fields'        => 'ids',
@@ -107,7 +107,7 @@ class Lightning_Paywall_Public
 	 */
 	public function filter_the_content($content)
 	{
-		
+
 		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true)) {
 			return $content;
 		}
@@ -384,12 +384,12 @@ class Lightning_Paywall_Public
 
 	public function render_shortcode_lnpw_start_video($atts)
 	{
-		$img_preview = plugin_dir_url( __FILE__ ) . 'img/preview.png';
+		$img_preview = plugin_dir_url(__FILE__) . 'img/preview.png';
 
 		$atts = shortcode_atts(array(
 			'pay_view_block' => false,
-			'title' => '',
-			'description' => '',
+			'title' => 'Untitled',
+			'description' => '...',
 			'preview' => $img_preview,
 		), $atts);
 
@@ -431,8 +431,7 @@ class Lightning_Paywall_Public
 	}
 	public function render_shortcode_lnpw_pay_view_block($atts)
 	{
-		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content())
-		{
+		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content()) {
 			return '';
 		}
 		//$img_preview = plugin_dir_url( __FILE__ ) . 'img/preview.png';
@@ -443,38 +442,59 @@ class Lightning_Paywall_Public
 			'preview' => '',
 		), $atts);
 
-		//data-post_id="<?php echo  get_the_ID(); 
+
 		ob_start();
-		
-		?>
+
+?>
 		<div class="lnpw_pay">
-		<div class="lnpw_pay__preview">
-		<h2><?php echo esc_html($atts['title']); ?></h2>
-		<p><?php echo esc_html($atts['description']); ?></p>
-		<img src=<?php echo esc_url($atts['preview']); ?> alt="Video preview">
-		</div>
-		<div class="lnpw_pay__content">
-			<h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
-			<p>
-			  <?php echo Lightning_Paywall_Public::get_post_info_string() ?>
-			</p>
-		 </div>
+			<div class="lnpw_pay__preview">
+				<h2><?php echo esc_html($atts['title']); ?></h2>
+				<p><?php echo esc_html($atts['description']); ?></p>
+				<img src=<?php echo esc_url($atts['preview']); ?> alt="Video preview">
+			</div>
+			<div class="lnpw_pay__content">
+				<h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
+				<p>
+					<?php echo Lightning_Paywall_Public::get_post_info_string() ?>
+				</p>
+			</div>
 			<div class="lnpw_pay__footer">
 				<div>
-				  <button type="button" id="lnpw_pay__button" ><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
+					<button type="button" id="lnpw_pay__button" data-post_id="<?php echo  get_the_ID(); ?>"><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
 				</div>
-			<div class="lnpw_pay__loading">
-				<p class="loading"></p>
+				<div class="lnpw_pay__loading">
+					<p class="loading"></p>
+				</div>
+				<div class="lnpw_help">
+					<a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/" target="_blank">Help</a>
+				</div>
 			</div>
-			<div class="lnpw_help">
-				<a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/" target="_blank">Help</a>
-			</div>
-		 </div>
 		</div>
-		<?php
+	<?php
+
 
 		return ob_get_clean();
+	}
 
+	public function render_shortcode_lnpw_store($atts)
+	{
 
+		$args = array(
+			'post_type'   => ''
+		);
+
+		$myposts = get_posts($args);
+		ob_start();
+
+	?>
+		<?php foreach ($myposts as $post) : setup_postdata($post); ?>
+			<li>
+				<a href="<?php the_permalink($post); ?>"><?php print_r($post); ?></a>
+			</li>
+		<?php endforeach;
+		wp_reset_postdata(); ?>
+<?php
+
+		return ob_get_clean();
 	}
 }
