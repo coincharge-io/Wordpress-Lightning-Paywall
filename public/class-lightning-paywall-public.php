@@ -480,19 +480,22 @@ class Lightning_Paywall_Public
 	{
 
 		$args = array(
-			'post_type'   => ''
+			'post_type' => 'post',
 		);
 
 		$myposts = get_posts($args);
 		ob_start();
 
 	?>
+		<div class="lnpw_store">
 		<?php foreach ($myposts as $post) : setup_postdata($post); ?>
-			<li>
-				<a href="<?php the_permalink($post); ?>"><?php print_r($post); ?></a>
-			</li>
+			
+			<div class="lnpw_store_video">
+			<a href="<?php the_permalink($post); ?>"><?php the_content(); ?></a>
+			</div>
 		<?php endforeach;
 		wp_reset_postdata(); ?>
+		</div>
 <?php
 
 		return ob_get_clean();
