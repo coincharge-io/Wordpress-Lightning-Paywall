@@ -483,21 +483,68 @@ class Lightning_Paywall_Public
 			'post_type' => 'post',
 		);
 
+
 		$myposts = get_posts($args);
 		ob_start();
 
 	?>
 		<div class="lnpw_store">
-		<?php foreach ($myposts as $post) : setup_postdata($post); ?>
-			
-			<div class="lnpw_store_video">
-			<a href="<?php the_permalink($post); ?>"><?php the_content(); ?></a>
-			</div>
-		<?php endforeach;
-		wp_reset_postdata(); ?>
+			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
+
+
+				<div class="lnpw_store_video">
+					<div class="lnpw_store_video_preview">
+						<img src="<?php echo esc_url($this->extract_preview($post, 'lnpw_start_video')['preview']) ?>" alt="Video preview" />
+					</div>
+					<div class="lnpw_store_video_information">
+						<a href="<?php the_permalink($post); ?>">
+							<h3><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['title']); ?></h3>
+						</a>
+						<p><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['description']); ?></p>
+					</div>
+				</div>
+			<?php endforeach;
+			wp_reset_postdata(); ?>
 		</div>
 <?php
 
 		return ob_get_clean();
+	}
+	public function extract_preview($post, $shortcode_attr)
+	{
+
+		$preview_data = array();
+
+		$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
+
+		$preview_data['title'] = 'Untitled';
+
+		$preview_data['description'] = '...';
+
+		$regex_pattern = get_shortcode_regex();
+
+		preg_match('/' . $regex_pattern . '/s', $post->post_content, $regex_matches);
+
+		if ($regex_matches[2] == $shortcode_attr) {
+
+			$attributes = shortcode_parse_atts($regex_matches[0]);
+
+			if (isset($attributes['title'])) {
+
+				$preview_data['title'] = $attributes['title'];
+			}
+
+			if (isset($attributes['description'])) {
+
+				$preview_data['description'] = $attributes['description'];
+			}
+
+			if (isset($attributes['preview'])) {
+
+				$preview_data['preview'] = $attributes['preview'];
+			}
+
+			return $preview_data;
+		}
 	}
 }
