@@ -434,7 +434,6 @@ class Lightning_Paywall_Public
 		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content()) {
 			return '';
 		}
-		//$img_preview = plugin_dir_url( __FILE__ ) . 'img/preview.png';
 
 		$atts = shortcode_atts(array(
 			'title' => '',
@@ -478,6 +477,9 @@ class Lightning_Paywall_Public
 
 	public function render_shortcode_lnpw_store($atts)
 	{
+		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content()) {
+			return '';
+		}
 
 		$args = array(
 			'post_type' => 'post',
