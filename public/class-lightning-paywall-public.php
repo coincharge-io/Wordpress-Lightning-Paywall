@@ -389,7 +389,7 @@ class Lightning_Paywall_Public
 		$atts = shortcode_atts(array(
 			'pay_view_block' => false,
 			'title' => 'Untitled',
-			'description' => '...',
+			'description' => 'No description available',
 			'preview' => $img_preview,
 		), $atts);
 
@@ -491,18 +491,20 @@ class Lightning_Paywall_Public
 		<div class="lnpw_store">
 			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
 
+				<?php if (null !== $this->extract_preview($post, 'lnpw_start_video')) : ?>
+					<div class="lnpw_store_video">
+						<div class="lnpw_store_video_preview">
+							<img src="<?php echo esc_url($this->extract_preview($post, 'lnpw_start_video')['preview']) ?>" alt="Video preview" />
+						</div>
+						<div class="lnpw_store_video_information">
+							<a href="<?php the_permalink($post); ?>">
+								<h5><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['title']); ?></h5>
 
-				<div class="lnpw_store_video">
-					<div class="lnpw_store_video_preview">
-						<img src="<?php echo esc_url($this->extract_preview($post, 'lnpw_start_video')['preview']) ?>" alt="Video preview" />
+								<h6><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['description']); ?></h6>
+							</a>
+						</div>
 					</div>
-					<div class="lnpw_store_video_information">
-						<a href="<?php the_permalink($post); ?>">
-							<h3><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['title']); ?></h3>
-						</a>
-						<p><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['description']); ?></p>
-					</div>
-				</div>
+				<?php endif; ?>
 			<?php endforeach;
 			wp_reset_postdata(); ?>
 		</div>
@@ -524,6 +526,11 @@ class Lightning_Paywall_Public
 		$regex_pattern = get_shortcode_regex();
 
 		preg_match('/' . $regex_pattern . '/s', $post->post_content, $regex_matches);
+
+		if (empty($regex_matches[2])) {
+
+			return;
+		}
 
 		if ($regex_matches[2] == $shortcode_attr) {
 
