@@ -393,10 +393,14 @@ class Lightning_Paywall_Public
 			'preview' => $img_preview,
 		), $atts);
 
+		$title = $atts['title'] === "" ? "" : "title='{$atts['title']}' ";
+
+		$description = $atts['description'] === "" ? "" : "description='{$atts['description']}' ";
+
 		$s_data = '<!-- lnpw:start_content -->';
 
 		if ($atts['pay_view_block']) {
-			return do_shortcode("[lnpw_pay_video_block title={$atts['title']} description={$atts['description']} preview={$atts['preview']}]") . $s_data;
+			return do_shortcode("[lnpw_pay_video_block title='{$atts['title']} description='{$atts['description']}' preview={$atts['preview']}]") . $s_data;
 		}
 
 		return $s_data;
@@ -440,7 +444,6 @@ class Lightning_Paywall_Public
 			'description' => '',
 			'preview' => '',
 		), $atts);
-
 
 		ob_start();
 
