@@ -443,7 +443,6 @@ class Lightning_Paywall_Admin
 					'type'        => 'attach_image',
 					'heading'     => 'Video preview',
 					'param_name'  => 'preview',
-					'value'       => '',
 					'description' => 'Show payment block video preview',
 				),
 			),
