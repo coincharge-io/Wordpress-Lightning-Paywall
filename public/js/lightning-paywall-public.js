@@ -5,15 +5,13 @@
     var lnpw_order_id = null;
 
     $("#lnpw_pay__button").click(function () {
+      $(".lnpw_pay__loading p.loading").addClass("spinner");
       var post_id = $(this).data("post_id");
-
-      $(".loading").addClass("spinner");
-
       if (lnpw_invoice_id && lnpw_order_id) {
         lnpwShowInvoice(lnpw_invoice_id, lnpw_order_id);
         return;
       }
-
+      
       $.ajax({
         url: "/wp-admin/admin-ajax.php",
         method: "GET",
@@ -23,12 +21,12 @@
         },
         success: function (response) {
           if (response.success) {
-            $(".loading").removeClass("spinner");
+            $(".lnpw_pay__loading p.loading").removeClass("spinner");
             lnpw_invoice_id = response.data.invoice_id;
             lnpw_order_id = response.data.order_id;
             lnpwShowInvoice(lnpw_invoice_id, lnpw_order_id);
           } else {
-            $(".loading").removeClass("spinner");
+            $(".lnpw_pay__loading p.loading").removeClass("spinner");
             console.error(response);
           }
         },
