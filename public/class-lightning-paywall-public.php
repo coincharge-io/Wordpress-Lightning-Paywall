@@ -441,8 +441,10 @@ class Lightning_Paywall_Public
 			'description' => '',
 			'preview' => '',
 		), $atts);
+		
+		$image = wp_get_attachment_image_src( $atts['preview'] );
 
-		$preview_url = wp_get_attachment_image_src( $atts['preview']) ? wp_get_attachment_image_src( $atts['preview']) : $atts['preview'];
+		$preview_url = $image ? $image[0] : $atts['preview'];
 
 		ob_start();
 
