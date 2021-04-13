@@ -442,6 +442,8 @@ class Lightning_Paywall_Public
 			'preview' => '',
 		), $atts);
 
+		$preview_url = wp_get_attachment_image_src( $atts['preview']) ? wp_get_attachment_image_src( $atts['preview']) : $atts['preview'];
+
 		ob_start();
 
 ?>
@@ -449,7 +451,7 @@ class Lightning_Paywall_Public
 			<div class="lnpw_pay__preview">
 				<h2><?php echo esc_html($atts['title']); ?></h2>
 				<p><?php echo esc_html($atts['description']); ?></p>
-				<img src=<?php echo esc_url($atts['preview']); ?> alt="Video preview">
+				<img src=<?php echo esc_url($preview_url); ?> alt="Video preview">
 			</div>
 			<div class="lnpw_pay__content">
 				<h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>

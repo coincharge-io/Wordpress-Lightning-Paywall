@@ -455,6 +455,14 @@ class Lightning_Paywall_Admin
 			'category'    => 'Content',
 			'params'      => array(),
 		));
+
+		vc_map(array(
+			'name'        => 'LP Store',
+			'base'        => 'lnpw_store',
+			'description' => 'Show Videos',
+			'category'    => 'Content',
+			'params'      => array(),
+		));
 	}
 
 	public function load_elementor_widgets()
