@@ -523,7 +523,7 @@ class Lightning_Paywall_Public
 
 		$preview_data['title'] = 'Untitled';
 
-		$preview_data['description'] = '...';
+		$preview_data['description'] = 'No description';
 
 		$regex_pattern = get_shortcode_regex();
 
@@ -533,7 +533,7 @@ class Lightning_Paywall_Public
 
 			return;
 		}
-
+		
 		if ($regex_matches[2] == $shortcode_attr) {
 
 			$attributes = shortcode_parse_atts($regex_matches[0]);

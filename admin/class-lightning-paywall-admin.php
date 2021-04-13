@@ -411,6 +411,51 @@ class Lightning_Paywall_Admin
 			'category'    => 'Content',
 			'params'      => array(),
 		));
+
+		vc_map(array(
+			'name'        => 'LP Start Paid Video Content',
+			'base'        => 'lnpw_start_video',
+			'description' => 'Start area of paid video content',
+			'category'    => 'Content',
+			'params'      => array(
+				array(
+					'type'        => 'checkbox',
+					'heading'     => 'Enable payment block',
+					'param_name'  => 'pay_view_block',
+					'value'       => false,
+					'description' => 'Show payment block instead of video',
+				),
+				array(
+					'type'        => 'textarea',
+					'heading'     => 'Video title',
+					'param_name'  => 'title',
+					'value'       => 'Untitled',
+					'description' => 'Show payment block video title',
+				),
+				array(
+					'type'        => 'textarea',
+					'heading'     => 'Video description',
+					'param_name'  => 'description',
+					'value'       => 'No description',
+					'description' => 'Show payment block video description',
+				),
+				array(
+					'type'        => 'attach_image',
+					'heading'     => 'Video preview',
+					'param_name'  => 'preview',
+					'value'       => '',
+					'description' => 'Show payment block video preview',
+				),
+			),
+		));
+
+		vc_map(array(
+			'name'        => 'LP End Paid Video Content',
+			'base'        => 'lnpw_end_video',
+			'description' => 'End area of paid video content',
+			'category'    => 'Content',
+			'params'      => array(),
+		));
 	}
 
 	public function load_elementor_widgets()
