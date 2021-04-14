@@ -1,26 +1,7 @@
 {
   "name": "lightning-paywall",
   "version": "1.0.0",
-  "description": "
-  === Lightning Paywall ===
-
-Contributors: coincharge
-
-Donate link: https://coincharge.io/en/contact/
-
-Tags: lightning-paywall, Bitcoin, Lightning, paywall, BTCPay, pay-per-post, pay-per-view, pay-per-content, coincharge, publisher, payment
-
-Requires at least: 5.6
-
-Requires PHP: 7.4
-
-Tested up to: 5.7
-
-Stable tag: 1.0.0
-
-License: GPLv2
-
-License URI: http://www.gnu.org/licenses/gpl-2.0.html",
+  "description": "Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer previews of your blog posts and accept bitcoin payment for a single post (pay-per-post) via Lightning Network.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

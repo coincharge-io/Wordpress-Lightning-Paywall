@@ -105,7 +105,7 @@ registerBlockType("lightning-paywall/gutenberg-end-block", {
   category: 'widgets',
   keywords: ['paywall', 'end-paywall'],
   edit: function edit(props) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", null, "LP End Paid Text Content");
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", null, " LP End Paid Text Content ");
   },
   save: function save(props) {
     return null;
@@ -127,15 +127,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 
 var registerBlockType = wp.blocks.registerBlockType;
-var _wp = wp,
-    ServerSideRender = _wp.serverSideRender;
 registerBlockType("lightning-paywall/gutenberg-start-block", {
   title: 'LP Start Paid Text Content',
   icon: 'tagcloud',
   category: 'widgets',
   keywords: ['paywall', 'start-paywall'],
   edit: function edit(props) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", null, "LP Start Paid Text Content");
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", null, " LP Start Paid Text Content ");
   },
   save: function save(props) {
     return null;
