@@ -44,7 +44,7 @@
   margin: 5px;
   border-radius: 50%;
   border: 6px solid #fff;
-  border-color: #ffa500 transparent #ffa500 transparent;
+  border-color: #ffa500 #1d5aa3 #ffa500 #1d5aa3;
   animation: spinner 1s linear infinite;
 }
 

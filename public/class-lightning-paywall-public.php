@@ -182,11 +182,11 @@ class Lightning_Paywall_Public
 		if (get_post_meta($post_id, 'lnpw_duration_type', true)) {
 			$duration_type = get_post_meta($post_id, 'lnpw_duration_type', true);
 		} else {
-			$duration_type = get_option('lnpw_default_duration_type');
+			$duration_type = get_option('lnpw_default_duration_type', 'unlimited');
 		}
 
-		$currency = get_option('lnpw_currency');
-
+		$currency = get_option('lnpw_currency', 'SATS');
+		
 		$payblock_info = get_option('lnpw_default_payblock_info');
 
 		if (!empty($payblock_info)) {
