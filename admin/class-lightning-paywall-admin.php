@@ -516,26 +516,63 @@ class Lightning_Paywall_Admin
 		return do_shortcode("[lnpw_end_content]");
 	}
 
+	public function render_store_gutenberg()
+	{
+		return do_shortcode("[lnpw_store]");
+	}
+	public function render_start_video_gutenberg($atts){
+		
+		//$img_preview = plugin_dir_url(__FILE__) . 'img/preview.png';
+		
+		$atts = shortcode_atts(array(
+			'pay_view_block' => false,
+			'title' => 'Untitled',
+			'description' => 'No description available',
+			'preview' => '',
+		), $atts);
+		if ($atts['pay_view_block']) {
+			return do_shortcode("[lnpw_start_video pay_view_block='{$atts['pay_view_block']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']}]");
+		}
+
+		
+	}
 	public function load_gutenberg()
 	{
 
 		wp_register_script(
 			'gutenberg-block-script',
 			plugin_dir_url(__FILE__) . 'gutenberg/index.js',
-			array('wp-blocks', 'wp-element', 'wp-editor'),
+			array('wp-blocks', 'wp-element', 'wp-editor', 'wp-components'),
 			$this->version
 		);
 
-		register_block_type('lightning-paywall/gutenberg-start-block', [
+		register_block_type('lightning-paywall/gutenberg-start-block', 
+		[
 			'editor_script' => 'gutenberg-block-script',
 			'render_callback' => (array($this, 'render_gutenberg')),
 		]);
-		register_block_type(
-			'lightning-paywall/gutenberg-end-block',
+		register_block_type('lightning-paywall/gutenberg-end-block',
 			[
 				'editor_script' => 'gutenberg-block-script',
 				'render_callback' => (array($this, 'render_end_gutenberg')),
-			]
-		);
+			]);
+		register_block_type('lightning-paywall/gutenberg-store-view',
+			[
+				'editor_script' => 'gutenberg-block-script',
+				'render_callback' => (array($this, 'render_store_gutenberg')),
+			]);
+
+			register_block_type('lightning-paywall/gutenberg-start-video-block',
+				[
+					'editor_script' => 'gutenberg-block-script',
+					'render_callback' => (array($this, 'render_start_video_gutenberg')),
+				]);
+
+			register_block_type('lightning-paywall/gutenberg-end-video-block',
+				[
+					'editor_script' => 'gutenberg-block-script',
+					'render_callback' => (array($this, 'render_end_gutenberg')),
+				]);
+		
 	}
 }
