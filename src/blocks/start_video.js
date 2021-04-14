@@ -1,5 +1,5 @@
 const { registerBlockType } = wp.blocks;
-const { useBlockProps, RichText, MediaUpload  } = wp.editor;
+const { RichText, MediaUpload  } = wp.editor;
 const { ToggleControl } = wp.components;
 
 
