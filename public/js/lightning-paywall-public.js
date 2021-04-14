@@ -20,13 +20,12 @@
           post_id: post_id,
         },
         success: function (response) {
+          $(".lnpw_pay__loading p.loading").removeClass("spinner");
           if (response.success) {
-            $(".lnpw_pay__loading p.loading").removeClass("spinner");
             lnpw_invoice_id = response.data.invoice_id;
             lnpw_order_id = response.data.order_id;
             lnpwShowInvoice(lnpw_invoice_id, lnpw_order_id);
           } else {
-            $(".lnpw_pay__loading p.loading").removeClass("spinner");
             console.error(response);
           }
         },
