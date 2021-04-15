@@ -234,7 +234,7 @@ class Lightning_Paywall_Public
 			$value = rtrim($value, '0');
 			return $value;
 		}
-		return get_post_meta($post_id, 'lnpw_price', true) ?: get_option('lnpw_default_price');;
+		return get_post_meta($post_id, 'lnpw_price', true) ?: get_option('lnpw_default_price');
 	}
 
 	public function generate_invoice_id($post_id, $order_id)
