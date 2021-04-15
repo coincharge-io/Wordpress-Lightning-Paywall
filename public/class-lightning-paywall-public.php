@@ -221,7 +221,7 @@ class Lightning_Paywall_Public
 
 	private function calculate_price_for_invoice($post_id)
 	{
-		$price = get_post_meta($post_id, 'lnpw_price', true) ?: get_option('lnpw_default_price');
+
 		if (get_option('lnpw_currency') === 'SATS') {
 
 			if (get_post_meta($post_id, 'lnpw_price', true)) {
@@ -234,7 +234,7 @@ class Lightning_Paywall_Public
 			$value = rtrim($value, '0');
 			return $value;
 		}
-		return $price;
+		return get_post_meta($post_id, 'lnpw_price', true) ?: get_option('lnpw_default_price');;
 	}
 
 	public function generate_invoice_id($post_id, $order_id)

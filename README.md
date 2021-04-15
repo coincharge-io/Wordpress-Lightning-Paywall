@@ -13,7 +13,7 @@ Requires PHP: 7.4
 
 Tested up to: 5.7
 
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 License: GPLv2
 
@@ -79,6 +79,15 @@ There are no FAQ just yet.
 = 1.0.0 =
 
 - First release
+
+= 1.0.1 =
+
+- Fixed: Loading spinner doesn't show up inside paywall
+
+- Fixed: Default values for currency and duration type aren't displayed inside paywall  
+
+- Fixed: Payment modal is popping up just for SATS currency
+
 
 == Upgrade Notice ==
 
