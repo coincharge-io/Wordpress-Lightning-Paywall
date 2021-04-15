@@ -73,7 +73,7 @@ class Lightning_Paywall_Public
 		if (empty($_COOKIE['lnpw_' . $post_id])) {
 			return false;
 		}
-		
+
 		$order = get_posts([
 			'post_type'     => 'lnpw_order',
 			'fields'        => 'ids',
@@ -107,7 +107,7 @@ class Lightning_Paywall_Public
 	 */
 	public function filter_the_content($content)
 	{
-		
+
 		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true)) {
 			return $content;
 		}
@@ -182,10 +182,10 @@ class Lightning_Paywall_Public
 		if (get_post_meta($post_id, 'lnpw_duration_type', true)) {
 			$duration_type = get_post_meta($post_id, 'lnpw_duration_type', true);
 		} else {
-			$duration_type = get_option('lnpw_default_duration_type');
+			$duration_type = get_option('lnpw_default_duration_type', 'unlimited');
 		}
 
-		$currency = get_option('lnpw_currency');
+		$currency = get_option('lnpw_currency', 'SATS');
 
 		$payblock_info = get_option('lnpw_default_payblock_info');
 
@@ -221,7 +221,7 @@ class Lightning_Paywall_Public
 
 	private function calculate_price_for_invoice($post_id)
 	{
-
+		$price = get_post_meta($post_id, 'lnpw_price', true) ?: get_option('lnpw_default_price');
 		if (get_option('lnpw_currency') === 'SATS') {
 
 			if (get_post_meta($post_id, 'lnpw_price', true)) {
@@ -234,13 +234,12 @@ class Lightning_Paywall_Public
 			$value = rtrim($value, '0');
 			return $value;
 		}
-
-		return get_post_meta($post_id, 'lnpw_price', true) ?? get_option('lnpw_default_price');
+		return $price;
 	}
 
 	public function generate_invoice_id($post_id, $order_id)
 	{
-		$amount = strval($this->calculate_price_for_invoice($post_id));
+		$amount = $this->calculate_price_for_invoice($post_id);
 
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
