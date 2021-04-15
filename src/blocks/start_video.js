@@ -1,6 +1,6 @@
 const { registerBlockType } = wp.blocks;
-const { RichText, MediaUpload  } = wp.editor;
-const { ToggleControl } = wp.components;
+const { InspectorControls, RichText, MediaUpload  } = wp.editor;
+const { ToggleControl, PanelBody, PanelRow } = wp.components;
 
 
 registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
@@ -35,46 +35,48 @@ registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
         
         return (
             <div>
-                <div>
-                    <ToggleControl
-                    label="Enable paywall"
-                    checked={  pay_view_block }
-                    onChange={ ( checked ) => {
-                        setAttributes( { pay_view_block: checked } );
-                    } 
-                    }
-                    value={ pay_view_block } />
-                </div>
-                <div>
-                <RichText
-                    onChange={ ( content ) => {
-                        setAttributes( { title: content } );
-                    } }
-                    value={ title }
-                />
-                </div>
-                <div>
-                <RichText
-                    onChange={ ( desc ) => {
-                        setAttributes( { description: desc } );
-                    } 
-                    }
-                    value={ description }
-                />
-                </div>
-                <div>
-                <strong>Select a preview image:</strong>
-                <MediaUpload
-                    onSelect={( pic ) => {
-                        setAttributes( { preview: pic.sizes.full.url } );
-                    } }
-                    render={({ open }) => (
-                    <button onClick={open}>
-                        Upload Image!
-                    </button>
-                    )}
-                />
-                </div>
+                <InspectorControls>
+					<PanelBody
+						title="LP Paywall"
+						initialOpen={true}>
+					<PanelRow>
+                        <ToggleControl
+                        label="Enable paywall"
+                        checked={  pay_view_block }
+                        onChange={ ( checked ) => {
+                            setAttributes( { pay_view_block: checked } );
+                        }}
+                        value={ pay_view_block } />
+                    </PanelRow>
+                    <PanelRow>
+                        <RichText
+                        label="Title"
+                            onChange={ ( content ) => {
+                                setAttributes( { title: content } );
+                            } }
+                            value={ title }/>
+                    </PanelRow>
+                    <PanelRow>
+                        <RichText
+                        onChange={ ( desc ) => {
+                            setAttributes( { description: desc } );
+                        }}
+                        value={ description }/>
+                    </PanelRow>
+                    <PanelRow>
+                        <strong>Select a preview image:</strong>
+                        <MediaUpload
+                            onSelect={( pic ) => {
+                                setAttributes( { preview: pic.sizes.full.url } );
+                            } }
+                            render={({ open }) => (
+                                <button onClick={open}>
+                                    Upload Image!
+                                </button>
+                                )}/>
+                    </PanelRow>
+                    </PanelBody>
+                </InspectorControls>
             </div>
         );},
     save:props => {

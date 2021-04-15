@@ -6,6 +6,6 @@ registerBlockType( "lightning-paywall/gutenberg-end-video-block", {
     icon: 'tagcloud',
     category: 'widgets',
     keywords: [ 'paywall', 'end-video-paywall' ],
-    edit:props =>{return <h2> LP End Paid Video Content </h2>},
+    edit:props =>{return <h2> </h2>},
     save:props => {return null}
 });
