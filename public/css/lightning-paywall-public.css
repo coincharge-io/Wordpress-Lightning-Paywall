@@ -30,18 +30,19 @@
   }
 }
 
-
 .lnpw_pay__loading p.loading.spinner:before {
-  content: '';
   display: inline-block;
-  box-sizing: border-box;
-  width: 35px;
-  height: 35px;
-  margin: 5px;
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: inherit;
+  border: solid 5px #1d5aa3;
+  border-bottom-color: #ffa500;
   border-radius: 50%;
-  border: 6px solid #fff;
-  border-color: #ffa500 #1d5aa3 #ffa500 #1d5aa3;
-  animation: spinner .6s linear infinite;
+  margin: 5px;
+  content: "";
+  height: 40px;
+  top: 10%;
+  left: 10%;
+  width: 40px;
 }
 
 .lnpw_help > a.lnpw_help__link {
