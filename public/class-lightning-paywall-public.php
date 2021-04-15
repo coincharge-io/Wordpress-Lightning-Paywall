@@ -186,7 +186,7 @@ class Lightning_Paywall_Public
 		}
 
 		$currency = get_option('lnpw_currency', 'SATS');
-		
+
 		$payblock_info = get_option('lnpw_default_payblock_info');
 
 		if (!empty($payblock_info)) {
@@ -235,7 +235,7 @@ class Lightning_Paywall_Public
 			return $value;
 		}
 
-		return get_post_meta($post_id, 'lnpw_price', true) ?? get_option('lnpw_default_price');
+		return get_post_meta($post_id, 'lnpw_price', true) ?: get_option('lnpw_default_price');
 	}
 
 	public function generate_invoice_id($post_id, $order_id)
@@ -441,8 +441,8 @@ class Lightning_Paywall_Public
 			'description' => '',
 			'preview' => '',
 		), $atts);
-		
-		$image = wp_get_attachment_image_src( $atts['preview'] );
+
+		$image = wp_get_attachment_image_src($atts['preview']);
 
 		$preview_url = $image ? $image[0] : $atts['preview'];
 
@@ -537,7 +537,7 @@ class Lightning_Paywall_Public
 
 			return;
 		}
-		
+
 		if ($regex_matches[2] == $shortcode_attr) {
 
 			$attributes = shortcode_parse_atts($regex_matches[0]);
