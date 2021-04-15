@@ -31,18 +31,15 @@
 }
 
 .lnpw_pay__loading p.loading.spinner:before {
+  content: "";
   display: inline-block;
-  animation: 1.5s linear infinite spinner;
-  animation-play-state: inherit;
   border: solid 5px #1d5aa3;
   border-bottom-color: #ffa500;
   border-radius: 50%;
-  margin: 5px;
-  content: "";
+  margin: 10px;
   height: 40px;
-  top: 10%;
-  left: 10%;
   width: 40px;
+  animation: 1.5s linear infinite spinner;
 }
 
 .lnpw_help > a.lnpw_help__link {
