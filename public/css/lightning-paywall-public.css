@@ -3,7 +3,8 @@
   padding: 30px;
 }
 
-.lnpw_pay__content {
+.lnpw_pay__content,
+.lnpw_pay__preview {
   text-align: center;
 }
 
@@ -30,16 +31,21 @@
   }
 }
 
+.lnpw_pay__loading p.loading.spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
 .lnpw_pay__loading p.loading.spinner:before {
   content: "";
-  display: inline-block;
-  border: solid 5px #1d5aa3;
-  border-bottom-color: #ffa500;
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin: 5px;
   border-radius: 50%;
-  margin: 10px;
-  height: 40px;
-  width: 40px;
-  animation: 1.5s linear infinite spinner;
+  border: 6px solid #fff;
+  border-color: #ffa500 #1d5aa3 #ffa500 #1d5aa3;
+  animation: spinner 1s linear infinite;
 }
 
 .lnpw_help > a.lnpw_help__link {
@@ -49,11 +55,13 @@
 }
 
 .lnpw_pay__loading p.loading.spinner {
-  margin-top: 2px;
+  margin-top: 5px;
 }
 
 .lnpw_pay__content p {
   margin-top: 20px;
   font-size: 1.1em;
 }
-
+.lnpw_pay__footer div.lnpw_help{
+  margin-top: 10px;
+}
