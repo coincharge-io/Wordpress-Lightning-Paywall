@@ -67,7 +67,7 @@ class Elementor_LNPW_Start_Content_Widget extends \Elementor\Widget_Base {
 		$enable_pay_block = $settings[ 'pay_block' ];
 
 		if($enable_pay_block){
-			echo do_shortcode( "[lnpw_start_content pay_block='{$enable_pay_block}']" );
+			echo do_shortcode( "[lnpw_start_content pay_block='true']" );
 		}
 	}
 

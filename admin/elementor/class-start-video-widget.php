@@ -96,7 +96,7 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base {
         $preview = $settings[ 'preview' ]['url'];
 		
 		if($enable_pay_view_block){
-			echo do_shortcode( "[lnpw_start_video pay_view_block='{$enable_pay_view_block}' title='{$title}' description='{$description}' preview='{$preview}']" );
+			echo do_shortcode( "[lnpw_start_video pay_view_block='true' title='{$title}' description='{$description}' preview='{$preview}']" );
 		}
 
 	}

@@ -530,12 +530,12 @@ class Lightning_Paywall_Admin
 		
 		
 		$atts = shortcode_atts(array(
-			'pay_view_block' => false,
+			'pay_view_block' => true,
 			'title' => 'Untitled',
 			'description' => 'No description available',
 			'preview' => '',
 		), $atts);
-
+		
 		if ($atts['pay_view_block']) {
 			return do_shortcode("[lnpw_start_video pay_view_block='{$atts['pay_view_block']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']}]");
 		}
