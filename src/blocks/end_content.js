@@ -6,6 +6,6 @@ registerBlockType( "lightning-paywall/gutenberg-end-block", {
     icon: 'tagcloud',
     category: 'widgets',
     keywords: [ 'paywall', 'end-paywall' ],
-    edit:props =>{return <h2> </h2>},
+    edit:props =>{return <hr class="lnpw_pay__gutenberg_block_separator"></hr>},
     save:props => {return null}
 });

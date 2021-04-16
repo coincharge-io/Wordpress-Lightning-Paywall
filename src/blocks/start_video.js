@@ -1,7 +1,6 @@
 const { registerBlockType } = wp.blocks;
-const { InspectorControls, RichText, MediaUpload  } = wp.editor;
-const { ToggleControl, PanelBody, PanelRow } = wp.components;
-
+const { InspectorControls, MediaUpload  } = wp.editor;
+const { ToggleControl, PanelBody, PanelRow, TextareaControl, Button  } = wp.components;
 
 registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
     title: 'LP Start Paid Video Content',
@@ -11,7 +10,7 @@ registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
     attributes:{
         pay_view_block: {
             type: 'boolean',
-            default: false
+            default: true
         },
         title: {
             type:'string',
@@ -35,13 +34,14 @@ registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
         
         return (
             <div>
+            <hr class="lnpw_pay__gutenberg_block_separator"></hr>
                 <InspectorControls>
 					<PanelBody
-						title="LP Paywall"
+						title="LP Paywall Video"
 						initialOpen={true}>
 					<PanelRow>
                         <ToggleControl
-                        label="Enable paywall"
+                        label="Enable payment block"
                         checked={  pay_view_block }
                         onChange={ ( checked ) => {
                             setAttributes( { pay_view_block: checked } );
@@ -49,30 +49,31 @@ registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
                         value={ pay_view_block } />
                     </PanelRow>
                     <PanelRow>
-                        <RichText
-                        label="Title"
+                        <TextareaControl 
+                            label="Title"
+                            help="Enter video title"
                             onChange={ ( content ) => {
                                 setAttributes( { title: content } );
                             } }
                             value={ title }/>
                     </PanelRow>
                     <PanelRow>
-                        <RichText
+                        <TextareaControl 
+                        label="Description"
+                        help="Enter video description"
                         onChange={ ( desc ) => {
                             setAttributes( { description: desc } );
                         }}
                         value={ description }/>
                     </PanelRow>
                     <PanelRow>
-                        <strong>Select a preview image:</strong>
                         <MediaUpload
                             onSelect={( pic ) => {
                                 setAttributes( { preview: pic.sizes.full.url } );
                             } }
-                            render={({ open }) => (
-                                <button onClick={open}>
-                                    Upload Image!
-                                </button>
+                            
+                            render={({ open }) =>(
+                                <Button onClick={ open }>Video preview</Button>
                                 )}/>
                     </PanelRow>
                     </PanelBody>

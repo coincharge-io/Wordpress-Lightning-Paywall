@@ -6,6 +6,6 @@ registerBlockType( "lightning-paywall/gutenberg-store-view", {
     icon: 'tagcloud',
     category: 'widgets',
     keywords: [ 'paywall', 'end-video-paywall' ],
-    edit:props =>{return <h2> LP Video Store </h2>},
+    edit:props =>{return <hr class="lnpw_pay__gutenberg_block_separator"></hr>},
     save:props => {return null}
 });

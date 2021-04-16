@@ -91,4 +91,8 @@ td.New {
 td.Settled {
   background-color: #269950;
 }
-
+.lnpw_pay__gutenberg_block_separator{
+  width:100%;
+  height:25px;
+  background:  #c2cbd2;
+}

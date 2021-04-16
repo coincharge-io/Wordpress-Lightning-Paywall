@@ -1,5 +1,6 @@
 const { registerBlockType } = wp.blocks;
-const { ToggleControl } = wp.components;
+const { ToggleControl, PanelBody, PanelRow } = wp.components;
+const { InspectorControls } = wp.editor;
 
 
 registerBlockType( "lightning-paywall/gutenberg-start-block", {
@@ -10,7 +11,7 @@ registerBlockType( "lightning-paywall/gutenberg-start-block", {
     attributes: {
         pay_block:{
             type: 'boolean',
-            default: false
+            default: true
         }
     },
     edit:props => {
@@ -19,15 +20,23 @@ registerBlockType( "lightning-paywall/gutenberg-start-block", {
             setAttributes
         } = props;
         return (
-        <div>
-                    <ToggleControl
-                    label="Enable paywall"
-                    checked={  pay_block }
-                    onChange={ ( checked ) => {
-                        setAttributes( { pay_block: checked } );
-                    } 
-                    }
-                    value={ pay_block } />
+            <div>
+            <hr class="lnpw_pay__gutenberg_block_separator"></hr>
+                <InspectorControls>
+                <PanelBody
+                                title="LP Paywall Text"
+                                initialOpen={true}>
+                            <PanelRow>
+                            <ToggleControl
+                                label="Enable paywall"
+                                checked={  pay_block }
+                                onChange={ ( checked ) => {
+                                    setAttributes( { pay_block: checked } );
+                                }}
+                                value={ pay_block } />
+                            </PanelRow>
+                            </PanelBody>
+                    </InspectorControls>
             </div>)
         },
     save:props => {return null}

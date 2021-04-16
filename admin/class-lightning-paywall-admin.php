@@ -390,7 +390,7 @@ class Lightning_Paywall_Admin
 					'type'        => 'checkbox',
 					'heading'     => 'Enable payment block',
 					'param_name'  => 'pay_block',
-					'value'       => false,
+					'value'       => true,
 					'description' => 'Show payment block instead of content',
 				),
 			),
@@ -422,28 +422,28 @@ class Lightning_Paywall_Admin
 					'type'        => 'checkbox',
 					'heading'     => 'Enable payment block',
 					'param_name'  => 'pay_view_block',
-					'value'       => false,
+					'value'       => true,
 					'description' => 'Show payment block instead of video',
 				),
 				array(
 					'type'        => 'textarea',
-					'heading'     => 'Video title',
+					'heading'     => 'Title',
 					'param_name'  => 'title',
 					'value'       => 'Untitled',
-					'description' => 'Show payment block video title',
+					'description' => 'Enter video title',
 				),
 				array(
 					'type'        => 'textarea',
-					'heading'     => 'Video description',
+					'heading'     => 'Description',
 					'param_name'  => 'description',
 					'value'       => 'No description',
-					'description' => 'Show payment block video description',
+					'description' => 'Enter video description',
 				),
 				array(
 					'type'        => 'attach_image',
-					'heading'     => 'Video preview',
+					'heading'     => 'Preview',
 					'param_name'  => 'preview',
-					'description' => 'Show payment block video preview',
+					'description' => 'Add video preview',
 				),
 			),
 		));
@@ -509,9 +509,9 @@ class Lightning_Paywall_Admin
 	public function render_gutenberg($atts)
 	{
 		$atts = shortcode_atts(array(
-			'pay_block' => false,
+			'pay_block' => true,
 		), $atts);
-
+		
 		if($atts['pay_block']){
 			return do_shortcode("[lnpw_start_content pay_block='{$atts['pay_block']}']");
 		}

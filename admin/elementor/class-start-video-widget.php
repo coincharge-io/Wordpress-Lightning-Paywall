@@ -50,13 +50,14 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base {
 			[
 				'label' => 'Enable payment block',
 				'type'  => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'yes',
 			]
 		);
 
         $this->add_control(
 			'title',
 			[
-				'label' => 'Video title',
+				'label' => 'Title',
 				'type'  => \Elementor\Controls_Manager::TEXT,
                 'default' => 'Untitled',
 			]
@@ -65,7 +66,7 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base {
         $this->add_control(
 			'description',
 			[
-				'label' => 'Video description',
+				'label' => 'Description',
 				'type'  => \Elementor\Controls_Manager::TEXT,
                 'default' => 'No description',
 			]
@@ -74,7 +75,7 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base {
         $this->add_control(
 			'preview',
 			[
-				'label' => 'Video preview',
+				'label' => 'Preview',
 				'type'  => \Elementor\Controls_Manager::MEDIA,
 			]
 		);
@@ -93,8 +94,10 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base {
         $title = $settings[ 'title' ];
         $description = $settings[ 'description' ];
         $preview = $settings[ 'preview' ]['url'];
-
-		echo do_shortcode( "[lnpw_start_video pay_view_block='{$enable_pay_view_block}' title='{$title}' description='{$description}' preview='{$preview}']" );
+		
+		if($enable_pay_view_block){
+			echo do_shortcode( "[lnpw_start_video pay_view_block='{$enable_pay_view_block}' title='{$title}' description='{$description}' preview='{$preview}']" );
+		}
 
 	}
 

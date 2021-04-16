@@ -40,7 +40,7 @@ class Elementor_LNPW_Start_Content_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', 'plugin-name' ),
+				'label' => __( 'Content', 'lightning-paywall' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -50,6 +50,7 @@ class Elementor_LNPW_Start_Content_Widget extends \Elementor\Widget_Base {
 			[
 				'label' => 'Enable payment block',
 				'type'  => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'yes',
 			]
 		);
 
@@ -65,8 +66,9 @@ class Elementor_LNPW_Start_Content_Widget extends \Elementor\Widget_Base {
 		$settings         = $this->get_settings_for_display();
 		$enable_pay_block = $settings[ 'pay_block' ];
 
-		echo do_shortcode( "[lnpw_start_content pay_block='{$enable_pay_block}']" );
-
+		if($enable_pay_block){
+			echo do_shortcode( "[lnpw_start_content pay_block='{$enable_pay_block}']" );
+		}
 	}
 
 }
