@@ -375,7 +375,6 @@ class Lightning_Paywall_Public
 
 		$s_data = '<!-- lnpw:start_content -->';
 		
-		
   		$payblock = $atts['pay_block'] === 'true';
 
 		if ($payblock) {
