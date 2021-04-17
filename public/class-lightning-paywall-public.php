@@ -376,12 +376,11 @@ class Lightning_Paywall_Public
 		$s_data = '<!-- lnpw:start_content -->';
 		
   		$payblock = $atts['pay_block'] === 'true';
-
+		  
 		if ($payblock) {
 			return do_shortcode('[lnpw_pay_block]') . $s_data;
 		}
-
-		return $s_data;
+		
 	}
 
 	public function render_shortcode_lnpw_start_video($atts)
@@ -404,7 +403,6 @@ class Lightning_Paywall_Public
 			return do_shortcode("[lnpw_pay_video_block title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']}]") . $s_data;
 		}
 
-		return $s_data;
 	}
 
 	/**
