@@ -374,13 +374,12 @@ class Lightning_Paywall_Public
 		), $atts);
 
 		$s_data = '<!-- lnpw:start_content -->';
-		
-  		$payblock = $atts['pay_block'] === 'true';
-		  
+
+		$payblock = $atts['pay_block'] === 'true';
+
 		if ($payblock) {
 			return do_shortcode('[lnpw_pay_block]') . $s_data;
 		}
-		
 	}
 
 	public function render_shortcode_lnpw_start_video($atts)
@@ -395,14 +394,13 @@ class Lightning_Paywall_Public
 		), $atts);
 
 		$payblock = $atts['pay_view_block'] === 'true';
-		
+
 
 		$s_data = '<!-- lnpw:start_content -->';
-		
+
 		if ($payblock) {
 			return do_shortcode("[lnpw_pay_video_block title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']}]") . $s_data;
 		}
-
 	}
 
 	/**
@@ -498,17 +496,16 @@ class Lightning_Paywall_Public
 	?>
 		<div class="lnpw_store">
 			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
-
-				<?php if (null !== $this->extract_preview($post, 'lnpw_start_video')) : ?>
+				<?php if (null !== $this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))) : ?>
 					<div class="lnpw_store_video">
 						<div class="lnpw_store_video_preview">
-							<img src="<?php echo esc_url($this->extract_preview($post, 'lnpw_start_video')['preview']) ?>" alt="Video preview" />
+							<img src="<?php echo esc_url($this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))['preview']) ?>" alt="Video preview" />
 						</div>
 						<div class="lnpw_store_video_information">
 							<a href="<?php the_permalink($post); ?>">
-								<h5><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['title']); ?></h5>
+								<h5><?php echo esc_html($this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))['title']); ?></h5>
 
-								<h6><?php echo esc_html($this->extract_preview($post, 'lnpw_start_video')['description']); ?></h6>
+								<h6><?php echo esc_html($this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))['description']); ?></h6>
 							</a>
 						</div>
 					</div>
@@ -520,7 +517,7 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
-	public function extract_preview($post, $shortcode_attr)
+	private function extract_preview($post, $shortcode_attr)
 	{
 
 		$preview_data = array();
@@ -561,5 +558,56 @@ class Lightning_Paywall_Public
 
 			return $preview_data;
 		}
+	}
+	private function extract_gutenberg_preview($post)
+	{
+		$preview_data = array();
+		if (has_blocks($post->post_content)) {
+
+			$blocks = parse_blocks($post->post_content);
+			if ($blocks[0]['blockName'] === 'lightning-paywall/gutenberg-start-video-block') {
+
+				$preview_data['title'] = $blocks[0]['attrs']['title'] ?? 'Untitled';
+
+				$preview_data['description'] = $blocks[0]['attrs']['description'] ?? 'No description';
+
+				$preview_data['preview'] = $blocks[0]['attrs']['preview'] ?? plugin_dir_url(__FILE__) . 'img/preview.png';
+
+				return $preview_data;
+			}
+		}
+		return;
+	}
+	private function extract_elementor_preview($post)
+	{
+		$preview_data = array();
+
+		$doc = new DOMDocument();
+
+		@$doc->loadHTML($post->post_content);
+
+		$img = $doc->getElementsByTagName('img')[0];
+		if ($doc->getElementsByTagName('h2')->item(0)) {
+
+			$preview_data['title'] = $doc->getElementsByTagName('h2')->item(0)->nodeValue;
+		} else {
+			return;
+		}
+
+		if ($img) {
+
+			$preview_data['preview'] = $img->getAttribute('src');
+		}
+
+		if ($doc->getElementsByTagName('p')) {
+
+			$preview_data['description'] = $doc->getElementsByTagName('p')->item(0)->nodeValue;
+		}
+
+		return $preview_data;
+	}
+	private function integrate_preview_functions($gutt, $elem, $wpb)
+	{
+		return $gutt ? $gutt : ($elem ? $elem : $wpb);
 	}
 }

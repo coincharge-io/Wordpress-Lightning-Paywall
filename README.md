@@ -13,7 +13,7 @@ Requires PHP: 7.4
 
 Tested up to: 5.7
 
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 License: GPLv2
 
@@ -76,9 +76,26 @@ There are no FAQ just yet.
 
 == Changelog ==
 
+= 1.1.0 =
+
+- Fixed: Paywall can't be disabled via shortcode
+
+
+= 1.0.1 =
+
+- Fixed: Loading spinner doesn't show up inside paywall
+
+- Fixed: Default values for currency and duration type aren't displayed inside paywall
+
+- Fixed: Payment modal is popping up just for SATS currency
+
+
 = 1.0.0 =
 
 - First release
+
+
+
 
 == Upgrade Notice ==
 
