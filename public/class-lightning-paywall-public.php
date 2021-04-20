@@ -108,9 +108,6 @@ class Lightning_Paywall_Public
 	public function filter_the_content($content)
 	{
 
-		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true)) {
-			return $content;
-		}
 
 		if ($this->is_paid_content()) {
 			return $content;
@@ -240,7 +237,7 @@ class Lightning_Paywall_Public
 
 	public function generate_invoice_id($post_id, $order_id)
 	{
-		$amount = strval($this->calculate_price_for_invoice($post_id));
+		$amount = $this->calculate_price_for_invoice($post_id);
 
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
@@ -421,7 +418,7 @@ class Lightning_Paywall_Public
 	 */
 	public function render_shortcode_lnpw_pay_block($atts)
 	{
-		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content()) {
+		if ($this->is_paid_content()) {
 			return '';
 		}
 		ob_start();
@@ -432,7 +429,7 @@ class Lightning_Paywall_Public
 	}
 	public function render_shortcode_lnpw_pay_view_block($atts)
 	{
-		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content()) {
+		if ($this->is_paid_content()) {
 			return '';
 		}
 
@@ -481,7 +478,7 @@ class Lightning_Paywall_Public
 
 	public function render_shortcode_lnpw_store($atts)
 	{
-		if (!get_post_meta(get_the_ID(), 'lnpw_enabled', true) || $this->is_paid_content()) {
+		if ($this->is_paid_content()) {
 			return '';
 		}
 

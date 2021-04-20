@@ -260,7 +260,7 @@ class Lightning_Paywall_Admin
 	/** 
 	 * Fetch invoices
 	 */
-	 
+
 	public function get_greenfield_invoices()
 	{
 
@@ -347,12 +347,6 @@ class Lightning_Paywall_Admin
 
 		if (!isset($_POST['lnpw_post_meta_box_nonce']) || !wp_verify_nonce($_POST['lnpw_post_meta_box_nonce'], plugin_basename(__FILE__))) {
 			return;
-		}
-
-		if (!empty($_POST['lnpw_enabled'])) {
-			update_post_meta($post_id, 'lnpw_enabled', sanitize_text_field($_POST['lnpw_enabled']));
-		} else {
-			delete_post_meta($post_id, 'lnpw_enabled');
 		}
 
 		if (!empty($_POST['lnpw_price'])) {
@@ -514,7 +508,7 @@ class Lightning_Paywall_Admin
 
 		$payblock = $atts['pay_block'] === 'true';
 
-		if($payblock){
+		if ($payblock) {
 			return do_shortcode("[lnpw_start_content pay_block='{$atts['pay_block']}']");
 		}
 	}
@@ -528,9 +522,10 @@ class Lightning_Paywall_Admin
 	{
 		return do_shortcode("[lnpw_store]");
 	}
-	public function render_start_video_gutenberg($atts){
-		
-		
+	public function render_start_video_gutenberg($atts)
+	{
+
+
 		$atts = shortcode_atts(array(
 			'pay_view_block' => 'true',
 			'title' => 'Untitled',
@@ -543,8 +538,6 @@ class Lightning_Paywall_Admin
 		if ($payblock) {
 			return do_shortcode("[lnpw_start_video pay_view_block='{$atts['pay_view_block']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']}]");
 		}
-
-		
 	}
 	public function load_gutenberg()
 	{
@@ -556,35 +549,44 @@ class Lightning_Paywall_Admin
 			$this->version
 		);
 
-		register_block_type('lightning-paywall/gutenberg-start-block', 
-		[
-			'editor_script' => 'gutenberg-block-script',
-			'render_callback' => (array($this, 'render_gutenberg')),
-		]);
+		register_block_type(
+			'lightning-paywall/gutenberg-start-block',
+			[
+				'editor_script' => 'gutenberg-block-script',
+				'render_callback' => (array($this, 'render_gutenberg')),
+			]
+		);
 
-		register_block_type('lightning-paywall/gutenberg-end-block',
+		register_block_type(
+			'lightning-paywall/gutenberg-end-block',
 			[
 				'editor_script' => 'gutenberg-block-script',
 				'render_callback' => (array($this, 'render_end_gutenberg')),
-			]);
+			]
+		);
 
-		register_block_type('lightning-paywall/gutenberg-store-view',
+		register_block_type(
+			'lightning-paywall/gutenberg-store-view',
 			[
 				'editor_script' => 'gutenberg-block-script',
 				'render_callback' => (array($this, 'render_store_gutenberg')),
-			]);
+			]
+		);
 
-		register_block_type('lightning-paywall/gutenberg-start-video-block',
+		register_block_type(
+			'lightning-paywall/gutenberg-start-video-block',
 			[
 				'editor_script' => 'gutenberg-block-script',
 				'render_callback' => (array($this, 'render_start_video_gutenberg')),
-			]);
+			]
+		);
 
-		register_block_type('lightning-paywall/gutenberg-end-video-block',
+		register_block_type(
+			'lightning-paywall/gutenberg-end-video-block',
 			[
 				'editor_script' => 'gutenberg-block-script',
 				'render_callback' => (array($this, 'render_end_gutenberg')),
-			]);
-		
+			]
+		);
 	}
 }
