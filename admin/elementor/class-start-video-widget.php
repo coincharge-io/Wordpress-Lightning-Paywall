@@ -86,6 +86,57 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 			]
 		);
 
+		$this->add_control(
+			'currency',
+			[
+				'label' => 'Currency',
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'options' => [
+					'Default' => '',
+					'SATS' => 'SATS',
+					'BTC' => 'BTC',
+					'EUR' => 'EUR',
+					'USD' => 'USD',
+				],
+				'default' => '',
+			]
+		);
+
+		$this->add_control(
+			'price',
+			[
+				'label' => 'Price',
+				'type'  => \Elementor\Controls_Manager::NUMBER,
+			]
+		);
+
+		$this->add_control(
+			'duration_type',
+			[
+				'label' => 'Duration type',
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'options' => [
+					'default' => '',
+					'minute' => 'minute',
+					'hour' => 'hour',
+					'week' => 'week',
+					'month' => 'month',
+					'year' => 'year',
+					'onetime' => 'onetime',
+					'unlimited' => 'unlimited'
+				],
+				'default' => '',
+			]
+		);
+
+		$this->add_control(
+			'duration',
+			[
+				'label' => 'Duration',
+				'type'  => \Elementor\Controls_Manager::NUMBER,
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -100,9 +151,13 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 		$title = $settings['title'];
 		$description = $settings['description'];
 		$preview = $settings['preview']['url'];
-
+		$price = $settings[ 'price' ];
+		$duration = $settings[ 'duration' ];
+		$duration_type = $settings[ 'duration_type' ];
+		$currency = $settings[ 'currency' ];
+		
 		if ($enable_pay_view_block) {
-			echo do_shortcode("[lnpw_start_video pay_view_block='true' title='{$title}' description='{$description}' preview='{$preview}']");
+			echo do_shortcode("[lnpw_start_video pay_view_block='true' title='{$title}' description='{$description}' preview='{$preview}' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
 		}
 	}
 }

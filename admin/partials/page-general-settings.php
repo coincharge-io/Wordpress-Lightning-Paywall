@@ -2,7 +2,7 @@
 
 $post_types             = Lightning_Paywall_Admin::get_allowed_post_types();
 $enabled_post_types     = get_option('lnpw_enabled_post_types');
-$used_currency          = get_option('lnpw_currency');
+$used_currency          = get_option('lnpw_default_currency');
 $supported_currencies   = Lightning_Paywall_Admin::CURRENCIES;
 $default_price          = get_option('lnpw_default_price');
 $default_duration       = get_option('lnpw_default_duration');
@@ -16,7 +16,17 @@ $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
 $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
+/**<div>
+                <label for="lnpw_enabled_post_types">Enabled on</label>
 
+                <?php foreach ($post_types as $post_type) : ?>
+                    <span style="margin-left: 15px; text-transform: capitalize">
+                        <label style="line-height: 1" for="lnpw_enabled_<?php echo $post_type ?>"><?php echo $post_type ?></label>
+
+                        <input style="margin: 0" type="checkbox" name="lnpw_enabled_post_types[]" id="lnpw_enabled_<?php echo $post_type ?>" value="<?php echo $post_type ?>" <?php echo in_array($post_type, $enabled_post_types) ? 'checked' : ''; ?>>
+                    </span>
+                <?php endforeach; ?>
+            </div> */
 ?>
 
 <div class="container">
@@ -27,17 +37,6 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
         <form method="POST" action="options.php">
             <?php settings_fields('lnpw_general_settings'); ?>
 
-            <div>
-                <label for="lnpw_enabled_post_types">Enabled on</label>
-
-                <?php foreach ($post_types as $post_type) : ?>
-                    <span style="margin-left: 15px; text-transform: capitalize">
-                        <label style="line-height: 1" for="lnpw_enabled_<?php echo $post_type ?>"><?php echo $post_type ?></label>
-
-                        <input style="margin: 0" type="checkbox" name="lnpw_enabled_post_types[]" id="lnpw_enabled_<?php echo $post_type ?>" value="<?php echo $post_type ?>" <?php echo in_array($post_type, $enabled_post_types) ? 'checked' : ''; ?>>
-                    </span>
-                <?php endforeach; ?>
-            </div>
             <div>
                 <h2>Payment Block</h2>
                 <div class="row">
@@ -74,7 +73,7 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                     <div class="col-80">
                         <input required type="number" min=0 placeholder="Default Price" step=1 name="lnpw_default_price" id="lnpw_default_price" value="<?php echo $default_price ?>">
 
-                        <select required name="lnpw_currency" id="lnpw_currency">
+                        <select required name="lnpw_default_currency" id="lnpw_default_currency">
                             <option disabled value="">Select currency</option>
                             <?php foreach ($supported_currencies as $currency) : ?>
                                 <option <?php echo $used_currency === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">

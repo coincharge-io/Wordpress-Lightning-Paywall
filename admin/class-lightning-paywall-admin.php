@@ -127,7 +127,7 @@ class Lightning_Paywall_Admin
 	{
 
 		register_setting('lnpw_general_settings', 'lnpw_enabled_post_types', array('type' => 'array', 'default' => array('post')));
-		register_setting('lnpw_general_settings', 'lnpw_currency', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_general_settings', 'lnpw_default_currency', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_general_settings', 'lnpw_default_price', array('type' => 'number', 'default' => 10));
 		register_setting('lnpw_general_settings', 'lnpw_default_duration', array('type' => 'integer', 'default' =>  ''));
 		register_setting('lnpw_general_settings', 'lnpw_default_duration_type', array('type' => 'string', 'default' => 'unlimited'));
@@ -194,6 +194,7 @@ class Lightning_Paywall_Admin
 		}
 		return false;
 	}
+
 	/**
 	 *	Check connection with a server
 	 */
@@ -299,13 +300,13 @@ class Lightning_Paywall_Admin
 	/**
 	 *
 	 */
-	public function add_meta_boxes()
+	/*public function add_meta_boxes()
 	{
 
 		if (get_option('lnpw_enabled_post_types')) {
 			add_meta_box('lnpw_post_settings', 'Lightning Paywall Settings', array($this, 'render_post_settings_meta_box'), get_option('lnpw_enabled_post_types'));
 		}
-	}
+	}*/
 
 	/**
 	 * Render General Settings page
@@ -338,7 +339,7 @@ class Lightning_Paywall_Admin
 	/**
 	 * @param  int  $post_id
 	 */
-	public function save_post_settings_meta_box($post_id)
+	/*public function save_post_settings_meta_box($post_id)
 	{
 
 		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
@@ -367,7 +368,7 @@ class Lightning_Paywall_Admin
 			delete_post_meta($post_id, 'lnpw_duration_type');
 		}
 	}
-
+*/
 	/**
 	 * @throws Exception
 	 */
@@ -386,6 +387,50 @@ class Lightning_Paywall_Admin
 					'param_name'  => 'pay_block',
 					'value'       => 'true',
 					'description' => 'Show payment block instead of content',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'Currency',
+					'param_name'  => 'currency',
+					'value'       => array(
+						'Default'	=> '',
+						'SATS'  	=> 'SATS',
+						'BTC' 		=> 'BTC',
+						'EUR'  		=> 'EUR',
+						'USD' 		=> 'USD'
+					),
+					'std'		  => 'default',
+					'description' => 'Set currency',
+				),
+				array(
+					'type'        => 'textfield',
+					'heading'     => 'Price',
+					'param_name'  => 'price',
+					'description' => 'Set price',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'Duration type',
+					'param_name'  => 'duration_type',
+					'value'       => array(
+						'default'	=> '',
+						'minute'  	=> 'minute',
+						'hour' 		=> 'hour',
+						'day'  		=> 'day',
+						'week' 		=> 'week',
+						'month' 	=> 'month',
+						'year'  	=> 'year',
+						'onetime' 	=> 'onetime',
+						'unlimited' => 'unlimited',
+					),
+					'std'    	  => 'default',
+					'description' => 'Set duration type',
+				),
+				array(
+					'type'        => 'textfield',
+					'heading'     => 'Duration',
+					'param_name'  => 'duration',
+					'description' => 'Set duration',
 				),
 			),
 		));
@@ -438,6 +483,50 @@ class Lightning_Paywall_Admin
 					'heading'     => 'Preview',
 					'param_name'  => 'preview',
 					'description' => 'Add video preview',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'Currency',
+					'param_name'  => 'currency',
+					'value'       => array(
+						'Default'	=> '',
+						'SATS'  	=> 'SATS',
+						'BTC' 		=> 'BTC',
+						'EUR'  		=> 'EUR',
+						'USD' 		=> 'USD'
+					),
+					'std'		  => 'default',
+					'description' => 'Set currency',
+				),
+				array(
+					'type'        => 'textfield',
+					'heading'     => 'Price',
+					'param_name'  => 'price',
+					'description' => 'Set price',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'Duration type',
+					'param_name'  => 'duration_type',
+					'value'       => array(
+						'default'	=> '',
+						'minute'  	=> 'minute',
+						'hour' 		=> 'hour',
+						'day'  		=> 'day',
+						'week' 		=> 'week',
+						'month' 	=> 'month',
+						'year'  	=> 'year',
+						'onetime' 	=> 'onetime',
+						'unlimited' => 'unlimited',
+					),
+					'std'    	  => 'default',
+					'description' => 'Set duration type',
+				),
+				array(
+					'type'        => 'textfield',
+					'heading'     => 'Duration',
+					'param_name'  => 'duration',
+					'description' => 'Set duration',
 				),
 			),
 		));
@@ -504,13 +593,14 @@ class Lightning_Paywall_Admin
 	{
 		$atts = shortcode_atts(array(
 			'pay_block' => 'true',
+			'currency' => '',
+			'price' => '',
+			'duration_type' => '',
+			'duration' => '',
 		), $atts);
 
-		$payblock = $atts['pay_block'] === 'true';
 
-		if ($payblock) {
-			return do_shortcode("[lnpw_start_content pay_block='{$atts['pay_block']}']");
-		}
+		return do_shortcode("[lnpw_start_content pay_block='{$atts['pay_block']}' price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
 	}
 
 	public function render_end_gutenberg()
@@ -531,13 +621,13 @@ class Lightning_Paywall_Admin
 			'title' => 'Untitled',
 			'description' => 'No description available',
 			'preview' => '',
+			'currency' => '',
+			'price' => '',
+			'duration_type' => '',
+			'duration' => '',
 		), $atts);
 
-		$payblock = $atts['pay_view_block'] === 'true';
-
-		if ($payblock) {
-			return do_shortcode("[lnpw_start_video pay_view_block='{$atts['pay_view_block']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']}]");
-		}
+		return do_shortcode("[lnpw_start_video pay_view_block='{$atts['pay_view_block']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']} price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
 	}
 	public function load_gutenberg()
 	{

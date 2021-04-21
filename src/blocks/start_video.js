@@ -1,6 +1,6 @@
 const { registerBlockType } = wp.blocks;
 const { InspectorControls, MediaUpload  } = wp.editor;
-const { ToggleControl, PanelBody, PanelRow, TextareaControl, Button  } = wp.components;
+const { ToggleControl, PanelBody, PanelRow, TextareaControl, Button, __experimentalNumberControl: NumberControl, SelectControl  } = wp.components;
 
 registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
     title: 'LP Start Paid Video Content',
@@ -23,12 +23,25 @@ registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
         preview: {
             type:'string',
             default: ''
+        },
+        currency:{
+            type: 'string',
+        },
+        price:{
+            type: 'number'
+        },
+        duration_type:{
+            type: 'string',
+            default: '',
+        },
+        duration:{
+            type: 'number'
         }
 
     },
     edit:props => {
         const {
-            attributes: { pay_view_block, title, description, preview },
+            attributes: { pay_view_block, title, description, preview, currency, duration_type, price, duration },
             setAttributes
         } = props;
         
@@ -76,6 +89,49 @@ registerBlockType( "lightning-paywall/gutenberg-start-video-block", {
                                 <Button onClick={ open }>Video preview</Button>
                                 )}/>
                     </PanelRow>
+                    <PanelRow>
+                                <SelectControl 
+                                label="Currency"
+                            value={ currency } 
+                            onChange={ (  selectedItem  ) => setAttributes( {currency:selectedItem} )}
+                            options={ [
+                                { value: '', label: 'Default' },
+                                { value: 'SATS', label: 'SATS' },
+                                { value: 'BTC', label: 'BTC' },
+                                { value: 'EUR', label: 'EUR' },
+                                { value: 'USD', label: 'USD' },
+                            ] }/>
+                            </PanelRow>
+                            <PanelRow>
+                            <NumberControl
+                                    label="Price"
+                                    value={ price }
+                                    onChange={ ( nextValue ) => setAttributes( {price:nextValue} ) }
+                                />
+                            </PanelRow>
+                            <PanelRow>
+                                <SelectControl 
+                                label="Duration type"
+                            value={ duration_type } 
+                            onChange={ (  selectedItem  ) => setAttributes( {duration_type:selectedItem} )}
+                            options={ [
+                                { value: '', label: 'Default' },
+                                { value: 'minute', label: 'Minute' },
+                                { value: 'hour', label: 'Hour' },
+                                { value: 'week', label: 'Week' },
+                                { value: 'month', label: 'Month' },
+                                { value: 'year', label: 'Year' },
+                                { value: 'onetime', label: 'Onetime' },
+                                { value: 'unlimited', label: 'Unlimited' },
+                            ] }/>
+                            </PanelRow>
+                            <PanelRow>
+                            <NumberControl
+                                    label="Duration"
+                                    value={ duration }
+                                    onChange={ ( nextValue ) => setAttributes( {duration:nextValue} ) }
+                                />
+                            </PanelRow>
                     </PanelBody>
                 </InspectorControls>
             </div>
