@@ -21,7 +21,6 @@ registerBlockType( "lightning-paywall/gutenberg-start-block", {
         },
         duration_type:{
             type: 'string',
-            default: '',
         },
         duration:{
             type: 'number'
@@ -66,7 +65,7 @@ registerBlockType( "lightning-paywall/gutenberg-start-block", {
                             <NumberControl
                                     label="Price"
                                     value={ price }
-                                    onChange={ ( nextValue ) => setAttributes( {price:nextValue} ) }
+                                    onChange={ ( nextValue ) => setAttributes( {price:Number(nextValue)} ) }
                                 />
                             </PanelRow>
                             <PanelRow>
@@ -89,7 +88,7 @@ registerBlockType( "lightning-paywall/gutenberg-start-block", {
                             <NumberControl
                                     label="Duration"
                                     value={ duration }
-                                    onChange={ ( nextValue ) => setAttributes( {duration:nextValue} ) }
+                                    onChange={ ( nextValue ) => setAttributes( {duration:Number(nextValue)} ) }
                                 />
                             </PanelRow>
                             </PanelBody>
