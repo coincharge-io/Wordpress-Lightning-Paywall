@@ -376,10 +376,11 @@ class Lightning_Paywall_Admin
 	{
 
 		vc_map(array(
-			'name'        => 'LP Start Paid Text Content',
+			'name'        => 'LP Pay-per-Post Start',
 			'base'        => 'lnpw_start_content',
 			'description' => 'Start area of paid content',
 			'category'    => 'Content',
+			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
 			'params'      => array(
 				array(
 					'type'        => 'checkbox',
@@ -436,10 +437,11 @@ class Lightning_Paywall_Admin
 		));
 
 		vc_map(array(
-			'name'        => 'LP End Paid Text Content',
+			'name'        => 'LP Pay-per-Post End',
 			'base'        => 'lnpw_end_content',
 			'description' => 'End area of paid content',
 			'category'    => 'Content',
+			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
 			'params'      => array(),
 		));
 
@@ -448,14 +450,16 @@ class Lightning_Paywall_Admin
 			'base'        => 'lnpw_pay_block',
 			'description' => 'Show Payment Widget',
 			'category'    => 'Content',
+			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
 			'params'      => array(),
 		));
 
 		vc_map(array(
-			'name'        => 'LP Start Paid Video Content',
+			'name'        => 'LP Pay-per-View Start',
 			'base'        => 'lnpw_start_video',
 			'description' => 'Start area of paid video content',
 			'category'    => 'Content',
+			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
 			'params'      => array(
 				array(
 					'type'        => 'checkbox',
@@ -532,18 +536,20 @@ class Lightning_Paywall_Admin
 		));
 
 		vc_map(array(
-			'name'        => 'LP End Paid Video Content',
+			'name'        => 'LP Pay-per-View End',
 			'base'        => 'lnpw_end_video',
 			'description' => 'End area of paid video content',
 			'category'    => 'Content',
+			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
 			'params'      => array(),
 		));
 
 		vc_map(array(
-			'name'        => 'LP Store',
+			'name'        => 'LP Video Catalog',
 			'base'        => 'lnpw_store',
 			'description' => 'Show Videos',
 			'category'    => 'Content',
+			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
 			'params'      => array(),
 		));
 	}
@@ -608,9 +614,9 @@ class Lightning_Paywall_Admin
 		return do_shortcode("[lnpw_end_content]");
 	}
 
-	public function render_store_gutenberg()
+	public function render_video_catalog_gutenberg()
 	{
-		return do_shortcode("[lnpw_store]");
+		return do_shortcode("[lnpw_video_catalog]");
 	}
 	public function render_start_video_gutenberg($atts)
 	{
@@ -656,10 +662,10 @@ class Lightning_Paywall_Admin
 		);
 
 		register_block_type(
-			'lightning-paywall/gutenberg-store-view',
+			'lightning-paywall/gutenberg-catalog-view',
 			[
 				'editor_script' => 'gutenberg-block-script',
-				'render_callback' => (array($this, 'render_store_gutenberg')),
+				'render_callback' => (array($this, 'render_video_catalog_gutenberg')),
 			]
 		);
 

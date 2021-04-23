@@ -1,8 +1,8 @@
 const { registerBlockType } = wp.blocks;
 
 
-registerBlockType( "lightning-paywall/gutenberg-end-block", {
-    title: 'LP Pay-per-Post End',
+registerBlockType( "lightning-paywall/gutenberg-catalog-view", {
+    title: 'LP Video Catalog',
     icon: <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="517.000000pt" height="372.000000pt" viewBox="0 0 517.000000 372.000000"
  preserveAspectRatio="xMidYMid meet">
@@ -77,7 +77,7 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
 </g>
 </svg>,
     category: 'widgets',
-    keywords: [ 'paywall', 'end-paywall' ],
+    keywords: [ 'paywall', 'end-video-paywall' ],
     edit:props =>{return <hr class="lnpw_pay__gutenberg_block_separator"></hr>},
     save:props => {return null}
 });

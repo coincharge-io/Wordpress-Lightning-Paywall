@@ -538,7 +538,7 @@ class Lightning_Paywall_Public
 		return ob_get_clean();
 	}
 
-	public function render_shortcode_lnpw_store($atts)
+	public function render_shortcode_lnpw_video_catalog($atts)
 	{
 		if ($this->is_paid_content()) {
 			return '';

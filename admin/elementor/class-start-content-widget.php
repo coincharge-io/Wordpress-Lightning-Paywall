@@ -18,7 +18,7 @@ class Elementor_LNPW_Start_Content_Widget extends \Elementor\Widget_Base
 	 */
 	public function get_title()
 	{
-		return 'LP Start Paid Text Content';
+		return 'LP Pay-per-Post Start';
 	}
 
 	/**
@@ -26,7 +26,7 @@ class Elementor_LNPW_Start_Content_Widget extends \Elementor\Widget_Base
 	 */
 	public function get_icon()
 	{
-		return 'fa fa-code';
+		return 'fa fa-btc';
 	}
 
 	/**

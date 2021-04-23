@@ -1,49 +1,55 @@
 <?php
 
 
-class Elementor_LNPW_End_Video_Widget extends \Elementor\Widget_Base {
+class Elementor_LNPW_End_Video_Widget extends \Elementor\Widget_Base
+{
 
 
 	/**
 	 * @return string
 	 */
-	public function get_name() {
+	public function get_name()
+	{
 		return 'elementor_lnpw_end_video';
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_title() {
-		return 'LP End Paid Video Content';
+	public function get_title()
+	{
+		return 'LP Pay-per-View End';
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_icon() {
-		return 'fa fa-code';
+	public function get_icon()
+	{
+		return 'fa fa-btc';
 	}
 
 	/**
 	 * @return string[]
 	 */
-	public function get_categories() {
-		return [ 'general' ];
+	public function get_categories()
+	{
+		return ['general'];
 	}
 
 	/**
 	 *
 	 */
-	protected function _register_controls() {
+	protected function _register_controls()
+	{
 		//
 	}
 
 	/**
 	 *
 	 */
-	protected function render() {
-		echo do_shortcode( "[lnpw_end_video]" );
+	protected function render()
+	{
+		echo do_shortcode("[lnpw_end_video]");
 	}
-
 }

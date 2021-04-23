@@ -18,7 +18,7 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 	 */
 	public function get_title()
 	{
-		return 'LP Start Paid Video Content';
+		return 'LP Pay-per-View Start';
 	}
 
 	/**
@@ -26,7 +26,7 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 	 */
 	public function get_icon()
 	{
-		return 'fa fa-code';
+		return 'fa fa-btc';
 	}
 
 	/**
@@ -151,11 +151,11 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 		$title = $settings['title'];
 		$description = $settings['description'];
 		$preview = $settings['preview']['url'];
-		$price = $settings[ 'price' ];
-		$duration = $settings[ 'duration' ];
-		$duration_type = $settings[ 'duration_type' ];
-		$currency = $settings[ 'currency' ];
-		
+		$price = $settings['price'];
+		$duration = $settings['duration'];
+		$duration_type = $settings['duration_type'];
+		$currency = $settings['currency'];
+
 		if ($enable_pay_view_block) {
 			echo do_shortcode("[lnpw_start_video pay_view_block='true' title='{$title}' description='{$description}' preview='{$preview}' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
 		}

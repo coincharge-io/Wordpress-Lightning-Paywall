@@ -22,7 +22,7 @@ class Elementor_LNPW_Pay_Block_Widget extends \Elementor\Widget_Base {
 	 * @return string
 	 */
 	public function get_icon() {
-		return 'fa fa-code';
+		return 'fa fa-btc';
 	}
 
 	/**
