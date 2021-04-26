@@ -94,8 +94,6 @@ There are no FAQ just yet.
 - First release.
 
 
-
-
 == Upgrade Notice ==
 
 = 1.1.0 =
@@ -108,6 +106,7 @@ There are no FAQ just yet.
   - Default values for currency and duration type aren't displayed inside paywall
 
 == Screenshots ==
+
 1.Pairing Process
 2.Pairing Process
 3.Pairing Process
