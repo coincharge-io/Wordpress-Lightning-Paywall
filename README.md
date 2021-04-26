@@ -107,21 +107,21 @@ There are no FAQ just yet.
 
 == Screenshots ==
 
-1.Pairing Process
-2.Pairing Process
-3.Pairing Process
-4.Pairing Process
-5.Pairing Process
-6.Pairing Process
-7.Pairing Process
-8.Pairing Process
-9.WPBakery Add Paywall
-10.WPBakery Add Paywall
-11.WPBakery Add Paywall
-12.WPBakery Add Paywall
-13.Change Global Settings
-14.Elementor Add Paywall
-15.Gutenberg Add Paywall
-16.Gutenberg Add Paywall
-17.Shortcode Add Paywall
-18.Shortcode Add Paywall
+1. Pairing Process
+2. Pairing Process
+3. Pairing Process
+4. Pairing Process
+5. Pairing Process
+6. Pairing Process
+7. Pairing Process
+8. Pairing Process
+9. WPBakery Add Paywall
+10. WPBakery Add Paywall
+11. WPBakery Add Paywall
+12. WPBakery Add Paywall
+13. Change Global Settings
+14. Elementor Add Paywall
+15. Gutenberg Add Paywall
+16. Gutenberg Add Paywall
+17. Shortcode Add Paywall
+18. Shortcode Add Paywall
