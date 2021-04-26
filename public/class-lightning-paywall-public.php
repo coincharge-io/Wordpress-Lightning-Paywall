@@ -418,7 +418,7 @@ class Lightning_Paywall_Public
 		$atts = shortcode_atts(array(
 			'pay_view_block' => 'false',
 			'title' => 'Untitled',
-			'description' => 'No description available',
+			'description' => 'No description',
 			'preview' => $img_preview,
 			'currency' => '',
 			'price'     => '',
@@ -457,7 +457,7 @@ class Lightning_Paywall_Public
 		$s_data = '<!-- lnpw:start_content -->';
 
 		if ($payblock) {
-			return do_shortcode("[lnpw_pay_video_block title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']}]") . $s_data;
+			return do_shortcode("[lnpw_pay_video_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']") . $s_data;
 		}
 	}
 
@@ -586,11 +586,6 @@ class Lightning_Paywall_Public
 
 		$preview_data = array();
 
-		$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
-
-		$preview_data['title'] = 'Untitled';
-
-		$preview_data['description'] = 'No description';
 
 		$regex_pattern = get_shortcode_regex();
 
@@ -605,15 +600,21 @@ class Lightning_Paywall_Public
 
 			$attributes = shortcode_parse_atts($regex_matches[0]);
 
+			$preview_data['title'] = 'Untitled';
+
 			if (isset($attributes['title'])) {
 
 				$preview_data['title'] = $attributes['title'];
 			}
 
+			$preview_data['description'] = 'No description';
+
 			if (isset($attributes['description'])) {
 
 				$preview_data['description'] = $attributes['description'];
 			}
+
+			$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
 
 			if (isset($attributes['preview'])) {
 
@@ -628,12 +629,6 @@ class Lightning_Paywall_Public
 
 		$preview_data = array();
 
-		$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
-
-		$preview_data['title'] = 'Untitled';
-
-		$preview_data['description'] = 'No description';
-
 		$regex_pattern = get_shortcode_regex();
 
 		preg_match('/' . $regex_pattern . '/s', $post->post_content, $regex_matches);
@@ -646,22 +641,25 @@ class Lightning_Paywall_Public
 		if ($regex_matches[2] == $shortcode_attr) {
 
 			$attributes = shortcode_parse_atts($regex_matches[0]);
+			$preview_data['title'] = 'Untitled';
 
 			if (isset($attributes['title'])) {
-
 				$preview_data['title'] = $attributes['title'];
 			}
+
+			$preview_data['description'] = 'No description';
 
 			if (isset($attributes['description'])) {
 
 				$preview_data['description'] = $attributes['description'];
 			}
 
+			$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
+
 			if (isset($attributes['preview'])) {
 
 				$preview_data['preview'] = $attributes['preview'];
 			}
-
 			return $preview_data;
 		}
 	}
