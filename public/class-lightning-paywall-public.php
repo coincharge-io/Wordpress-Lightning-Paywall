@@ -544,11 +544,11 @@ class Lightning_Paywall_Public
 			return '';
 		}
 
+		global $post;
+		
 		$args = array(
 			'post_type' => 'post',
 		);
-
-
 		$myposts = get_posts($args);
 		ob_start();
 
