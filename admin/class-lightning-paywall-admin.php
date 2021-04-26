@@ -297,16 +297,7 @@ class Lightning_Paywall_Admin
 			wp_send_json_error($data);
 		}
 	}
-	/**
-	 *
-	 */
-	/*public function add_meta_boxes()
-	{
 
-		if (get_option('lnpw_enabled_post_types')) {
-			add_meta_box('lnpw_post_settings', 'Lightning Paywall Settings', array($this, 'render_post_settings_meta_box'), get_option('lnpw_enabled_post_types'));
-		}
-	}*/
 
 	/**
 	 * Render General Settings page
@@ -336,39 +327,7 @@ class Lightning_Paywall_Admin
 		include 'partials/meta-box-post-settings.php';
 	}
 
-	/**
-	 * @param  int  $post_id
-	 */
-	/*public function save_post_settings_meta_box($post_id)
-	{
 
-		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-			return;
-		}
-
-		if (!isset($_POST['lnpw_post_meta_box_nonce']) || !wp_verify_nonce($_POST['lnpw_post_meta_box_nonce'], plugin_basename(__FILE__))) {
-			return;
-		}
-
-		if (!empty($_POST['lnpw_price'])) {
-			update_post_meta($post_id, 'lnpw_price', sanitize_text_field($_POST['lnpw_price']));
-		} else {
-			delete_post_meta($post_id, 'lnpw_price');
-		}
-
-		if (!empty($_POST['lnpw_duration'])) {
-			update_post_meta($post_id, 'lnpw_duration', sanitize_text_field($_POST['lnpw_duration']));
-		} else {
-			delete_post_meta($post_id, 'lnpw_duration');
-		}
-
-		if (!empty($_POST['lnpw_duration_type'])) {
-			update_post_meta($post_id, 'lnpw_duration_type', sanitize_text_field($_POST['lnpw_duration_type']));
-		} else {
-			delete_post_meta($post_id, 'lnpw_duration_type');
-		}
-	}
-*/
 	/**
 	 * @throws Exception
 	 */

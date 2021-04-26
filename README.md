@@ -23,12 +23,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 WordPress Lightning Paywall for BTCPay Server by Coincharge.
 
-Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer previews of your blog posts and accept bitcoin payment for a single post (pay-per-post) via Lightning Network.
+Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer blog posts (pay-per-post) and videos (pay-per-view) and accept bitcoin payment for a single post or video via Lightning Network.
 
-Pay-per-Post
-Payment per newspaper article, blog post or page. Instead of offering its content for free and relying on advertising revenue from banner ads and Google, the WordPress Lightning Paywall offers publishers a viable alternative.
+Pay-per-Post and Pay-per-View
+Payment per newspaper article, blog post or video. Instead of offering its content for free and relying on advertising revenue from banner ads and Google, the WordPress Lightning Paywall offers publishers a viable alternative.
 
-Sell high-quality content to readers willing to pay, who don’t want to subscribe but are willing to pay for a single and high-quality article.
+Sell high-quality content to readers willing to pay, who don’t want to subscribe but are willing to pay for a single and high-quality article or video.
 
 Publishers can make the dependency on banner ads, Google and clickbait content and focus more on high-quality content that readers are willing to pay for.
 
@@ -78,29 +78,51 @@ There are no FAQ just yet.
 
 = 1.1.0 =
 
-- Fixed: Paywall can't be disabled via shortcode
-
+- Added: Videos can be protected with paywall.
+- Added: All protected videos can be displayed on a page.
+- Changed: General settings can be overridden within editor block.
+- Fixed: Paywall can't be disabled via shortcode.
 
 = 1.0.1 =
 
-- Fixed: Loading spinner doesn't show up inside paywall
-
-- Fixed: Default values for currency and duration type aren't displayed inside paywall
-
-- Fixed: Payment modal is popping up just for SATS currency
-
+- Fixed: Loading spinner doesn't show up inside paywall.
+- Fixed: Default values for currency and duration type aren't displayed inside paywall.
+- Fixed: Payment modal is popping up just for SATS currency.
 
 = 1.0.0 =
 
-- First release
+- First release.
 
 
 
 
 == Upgrade Notice ==
 
-There is no need to upgrade just yet.
+= 1.1.0 =
+  New version includes the possibility of protecting videos with paywall. The main differences, in comparison to the earlier version, are the possibility to override the general settings inside editor block and method for protecting text via Gutenberg blocks.  
+
+= 1.0.1 =
+  This version fixes following problems: 
+  - Non showing loading spinner on click inside paywall
+  - Payment modal is popping up just for SATS currency
+  - Default values for currency and duration type aren't displayed inside paywall
 
 == Screenshots ==
-
-There are no screenshots yet.
+1.Pairing Process
+2.Pairing Process
+3.Pairing Process
+4.Pairing Process
+5.Pairing Process
+6.Pairing Process
+7.Pairing Process
+8.Pairing Process
+9.WPBakery Add Paywall
+10.WPBakery Add Paywall
+11.WPBakery Add Paywall
+12.WPBakery Add Paywall
+13.Change Global Settings
+14.Elementor Add Paywall
+15.Gutenberg Add Paywall
+16.Gutenberg Add Paywall
+17.Shortcode Add Paywall
+18.Shortcode Add Paywall

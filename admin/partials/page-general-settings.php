@@ -16,17 +16,7 @@ $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
 $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
-/**<div>
-                <label for="lnpw_enabled_post_types">Enabled on</label>
 
-                <?php foreach ($post_types as $post_type) : ?>
-                    <span style="margin-left: 15px; text-transform: capitalize">
-                        <label style="line-height: 1" for="lnpw_enabled_<?php echo $post_type ?>"><?php echo $post_type ?></label>
-
-                        <input style="margin: 0" type="checkbox" name="lnpw_enabled_post_types[]" id="lnpw_enabled_<?php echo $post_type ?>" value="<?php echo $post_type ?>" <?php echo in_array($post_type, $enabled_post_types) ? 'checked' : ''; ?>>
-                    </span>
-                <?php endforeach; ?>
-            </div> */
 ?>
 
 <div class="container">

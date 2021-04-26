@@ -212,11 +212,11 @@ class Lightning_Paywall_Public
 		return $duration_type === 'unlimited' ? $unlimited : ($duration_type === 'onetime' ? $onetime : $other);
 	}
 
-	private function get_payblock_header_string()
+	public static function get_payblock_header_string()
 	{
 		return get_option('lnpw_default_payblock_text') ?: 'For access to content first pay';
 	}
-	private function get_payblock_button_string()
+	public static function get_payblock_button_string()
 	{
 		return get_option('lnpw_default_payblock_button') ?: 'Pay';
 	}
@@ -554,29 +554,76 @@ class Lightning_Paywall_Public
 
 	?>
 		<div class="lnpw_store">
-			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
-				<?php if (null !== $this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))) : ?>
-					<div class="lnpw_store_video">
-						<div class="lnpw_store_video_preview">
-							<img src="<?php echo esc_url($this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))['preview']) ?>" alt="Video preview" />
-						</div>
-						<div class="lnpw_store_video_information">
-							<a href="<?php the_permalink($post); ?>">
-								<h5><?php echo esc_html($this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))['title']); ?></h5>
-
-								<h6><?php echo esc_html($this->integrate_preview_functions($this->extract_gutenberg_preview($post), $this->extract_elementor_preview($post), $this->extract_preview($post, 'lnpw_start_video'))['description']); ?></h6>
-							</a>
-						</div>
+			<?php foreach ($myposts as $post) : setup_postdata($post); ?><?php
+																			$gutenberg = $this->extract_gutenberg_preview($post);
+																			$elementor = $this->extract_elementor_preview($post);
+																			$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
+																			$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
+																			$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode); ?>
+			<?php if (null !== $integrated) : ?>
+				<div class="lnpw_store_video">
+					<div class="lnpw_store_video_preview">
+						<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
 					</div>
-				<?php endif; ?>
-			<?php endforeach;
+					<div class="lnpw_store_video_information">
+						<a href="<?php the_permalink($post); ?>">
+							<h5><?php echo esc_html($integrated['title']); ?></h5>
+
+							<h6><?php echo esc_html($integrated['description']); ?></h6>
+						</a>
+					</div>
+				</div>
+			<?php endif; ?>
+		<?php endforeach;
 			wp_reset_postdata(); ?>
 		</div>
 <?php
 
 		return ob_get_clean();
 	}
-	private function extract_preview($post, $shortcode_attr)
+	private function extract_bakery_preview($post, $shortcode_attr)
+	{
+
+		$preview_data = array();
+
+		$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
+
+		$preview_data['title'] = 'Untitled';
+
+		$preview_data['description'] = 'No description';
+
+		$regex_pattern = get_shortcode_regex();
+
+		preg_match('/' . $regex_pattern . '/s', $post->post_content, $regex_matches);
+
+		if (empty($regex_matches[2])) {
+
+			return;
+		}
+
+		if (substr($regex_matches[5], 12, 16) == $shortcode_attr) {
+
+			$attributes = shortcode_parse_atts($regex_matches[0]);
+
+			if (isset($attributes['title'])) {
+
+				$preview_data['title'] = $attributes['title'];
+			}
+
+			if (isset($attributes['description'])) {
+
+				$preview_data['description'] = $attributes['description'];
+			}
+
+			if (isset($attributes['preview'])) {
+
+				$preview_data['preview'] = $attributes['preview'];
+			}
+
+			return $preview_data;
+		}
+	}
+	private function extract_shortcode_preview($post, $shortcode_attr)
 	{
 
 		$preview_data = array();
@@ -643,7 +690,10 @@ class Lightning_Paywall_Public
 
 		$doc = new DOMDocument();
 
-		@$doc->loadHTML($post->post_content);
+		if (!is_object($post->post_content)) {
+			return;
+		}
+		$doc->loadHTML($post->post_content);
 
 		$img = $doc->getElementsByTagName('img')[0];
 		if ($doc->getElementsByTagName('h2')->item(0)) {
@@ -665,8 +715,8 @@ class Lightning_Paywall_Public
 
 		return $preview_data;
 	}
-	private function integrate_preview_functions($gutt, $elem, $wpb)
+	private function integrate_preview_functions($gutt, $elem, $wpb, $sc)
 	{
-		return $gutt ? $gutt : ($elem ? $elem : $wpb);
+		return $gutt ? $gutt : ($elem ? $elem : ($wpb ? $wpb : $sc));
 	}
 }
