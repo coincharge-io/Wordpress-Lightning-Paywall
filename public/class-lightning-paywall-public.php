@@ -538,7 +538,7 @@ class Lightning_Paywall_Public
 		return ob_get_clean();
 	}
 
-	public function render_shortcode_lnpw_video_catalog($atts)
+	public function render_shortcode_lnpw_video_catalog()
 	{
 		if ($this->is_paid_content()) {
 			return '';
@@ -555,11 +555,13 @@ class Lightning_Paywall_Public
 	?>
 		<div class="lnpw_store">
 			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
-				<?php $gutenberg = $this->extract_gutenberg_preview($post);
+				<?php
+				$gutenberg = $this->extract_gutenberg_preview($post);
 				$elementor = $this->extract_elementor_preview($post);
 				$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
 				$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
 				$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode);
+
 				if (null !== $integrated) : ?>
 					<div class="lnpw_store_video">
 						<div class="lnpw_store_video_preview">
@@ -585,7 +587,9 @@ class Lightning_Paywall_Public
 	{
 
 		$preview_data = array();
-
+		$preview_data['title'] = 'Untitled';
+		$preview_data['description'] = 'No description';
+		$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
 
 		$regex_pattern = get_shortcode_regex();
 
@@ -600,21 +604,18 @@ class Lightning_Paywall_Public
 
 			$attributes = shortcode_parse_atts($regex_matches[0]);
 
-			$preview_data['title'] = 'Untitled';
 
 			if (isset($attributes['title'])) {
 
 				$preview_data['title'] = $attributes['title'];
 			}
 
-			$preview_data['description'] = 'No description';
 
 			if (isset($attributes['description'])) {
 
 				$preview_data['description'] = $attributes['description'];
 			}
 
-			$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
 
 			if (isset($attributes['preview'])) {
 
@@ -628,7 +629,9 @@ class Lightning_Paywall_Public
 	{
 
 		$preview_data = array();
-
+		$preview_data['title'] = 'Untitled';
+		$preview_data['description'] = 'No description';
+		$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
 		$regex_pattern = get_shortcode_regex();
 
 		preg_match('/' . $regex_pattern . '/s', $post->post_content, $regex_matches);
@@ -641,20 +644,15 @@ class Lightning_Paywall_Public
 		if ($regex_matches[2] == $shortcode_attr) {
 
 			$attributes = shortcode_parse_atts($regex_matches[0]);
-			$preview_data['title'] = 'Untitled';
 
 			if (isset($attributes['title'])) {
 				$preview_data['title'] = $attributes['title'];
 			}
 
-			$preview_data['description'] = 'No description';
-
 			if (isset($attributes['description'])) {
 
 				$preview_data['description'] = $attributes['description'];
 			}
-
-			$preview_data['preview'] = plugin_dir_url(__FILE__) . 'img/preview.png';
 
 			if (isset($attributes['preview'])) {
 
@@ -669,6 +667,7 @@ class Lightning_Paywall_Public
 		if (has_blocks($post->post_content)) {
 
 			$blocks = parse_blocks($post->post_content);
+
 			if ($blocks[0]['blockName'] === 'lightning-paywall/gutenberg-start-video-block') {
 
 				$preview_data['title'] = $blocks[0]['attrs']['title'] ?? 'Untitled';
@@ -713,19 +712,9 @@ class Lightning_Paywall_Public
 
 		return $preview_data;
 	}
-	private function integrate_preview_functions($gutt, $elem, $wpb, $sc)
+	public function integrate_preview_functions($gutt, $elem, $wpb, $sc)
 	{
-		if (isset($gutt)) {
-			return $gutt;
-		}
-		if (isset($elem)) {
-			return $elem;
-		}
-		if (isset($wpb)) {
-			return $wpb;
-		}
-		if (isset($sc)) {
-			return $sc;
-		}
+
+		return $gutt ? $gutt : ($elem ? $elem : ($wpb ? $wpb : $sc));
 	}
 }
