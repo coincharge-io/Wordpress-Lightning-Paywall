@@ -554,27 +554,27 @@ class Lightning_Paywall_Public
 
 	?>
 		<div class="lnpw_store">
-			<?php foreach ($myposts as $post) : setup_postdata($post); ?><?php
-																			$gutenberg = $this->extract_gutenberg_preview($post);
-																			$elementor = $this->extract_elementor_preview($post);
-																			$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
-																			$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
-																			$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode); ?>
-			<?php if (null !== $integrated) : ?>
-				<div class="lnpw_store_video">
-					<div class="lnpw_store_video_preview">
-						<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
-					</div>
-					<div class="lnpw_store_video_information">
-						<a href="<?php the_permalink($post); ?>">
-							<h5><?php echo esc_html($integrated['title']); ?></h5>
+			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
+				<?php $gutenberg = $this->extract_gutenberg_preview($post);
+				$elementor = $this->extract_elementor_preview($post);
+				$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
+				$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
+				$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode);
+				if (null !== $integrated) : ?>
+					<div class="lnpw_store_video">
+						<div class="lnpw_store_video_preview">
+							<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
+						</div>
+						<div class="lnpw_store_video_information">
+							<a href="<?php the_permalink($post); ?>">
+								<h5><?php echo esc_html($integrated['title']); ?></h5>
 
-							<h6><?php echo esc_html($integrated['description']); ?></h6>
-						</a>
+								<h6><?php echo esc_html($integrated['description']); ?></h6>
+							</a>
+						</div>
 					</div>
-				</div>
-			<?php endif; ?>
-		<?php endforeach;
+				<?php endif; ?>
+			<?php endforeach;
 			wp_reset_postdata(); ?>
 		</div>
 <?php
