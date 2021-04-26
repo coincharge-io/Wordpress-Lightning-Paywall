@@ -715,6 +715,17 @@ class Lightning_Paywall_Public
 	}
 	private function integrate_preview_functions($gutt, $elem, $wpb, $sc)
 	{
-		return $gutt ? $gutt : ($elem ? $elem : ($wpb ? $wpb : $sc));
+		if (isset($gutt)) {
+			return $gutt;
+		}
+		if (isset($elem)) {
+			return $elem;
+		}
+		if (isset($wpb)) {
+			return $wpb;
+		}
+		if (isset($sc)) {
+			return $sc;
+		}
 	}
 }
