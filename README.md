@@ -13,7 +13,7 @@ Requires PHP: 7.4
 
 Tested up to: 5.7
 
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 
 License: GPLv2
 
@@ -76,6 +76,10 @@ There are no FAQ just yet.
 
 == Changelog ==
 
+= 1.1.1 = 
+
+- Fixed Elementor problem
+
 = 1.1.0 =
 
 - Added: Videos can be protected with paywall.
@@ -95,6 +99,9 @@ There are no FAQ just yet.
 
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+  Update immediately. Fixed problem with Elementor.
 
 = 1.1.0 =
   New version includes the possibility of protecting videos with paywall. The main differences, in comparison to the earlier version, are the possibility to override the general settings inside editor block and method for protecting text via Gutenberg blocks.  

@@ -515,13 +515,12 @@ class Lightning_Paywall_Admin
 
 	public function load_elementor_widgets()
 	{
-
-		require_once 'elementor/class-start-content-widget.php';
-		require_once 'elementor/class-end-content-widget.php';
-		require_once 'elementor/class-pay-block-widget.php';
-		require_once 'elementor/class-start-video-widget.php';
-		require_once 'elementor/class-end-video-widget.php';
-		require_once 'elementor/class-store-widget.php';
+		require_once __DIR__ . '/elementor/class-start-content-widget.php';
+		require_once __DIR__ . '/elementor/class-end-content-widget.php';
+		require_once __DIR__ . '/elementor/class-pay-block-widget.php';
+		require_once __DIR__ . '/elementor/class-start-video-widget.php';
+		require_once __DIR__ . '/elementor/class-end-video-widget.php';
+		require_once __DIR__  . '/elementor/class-store-widget.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_Start_Content_Widget());
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_End_Content_Widget());
