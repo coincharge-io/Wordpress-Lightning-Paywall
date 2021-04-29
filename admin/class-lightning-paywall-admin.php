@@ -521,6 +521,7 @@ class Lightning_Paywall_Admin
 		require_once __DIR__ . '/elementor/class-start-video-widget.php';
 		require_once __DIR__ . '/elementor/class-end-video-widget.php';
 		require_once __DIR__  . '/elementor/class-store-widget.php';
+		require_once __DIR__  . '/elementor/class-file-widget.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_Start_Content_Widget());
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_End_Content_Widget());
@@ -528,6 +529,7 @@ class Lightning_Paywall_Admin
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_Start_Video_Widget());
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_End_Video_Widget());
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_Store_Widget());
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_LNPW_File_Widget());
 	}
 
 	/**
@@ -576,6 +578,21 @@ class Lightning_Paywall_Admin
 	{
 		return do_shortcode("[lnpw_video_catalog]");
 	}
+	public function render_file_gutenberg($atts){
+		$atts = shortcode_atts(array(
+			'pay_file_block' => 'true',
+			'file'	=> '',
+			'title' => 'Untitled',
+			'description' => 'No description',
+			'preview' => '',
+			'currency' => '',
+			'price' => '',
+			'duration_type' => '',
+			'duration' => '',
+		), $atts);
+
+		return do_shortcode("[lnpw_file pay_file_block='{$atts['pay_file_block']}' file='{$atts['file']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']} price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
+	}
 	public function render_start_video_gutenberg($atts)
 	{
 
@@ -583,7 +600,7 @@ class Lightning_Paywall_Admin
 		$atts = shortcode_atts(array(
 			'pay_view_block' => 'true',
 			'title' => 'Untitled',
-			'description' => 'No description available',
+			'description' => 'No description',
 			'preview' => '',
 			'currency' => '',
 			'price' => '',
@@ -640,6 +657,14 @@ class Lightning_Paywall_Admin
 			[
 				'editor_script' => 'gutenberg-block-script',
 				'render_callback' => (array($this, 'render_end_gutenberg')),
+			]
+		);
+
+		register_block_type(
+			'lightning-paywall/gutenberg-file-block',
+			[
+				'editor_script' => 'gutenberg-block-script',
+				'render_callback' => (array($this, 'render_file_gutenberg')),
 			]
 		);
 	}

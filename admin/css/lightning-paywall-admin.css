@@ -96,3 +96,19 @@ td.Settled {
   height:25px;
   background:  #c2cbd2;
 }
+.lnpw_pay__gutenberg_block_file{
+  border:solid;
+  text-align: center;
+  color: #c2cbd2;
+}
+
+.lnpw_pay__gutenberg_block_file button{
+  background-color:#007cba;
+  color: #fff;
+  border-radius: 5px;
+  padding: .5em 1em;
+  margin-bottom: 5px;
+  line-height: 1.8;
+  font-size: 0.88889em;
+  font-weight: bold;
+}

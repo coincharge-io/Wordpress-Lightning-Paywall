@@ -79,3 +79,13 @@
   max-width: 50%;
 }
 
+a.lnpw_pay__download{
+  text-decoration: none;
+  background-color: #0073aa;
+  border-radius: 5px;
+  padding: 0.7em 1.4em;
+  cursor: pointer;
+  color: white;
+  line-height: 1.8;
+  font-weight: bold;
+}

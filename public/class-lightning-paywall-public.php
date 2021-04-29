@@ -462,6 +462,62 @@ class Lightning_Paywall_Public
 	}
 
 	/**
+	
+	 */
+	public function render_shortcode_lnpw_file($atts)
+	{
+		$img_preview = plugin_dir_url(__FILE__) . 'img/preview.png';
+
+		$atts = shortcode_atts(array(
+			'pay_file_block' => 'false',
+			'file'		=>	'',
+			'title' => 'Untitled',
+			'description' => 'No description',
+			'preview' => $img_preview,
+			'currency' => '',
+			'price'     => '',
+			'duration'  => '',
+			'duration_type' => ''
+		), $atts);
+
+		$valid_currency = in_array($atts['currency'], Lightning_Paywall_Admin::CURRENCIES);
+
+		$valid_duration = in_array($atts['duration_type'], Lightning_Paywall_Admin::DURATIONS);
+
+		if (!empty($atts['currency']) && $valid_currency) {
+			update_post_meta(get_the_ID(), 'lnpw_currency', sanitize_text_field($atts['currency']));
+		} else {
+			delete_post_meta(get_the_ID(), 'lnpw_currency');
+		}
+		if (!empty($atts['price'])) {
+			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($atts['price']));
+		} else {
+			delete_post_meta(get_the_ID(), 'lnpw_price');
+		}
+		if (!empty($atts['duration'])) {
+			update_post_meta(get_the_ID(), 'lnpw_duration', sanitize_text_field($atts['duration']));
+		} else {
+			delete_post_meta(get_the_ID(), 'lnpw_duration');
+		}
+		if (!empty($atts['duration_type']) && $valid_duration) {
+			update_post_meta(get_the_ID(), 'lnpw_duration_type', sanitize_text_field($atts['duration_type']));
+		} else {
+			delete_post_meta(get_the_ID(), 'lnpw_duration_type');
+		}
+
+		$payblock = $atts['pay_file_block'] === 'true';
+		$file = !empty($atts['file']);
+
+		$required_attributes = $payblock && $file;
+
+		$s_data = '<!-- lnpw:start_content -->';
+		$e_data = '<!-- /lnpw:end_content -->';
+
+		if ($required_attributes) {
+			return do_shortcode("[lnpw_pay_file_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']") . $s_data  . do_shortcode("[lnpw_protected_file file='{$atts['file']}']") . $e_data;
+		}
+	}
+	/**
 	 * @param  array  $atts
 	 *
 	 * @return string
@@ -538,6 +594,68 @@ class Lightning_Paywall_Public
 		return ob_get_clean();
 	}
 
+	public function render_shortcode_protected_file($atts)
+	{
+		$atts = shortcode_atts(array(
+			'file' => ''
+		), $atts);
+
+		ob_start();
+	?>
+		<a class="lnpw_pay__download" href=<?php echo esc_url($atts['file']) ?> target="_blank" download>Download</a>
+	<?php
+
+
+		return ob_get_clean();
+	}
+	public function render_shortcode_lnpw_pay_file_block($atts)
+	{
+		if ($this->is_paid_content()) {
+			return '';
+		}
+
+		$atts = shortcode_atts(array(
+			'title' => '',
+			'description' => '',
+			'preview' => '',
+		), $atts);
+
+		$image = wp_get_attachment_image_src($atts['preview']);
+
+		$preview_url = $image ? $image[0] : $atts['preview'];
+
+		ob_start();
+
+	?>
+		<div class="lnpw_pay">
+			<div class="lnpw_pay__preview">
+				<h2><?php echo esc_html($atts['title']); ?></h2>
+				<p><?php echo esc_html($atts['description']); ?></p>
+				<img src=<?php echo esc_url($preview_url); ?> alt="Video preview">
+			</div>
+			<div class="lnpw_pay__content">
+				<h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
+				<p>
+					<?php echo Lightning_Paywall_Public::get_post_info_string() ?>
+				</p>
+			</div>
+			<div class="lnpw_pay__footer">
+				<div>
+					<button type="button" id="lnpw_pay__button" data-post_id="<?php echo  get_the_ID(); ?>"><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
+				</div>
+				<div class="lnpw_pay__loading">
+					<p class="loading"></p>
+				</div>
+				<div class="lnpw_help">
+					<a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/" target="_blank">Help</a>
+				</div>
+			</div>
+		</div>
+	<?php
+
+
+		return ob_get_clean();
+	}
 	public function render_shortcode_lnpw_video_catalog()
 	{
 		if ($this->is_paid_content()) {
@@ -545,7 +663,7 @@ class Lightning_Paywall_Public
 		}
 
 		global $post;
-		
+
 		$args = array(
 			'post_type' => 'post',
 		);
