@@ -13,7 +13,7 @@ Requires PHP: 7.4
 
 Tested up to: 5.7
 
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 
 License: GPLv2
 
@@ -76,9 +76,14 @@ There are no FAQ just yet.
 
 == Changelog ==
 
+= 1.1.2 =
+
+- Fixed: Problem with payment caused by change in handling general and meta settings
+- Fixed: Error message doesn't appear for invalid server credentials 
+
 = 1.1.1 = 
 
-- Fixed Elementor problem
+- Fixed: New features doesn't work
 
 = 1.1.0 =
 
@@ -99,6 +104,9 @@ There are no FAQ just yet.
 
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+  Update immediately. Fixed problem with non showing payment page.
 
 = 1.1.1 =
   Update immediately. Fixed problem with Elementor.

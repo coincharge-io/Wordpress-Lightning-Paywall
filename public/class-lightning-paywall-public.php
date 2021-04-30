@@ -223,8 +223,9 @@ class Lightning_Paywall_Public
 
 	private function calculate_price_for_invoice($post_id)
 	{
+		$currency_scope = get_post_meta($post_id, 'lnpw_currency', true) ?: get_option('lnpw_default_currency', 'SATS');
 
-		if (get_option('lnpw_currency') === 'SATS') {
+		if ($currency_scope === 'SATS') {
 
 			if (get_post_meta($post_id, 'lnpw_price', true)) {
 				$price = get_post_meta($post_id, 'lnpw_price', true);
@@ -246,9 +247,13 @@ class Lightning_Paywall_Public
 
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
+		$currency_scope = get_post_meta($post_id, 'lnpw_currency', true) ?: get_option('lnpw_default_currency', 'SATS');
+
+		$currency = $currency_scope != 'SATS' ? $currency_scope : 'BTC';
+
 		$data = array(
 			'amount'    => $amount,
-			'currency' => get_option('lnpw_currency') != 'SATS' ? get_option('lnpw_currency') : 'BTC',
+			'currency' => $currency,
 			'metadata' => array(
 				'orderId'  => $order_id,
 				'itemDesc' => 'Pay by view: ' . get_the_title($post_id),
@@ -545,7 +550,7 @@ class Lightning_Paywall_Public
 		}
 
 		global $post;
-		
+
 		$args = array(
 			'post_type' => 'post',
 		);
