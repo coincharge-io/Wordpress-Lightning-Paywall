@@ -16,7 +16,6 @@ $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
 $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
-
 ?>
 
 <div class="container">

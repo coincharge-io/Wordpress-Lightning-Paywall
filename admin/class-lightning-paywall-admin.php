@@ -194,6 +194,15 @@ class Lightning_Paywall_Admin
 		}
 		return false;
 	}
+	/**
+	 * @param  WP_Post  $post
+	 * @param  array  $meta
+	 */
+	 public function render_post_settings_meta_box($post, $meta)
+	 {
+ 
+		 wp_nonce_field(plugin_basename(__FILE__), 'lnpw_post_meta_box_nonce');
+	 }
 
 	/**
 	 *	Check connection with a server
@@ -232,7 +241,7 @@ class Lightning_Paywall_Admin
 		$response_create = wp_remote_request($url, $args_create);
 
 		if (is_wp_error($response_view) || is_wp_error($response_create)) {
-			wp_send_json_error(['message' => 'Something went wrong. Please check your API keys.']);
+			wp_send_json_error(['message' => 'Something went wrong. Please check your credentials.']);
 		}
 
 		$view_permission = json_decode($response_view['body'])->permissions[0];
@@ -254,7 +263,7 @@ class Lightning_Paywall_Admin
 			update_option("lnpw_btcpay_store_id", $view_store_id);
 			wp_send_json_success();
 		} else {
-			wp_send_json_error();
+			wp_send_json_error(['message' => 'Something went wrong. Please check your API keys.']);
 		}
 	}
 
@@ -313,18 +322,6 @@ class Lightning_Paywall_Admin
 	public function render_invoices_page()
 	{
 		include 'partials/page-invoices.php';
-	}
-
-	/**
-	 * @param  WP_Post  $post
-	 * @param  array  $meta
-	 */
-	public function render_post_settings_meta_box($post, $meta)
-	{
-
-		wp_nonce_field(plugin_basename(__FILE__), 'lnpw_post_meta_box_nonce');
-
-		include 'partials/meta-box-post-settings.php';
 	}
 
 
