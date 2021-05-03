@@ -140,6 +140,7 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 		$this->end_controls_section();
 	}
 
+
 	/**
 	 *
 	 */

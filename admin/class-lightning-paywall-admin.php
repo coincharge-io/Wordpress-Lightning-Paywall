@@ -258,7 +258,6 @@ class Lightning_Paywall_Admin
 		$view_store_id = substr($view_permission, strrpos($view_permission, ':') + 1);
 		$create_store_id = substr($create_permission, strrpos($create_permission, ':') + 1);
 		$valid_store_id = $view_store_id === $create_store_id;
-
 		if ($valid_permissions && $valid_store_id && $valid_response_code) {
 			update_option("lnpw_btcpay_store_id", $view_store_id);
 			wp_send_json_success();

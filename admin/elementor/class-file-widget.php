@@ -155,6 +155,7 @@ class Elementor_LNPW_File_Widget extends \Elementor\Widget_Base
 		if ($enable_pay_block) {
 			echo do_shortcode("[lnpw_start_content pay_block='true' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
 		}
+		
 	}
 
 }
