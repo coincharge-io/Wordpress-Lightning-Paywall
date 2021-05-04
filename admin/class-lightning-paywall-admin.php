@@ -144,11 +144,11 @@ class Lightning_Paywall_Admin
 	 * @param  WP_Post  $post
 	 * @param  array  $meta
 	 */
-	 public function render_post_settings_meta_box($post, $meta)
-	 {
- 
-		 wp_nonce_field(plugin_basename(__FILE__), 'lnpw_post_meta_box_nonce');
-	 }
+	public function render_post_settings_meta_box($post, $meta)
+	{
+
+		wp_nonce_field(plugin_basename(__FILE__), 'lnpw_post_meta_box_nonce');
+	}
 
 	public function sanitize_btcpay_server_url($value)
 	{
@@ -203,7 +203,17 @@ class Lightning_Paywall_Admin
 		}
 		return false;
 	}
+	private function check_store_id($store_id)
+	{
 
+		if (get_option("lnpw_btcpay_store_id") !== false) {
+
+			update_option("lnpw_btcpay_store_id", $store_id);
+		} else {
+
+			add_option("lnpw_btcpay_store_id", $store_id, null, 'no');
+		}
+	}
 	/**
 	 *	Check connection with a server
 	 */
@@ -260,10 +270,10 @@ class Lightning_Paywall_Admin
 		$valid_store_id = $view_store_id === $create_store_id;
 
 		if ($valid_permissions && $valid_store_id && $valid_response_code) {
-			update_option("lnpw_btcpay_store_id", $view_store_id);
+			$this->check_store_id($view_store_id);
 			wp_send_json_success();
 		} else {
-			wp_send_json_error(['message' => 'Something went wrong. Please check your server url.']);
+			wp_send_json_error(['message' => 'Something went wrong. Please check your credentials.']);
 		}
 	}
 

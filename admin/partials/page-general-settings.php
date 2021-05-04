@@ -16,6 +16,13 @@ $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
 $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
+/*foreach (wp_load_alloptions() as $option => $value) {
+
+    if (strpos($option, 'lnpw_btcpay_') !== false || strpos($option, 'lnpw_default_') !== false) {
+
+        delete_option($option);
+    }
+}*/
 ?>
 
 <div class="container">
