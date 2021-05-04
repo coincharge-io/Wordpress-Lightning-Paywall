@@ -138,7 +138,6 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_server_url', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_server_url')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_view', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
-		register_setting('lnpw_general_settings', 'lnpw_btcpay_store_id', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_store_id')));
 	}
 	/**
 	 * @param  WP_Post  $post
@@ -159,13 +158,6 @@ class Lightning_Paywall_Admin
 	}
 
 	public function sanitize_btcpay_auth_key($value)
-	{
-		$value = sanitize_text_field($value);
-
-		return $value;
-	}
-
-	public function sanitize_btcpay_store_id($value)
 	{
 		$value = sanitize_text_field($value);
 

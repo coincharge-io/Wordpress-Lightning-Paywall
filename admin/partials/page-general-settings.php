@@ -1,7 +1,6 @@
 <?php
 
-$post_types             = Lightning_Paywall_Admin::get_allowed_post_types();
-$enabled_post_types     = get_option('lnpw_enabled_post_types');
+
 $used_currency          = get_option('lnpw_default_currency');
 $supported_currencies   = Lightning_Paywall_Admin::CURRENCIES;
 $default_price          = get_option('lnpw_default_price');
@@ -15,14 +14,7 @@ $supported_durations    = Lightning_Paywall_Admin::DURATIONS;
 $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
-$btcpay_store_id        = get_option('lnpw_btcpay_store_id');
-/*foreach (wp_load_alloptions() as $option => $value) {
 
-    if (strpos($option, 'lnpw_btcpay_') !== false || strpos($option, 'lnpw_default_') !== false) {
-
-        delete_option($option);
-    }
-}*/
 ?>
 
 <div class="container">
@@ -107,7 +99,6 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                     </div>
                     <div class="col-80">
                         <input type="url" placeholder="BTCPay Server Url" name="lnpw_btcpay_server_url" id="lnpw_btcpay_server_url" value="<?php echo $btcpay_server_url ?>" style="min-width: 335px;">
-                        <input type="hidden" name="lnpw_btcpay_store_id" id="lnpw_btcpay_store_id" value="<?php echo $btcpay_store_id ?>">
                         <div class="lnpw_generate_api">Generate API keys:<a href="" class="lnpw_auth_key" target="_blank"></a></div>
                     </div>
                 </div>

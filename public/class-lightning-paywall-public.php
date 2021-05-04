@@ -244,7 +244,6 @@ class Lightning_Paywall_Public
 	public function generate_invoice_id($post_id, $order_id)
 	{
 		$amount = $this->calculate_price_for_invoice($post_id);
-
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
 		$currency_scope = get_post_meta($post_id, 'lnpw_currency', true) ?: get_option('lnpw_default_currency', 'SATS');

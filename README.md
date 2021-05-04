@@ -76,6 +76,10 @@ There are no FAQ just yet.
 
 == Changelog ==
 
+= 1.1.3 =
+
+- Fixed: Problem with saving store id
+
 = 1.1.2 =
 
 - Fixed: Problem with payment caused by change in handling general and meta settings
@@ -104,6 +108,9 @@ There are no FAQ just yet.
 
 
 == Upgrade Notice ==
+
+= 1.1.3 = 
+  Problem with saving store id is fixed.
 
 = 1.1.2 =
   Update immediately. Fixed problem with non showing payment page.
