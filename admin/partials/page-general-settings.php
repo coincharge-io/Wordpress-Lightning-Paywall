@@ -1,7 +1,5 @@
 <?php
 
-$post_types             = Lightning_Paywall_Admin::get_allowed_post_types();
-$enabled_post_types     = get_option('lnpw_enabled_post_types');
 $used_currency          = get_option('lnpw_default_currency');
 $supported_currencies   = Lightning_Paywall_Admin::CURRENCIES;
 $default_price          = get_option('lnpw_default_price');

@@ -198,12 +198,22 @@ class Lightning_Paywall_Admin
 	 * @param  WP_Post  $post
 	 * @param  array  $meta
 	 */
-	 public function render_post_settings_meta_box($post, $meta)
-	 {
- 
-		 wp_nonce_field(plugin_basename(__FILE__), 'lnpw_post_meta_box_nonce');
-	 }
+	public function render_post_settings_meta_box($post, $meta)
+	{
 
+		wp_nonce_field(plugin_basename(__FILE__), 'lnpw_post_meta_box_nonce');
+	}
+	private function check_store_id($store_id)
+	{
+		
+		if (get_option("lnpw_btcpay_store_id") !== false) {
+
+			update_option("lnpw_btcpay_store_id", $store_id);
+		} else {
+
+			add_option("lnpw_btcpay_store_id", $store_id, null, 'no');
+		}
+	}
 	/**
 	 *	Check connection with a server
 	 */
@@ -258,8 +268,10 @@ class Lightning_Paywall_Admin
 		$view_store_id = substr($view_permission, strrpos($view_permission, ':') + 1);
 		$create_store_id = substr($create_permission, strrpos($create_permission, ':') + 1);
 		$valid_store_id = $view_store_id === $create_store_id;
+
 		if ($valid_permissions && $valid_store_id && $valid_response_code) {
-			update_option("lnpw_btcpay_store_id", $view_store_id);
+			//update_option("lnpw_btcpay_store_id", $view_store_id);
+			$this->check_store_id($view_store_id);
 			wp_send_json_success();
 		} else {
 			wp_send_json_error(['message' => 'Something went wrong. Please check your API keys.']);
@@ -574,7 +586,8 @@ class Lightning_Paywall_Admin
 	{
 		return do_shortcode("[lnpw_video_catalog]");
 	}
-	public function render_file_gutenberg($atts){
+	public function render_file_gutenberg($atts)
+	{
 		$atts = shortcode_atts(array(
 			'pay_file_block' => 'true',
 			'file'	=> '',
