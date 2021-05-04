@@ -1,6 +1,4 @@
 <?php
-
-
 $used_currency          = get_option('lnpw_default_currency');
 $supported_currencies   = Lightning_Paywall_Admin::CURRENCIES;
 $default_price          = get_option('lnpw_default_price');
@@ -14,7 +12,6 @@ $supported_durations    = Lightning_Paywall_Admin::DURATIONS;
 $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
-
 ?>
 
 <div class="container">
