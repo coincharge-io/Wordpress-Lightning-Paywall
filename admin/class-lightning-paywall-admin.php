@@ -205,7 +205,7 @@ class Lightning_Paywall_Admin
 	}
 	private function check_store_id($store_id)
 	{
-		
+
 		if (get_option("lnpw_btcpay_store_id") !== false) {
 
 			update_option("lnpw_btcpay_store_id", $store_id);
@@ -270,7 +270,6 @@ class Lightning_Paywall_Admin
 		$valid_store_id = $view_store_id === $create_store_id;
 
 		if ($valid_permissions && $valid_store_id && $valid_response_code) {
-			//update_option("lnpw_btcpay_store_id", $view_store_id);
 			$this->check_store_id($view_store_id);
 			wp_send_json_success();
 		} else {
