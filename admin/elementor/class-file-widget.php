@@ -59,7 +59,16 @@ class Elementor_LNPW_File_Widget extends \Elementor\Widget_Base
 				'default' => 'yes',
 			]
 		);
-        $this->add_control(
+
+		$this->add_control(
+			'file',
+			[
+				'label' => 'File',
+				'type'  => \Elementor\Controls_Manager::URL,
+			]
+		);
+
+		$this->add_control(
 			'title',
 			[
 				'label' => 'Title',
@@ -144,18 +153,16 @@ class Elementor_LNPW_File_Widget extends \Elementor\Widget_Base
 	 */
 	protected function render()
 	{
-        $settings         = $this->get_settings_for_display();
 		$settings         = $this->get_settings_for_display();
 		$enable_pay_block = $settings['pay_file_block'];
+		$file =	$settings['file']['url'];
 		$price = $settings['price'];
 		$duration = $settings['duration'];
 		$duration_type = $settings['duration_type'];
 		$currency = $settings['currency'];
 
 		if ($enable_pay_block) {
-			echo do_shortcode("[lnpw_start_content pay_block='true' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
+			echo do_shortcode("[lnpw_file pay_file_block='true' file='{$file}' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
 		}
-		
 	}
-
 }

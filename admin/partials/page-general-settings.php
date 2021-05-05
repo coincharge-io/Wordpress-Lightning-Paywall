@@ -13,7 +13,6 @@ $supported_durations    = Lightning_Paywall_Admin::DURATIONS;
 $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
-$btcpay_store_id        = get_option('lnpw_btcpay_store_id');
 ?>
 
 <div class="container">
@@ -98,7 +97,6 @@ $btcpay_store_id        = get_option('lnpw_btcpay_store_id');
                     </div>
                     <div class="col-80">
                         <input type="url" placeholder="BTCPay Server Url" name="lnpw_btcpay_server_url" id="lnpw_btcpay_server_url" value="<?php echo $btcpay_server_url ?>" style="min-width: 335px;">
-                        <input type="hidden" name="lnpw_btcpay_store_id" id="lnpw_btcpay_store_id" value="<?php echo $btcpay_store_id ?>">
                         <div class="lnpw_generate_api">Generate API keys:<a href="" class="lnpw_auth_key" target="_blank"></a></div>
                     </div>
                 </div>

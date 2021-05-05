@@ -138,7 +138,6 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_server_url', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_server_url')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_view', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
-		register_setting('lnpw_general_settings', 'lnpw_btcpay_store_id', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_store_id')));
 	}
 
 	public function sanitize_btcpay_server_url($value)
@@ -156,12 +155,6 @@ class Lightning_Paywall_Admin
 		return $value;
 	}
 
-	public function sanitize_btcpay_store_id($value)
-	{
-		$value = sanitize_text_field($value);
-
-		return $value;
-	}
 
 	public function sanitize_payblock_area($value)
 	{
@@ -273,7 +266,7 @@ class Lightning_Paywall_Admin
 			$this->check_store_id($view_store_id);
 			wp_send_json_success();
 		} else {
-			wp_send_json_error(['message' => 'Something went wrong. Please check your API keys.']);
+			wp_send_json_error(['message' => 'Something went wrong. Please check your credentials.']);
 		}
 	}
 
@@ -517,6 +510,93 @@ class Lightning_Paywall_Admin
 			'category'    => 'Content',
 			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
 			'params'      => array(),
+		));
+
+		vc_map(array(
+			'name'        => 'LP Pay-per-File',
+			'base'        => 'lnpw_file',
+			'description' => 'Area of file',
+			'category'    => 'Content',
+			'icon'		  => plugin_dir_url(__FILE__) . 'img/icon.svg',
+			'params'      => array(
+				array(
+					'type'        => 'checkbox',
+					'heading'     => 'Enable payment block',
+					'param_name'  => 'pay_file_block',
+					'value'       => 'true',
+					'description' => 'Show payment block instead of video',
+				),
+				array(
+					'type'        => 'vc_link',
+					'heading'     => 'File',
+					'param_name'  => 'file',
+					'description' => 'Add file link',
+				),
+				array(
+					'type'        => 'textarea',
+					'heading'     => 'Title',
+					'param_name'  => 'title',
+					'value'       => 'Untitled',
+					'description' => 'Enter video title',
+				),
+				array(
+					'type'        => 'textarea',
+					'heading'     => 'Description',
+					'param_name'  => 'description',
+					'value'       => 'No description',
+					'description' => 'Enter video description',
+				),
+				array(
+					'type'        => 'attach_image',
+					'heading'     => 'Preview',
+					'param_name'  => 'preview',
+					'description' => 'Add video preview',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'Currency',
+					'param_name'  => 'currency',
+					'value'       => array(
+						'Default'	=> '',
+						'SATS'  	=> 'SATS',
+						'BTC' 		=> 'BTC',
+						'EUR'  		=> 'EUR',
+						'USD' 		=> 'USD'
+					),
+					'std'		  => 'default',
+					'description' => 'Set currency',
+				),
+				array(
+					'type'        => 'textfield',
+					'heading'     => 'Price',
+					'param_name'  => 'price',
+					'description' => 'Set price',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'Duration type',
+					'param_name'  => 'duration_type',
+					'value'       => array(
+						'default'	=> '',
+						'minute'  	=> 'minute',
+						'hour' 		=> 'hour',
+						'day'  		=> 'day',
+						'week' 		=> 'week',
+						'month' 	=> 'month',
+						'year'  	=> 'year',
+						'onetime' 	=> 'onetime',
+						'unlimited' => 'unlimited',
+					),
+					'std'    	  => 'default',
+					'description' => 'Set duration type',
+				),
+				array(
+					'type'        => 'textfield',
+					'heading'     => 'Duration',
+					'param_name'  => 'duration',
+					'description' => 'Set duration',
+				),
+			),
 		));
 	}
 
