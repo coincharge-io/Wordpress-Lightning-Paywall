@@ -13,7 +13,7 @@ Requires PHP: 7.4
 
 Tested up to: 5.7
 
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 
 License: GPLv2
 
@@ -76,9 +76,19 @@ There are no FAQ just yet.
 
 == Changelog ==
 
+= 1.1.3 =
+
+- Fixed: Problem with saving store id.
+
+= 1.1.2 =
+
+- Fixed: Problem with payment caused by change in handling general and meta settings.
+
+- Fixed: Error message doesn't appear for invalid server credentials.
+
 = 1.1.1 = 
 
-- Fixed Elementor problem
+- Fixed Elementor problem.
 
 = 1.1.0 =
 
@@ -99,6 +109,10 @@ There are no FAQ just yet.
 
 
 == Upgrade Notice ==
+
+= 1.1.3 = Problem with saving store id is fixed.
+
+= 1.1.2 = Update immediately. Fixed problem with non showing payment page.
 
 = 1.1.1 =
   Update immediately. Fixed problem with Elementor.

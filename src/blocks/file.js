@@ -167,7 +167,8 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
                                 <SelectControl 
                                 label="Currency"
                             value={ currency } 
-                            onChange={ (  selectedItem  ) => setAttributes( {currency:selectedItem} )}
+                            onChange={ (  selectedItem  ) => 
+                                setAttributes( {currency:selectedItem} )}
                             options={ [
                                 { value: '', label: 'Default' },
                                 { value: 'SATS', label: 'SATS' },
@@ -180,7 +181,9 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
                             <NumberControl
                                     label="Price"
                                     value={ price }
-                                    onChange={ ( nextValue ) => setAttributes( {price:Number(nextValue)} ) }
+                                    onChange={ ( nextValue ) =>
+                                        
+                                        setAttributes( {price:Number(nextValue)} ) }
                                 />
                             </PanelRow>
                             <PanelRow>
