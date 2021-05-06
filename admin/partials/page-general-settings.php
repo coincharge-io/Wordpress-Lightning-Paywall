@@ -9,10 +9,19 @@ $default_text           = get_option('lnpw_default_payblock_text');
 $default_button         = get_option('lnpw_default_payblock_button');
 $default_info           = get_option('lnpw_default_payblock_info');
 $supported_durations    = Lightning_Paywall_Admin::DURATIONS;
-
+$used_format            = get_option("lnpw_default_btc_format");
+$supported_btc_format   = Lightning_Paywall_Admin::BTC_FORMAT;
 $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
+
+/*foreach (wp_load_alloptions() as $option => $value) {
+
+    if (strpos($option, 'lnpw_') !== false) {
+
+        delete_option($option);
+    }
+}*/
 ?>
 
 <div class="container">
@@ -67,6 +76,27 @@ $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
                                 </option>
                             <?php endforeach; ?>
                         </select>
+                        <?php if ($used_currency === 'SATS') : ?>
+                            <div class="lnpw_price_format">
+                                <p>Select a display format:</p>
+                                <?php foreach ($supported_btc_format as $format) : ?>
+                                    <div>
+                                        <input type="radio" id="lnpw_default_btc_format" name="lnpw_default_btc_format" value="<?php echo $format ?>" <?php echo $used_format === $format ? 'checked' : '' ?>>
+                                        <label for="lnpw_default_btc_format"><?php echo $format ?></label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else : ?>
+                            <div style="display:none;" class="lnpw_price_format">
+                                <p>Select a display format:</p>
+                                <?php foreach ($supported_btc_format as $format) : ?>
+                                    <div>
+                                        <input type="radio" id="lnpw_default_btc_format" name="lnpw_default_btc_format" value="<?php echo $format ?>" <?php echo $used_format === $format ? 'checked' : '' ?>>
+                                        <label for="lnpw_default_btc_format"><?php echo $format ?></label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 

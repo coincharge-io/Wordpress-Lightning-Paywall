@@ -45,13 +45,22 @@ class Lightning_Paywall_Admin
 	/**
 	 *
 	 */
-	const CURRENCIES = [
+	/*const CURRENCIES = [
 		'SATS',
 		'BTC',
 		'USD',
 		'EUR',
+	];*/
+	const CURRENCIES = [
+		'SATS',
+		'USD',
+		'EUR',
 	];
 
+	const BTC_FORMAT = [
+		'SATS',
+		'BTC',
+	];
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -128,6 +137,7 @@ class Lightning_Paywall_Admin
 
 		register_setting('lnpw_general_settings', 'lnpw_enabled_post_types', array('type' => 'array', 'default' => array('post')));
 		register_setting('lnpw_general_settings', 'lnpw_default_currency', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_general_settings', 'lnpw_default_btc_format', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_general_settings', 'lnpw_default_price', array('type' => 'number', 'default' => 10));
 		register_setting('lnpw_general_settings', 'lnpw_default_duration', array('type' => 'integer', 'default' =>  ''));
 		register_setting('lnpw_general_settings', 'lnpw_default_duration_type', array('type' => 'string', 'default' => 'unlimited'));
@@ -646,6 +656,7 @@ class Lightning_Paywall_Admin
 	{
 		$atts = shortcode_atts(array(
 			'pay_block' => 'true',
+			'btc_format' => '',
 			'currency' => '',
 			'price' => '',
 			'duration_type' => '',
@@ -653,7 +664,7 @@ class Lightning_Paywall_Admin
 		), $atts);
 
 
-		return do_shortcode("[lnpw_start_content pay_block='{$atts['pay_block']}' price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
+		return do_shortcode("[lnpw_start_content pay_block='{$atts['pay_block']}' btc_format='{$atts['btc_format']}' price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
 	}
 
 	public function render_end_gutenberg()
@@ -669,6 +680,7 @@ class Lightning_Paywall_Admin
 	{
 		$atts = shortcode_atts(array(
 			'pay_file_block' => 'true',
+			'btc_format' => '',
 			'file'	=> '',
 			'title' => 'Untitled',
 			'description' => 'No description',
@@ -679,7 +691,7 @@ class Lightning_Paywall_Admin
 			'duration' => '',
 		), $atts);
 
-		return do_shortcode("[lnpw_file pay_file_block='{$atts['pay_file_block']}' file='{$atts['file']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']} price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
+		return do_shortcode("[lnpw_file pay_file_block='{$atts['pay_file_block']}' btc_format='{$atts['btc_format']}' file='{$atts['file']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']} price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
 	}
 	public function render_start_video_gutenberg($atts)
 	{
@@ -687,6 +699,7 @@ class Lightning_Paywall_Admin
 
 		$atts = shortcode_atts(array(
 			'pay_view_block' => 'true',
+			'btc_format' => '',
 			'title' => 'Untitled',
 			'description' => 'No description',
 			'preview' => '',
@@ -696,7 +709,7 @@ class Lightning_Paywall_Admin
 			'duration' => '',
 		), $atts);
 
-		return do_shortcode("[lnpw_start_video pay_view_block='{$atts['pay_view_block']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']} price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
+		return do_shortcode("[lnpw_start_video pay_view_block='{$atts['pay_view_block']}' btc_format='{$atts['btc_format']}' title='{$atts['title']}' description='{$atts['description']}' preview={$atts['preview']} price='{$atts['price']}' duration_type='{$atts['duration_type']}' duration='{$atts['duration']}' currency='{$atts['currency']}']");
 	}
 	public function load_gutenberg()
 	{

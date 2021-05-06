@@ -29,12 +29,9 @@
     });
   });
   $(document).ready(function () {
-    $("#lnpw_currency").change(function () {
+    $("#lnpw_default_currency").change(function () {
       var stepValue =
-        $(this).val() === "BTC"
-          ? "0.00000001"
-          : $(this).val() === "SATS"
-          ? "1"
+        $(this).val() === "SATS" ? "1"
           : "0.50";
 
       $("#lnpw_default_price").attr({
@@ -44,11 +41,11 @@
     });
   });
   $(document).ready(function () {
-    $("form").submit(function () {
-      if ($("#lnpw_currency").val() === "BTC") {
-        $("#lnpw_default_price").val(
-          parseFloat($("#lnpw_default_price").val()).toFixed(8)
-        );
+    $("#lnpw_default_currency").change(function () {
+      if ($("#lnpw_default_currency").val() !== "SATS") {
+        $(".lnpw_price_format").hide();
+      }else{
+        $(".lnpw_price_format").show()
       }
     });
   });

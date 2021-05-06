@@ -186,8 +186,14 @@ class Lightning_Paywall_Public
 		} else {
 			$currency = get_option('lnpw_default_currency', 'SATS');
 		}
+		$btc_format = get_post_meta(get_the_ID(), 'lnpw_btc_format', true) ?: get_option('lnpw_default_btc_format');
 
-
+		if ($currency === 'SATS' && $btc_format === 'BTC') {
+			$price = $price / 100000000;
+			$price = sprintf('%.8f', $price);
+			$price = rtrim($price, '0');
+			$currency = 'BTC';
+		}
 
 		$payblock_info = get_option('lnpw_default_payblock_info');
 
@@ -376,6 +382,7 @@ class Lightning_Paywall_Public
 
 		$atts = shortcode_atts(array(
 			'pay_block' => 'false',
+			'btc_format' => '',
 			'price'     => '',
 			'currency'  => '',
 			'duration'  => '',
@@ -384,16 +391,22 @@ class Lightning_Paywall_Public
 
 		$valid_currency = in_array($atts['currency'], Lightning_Paywall_Admin::CURRENCIES);
 		$valid_duration = in_array($atts['duration_type'], Lightning_Paywall_Admin::DURATIONS);
+		$valid_btc_format = in_array($atts['btc_format'], Lightning_Paywall_Admin::BTC_FORMAT);
 
-		$price = $this->parse_btc($atts['price']) ?: $atts['price'];
+		//$price = $this->parse_btc($atts['price']) ?: $atts['price'];
 
 		if (!empty($atts['currency']) && $valid_currency) {
 			update_post_meta(get_the_ID(), 'lnpw_currency', sanitize_text_field($atts['currency']));
 		} else {
 			delete_post_meta(get_the_ID(), 'lnpw_currency');
 		}
+		if ($atts['currency'] === 'SATS' && $valid_btc_format) {
+			update_post_meta(get_the_ID(), 'lnpw_btc_format', sanitize_text_field($atts['btc_format']));
+		} else {
+			delete_post_meta(get_the_ID(), 'lnpw_btc_format');
+		}
 		if (!empty($atts['price'])) {
-			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($price));
+			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($atts['price']));
 		} else {
 			delete_post_meta(get_the_ID(), 'lnpw_price');
 		}
@@ -422,6 +435,7 @@ class Lightning_Paywall_Public
 
 		$atts = shortcode_atts(array(
 			'pay_view_block' => 'false',
+			'btc_format' => '',
 			'title' => 'Untitled',
 			'description' => 'No description',
 			'preview' => $img_preview,
@@ -435,15 +449,22 @@ class Lightning_Paywall_Public
 
 		$valid_duration = in_array($atts['duration_type'], Lightning_Paywall_Admin::DURATIONS);
 
-		$price = $this->parse_btc($atts['price']) ?: $atts['price'];
+		$valid_btc_format = in_array($atts['btc_format'], Lightning_Paywall_Admin::BTC_FORMAT);
+
+		//$price = $this->parse_btc($atts['price']) ?: $atts['price'];
 
 		if (!empty($atts['currency']) && $valid_currency) {
 			update_post_meta(get_the_ID(), 'lnpw_currency', sanitize_text_field($atts['currency']));
 		} else {
 			delete_post_meta(get_the_ID(), 'lnpw_currency');
 		}
+		if ($atts['currency'] === 'SATS' && $valid_btc_format) {
+			update_post_meta(get_the_ID(), 'lnpw_btc_format', sanitize_text_field($atts['btc_format']));
+		} else {
+			delete_post_meta(get_the_ID(), 'lnpw_btc_format');
+		}
 		if (!empty($atts['price'])) {
-			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($price));
+			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($atts['price']));
 		} else {
 			delete_post_meta(get_the_ID(), 'lnpw_price');
 		}
@@ -467,7 +488,7 @@ class Lightning_Paywall_Public
 			return do_shortcode("[lnpw_pay_video_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']") . $s_data;
 		}
 	}
-	public function parse_btc($price)
+	/*public function parse_btc($price)
 	{
 		$currency = get_post_meta(get_the_ID(), 'lnpw_currency', true) ?: get_option('lnpw_default_currency');
 
@@ -480,7 +501,7 @@ class Lightning_Paywall_Public
 		}
 		return $string;
 	}
-
+*/
 	/**
 	
 	 */
@@ -490,6 +511,7 @@ class Lightning_Paywall_Public
 
 		$atts = shortcode_atts(array(
 			'pay_file_block' => 'false',
+			'btc_format' => '',
 			'file'		=>	'',
 			'title' => 'Untitled',
 			'description' => 'No description',
@@ -504,15 +526,22 @@ class Lightning_Paywall_Public
 
 		$valid_duration = in_array($atts['duration_type'], Lightning_Paywall_Admin::DURATIONS);
 
-		$price = $this->parse_btc($atts['price']) ?: $atts['price'];
+		$valid_btc_format = in_array($atts['btc_format'], Lightning_Paywall_Admin::BTC_FORMAT);
+
+		//$price = $this->parse_btc($atts['price']) ?: $atts['price'];
 
 		if (!empty($atts['currency']) && $valid_currency) {
 			update_post_meta(get_the_ID(), 'lnpw_currency', sanitize_text_field($atts['currency']));
 		} else {
 			delete_post_meta(get_the_ID(), 'lnpw_currency');
 		}
+		if ($atts['currency'] === 'SATS' && $valid_btc_format) {
+			update_post_meta(get_the_ID(), 'lnpw_btc_format', sanitize_text_field($atts['btc_format']));
+		} else {
+			delete_post_meta(get_the_ID(), 'lnpw_btc_format');
+		}
 		if (!empty($atts['price'])) {
-			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($price));
+			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($atts['price']));
 		} else {
 			delete_post_meta(get_the_ID(), 'lnpw_price');
 		}

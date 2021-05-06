@@ -370,6 +370,9 @@ registerBlockType("lightning-paywall/gutenberg-file-block", {
       type: 'boolean',
       default: true
     },
+    btc_format: {
+      type: 'string'
+    },
     file: {
       type: 'string',
       default: ''
@@ -402,6 +405,7 @@ registerBlockType("lightning-paywall/gutenberg-file-block", {
   edit: function edit(props) {
     var _props$attributes = props.attributes,
         pay_file_block = _props$attributes.pay_file_block,
+        btc_format = _props$attributes.btc_format,
         file = _props$attributes.file,
         title = _props$attributes.title,
         description = _props$attributes.description,
@@ -478,6 +482,21 @@ registerBlockType("lightning-paywall/gutenberg-file-block", {
       }, {
         value: 'USD',
         label: 'USD'
+      }]
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SelectControl, {
+      label: "Btc format",
+      value: btc_format,
+      onChange: function onChange(selectedItem) {
+        return setAttributes({
+          btc_format: selectedItem
+        });
+      },
+      options: [{
+        value: 'SATS',
+        label: 'SATS'
+      }, {
+        value: 'BTC',
+        label: 'BTC'
       }]
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(NumberControl, {
       label: "Price",
@@ -645,6 +664,9 @@ registerBlockType("lightning-paywall/gutenberg-start-block", {
       type: 'boolean',
       default: true
     },
+    btc_format: {
+      type: 'string'
+    },
     currency: {
       type: 'string'
     },
@@ -661,6 +683,7 @@ registerBlockType("lightning-paywall/gutenberg-start-block", {
   edit: function edit(props) {
     var _props$attributes = props.attributes,
         pay_block = _props$attributes.pay_block,
+        btc_format = _props$attributes.btc_format,
         currency = _props$attributes.currency,
         duration_type = _props$attributes.duration_type,
         price = _props$attributes.price,
@@ -695,14 +718,26 @@ registerBlockType("lightning-paywall/gutenberg-start-block", {
         value: 'SATS',
         label: 'SATS'
       }, {
-        value: 'BTC',
-        label: 'BTC'
-      }, {
         value: 'EUR',
         label: 'EUR'
       }, {
         value: 'USD',
         label: 'USD'
+      }]
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SelectControl, {
+      label: "Btc format",
+      value: btc_format,
+      onChange: function onChange(selectedItem) {
+        return setAttributes({
+          btc_format: selectedItem
+        });
+      },
+      options: [{
+        value: 'SATS',
+        label: 'SATS'
+      }, {
+        value: 'BTC',
+        label: 'BTC'
       }]
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(NumberControl, {
       label: "Price",
@@ -859,6 +894,9 @@ registerBlockType("lightning-paywall/gutenberg-start-video-block", {
       type: 'boolean',
       default: true
     },
+    btc_format: {
+      type: 'string'
+    },
     title: {
       type: 'string',
       default: 'Untitled'
@@ -887,6 +925,7 @@ registerBlockType("lightning-paywall/gutenberg-start-video-block", {
   edit: function edit(props) {
     var _props$attributes = props.attributes,
         pay_view_block = _props$attributes.pay_view_block,
+        btc_format = _props$attributes.btc_format,
         title = _props$attributes.title,
         description = _props$attributes.description,
         preview = _props$attributes.preview,
@@ -962,6 +1001,21 @@ registerBlockType("lightning-paywall/gutenberg-start-video-block", {
       }, {
         value: 'USD',
         label: 'USD'
+      }]
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(SelectControl, {
+      label: "Btc format",
+      value: btc_format,
+      onChange: function onChange(selectedItem) {
+        return setAttributes({
+          btc_format: selectedItem
+        });
+      },
+      options: [{
+        value: 'SATS',
+        label: 'SATS'
+      }, {
+        value: 'BTC',
+        label: 'BTC'
       }]
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(NumberControl, {
       label: "Price",

@@ -85,6 +85,9 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
             type: 'boolean',
             default: true
         },
+        btc_format:{
+            type: 'string',
+        },
         currency:{
             type: 'string',
         },
@@ -100,7 +103,7 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
     },
     edit:props => {
         const {
-            attributes: { pay_block, currency, duration_type, price, duration },
+            attributes: { pay_block, btc_format, currency, duration_type, price, duration },
             setAttributes
         } = props;
         
@@ -128,9 +131,18 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
                             options={ [
                                 { value: '', label: 'Default' },
                                 { value: 'SATS', label: 'SATS' },
-                                { value: 'BTC', label: 'BTC' },
                                 { value: 'EUR', label: 'EUR' },
                                 { value: 'USD', label: 'USD' },
+                            ] }/>
+                            </PanelRow>
+                            <PanelRow>
+                                <SelectControl 
+                                label="Btc format"
+                            value={ btc_format } 
+                            onChange={ (  selectedItem  ) => setAttributes( {btc_format:selectedItem} )}
+                            options={ [
+                                { value: 'SATS', label: 'SATS' },
+                                { value: 'BTC', label: 'BTC' },
                             ] }/>
                             </PanelRow>
                             <PanelRow>
