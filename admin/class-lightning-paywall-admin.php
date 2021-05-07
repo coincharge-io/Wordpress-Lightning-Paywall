@@ -365,12 +365,27 @@ class Lightning_Paywall_Admin
 					'value'       => array(
 						'Default'	=> '',
 						'SATS'  	=> 'SATS',
-						'BTC' 		=> 'BTC',
 						'EUR'  		=> 'EUR',
 						'USD' 		=> 'USD'
 					),
-					'std'		  => 'default',
+					'std'		  => 'Default',
 					'description' => 'Set currency',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'BTC format',
+					'param_name'  => 'btc_format',
+					'dependency'  => array(
+						'element' => 'currency',
+						'value'	  => 'SATS'
+					),
+					'value'       => array(
+						'Default'	=> '',
+						'SATS'  	=> 'SATS',
+						'BTC' 		=> 'BTC',
+					),
+					'std'		  => 'Default',
+					'description' => 'Set BTC format',
 				),
 				array(
 					'type'        => 'textfield',
@@ -464,12 +479,27 @@ class Lightning_Paywall_Admin
 					'value'       => array(
 						'Default'	=> '',
 						'SATS'  	=> 'SATS',
-						'BTC' 		=> 'BTC',
 						'EUR'  		=> 'EUR',
 						'USD' 		=> 'USD'
 					),
-					'std'		  => 'default',
+					'std'		  => 'Default',
 					'description' => 'Set currency',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'BTC format',
+					'param_name'  => 'btc_format',
+					'dependency'  => array(
+						'element' => 'currency',
+						'value'	  => 'SATS'
+					),
+					'value'       => array(
+						'Default'	=> '',
+						'SATS'  	=> 'SATS',
+						'BTC' 		=> 'BTC',
+					),
+					'std'		  => 'Default',
+					'description' => 'Set BTC format',
 				),
 				array(
 					'type'        => 'textfield',
@@ -569,12 +599,27 @@ class Lightning_Paywall_Admin
 					'value'       => array(
 						'Default'	=> '',
 						'SATS'  	=> 'SATS',
-						'BTC' 		=> 'BTC',
 						'EUR'  		=> 'EUR',
 						'USD' 		=> 'USD'
 					),
-					'std'		  => 'default',
+					'std'		  => 'Default',
 					'description' => 'Set currency',
+				),
+				array(
+					'type'        => 'dropdown',
+					'heading'     => 'BTC format',
+					'param_name'  => 'btc_format',
+					'dependency'  => array(
+						'element' => 'currency',
+						'value'	  => 'SATS'
+					),
+					'value'       => array(
+						'Default'	=> '',
+						'SATS'  	=> 'SATS',
+						'BTC' 		=> 'BTC',
+					),
+					'std'		  => 'Default',
+					'description' => 'Set BTC format',
 				),
 				array(
 					'type'        => 'textfield',

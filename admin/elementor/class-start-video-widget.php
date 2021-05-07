@@ -94,11 +94,26 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 				'options' => [
 					'Default' => '',
 					'SATS' => 'SATS',
-					'BTC' => 'BTC',
 					'EUR' => 'EUR',
 					'USD' => 'USD',
 				],
-				'default' => '',
+				'default' => 'Default',
+			]
+		);
+		$this->add_control(
+			'btc_format',
+			[
+				'label' => 'BTC format',
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'condition'	=> [
+					'currency'	=> 'SATS'
+				],
+				'options' => [
+					'Default' => '',
+					'SATS' => 'SATS',
+					'BTC'  => 'BTC',
+				],
+				'default' => 'Default',
 			]
 		);
 
@@ -125,7 +140,7 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 					'onetime' => 'onetime',
 					'unlimited' => 'unlimited'
 				],
-				'default' => '',
+				'default' => 'default',
 			]
 		);
 
@@ -156,9 +171,10 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 		$duration = $settings['duration'];
 		$duration_type = $settings['duration_type'];
 		$currency = $settings['currency'];
+		$btc_format = $settings['btc_format'];
 
 		if ($enable_pay_view_block) {
-			echo do_shortcode("[lnpw_start_video pay_view_block='true' title='{$title}' description='{$description}' preview='{$preview}' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
+			echo do_shortcode("[lnpw_start_video pay_view_block='true' title='{$title}' description='{$description}' preview='{$preview}' currency='{$currency}' btc_format='{$btc_format}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
 		}
 	}
 }

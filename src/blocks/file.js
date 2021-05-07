@@ -1,6 +1,12 @@
 const { registerBlockType} = wp.blocks;
 const { InspectorControls, MediaUpload, MediaPlaceholder   } = wp.editor;
 const { ToggleControl, PanelBody, PanelRow, TextareaControl, Button, __experimentalNumberControl: NumberControl, SelectControl  } = wp.components;
+const {
+    element: {
+        useState,
+    },
+} = wp;
+
 
 registerBlockType( "lightning-paywall/gutenberg-file-block", {
     title: 'LP Pay-per-File',
@@ -122,7 +128,7 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
             attributes: { pay_file_block, btc_format, file, title, description, preview, currency, duration_type, price, duration },
             setAttributes
         } = props;
-        
+        const [show, setShow] = useState(currency==='SATS');
         return (
             <div class="lnpw_pay__gutenberg_block_file">
                 <InspectorControls>
@@ -170,26 +176,28 @@ c655 -2 659 -2 685 19 l27 20 0 271 0 271 -215 -6 -215 -5 6 49 7 49 -472 0
                                 <SelectControl 
                                 label="Currency"
                             value={ currency } 
-                            onChange={ (  selectedItem  ) => 
-                                setAttributes( {currency:selectedItem} )}
+                            onChange={ (  selectedItem  ) => {
+                                selectedItem === 'SATS' ? setShow(true) : setShow(false);
+                                setAttributes( {currency:selectedItem} )}}
                             options={ [
                                 { value: '', label: 'Default' },
                                 { value: 'SATS', label: 'SATS' },
-                                { value: 'BTC', label: 'BTC' },
                                 { value: 'EUR', label: 'EUR' },
                                 { value: 'USD', label: 'USD' },
                             ] }/>
                             </PanelRow>
-                            <PanelRow>
+                            {show && <PanelRow>
                                 <SelectControl 
-                                label="Btc format"
+                                label="BTC format"
                             value={ btc_format } 
-                            onChange={ (  selectedItem  ) => setAttributes( {btc_format:selectedItem} )}
+                            onChange={ (  selectedItem  ) => 
+                                setAttributes( {btc_format:selectedItem} )}
                             options={ [
+                                { value: '', label: 'Default'},
                                 { value: 'SATS', label: 'SATS' },
                                 { value: 'BTC', label: 'BTC' },
                             ] }/>
-                            </PanelRow>
+                            </PanelRow>}
                             <PanelRow>
                             <NumberControl
                                     label="Price"
