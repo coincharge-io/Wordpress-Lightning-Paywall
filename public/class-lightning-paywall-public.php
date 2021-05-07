@@ -220,7 +220,7 @@ class Lightning_Paywall_Public
 
 	public static function get_payblock_header_string()
 	{
-		return get_option('lnpw_default_payblock_text') ?: 'For access to content first pay';
+		return get_option('lnpw_default_payblock_text') ?: 'For access to ' . get_post_meta(get_the_ID(), 'lnpw_invoice_content', true)['project'] . ' first pay';
 	}
 	public static function get_payblock_button_string()
 	{
@@ -261,7 +261,7 @@ class Lightning_Paywall_Public
 			'currency' => $currency,
 			'metadata' => array(
 				'orderId'  => $order_id,
-				'itemDesc' => 'Pay for:' . get_the_title($post_id),
+				'itemDesc' => get_post_meta($post_id, 'lnpw_invoice_content', true)['title'],
 				'buyer'    => array(
 					'name'   => (string) $_SERVER['REMOTE_ADDR']
 				)
@@ -423,6 +423,10 @@ class Lightning_Paywall_Public
 
 
 		$this->update_meta_settings($atts);
+
+		$invoice_content = array('title' => 'Pay-per-post: ' . get_the_title(get_the_ID()), 'project' => 'post');
+		update_post_meta(get_the_ID(), 'lnpw_invoice_content', $invoice_content);
+
 		$s_data = '<!-- lnpw:start_content -->';
 
 		$payblock = $atts['pay_block'] === 'true';
@@ -456,7 +460,8 @@ class Lightning_Paywall_Public
 
 		$this->update_meta_settings($atts);
 
-
+		$invoice_content = array('title' => 'Pay-per-view: ' . sanitize_text_field($atts['title']), 'project' => 'video');
+		update_post_meta(get_the_ID(), 'lnpw_invoice_content', $invoice_content);
 
 		$payblock = $atts['pay_view_block'] === 'true';
 
@@ -491,6 +496,10 @@ class Lightning_Paywall_Public
 		), $atts);
 
 		$this->update_meta_settings($atts);
+
+		$invoice_content = array('title' => 'Pay-per-file: ' . sanitize_text_field($atts['title']), 'project' => 'file');
+
+		update_post_meta(get_the_ID(), 'lnpw_invoice_content', $invoice_content);
 
 		$payblock = $atts['pay_file_block'] === 'true';
 		$file = !empty($atts['file']);
@@ -593,10 +602,16 @@ class Lightning_Paywall_Public
 	 */
 	public function render_shortcode_protected_file($atts)
 	{
+		if ($this->is_paid_content()) {
+			return '';
+		}
+
 		$atts = shortcode_atts(array(
 			'file' => ''
 		), $atts);
+
 		$href = vc_build_link($atts['file'])['url'] ?: $atts['file'];
+
 		ob_start();
 	?>
 		<a class="lnpw_pay__download" href=<?php echo esc_url($href) ?> target="_blank" download>Download</a>

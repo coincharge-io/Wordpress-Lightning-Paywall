@@ -42,15 +42,6 @@ class Lightning_Paywall_Admin
 		'unlimited',
 	];
 
-	/**
-	 *
-	 */
-	/*const CURRENCIES = [
-		'SATS',
-		'BTC',
-		'USD',
-		'EUR',
-	];*/
 	const CURRENCIES = [
 		'SATS',
 		'USD',

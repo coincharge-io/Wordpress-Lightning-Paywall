@@ -53,7 +53,7 @@ Further information can be found here: https://lightning-paywall.coincharge.io/
 
 - WordPress installation
 - BTCPay Server for Bitcoin and Lightning payment processing
-  > An additional WooCommerce installation is not required
+- An additional WooCommerce installation is not required
 
 == Installation ==
 
@@ -68,7 +68,8 @@ Further information can be found here: https://lightning-paywall.coincharge.io/
 
 = 1.2.0 =
 
--
+- Added: Files can be protected with paywall.
+- Changed: BTC is no longer available as
 
 = 1.1.3 =
 
