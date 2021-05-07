@@ -568,20 +568,20 @@ class Lightning_Paywall_Admin
 					'heading'     => 'Title',
 					'param_name'  => 'title',
 					'value'       => 'Untitled',
-					'description' => 'Enter video title',
+					'description' => 'Enter file title',
 				),
 				array(
 					'type'        => 'textarea',
 					'heading'     => 'Description',
 					'param_name'  => 'description',
 					'value'       => 'No description',
-					'description' => 'Enter video description',
+					'description' => 'Enter file description',
 				),
 				array(
 					'type'        => 'attach_image',
 					'heading'     => 'Preview',
 					'param_name'  => 'preview',
-					'description' => 'Add video preview',
+					'description' => 'Add file preview',
 				),
 				array(
 					'type'        => 'dropdown',

@@ -602,9 +602,6 @@ class Lightning_Paywall_Public
 	 */
 	public function render_shortcode_protected_file($atts)
 	{
-		if ($this->is_paid_content()) {
-			return '';
-		}
 
 		$atts = shortcode_atts(array(
 			'file' => ''
