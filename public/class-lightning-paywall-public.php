@@ -407,7 +407,7 @@ class Lightning_Paywall_Public
 	/**
 	 * @param  array  $atts
 	 *
-	 * @return string
+	 * @return false|string
 	 */
 	public function render_shortcode_lnpw_start_content($atts)
 	{
@@ -421,36 +421,7 @@ class Lightning_Paywall_Public
 			'duration_type' => '',
 		), $atts);
 
-		/*$valid_currency = in_array($atts['currency'], Lightning_Paywall_Admin::CURRENCIES);
-		$valid_duration = in_array($atts['duration_type'], Lightning_Paywall_Admin::DURATIONS);
-		$valid_btc_format = in_array($atts['btc_format'], Lightning_Paywall_Admin::BTC_FORMAT);
 
-
-		if (!empty($atts['currency']) && $valid_currency) {
-			update_post_meta(get_the_ID(), 'lnpw_currency', sanitize_text_field($atts['currency']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_currency');
-		}
-		if ($atts['currency'] === 'SATS' && $valid_btc_format) {
-			update_post_meta(get_the_ID(), 'lnpw_btc_format', sanitize_text_field($atts['btc_format']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_btc_format');
-		}
-		if (!empty($atts['price'])) {
-			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($atts['price']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_price');
-		}
-		if (!empty($atts['duration'])) {
-			update_post_meta(get_the_ID(), 'lnpw_duration', sanitize_text_field($atts['duration']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_duration');
-		}
-		if (!empty($atts['duration_type']) && $valid_duration) {
-			update_post_meta(get_the_ID(), 'lnpw_duration_type', sanitize_text_field($atts['duration_type']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_duration_type');
-		}*/
 		$this->update_meta_settings($atts);
 		$s_data = '<!-- lnpw:start_content -->';
 
@@ -460,6 +431,12 @@ class Lightning_Paywall_Public
 			return do_shortcode('[lnpw_pay_block]') . $s_data;
 		}
 	}
+
+	/**
+	 * @param $atts
+	 *
+	 * @return false|string
+	 */
 
 	public function render_shortcode_lnpw_start_video($atts)
 	{
@@ -479,38 +456,7 @@ class Lightning_Paywall_Public
 
 		$this->update_meta_settings($atts);
 
-		/*$valid_currency = in_array($atts['currency'], Lightning_Paywall_Admin::CURRENCIES);
 
-		$valid_duration = in_array($atts['duration_type'], Lightning_Paywall_Admin::DURATIONS);
-
-		$valid_btc_format = in_array($atts['btc_format'], Lightning_Paywall_Admin::BTC_FORMAT);
-
-
-		if (!empty($atts['currency']) && $valid_currency) {
-			update_post_meta(get_the_ID(), 'lnpw_currency', sanitize_text_field($atts['currency']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_currency');
-		}
-		if ($atts['currency'] === 'SATS' && $valid_btc_format) {
-			update_post_meta(get_the_ID(), 'lnpw_btc_format', sanitize_text_field($atts['btc_format']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_btc_format');
-		}
-		if (!empty($atts['price'])) {
-			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($atts['price']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_price');
-		}
-		if (!empty($atts['duration'])) {
-			update_post_meta(get_the_ID(), 'lnpw_duration', sanitize_text_field($atts['duration']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_duration');
-		}
-		if (!empty($atts['duration_type']) && $valid_duration) {
-			update_post_meta(get_the_ID(), 'lnpw_duration_type', sanitize_text_field($atts['duration_type']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_duration_type');
-		}*/
 
 		$payblock = $atts['pay_view_block'] === 'true';
 
@@ -523,7 +469,9 @@ class Lightning_Paywall_Public
 	}
 
 	/**
-	
+	 * @param $atts
+	 *
+	 * @return false|string
 	 */
 	public function render_shortcode_lnpw_file($atts)
 	{
@@ -543,38 +491,6 @@ class Lightning_Paywall_Public
 		), $atts);
 
 		$this->update_meta_settings($atts);
-
-		/*$valid_currency = in_array($atts['currency'], Lightning_Paywall_Admin::CURRENCIES);
-
-		$valid_duration = in_array($atts['duration_type'], Lightning_Paywall_Admin::DURATIONS);
-
-		$valid_btc_format = in_array($atts['btc_format'], Lightning_Paywall_Admin::BTC_FORMAT);
-
-		if (!empty($atts['currency']) && $valid_currency) {
-			update_post_meta(get_the_ID(), 'lnpw_currency', sanitize_text_field($atts['currency']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_currency');
-		}
-		if ($atts['currency'] === 'SATS' && $valid_btc_format) {
-			update_post_meta(get_the_ID(), 'lnpw_btc_format', sanitize_text_field($atts['btc_format']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_btc_format');
-		}
-		if (!empty($atts['price'])) {
-			update_post_meta(get_the_ID(), 'lnpw_price', sanitize_text_field($atts['price']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_price');
-		}
-		if (!empty($atts['duration'])) {
-			update_post_meta(get_the_ID(), 'lnpw_duration', sanitize_text_field($atts['duration']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_duration');
-		}
-		if (!empty($atts['duration_type']) && $valid_duration) {
-			update_post_meta(get_the_ID(), 'lnpw_duration_type', sanitize_text_field($atts['duration_type']));
-		} else {
-			delete_post_meta(get_the_ID(), 'lnpw_duration_type');
-		}*/
 
 		$payblock = $atts['pay_file_block'] === 'true';
 		$file = !empty($atts['file']);
@@ -616,6 +532,12 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
+
+	/**
+	 * @param $atts
+	 *
+	 * @return string
+	 */
 	public function render_shortcode_lnpw_pay_view_block($atts)
 	{
 		if ($this->is_paid_content()) {
@@ -664,7 +586,11 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
-
+	/**
+	 * @param $atts
+	 *
+	 * @return string
+	 */
 	public function render_shortcode_protected_file($atts)
 	{
 		$atts = shortcode_atts(array(
@@ -727,6 +653,12 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
+
+	/**
+	 * @param $atts
+	 *
+	 * @return false|string
+	 */
 	public function render_shortcode_lnpw_video_catalog()
 	{
 		if ($this->is_paid_content()) {
