@@ -332,21 +332,52 @@ class Lightning_Paywall_Public
 			wp_send_json_error();
 		}
 
-		$order_id = sanitize_text_field($_POST['order_id']);
-		$post_id  = get_post_meta($order_id, 'lnpw_post_id', true);
-		$secret   = get_post_meta($order_id, 'lnpw_secret', true);
+		$order_id   = sanitize_text_field($_POST['order_id']);
+		$post_id    = get_post_meta($order_id, 'lnpw_post_id', true);
+		$invoice_id = get_post_meta($order_id, 'lnpw_invoice_id', true);
+		$secret     = get_post_meta($order_id, 'lnpw_secret', true);
 
-		if (empty($post_id)) {
+		if (empty($post_id) || empty($invoice_id)) {
 			wp_send_json_error();
 		}
 
-		$cookie_path = parse_url(get_permalink($post_id), PHP_URL_PATH);
+		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices/' . $invoice_id;
 
-		setcookie('lnpw_' . $post_id, $secret, $this->get_cookie_duration($post_id), $cookie_path);
+		$args = array(
+			'headers'     => array(
+				'Authorization' => 'token ' . get_option('lnpw_btcpay_auth_key_view'),
+				'Content-Type'  => 'application/json',
+			),
+			'method'      => 'GET',
+			'timeout'     => 60,
+		);
 
-		update_post_meta($order_id, 'lnpw_status', 'success');
+		$response = wp_remote_request($url, $args);
 
-		wp_send_json_success();
+		if (is_wp_error($response)) {
+			return $response;
+		}
+
+		if ($response['response']['code'] != 200) {
+			return new WP_Error($response['response']['code'], 'HTTP Error ' . $response['response']['code']);
+		}
+
+		$body = json_decode($response['body'], true);
+
+		if (empty($body) || !empty($body['error'])) {
+			return new WP_Error('invoice_error', $body['error'] ?? 'Something went wrong');
+		}
+
+		if ($body['status'] === 'Settled') {
+			$cookie_path = parse_url(get_permalink($post_id), PHP_URL_PATH);
+
+			setcookie('lnpw_' . $post_id, $secret, $this->get_cookie_duration($post_id), $cookie_path);
+
+			update_post_meta($order_id, 'lnpw_status', 'success');
+
+			wp_send_json_success();
+		}
+		wp_send_json_error(['message' => 'invoice is not paid']);
 	}
 
 	/**
