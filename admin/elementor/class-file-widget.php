@@ -170,6 +170,9 @@ class Elementor_LNPW_File_Widget extends \Elementor\Widget_Base
 	protected function render()
 	{
 		$settings         = $this->get_settings_for_display();
+		$title = $settings['title'];
+		$description = $settings['description'];
+		$preview = $settings['preview']['url'];
 		$enable_pay_block = $settings['pay_file_block'];
 		$file =	$settings['file']['url'];
 		$price = $settings['price'];
@@ -177,9 +180,9 @@ class Elementor_LNPW_File_Widget extends \Elementor\Widget_Base
 		$duration_type = $settings['duration_type'];
 		$currency = $settings['currency'];
 		$btc_format = $settings['btc_format'];
-
+		
 		if ($enable_pay_block) {
-			echo do_shortcode("[lnpw_file pay_file_block='true' btc_format='{$btc_format}' file='{$file}' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
+			echo do_shortcode("[lnpw_file pay_file_block='true' title='{$title}' description='{$description}' preview='{$preview}' btc_format='{$btc_format}' file='{$file}' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
 		}
 	}
 }

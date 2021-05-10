@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       Lightning Paywall
  * Plugin URI:        https://lightning-paywall.coincharge.io
- * Description:       Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer previews of your blog posts and accept bitcoin payment for a single post (pay-per-post) via Lightning Network.
+ * Description:       Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer blog posts (pay-per-post), Videos (pay-per-view) and download file (pay-per-file) accept bitcoin payment for a single post, video or file download via Lightning Network.
  * Version:           1.2.0
  * Author:            https://coincharge.io
  * License:           GPL-2.0+
