@@ -555,7 +555,7 @@ class Lightning_Paywall_Admin
 					'heading'     => 'Enable payment block',
 					'param_name'  => 'pay_file_block',
 					'value'       => 'true',
-					'description' => 'Show payment block instead of video',
+					'description' => 'Show payment block instead of file',
 				),
 				array(
 					'type'        => 'vc_link',

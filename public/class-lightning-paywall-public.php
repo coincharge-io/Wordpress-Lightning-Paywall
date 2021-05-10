@@ -480,7 +480,7 @@ class Lightning_Paywall_Public
 	 */
 	public function render_shortcode_lnpw_file($atts)
 	{
-		$img_preview = plugin_dir_url(__FILE__) . 'img/preview.png';
+		$img_preview = plugin_dir_url(__FILE__) . 'img/file_preview.png';
 
 		$atts = shortcode_atts(array(
 			'pay_file_block' => 'false',
@@ -510,8 +510,16 @@ class Lightning_Paywall_Public
 		$e_data = '<!-- /lnpw:end_content -->';
 
 		if ($required_attributes) {
-			return do_shortcode("[lnpw_pay_file_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']") . $s_data  . do_shortcode("[lnpw_protected_file file='{$atts['file']}']") . $e_data;
+			$output = '<div>';
+			$output .= do_shortcode("[lnpw_pay_file_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']");
+			$output .= $s_data;
+			$output .= do_shortcode("[lnpw_protected_file file='{$atts['file']}']");
+			$output .= $e_data;
+			$output .= '</div>';
+			return  $output;
 		}
+
+		return do_shortcode("[lnpw_protected_file file='{$atts['file']}']");
 	}
 	/**
 	 * @param  array  $atts
@@ -611,7 +619,9 @@ class Lightning_Paywall_Public
 
 		ob_start();
 	?>
+
 		<a class="lnpw_pay__download" href=<?php echo esc_url($href) ?> target="_blank" download>Download</a>
+
 	<?php
 
 
