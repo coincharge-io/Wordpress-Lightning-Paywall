@@ -83,6 +83,8 @@ class Elementor_LNPW_Start_Video_Widget extends \Elementor\Widget_Base
 			[
 				'label' => 'Preview',
 				'type'  => \Elementor\Controls_Manager::MEDIA,
+				'default' =>
+				['url' => "plugin_dir_url(__DIR__) . 'public/img/preview.png'"]
 			]
 		);
 

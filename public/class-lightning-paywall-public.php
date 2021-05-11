@@ -372,7 +372,7 @@ class Lightning_Paywall_Public
 		return $duration_type === 'unlimited' ? strtotime("14 Jan 2038") : ($duration_type === 'onetime' ? 0 : strtotime("+{$duration} {$duration_type}"));
 	}
 
-	
+
 	private function update_meta_settings($atts)
 	{
 		$valid_currency = in_array($atts['currency'], Lightning_Paywall_Admin::CURRENCIES);
@@ -510,7 +510,7 @@ class Lightning_Paywall_Public
 
 		$s_data = '<!-- lnpw:start_content -->';
 		$e_data = '<!-- /lnpw:end_content -->';
-		
+
 		if ($required_attributes) {
 			$output =  do_shortcode("[lnpw_pay_file_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']");
 			$output .= $s_data;
@@ -518,7 +518,7 @@ class Lightning_Paywall_Public
 			$output .= $e_data;
 			return  $output;
 		}
-		
+
 		return do_shortcode("[lnpw_protected_file file='{$atts['file']}']");
 	}
 	/**
@@ -616,12 +616,12 @@ class Lightning_Paywall_Public
 		), $atts);
 
 		$href = vc_build_link($atts['file'])['url'] ?: $atts['file'];
-		
+
 		ob_start();
 	?>
-		
+
 		<a class="lnpw_pay__download" href=<?php echo esc_url($href) ?> target="_blank" download>Download</a>
-		
+
 	<?php
 
 
@@ -638,9 +638,9 @@ class Lightning_Paywall_Public
 			'description' => '',
 			'preview' => '',
 		), $atts);
-		
+
 		$image = wp_get_attachment_image_src($atts['preview']);
-		
+
 		$preview_url = $image ? $image[0] : $atts['preview'];
 
 		ob_start();
