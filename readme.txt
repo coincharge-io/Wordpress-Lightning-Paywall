@@ -15,10 +15,10 @@ WordPress Lightning Paywall for BTCPay Server by Coincharge.
 
 Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer blog posts (pay-per-post), videos (pay-per-view) and download file (pay-per-file), accepting bitcoin payment via Lightning Network.
 
-Pay-per-Post and Pay-per-View
-Payment per newspaper article, blog post or video. Instead of offering its content for free and relying on advertising revenue from banner ads and Google, the WordPress Lightning Paywall offers publishers a viable alternative.
+Pay-per-Post, Pay-per-View and Pay-per-File
+Payment per newspaper article, blog post, video or file. Instead of offering its content for free and relying on advertising revenue from banner ads and Google, the WordPress Lightning Paywall offers publishers a viable alternative.
 
-Sell high-quality content to readers willing to pay, who don’t want to subscribe but are willing to pay for a single and high-quality article or video.
+Sell high-quality content to readers willing to pay, who don’t want to subscribe but are willing to pay for a single and high-quality article, video or file.
 
 Publishers can make the dependency on banner ads, Google and clickbait content and focus more on high-quality content that readers are willing to pay for.
 
@@ -28,7 +28,7 @@ Advantages for the reader:
 
 - No login or registration required
 - No transmission of personal data (data protection) required
-- No lengthy subscription if you only want to read a single article
+- No lengthy subscription if you only want to read a single article, watch a video or download a file
 - Fast and easy payment via Bitcoin and Lightning
 
 Advantages for the publisher:
@@ -37,15 +37,19 @@ Advantages for the publisher:
 - With Lightning Paywall, you can earn money without forcing users to sign up for a monthly membership.
 - Offer free posts on your blog and especially high-quality posts are offered for a small fee.
 - Each article has a free part and after a certain point the article becomes chargeable.
+- Charge for your high quality videos.
+- Sell any file and offer it to your customers for download.
+
 
 Further information can be found here: https://lightning-paywall.coincharge.io/
 
 = Features =
 
-- Prices per post can be set globally or individually for each post
+- Prices can be set globally or individually for each post, video or file
 - Availability period of the paid contribution can be set individually
 - Future-oriented payment method thanks to the use of Bitcoin and Lightning
 - Use of the BTCPay server for payment processing and thus independent of banks and payment providers
+- Edit text within the paywall
 - Invoices overview
 - Supports Elementor, WPBakery, Gutenberg and Shortcode
 
@@ -69,7 +73,10 @@ Further information can be found here: https://lightning-paywall.coincharge.io/
 = 1.2.0 =
 
 - Added: Files can be protected with paywall.
-- Changed: BTC is no longer available as
+- Changed: Currencies are handled differently.
+- Fixed: Default preview image doesn't show up on Elementor.
+- Fixed: Content title column in invoice reflects name of the used project 
+
 
 = 1.1.3 =
 
@@ -107,7 +114,7 @@ Further information can be found here: https://lightning-paywall.coincharge.io/
 
 = 1.2.0 =
 
-  -
+  Pay-per-file is added. You can offer digital goods to users.
 
 = 1.1.3 = Problem with saving store id is fixed.
 
