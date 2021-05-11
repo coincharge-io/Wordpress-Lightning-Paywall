@@ -180,9 +180,11 @@ class Elementor_LNPW_File_Widget extends \Elementor\Widget_Base
 		$duration_type = $settings['duration_type'];
 		$currency = $settings['currency'];
 		$btc_format = $settings['btc_format'];
-		
+
 		if ($enable_pay_block) {
 			echo do_shortcode("[lnpw_file pay_file_block='true' title='{$title}' description='{$description}' preview='{$preview}' btc_format='{$btc_format}' file='{$file}' currency='{$currency}' duration='{$duration}' duration_type='{$duration_type}' price='{$price}']");
+		} else {
+			echo do_shortcode("[lnpw_protected_file file='{$file}']");
 		}
 	}
 }

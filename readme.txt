@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 WordPress Lightning Paywall for BTCPay Server by Coincharge.
 
-Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer blog posts (pay-per-post), Videos (pay-per-view) and download file (pay-per-file) accept bitcoin payment for a single post, video or file download via Lightning Network.
+Lightning Paywall is a WordPress plugin for publishers to charge for paid content. With the help of WordPress Lightning Paywall plugin you can offer blog posts (pay-per-post), videos (pay-per-view) and download file (pay-per-file), accepting bitcoin payment via Lightning Network.
 
 Pay-per-Post and Pay-per-View
 Payment per newspaper article, blog post or video. Instead of offering its content for free and relying on advertising revenue from banner ads and Google, the WordPress Lightning Paywall offers publishers a viable alternative.

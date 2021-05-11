@@ -512,15 +512,13 @@ class Lightning_Paywall_Public
 		$e_data = '<!-- /lnpw:end_content -->';
 		
 		if ($required_attributes) {
-			
-			$output = '';
-			$output .= do_shortcode("[lnpw_pay_file_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']");
+			$output =  do_shortcode("[lnpw_pay_file_block title='{$atts['title']}' description='{$atts['description']}' preview='{$atts['preview']}']");
 			$output .= $s_data;
 			$output .= do_shortcode("[lnpw_protected_file file='{$atts['file']}']");
 			$output .= $e_data;
 			return  $output;
 		}
-
+		
 		return do_shortcode("[lnpw_protected_file file='{$atts['file']}']");
 	}
 	/**
@@ -618,12 +616,12 @@ class Lightning_Paywall_Public
 		), $atts);
 
 		$href = vc_build_link($atts['file'])['url'] ?: $atts['file'];
-
+		
 		ob_start();
 	?>
-
+		
 		<a class="lnpw_pay__download" href=<?php echo esc_url($href) ?> target="_blank" download>Download</a>
-
+		
 	<?php
 
 
