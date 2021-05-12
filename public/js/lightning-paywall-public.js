@@ -40,7 +40,7 @@
           url: "/wp-admin/admin-ajax.php",
           method: "POST",
           data: {
-            action: "lpnw_paid_invoice",
+            action: "lnpw_paid_invoice",
             invoice_id: invoice_id,
             order_id: order_id,
           },
