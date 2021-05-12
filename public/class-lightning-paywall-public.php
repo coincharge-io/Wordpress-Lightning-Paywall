@@ -645,9 +645,10 @@ class Lightning_Paywall_Public
 		$atts = shortcode_atts(array(
 			'file' => ''
 		), $atts);
-
-		$href = vc_build_link($atts['file'])['url'] ?: $atts['file'];
-
+		$href = $atts['file'];
+		if(function_exists('vc_build_link')){
+			$href = vc_build_link($atts['file'])['url'] ?: $atts['file'];
+		}
 		ob_start();
 	?>
 
