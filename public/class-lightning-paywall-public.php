@@ -713,6 +713,20 @@ class Lightning_Paywall_Public
 	/**
 	 * @param $atts
 	 *
+	 * @return string
+	 */
+	public function render_shortcode_donation($atts){
+
+		ob_start();
+
+		include 'partials/lnpw-donation';
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * @param $atts
+	 *
 	 * @return false|string
 	 */
 	public function render_shortcode_lnpw_video_catalog()
