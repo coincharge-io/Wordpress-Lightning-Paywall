@@ -717,9 +717,24 @@ class Lightning_Paywall_Public
 	 */
 	public function render_shortcode_donation($atts){
 
+		$atts = shortcode_atts(array(
+			'title' => 'Proba',
+			'description' => 'Sad',
+			'img'	=> ''
+			
+		), $atts);
+
 		ob_start();
 
-		include 'partials/lnpw-donation';
+		?>
+		<div class="lnpw_donation_container">
+			<div class="lnpw_donation_info">
+				<h2><?php echo esc_html($atts['title']);?></h2>
+				<p><?php echo esc_html($atts['description']);?></p>
+				<img src=<?php echo esc_url($atts['img']); ?>
+			</div>
+    	</div>
+		<?php
 
 		return ob_get_clean();
 	}
