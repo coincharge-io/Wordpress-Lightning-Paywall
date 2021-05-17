@@ -61,6 +61,8 @@ class Lightning_Paywall_Public
 	{
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/lightning-paywall-public.js', array('jquery'), null, false);
+
+		wp_enqueue_script('btcpay', get_option('lnpw_btcpay_server_url', '') . '/modal/btcpay.js', array(), null, true);
 	}
 
 	private function is_paid_content($post_id = null)
@@ -117,7 +119,7 @@ class Lightning_Paywall_Public
 			return $content;
 		}
 
-		wp_enqueue_script('btcpay', get_option('lnpw_btcpay_server_url', '') . '/modal/btcpay.js', array(), null, true);
+		//wp_enqueue_script('btcpay', get_option('lnpw_btcpay_server_url', '') . '/modal/btcpay.js', array(), null, true);
 
 		$content_start = substr($content, 0, $start_pos);
 
@@ -297,6 +299,66 @@ class Lightning_Paywall_Public
 		update_post_meta($order_id, 'lnpw_invoice_id', $body['id']);
 
 		return $body['id'];
+	}
+	public function ajax_donate()
+	{
+
+		if(!empty($_POST['default_amount'])){
+			$amount = sanitize_text_field($_POST['default_amount']);
+			$currency = sanitize_text_field($_POST['default_currency']);
+		}
+		
+		if(!empty($_POST['amount'])){
+			$amount = sanitize_text_field($_POST['amount']);
+			$currency = sanitize_text_field($_POST['currency']);
+		}
+		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
+
+		
+		$data = array(
+			'amount'    => $amount,
+			'currency' => $currency,
+			'metadata' => array(
+				'itemDesc' => get_post_meta($post_id, 'lnpw_invoice_content', true)['title'],
+				'donor'    => array(
+					'name'   => (string) $_SERVER['REMOTE_ADDR']
+				)
+			)
+		);
+
+		$args = array(
+			'headers'     => array(
+				'Authorization' => 'token ' . get_option('lnpw_btcpay_auth_key_create'),
+				'Content-Type'  => 'application/json',
+			),
+			'body'        => json_encode($data),
+			'method'      => 'POST',
+			'timeout'     => 60,
+		);
+		
+		$response = wp_remote_request($url, $args);
+		
+		if (is_wp_error($response)) {
+			return $response;
+		}
+
+		if ($response['response']['code'] != 200) {
+			return new WP_Error($response['response']['code'], 'HTTP Error ' . $response['response']['code']);
+		}
+
+		$body = json_decode($response['body'], true);
+
+		if (empty($body) || !empty($body['error'])) {
+			return new WP_Error('invoice_error', $body['error'] ?? 'Something went wrong');
+		}
+
+		update_post_meta($order_id, 'lnpw_invoice_id', $body['id']);
+
+		
+		wp_send_json_success([
+			'invoice_id' => $body['id'],
+		]);
+
 	}
 
 	/**
@@ -720,18 +782,57 @@ class Lightning_Paywall_Public
 		$atts = shortcode_atts(array(
 			'title' => 'Proba',
 			'description' => 'Sad',
-			'img'	=> ''
+			'img'	=> '',
+			'val1'	=> '1000',
+			'val2'	=> '2000',
+			'val3'	=> '3000',
+			'curr'	=> 'SATS'
 			
 		), $atts);
 
+		$invoice_content = array('title' => 'Title: ' . sanitize_text_field($atts['title']), 'project' => 'donation');
+
+		update_post_meta(get_the_ID(), 'lnpw_invoice_content', $invoice_content);
+
+		$supported_currencies = Lightning_Paywall_Admin::CURRENCIES;
+		
 		ob_start();
 
 		?>
+		
 		<div class="lnpw_donation_container">
 			<div class="lnpw_donation_info">
 				<h2><?php echo esc_html($atts['title']);?></h2>
 				<p><?php echo esc_html($atts['description']);?></p>
 				<img src=<?php echo esc_url($atts['img']); ?>
+			</div>
+			<div>
+			<div id="donation_form">
+			<select required name="lnpw_donation_currency" id="lnpw_donation_currency">
+					<option disabled value="">Select currency</option>
+					<?php foreach ($supported_currencies as $currency) : ?>
+						<option  value="<?php echo $currency; ?>">
+							<?php echo $currency; ?>
+						</option>
+					<?php endforeach; ?>
+            </select>
+			<div class="lnpw_donation__container">
+					<p>Select amount:</p>
+					<input type="hidden" id="lnpw_donation_default_currency" name="lnpw_donation_default_currency" value="<?php echo esc_html($atts['curr']); ?>">
+						<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val1']). ' ' . esc_html($atts['curr']); ?></label>
+						<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val1']); ?>">
+						
+						<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val2']). ' ' .esc_html($atts['curr']);; ?> </label>
+						<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val2']); ?>">
+						<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val3']). ' ' . esc_html($atts['curr']);; ?></label>
+						<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val3']); ?>">
+						
+						<label for="lnpw_donation_custom_amount">Enter amount:</label>
+						<input type="number" id="lnpw_donation_custom_amount" name="lnpw_donation_custom_amount" >
+						
+            </div>
+			<button type="submit" data-post_id="<?php echo  get_the_ID(); ?>" id="lnpw_donation__button" >Donate</button>
+			</div>
 			</div>
     	</div>
 		<?php

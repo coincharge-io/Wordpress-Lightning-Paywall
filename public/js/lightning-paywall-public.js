@@ -57,4 +57,42 @@
 
     btcpay.showInvoice(invoice_id);
   }
+
+  $(document).ready(function () {
+    var lnpw_invoice_id = null;
+    if (lnpw_invoice_id) {
+        lnpwShowDonationInvoice(lnpw_invoice_id);
+        return;
+      }
+    $("#lnpw_donation__button").click(function () {
+        $.ajax({
+          url: "/wp-admin/admin-ajax.php",
+          method: "POST",
+          data: {
+            action: "lnpw_donate",
+            currency: $("#lnpw_donation_currency").val(),
+            default_currency: $("#lnpw_donation_default_currency").val(),
+            amount: $("#lnpw_donation_custom_amount").val(),
+            default_amount: $("#lnpw_donation_default_amount").val(),
+          },
+          success: function (response) {
+            if (response.success) {
+              lnpw_invoice_id=response.data.invoice_id;
+              lnpwShowDonationInvoice(lnpw_invoice_id);
+            } else {
+               console.error(response);
+            }
+        }
+      })
+    })
+  })
+  function lnpwShowDonationInvoice(invoice_id) {
+    btcpay.onModalReceiveMessage(function (event) {
+      if (event.data.status === "complete") {
+              location.reload(true);
+            }
+          })
+
+    btcpay.showInvoice(invoice_id);
+  }
 })(jQuery);
