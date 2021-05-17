@@ -780,8 +780,8 @@ class Lightning_Paywall_Public
 	public function render_shortcode_donation($atts){
 
 		$atts = shortcode_atts(array(
-			'title' => 'Proba',
-			'description' => 'Sad',
+			'title' => 'Donation',
+			'description' => 'No description',
 			'img'	=> '',
 			'val1'	=> '1000',
 			'val2'	=> '2000',
@@ -790,7 +790,7 @@ class Lightning_Paywall_Public
 			
 		), $atts);
 
-		$invoice_content = array('title' => 'Title: ' . sanitize_text_field($atts['title']), 'project' => 'donation');
+		$invoice_content = array('title' => 'Donation: ' . sanitize_text_field($atts['title']), 'project' => 'donation');
 
 		update_post_meta(get_the_ID(), 'lnpw_invoice_content', $invoice_content);
 
@@ -832,6 +832,9 @@ class Lightning_Paywall_Public
 						
             </div>
 			<button type="submit" data-post_id="<?php echo  get_the_ID(); ?>" id="lnpw_donation__button" >Donate</button>
+			<div class="lnpw_pay__loading">
+					<p class="loading"></p>
+			</div>
 			</div>
 			</div>
     	</div>

@@ -60,11 +60,13 @@
 
   $(document).ready(function () {
     var lnpw_invoice_id = null;
-    if (lnpw_invoice_id) {
+
+    $("#lnpw_donation__button").click(function () {
+      $(".lnpw_pay__loading p.loading").addClass("spinner");
+      if (lnpw_invoice_id) {
         lnpwShowDonationInvoice(lnpw_invoice_id);
         return;
       }
-    $("#lnpw_donation__button").click(function () {
         $.ajax({
           url: "/wp-admin/admin-ajax.php",
           method: "POST",
@@ -76,6 +78,7 @@
             default_amount: $("#lnpw_donation_default_amount").val(),
           },
           success: function (response) {
+            $(".lnpw_pay__loading p.loading").removeClass("spinner");
             if (response.success) {
               lnpw_invoice_id=response.data.invoice_id;
               lnpwShowDonationInvoice(lnpw_invoice_id);
