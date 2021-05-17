@@ -314,12 +314,12 @@ class Lightning_Paywall_Public
 		}
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
-		
+		var_dump(get_post_meta($post_id, 'lnpw_invoice_content', true)['title']);		
 		$data = array(
 			'amount'    => $amount,
 			'currency' => $currency,
 			'metadata' => array(
-				'itemDesc' => get_post_meta($post_id, 'lnpw_invoice_content', true)['title'],
+				'itemDesc' => 'Donation from: '. $_SERVER['REMOTE_ADDR'],
 				'donor'    => array(
 					'name'   => (string) $_SERVER['REMOTE_ADDR']
 				)
@@ -789,10 +789,6 @@ class Lightning_Paywall_Public
 			'curr'	=> 'SATS'
 			
 		), $atts);
-
-		$invoice_content = array('title' => 'Donation: ' . sanitize_text_field($atts['title']), 'project' => 'donation');
-
-		update_post_meta(get_the_ID(), 'lnpw_invoice_content', $invoice_content);
 
 		$supported_currencies = Lightning_Paywall_Admin::CURRENCIES;
 		
