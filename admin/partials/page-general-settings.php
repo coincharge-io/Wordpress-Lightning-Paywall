@@ -28,26 +28,26 @@ $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
                 <h2>Payment Block</h2>
                 <div class="row">
                     <div class="col-20">
-                        <label for="checkout_title">Checkout title</label>
+                        <label for="lnpw_checkout_title">Checkout title</label>
                     </div>
                     <div class="col-80">
-                        <textarea id="checkout_title" name="lnpw_default_payblock_text"><?php echo $default_text; ?></textarea>
+                        <textarea id="lnpw_checkout_title" name="lnpw_default_payblock_text"><?php echo $default_text; ?></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-20">
-                        <label for="checkout_button">Checkout button text</label>
+                        <label for="lnpw_checkout_button">Checkout button text</label>
                     </div>
                     <div class="col-80">
-                        <textarea id="checkout_button" name="lnpw_default_payblock_button"><?php echo $default_button; ?></textarea>
+                        <textarea id="lnpw_checkout_button" name="lnpw_default_payblock_button"><?php echo $default_button; ?></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-20">
-                        <label for="checkout_info">Checkout price info</label>
+                        <label for="lnpw_checkout_info">Checkout price info</label>
                     </div>
                     <div class="col-80">
-                        <textarea id="checkout_info" name="lnpw_default_payblock_info"><?php echo $default_info; ?></textarea>
+                        <textarea id="lnpw_checkout_info" name="lnpw_default_payblock_info"><?php echo $default_info; ?></textarea>
                     </div>
                 </div>
             </div>

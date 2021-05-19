@@ -303,23 +303,22 @@ class Lightning_Paywall_Public
 	public function ajax_donate()
 	{
 
-		if(!empty($_POST['default_amount'])){
+		if (!empty($_POST['default_amount'])) {
 			$amount = sanitize_text_field($_POST['default_amount']);
 			$currency = sanitize_text_field($_POST['default_currency']);
 		}
-		
-		if(!empty($_POST['amount'])){
+
+		if (!empty($_POST['amount'])) {
 			$amount = sanitize_text_field($_POST['amount']);
 			$currency = sanitize_text_field($_POST['currency']);
 		}
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
-		var_dump(get_post_meta($post_id, 'lnpw_invoice_content', true)['title']);		
 		$data = array(
 			'amount'    => $amount,
 			'currency' => $currency,
 			'metadata' => array(
-				'itemDesc' => 'Donation from: '. $_SERVER['REMOTE_ADDR'],
+				'itemDesc' => 'Donation from: ' . $_SERVER['REMOTE_ADDR'],
 				'donor'    => array(
 					'name'   => (string) $_SERVER['REMOTE_ADDR']
 				)
@@ -335,9 +334,9 @@ class Lightning_Paywall_Public
 			'method'      => 'POST',
 			'timeout'     => 60,
 		);
-		
+
 		$response = wp_remote_request($url, $args);
-		
+
 		if (is_wp_error($response)) {
 			return $response;
 		}
@@ -352,13 +351,12 @@ class Lightning_Paywall_Public
 			return new WP_Error('invoice_error', $body['error'] ?? 'Something went wrong');
 		}
 
-		update_post_meta($order_id, 'lnpw_invoice_id', $body['id']);
+		//update_post_meta($order_id, 'lnpw_invoice_id', $body['id']);
 
-		
+
 		wp_send_json_success([
 			'invoice_id' => $body['id'],
 		]);
-
 	}
 
 	/**
@@ -709,8 +707,8 @@ class Lightning_Paywall_Public
 		), $atts);
 
 		$href = $atts['file'];
-		
-		if(function_exists('vc_build_link')){
+
+		if (function_exists('vc_build_link')) {
 			$href = vc_build_link($atts['file'])['url'] ?: $atts['file'];
 		}
 		ob_start();
@@ -777,7 +775,8 @@ class Lightning_Paywall_Public
 	 *
 	 * @return string
 	 */
-	public function render_shortcode_donation($atts){
+	public function render_shortcode_donation($atts)
+	{
 
 		$atts = shortcode_atts(array(
 			'title' => 'Donation',
@@ -787,53 +786,52 @@ class Lightning_Paywall_Public
 			'val2'	=> '2000',
 			'val3'	=> '3000',
 			'curr'	=> 'SATS'
-			
+
 		), $atts);
 
 		$supported_currencies = Lightning_Paywall_Admin::CURRENCIES;
-		
+
 		ob_start();
 
-		?>
-		
+	?>
+
 		<div class="lnpw_donation_container">
 			<div class="lnpw_donation_info">
-				<h2><?php echo esc_html($atts['title']);?></h2>
-				<p><?php echo esc_html($atts['description']);?></p>
-				<img src=<?php echo esc_url($atts['img']); ?>
+				<h2><?php echo esc_html($atts['title']); ?></h2>
+				<p><?php echo esc_html($atts['description']); ?></p>
+				<img src=<?php echo esc_url($atts['img']); ?> </div>
+				<div>
+					<div id="donation_form">
+						<select required name="lnpw_donation_currency" id="lnpw_donation_currency">
+							<option disabled value="">Select currency</option>
+							<?php foreach ($supported_currencies as $currency) : ?>
+								<option value="<?php echo $currency; ?>">
+									<?php echo $currency; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+						<div class="lnpw_donation__container">
+							<p>Select amount:</p>
+							<input type="hidden" id="lnpw_donation_default_currency" name="lnpw_donation_default_currency" value="<?php echo esc_html($atts['curr']); ?>">
+							<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val1']) . ' ' . esc_html($atts['curr']); ?></label>
+							<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val1']); ?>">
+
+							<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val2']) . ' ' . esc_html($atts['curr']);; ?> </label>
+							<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val2']); ?>">
+							<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val3']) . ' ' . esc_html($atts['curr']);; ?></label>
+							<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val3']); ?>">
+
+							<label for="lnpw_donation_custom_amount">Enter amount:</label>
+							<input type="number" id="lnpw_donation_custom_amount" name="lnpw_donation_custom_amount">
+
+						</div>
+						<button type="submit" data-post_id="<?php echo  get_the_ID(); ?>" id="lnpw_donation__button">Donate</button>
+						<div class="lnpw_pay__loading">
+							<p class="loading"></p>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div>
-			<div id="donation_form">
-			<select required name="lnpw_donation_currency" id="lnpw_donation_currency">
-					<option disabled value="">Select currency</option>
-					<?php foreach ($supported_currencies as $currency) : ?>
-						<option  value="<?php echo $currency; ?>">
-							<?php echo $currency; ?>
-						</option>
-					<?php endforeach; ?>
-            </select>
-			<div class="lnpw_donation__container">
-					<p>Select amount:</p>
-					<input type="hidden" id="lnpw_donation_default_currency" name="lnpw_donation_default_currency" value="<?php echo esc_html($atts['curr']); ?>">
-						<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val1']). ' ' . esc_html($atts['curr']); ?></label>
-						<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val1']); ?>">
-						
-						<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val2']). ' ' .esc_html($atts['curr']);; ?> </label>
-						<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val2']); ?>">
-						<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val3']). ' ' . esc_html($atts['curr']);; ?></label>
-						<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val3']); ?>">
-						
-						<label for="lnpw_donation_custom_amount">Enter amount:</label>
-						<input type="number" id="lnpw_donation_custom_amount" name="lnpw_donation_custom_amount" >
-						
-            </div>
-			<button type="submit" data-post_id="<?php echo  get_the_ID(); ?>" id="lnpw_donation__button" >Donate</button>
-			<div class="lnpw_pay__loading">
-					<p class="loading"></p>
-			</div>
-			</div>
-			</div>
-    	</div>
 		<?php
 
 		return ob_get_clean();
@@ -858,34 +856,34 @@ class Lightning_Paywall_Public
 		$myposts = get_posts($args);
 		ob_start();
 
-	?>
-		<div class="lnpw_store">
-			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
-				<?php
-				$gutenberg = $this->extract_gutenberg_preview($post);
-				$elementor = $this->extract_elementor_preview($post);
-				$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
-				$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
-				$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode);
+		?>
+			<div class="lnpw_store">
+				<?php foreach ($myposts as $post) : setup_postdata($post); ?>
+					<?php
+					$gutenberg = $this->extract_gutenberg_preview($post);
+					$elementor = $this->extract_elementor_preview($post);
+					$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
+					$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
+					$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode);
 
-				if (null !== $integrated) : ?>
-					<div class="lnpw_store_video">
-						<div class="lnpw_store_video_preview">
-							<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
-						</div>
-						<div class="lnpw_store_video_information">
-							<a href="<?php the_permalink($post); ?>">
-								<h5><?php echo esc_html($integrated['title']); ?></h5>
+					if (null !== $integrated) : ?>
+						<div class="lnpw_store_video">
+							<div class="lnpw_store_video_preview">
+								<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
+							</div>
+							<div class="lnpw_store_video_information">
+								<a href="<?php the_permalink($post); ?>">
+									<h5><?php echo esc_html($integrated['title']); ?></h5>
 
-								<h6><?php echo esc_html($integrated['description']); ?></h6>
-							</a>
+									<h6><?php echo esc_html($integrated['description']); ?></h6>
+								</a>
+							</div>
 						</div>
-					</div>
-				<?php endif; ?>
-			<?php endforeach;
-			wp_reset_postdata(); ?>
-		</div>
-<?php
+					<?php endif; ?>
+				<?php endforeach;
+				wp_reset_postdata(); ?>
+			</div>
+	<?php
 
 		return ob_get_clean();
 	}

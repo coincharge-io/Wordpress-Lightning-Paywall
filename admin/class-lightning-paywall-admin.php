@@ -82,6 +82,10 @@ class Lightning_Paywall_Admin
 	{
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/lightning-paywall-admin.js', array('jquery'), $this->version, false);
+
+		wp_enqueue_style('wp-color-picker');
+		wp_enqueue_script('iris', admin_url('js/iris.min.js'), array('jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch'), false, 1);
+		wp_enqueue_script('lightning-paywall-admin', plugin_dir_url(__FILE__) . 'js/lightning-paywall-admin.js', array('jquery'), '', true);
 	}
 
 	public function register_post_types()
@@ -118,6 +122,7 @@ class Lightning_Paywall_Admin
 		add_menu_page('Lightning Paywall', 'Lightning Paywall', 'manage_options', 'lnpw_general_settings', '', 'dashicons-tickets');
 		add_submenu_page('lnpw_general_settings', 'Settings', 'Settings', 'manage_options', 'lnpw_general_settings', array($this, 'render_general_settings_page'));
 		add_submenu_page('lnpw_general_settings', 'Invoices', 'Invoices', 'manage_options', 'lnpw_invoices', array($this, 'render_invoices_page'));
+		add_submenu_page('lnpw_general_settings', 'Tipping', 'Tipping', 'manage_options', 'lnpw_tipping', array($this, 'render_tipping_page'));
 	}
 
 	/**
@@ -328,6 +333,13 @@ class Lightning_Paywall_Admin
 		include 'partials/page-invoices.php';
 	}
 
+	/**
+	 * Render Tipping page
+	 */
+	public function render_tipping_page()
+	{
+		include 'partials/page-tipping.php';
+	}
 
 	/**
 	 * @throws Exception
