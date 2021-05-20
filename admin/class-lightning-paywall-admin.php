@@ -86,6 +86,12 @@ class Lightning_Paywall_Admin
 		wp_enqueue_style('wp-color-picker');
 		wp_enqueue_script('iris', admin_url('js/iris.min.js'), array('jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch'), false, 1);
 		wp_enqueue_script('lightning-paywall-admin', plugin_dir_url(__FILE__) . 'js/lightning-paywall-admin.js', array('jquery'), '', true);
+
+		if (empty($_GET['page']) || "lnpw_tipping" !== $_GET['page']) {
+			return;
+		}
+
+		wp_enqueue_media();
 	}
 
 	public function register_post_types()
@@ -144,6 +150,16 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_server_url', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_server_url')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_view', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
+
+		register_setting('lnpw_general_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_dimension')));
+
+		register_setting('lnpw_general_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_button_text', array('type' => 'string', 'default' => 'Tip', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_button_banner', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_image')));
 	}
 
 	public function sanitize_btcpay_server_url($value)
@@ -161,11 +177,34 @@ class Lightning_Paywall_Admin
 		return $value;
 	}
 
+	public function sanitize_image($value)
+	{
+		$value = sanitize_text_field($value);
+
+		return $value;
+	}
 
 	public function sanitize_payblock_area($value)
 	{
 
 		$value = sanitize_textarea_field($value);
+
+		return $value;
+	}
+
+	public function sanitize_color($value)
+	{
+
+		$value = sanitize_hex_color($value);
+
+		return $value;
+	}
+	public function sanitize_dimension($value)
+	{
+
+		$value = sanitize_text_field($value);
+
+		explode('x', $value);
 
 		return $value;
 	}

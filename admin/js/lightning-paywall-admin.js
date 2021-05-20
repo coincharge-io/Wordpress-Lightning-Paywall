@@ -160,17 +160,47 @@
     });
   });
   $(document).ready(function (){
-    jQuery('#lnpw_tipping_background, #lnpw_tipping_button_color').iris({
-      // or in the data-default-color attribute on the input
+    $('#lnpw_tipping_background, #lnpw_tipping_button_color').iris({
+      
       defaultColor: true,
-      // a callback to fire whenever the color changes to a valid color
+      
       change: function(event, ui){},
-      // a callback to fire when the input is emptied or an invalid color
+      
       clear: function() {},
-      // hide the color picker controls on load
+      
       hide: true,
-      // show a group of common colors beneath the square
+      
       palettes: true
       });
   })
+$(document).ready(function($){
+
+            var custom_uploader
+              , click_elem = jQuery('.lnpw_tipping_button_banner')
+              , target = jQuery('.wrap input[name="lnpw_tipping_button_banner"]')
+
+            click_elem.click(function(e) {
+                e.preventDefault();
+                
+                if (custom_uploader) {
+                    custom_uploader.open();
+                    return;
+                }
+                
+                custom_uploader = wp.media.frames.file_frame = wp.media({
+                    title: 'Choose Image',
+                    button: {
+                        text: 'Choose Image'
+                    },
+                    multiple: false
+                });
+                
+                custom_uploader.on('select', function() {
+                    var attachment = custom_uploader.state().get('selection').first().toJSON();
+                    target.val(attachment.url);
+                });
+                
+                custom_uploader.open();
+            });      
+        });
 })(jQuery);
