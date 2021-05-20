@@ -95,10 +95,7 @@ a.lnpw_pay__download{
   background-color: #E6E6E6;
 }
 
-.lnpw_donation_container button[type='submit']{
-  background: #FE642E;
 
-}
 .lnpw_donation_amount_container{
   display: flex;
   flex-direction: column;

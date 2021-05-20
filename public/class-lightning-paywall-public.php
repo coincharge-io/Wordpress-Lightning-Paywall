@@ -775,7 +775,7 @@ class Lightning_Paywall_Public
 	 *
 	 * @return string
 	 */
-	public function render_shortcode_donation($atts)
+	public function render_shortcode_tipping($atts)
 	{
 
 		$atts = shortcode_atts(array(
@@ -788,18 +788,21 @@ class Lightning_Paywall_Public
 			'curr'	=> 'SATS'
 
 		), $atts);
-
+		$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
+		$banner = get_option('lnpw_tipping_banner');
+		$btn_text = get_option('lnpw_tipping_button_text', 'Tip');
+		$btn_color = get_option('lnpw_tipping_button_color');
+		$background_color = get_option('lnpw_tipping_background');
 		$supported_currencies = Lightning_Paywall_Admin::CURRENCIES;
-
 		ob_start();
 
 	?>
 
-		<div class="lnpw_donation_container">
+		<div class="lnpw_donation_container" style="background-color:<?php echo $background_color; ?>">
 			<div class="lnpw_donation_info">
 				<h2><?php echo esc_html($atts['title']); ?></h2>
 				<p><?php echo esc_html($atts['description']); ?></p>
-				<img src=<?php echo esc_url($atts['img']); ?> </div>
+				<img width=<?php echo $dimension[0]; ?> height=<?php echo $dimension[1]; ?> src=<?php echo $banner; ?> </div>
 				<div>
 					<div id="donation_form">
 						<select required name="lnpw_donation_currency" id="lnpw_donation_currency">
@@ -825,7 +828,7 @@ class Lightning_Paywall_Public
 							<input type="number" id="lnpw_donation_custom_amount" name="lnpw_donation_custom_amount">
 
 						</div>
-						<button type="submit" data-post_id="<?php echo  get_the_ID(); ?>" id="lnpw_donation__button">Donate</button>
+						<button type="submit" style="background:<?php echo $btn_color; ?>" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_donation__button"><?php echo $btn_text; ?></button>
 						<div class="lnpw_pay__loading">
 							<p class="loading"></p>
 						</div>

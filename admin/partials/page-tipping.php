@@ -2,12 +2,14 @@
 $supported_currencies   = Lightning_Paywall_Admin::CURRENCIES;
 array_push($supported_currencies, 'BTC');
 $dimensions = ['250x250', '300x250', '240x400'];
-//$used_dimension = '250x250';
 $used_currency  = get_option('lnpw_tipping_currency');
 $used_dimension      = get_option('lnpw_tipping_dimension');
 $title = get_option('lnpw_tipping_title');
 $description = get_option('lnpw_tipping_description');
 $btn_text = get_option('lnpw_tipping_button_text');
+$btn_color = get_option('lnpw_tipping_button_color');
+$background_color = get_option('lnpw_tipping_background');
+$banner = get_option('lnpw_tipping_banner');
 ?>
 
 
@@ -74,7 +76,7 @@ $btn_text = get_option('lnpw_tipping_button_text');
                 <label for="lnpw_tipping_background">Background color</label>
             </div>
             <div class="col-80">
-                <input id="lnpw_tipping_background" class="lnpw_tipping_background" name="lnpw_tipping_background" type="text" value="" />
+                <input id="lnpw_tipping_background" class="lnpw_tipping_background" name="lnpw_tipping_background" type="text" value=<?php echo $background_color; ?> />
 
             </div>
         </div>
@@ -83,16 +85,18 @@ $btn_text = get_option('lnpw_tipping_button_text');
                 <label for="lnpw_tipping_button_color">Button color</label>
             </div>
             <div class="col-80">
-                <input id="lnpw_tipping_button_color" class="lnpw_tipping_button_color" name="lnpw_tipping_button_color" type="text" value="" />
+                <input id="lnpw_tipping_button_color" class="lnpw_tipping_button_color" name="lnpw_tipping_button_color" type="text" value=<?php echo $btn_color; ?> />
 
             </div>
         </div>
         <div class="row">
             <div class="col-20">
-                <label for="lnpw_tipping_button_banner">Banner</label>
+                <label for="lnpw_tipping_banner">Banner</label>
             </div>
             <div class="col-80">
-                <input type="file" id="lnpw_tipping_button_banner" class="lnpw_tipping_button_banner" name="lnpw_tipping_button_banner" />
+                <input type="text" id="lnpw_tipping_banner" class="lnpw_tipping_banner" name="lnpw_tipping_banner" value=<?php echo $banner; ?> />
+                <button id="lnpw_tipping_button_banner" class="lnpw_tipping_button_banner" name="lnpw_tipping_button_banner">Upload</button>
+
             </div>
         </div>
         <div style="display: inline-block; margin-top: 25px;">

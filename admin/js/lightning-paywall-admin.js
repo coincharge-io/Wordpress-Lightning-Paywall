@@ -172,12 +172,12 @@
       
       palettes: true
       });
-  })
+  });
 $(document).ready(function($){
 
             var custom_uploader
-              , click_elem = jQuery('.lnpw_tipping_button_banner')
-              , target = jQuery('.wrap input[name="lnpw_tipping_button_banner"]')
+              , click_elem = $('.lnpw_tipping_button_banner')
+              , target = $('#lnpw_tipping_banner')
 
             click_elem.click(function(e) {
                 e.preventDefault();

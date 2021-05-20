@@ -159,7 +159,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_button_banner', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_image')));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_banner', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_image')));
 	}
 
 	public function sanitize_btcpay_server_url($value)
@@ -179,9 +179,19 @@ class Lightning_Paywall_Admin
 
 	public function sanitize_image($value)
 	{
-		$value = sanitize_text_field($value);
 
-		return $value;
+		$output = '';
+
+
+		$filetype = wp_check_filetype($value);
+		$mime_type = $filetype['type'];
+
+
+		if (strpos($mime_type, 'image') !== false) {
+			$output = $value;
+		}
+
+		return $output;
 	}
 
 	public function sanitize_payblock_area($value)
@@ -203,8 +213,6 @@ class Lightning_Paywall_Admin
 	{
 
 		$value = sanitize_text_field($value);
-
-		explode('x', $value);
 
 		return $value;
 	}
