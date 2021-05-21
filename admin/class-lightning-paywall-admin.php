@@ -152,6 +152,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 
 		register_setting('lnpw_general_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_dimension')));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => ''));
 
 		register_setting('lnpw_general_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false'));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_collect_name', array('type' => 'string', 'default' => 'false'));

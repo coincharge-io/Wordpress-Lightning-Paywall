@@ -12,6 +12,7 @@ $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
 $banner = get_option('lnpw_tipping_banner');
 $collect = get_option('lnpw_tipping_collect');
+$redirect = get_option('lnpw_tipping_redirect');
 $name = get_option('lnpw_tipping_collect_name');
 $phone = get_option('lnpw_tipping_collect_phone');
 $email = get_option('lnpw_tipping_collect_email');
@@ -57,6 +58,14 @@ $message = get_option('lnpw_tipping_collect_message');
             </div>
             <div class="col-80">
                 <textarea id="lnpw_tipping_description" name="lnpw_tipping_description"><?php echo $description; ?></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_redirect">Link to Thank you Page</label>
+            </div>
+            <div class="col-80">
+                <input id="lnpw_tipping_redirect" name="lnpw_tipping_redirect" value=<?php echo $redirect; ?> />
             </div>
         </div>
         <div class="row">
