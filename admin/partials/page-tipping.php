@@ -12,9 +12,18 @@ $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
 $banner = get_option('lnpw_tipping_banner');
 $collect = get_option('lnpw_tipping_collect');
+$name = get_option('lnpw_tipping_collect_name');
+$phone = get_option('lnpw_tipping_collect_phone');
+$email = get_option('lnpw_tipping_collect_email');
+$address = get_option('lnpw_tipping_collect_address');
+$message = get_option('lnpw_tipping_collect_message');
 ?>
 
-
+<style>
+    .container_donor_information {
+        display: <?php echo $collect === 'true' ? 'block' : 'none'; ?>;
+    }
+</style>
 <div>
     <h1>Tipping</h1>
     <form method="POST" action="options.php">
@@ -112,7 +121,7 @@ $collect = get_option('lnpw_tipping_collect');
         </div>
         <div class="row">
             <div class="col-20">
-                <label for="lnpw_tipping_collect">Do you want to collect donor information?</label>
+                <label for="lnpw_tipping_collect">Do you want to collect information?</label>
             </div>
             <div class="col-80">
                 <input type="hidden" class="lnpw_tipping_collect" name="lnpw_tipping_collect" value='false' />
@@ -120,105 +129,55 @@ $collect = get_option('lnpw_tipping_collect');
 
             </div>
         </div>
-        <?php if ($collect === 'true') : ?>
-            <div class="container_donor_information">
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_name">Full name</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
+        <div class="container_donor_information">
+            <div class="row">
+                <div class="col-20">
+                    <label for="lnpw_tipping_collect_name">Full name</label>
+                </div>
+                <div class="col-80">
+                    <input type="hidden" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" value='false' />
+                    <input type="checkbox" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" <?php echo $name === 'true' ? 'checked' : ''; ?> value="true" />
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_email">Email</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_address">Address</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_phone">Phone number</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_message">Message</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
                 </div>
             </div>
-        <?php else : ?>
-            <div class="container_donor_information" style="display:none;">
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_name">Full name</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-
-                    </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="lnpw_tipping_collect_email">Email</label>
                 </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_email">Email</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_address">Address</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_phone">Phone number</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-20">
-                        <label for="lnpw_tipping_collect_message">Message</label>
-                    </div>
-                    <div class="col-80">
-                        <input type="hidden" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" value='false' />
-                        <input type="checkbox" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" <?php echo $collect_name === 'true' ? 'checked' : ''; ?> value="true" />
-                    </div>
+                <div class="col-80">
+                    <input type="hidden" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" value='false' />
+                    <input type="checkbox" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" <?php echo $email === 'true' ? 'checked' : ''; ?> value="true" />
                 </div>
             </div>
-        <?php endif; ?>
+            <div class="row">
+                <div class="col-20">
+                    <label for="lnpw_tipping_collect_address">Address</label>
+                </div>
+                <div class="col-80">
+                    <input type="hidden" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" value='false' />
+                    <input type="checkbox" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" <?php echo $address === 'true' ? 'checked' : ''; ?> value="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="lnpw_tipping_collect_phone">Phone number</label>
+                </div>
+                <div class="col-80">
+                    <input type="hidden" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" value='false' />
+                    <input type="checkbox" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" <?php echo $phone === 'true' ? 'checked' : ''; ?> value="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="lnpw_tipping_collect_message">Message</label>
+                </div>
+                <div class="col-80">
+                    <input type="hidden" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" value='false' />
+                    <input type="checkbox" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" <?php echo $message === 'true' ? 'checked' : ''; ?> value="true" />
+                </div>
+            </div>
+        </div>
+
         <div style="display: inline-block; margin-top: 25px;">
             <button class="button button-primary" type="submit">Save</button>
         </div>

@@ -15,7 +15,11 @@ $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
 ?>
-
+<style>
+    .lnpw_price_format {
+        display: <?php echo $used_currency === 'SATS' ? 'block' : 'none'; ?>;
+    }
+</style>
 <div class="container">
     <h1>Lightning Paywall Settings</h1>
 
@@ -68,27 +72,15 @@ $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <?php if ($used_currency === 'SATS') : ?>
-                            <div class="lnpw_price_format">
-                                <p>Select Bitcoin price display:</p>
-                                <?php foreach ($supported_btc_format as $format) : ?>
-                                    <div>
-                                        <input type="radio" id="lnpw_default_btc_format" name="lnpw_default_btc_format" value="<?php echo $format ?>" <?php echo $used_format === $format ? 'checked' : '' ?>>
-                                        <label for="lnpw_default_btc_format"><?php echo $format ?></label>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php else : ?>
-                            <div style="display:none;" class="lnpw_price_format">
-                                <p>Select Bitcoin price display:</p>
-                                <?php foreach ($supported_btc_format as $format) : ?>
-                                    <div>
-                                        <input type="radio" id="lnpw_default_btc_format" name="lnpw_default_btc_format" value="<?php echo $format ?>" <?php echo $used_format === $format ? 'checked' : '' ?>>
-                                        <label for="lnpw_default_btc_format"><?php echo $format ?></label>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
+                        <div class="lnpw_price_format">
+                            <p>Select Bitcoin price display:</p>
+                            <?php foreach ($supported_btc_format as $format) : ?>
+                                <div>
+                                    <input type="radio" id="lnpw_default_btc_format" name="lnpw_default_btc_format" value="<?php echo $format ?>" <?php echo $used_format === $format ? 'checked' : '' ?>>
+                                    <label for="lnpw_default_btc_format"><?php echo $format ?></label>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
 
