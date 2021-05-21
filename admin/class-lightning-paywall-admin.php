@@ -152,7 +152,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 
 		register_setting('lnpw_general_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_dimension')));
-
+		register_setting('lnpw_general_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false'));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_button_text', array('type' => 'string', 'default' => 'Tip', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));

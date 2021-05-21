@@ -792,13 +792,24 @@ class Lightning_Paywall_Public
 		$banner = get_option('lnpw_tipping_banner');
 		$btn_text = get_option('lnpw_tipping_button_text', 'Tip');
 		$btn_color = get_option('lnpw_tipping_button_color');
+		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
 		$background_color = get_option('lnpw_tipping_background');
 		$supported_currencies = Lightning_Paywall_Admin::CURRENCIES;
+		$style = "background: {$btn_color}, color: {$btn_text_color}";
+
 		ob_start();
-
 	?>
+		<style>
+			.lnpw_donation_container {
+				background-color: <?php echo $background_color; ?>
+			}
 
-		<div class="lnpw_donation_container" style="background-color:<?php echo $background_color; ?>">
+			#lnpw_donation__button {
+				color: <?php echo $btn_text_color; ?>;
+				background: <?php echo $btn_color; ?>;
+			}
+		</style>
+		<div class="lnpw_donation_container">
 			<div class="lnpw_donation_info">
 				<h2><?php echo esc_html($atts['title']); ?></h2>
 				<p><?php echo esc_html($atts['description']); ?></p>
@@ -828,7 +839,8 @@ class Lightning_Paywall_Public
 							<input type="number" id="lnpw_donation_custom_amount" name="lnpw_donation_custom_amount">
 
 						</div>
-						<button type="submit" style="background:<?php echo $btn_color; ?>" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_donation__button"><?php echo $btn_text; ?></button>
+
+						<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_donation__button"><?php echo $btn_text; ?></button>
 						<div class="lnpw_pay__loading">
 							<p class="loading"></p>
 						</div>

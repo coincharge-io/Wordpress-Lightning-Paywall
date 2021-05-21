@@ -11,6 +11,7 @@ $btn_text_color = get_option('lnpw_tipping_button_text_color');
 $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
 $banner = get_option('lnpw_tipping_banner');
+$collect = get_option('lnpw_tipping_collect');
 ?>
 
 
@@ -106,6 +107,16 @@ $banner = get_option('lnpw_tipping_banner');
             <div class="col-80">
                 <input type="text" id="lnpw_tipping_banner" class="lnpw_tipping_banner" name="lnpw_tipping_banner" value=<?php echo $banner; ?> />
                 <button id="lnpw_tipping_button_banner" class="lnpw_tipping_button_banner" name="lnpw_tipping_button_banner">Upload</button>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_collect">Do you want to collect donor information?</label>
+            </div>
+            <div class="col-80">
+                <input type="hidden" id="lnpw_tipping_collect" class="lnpw_tipping_collect" name="lnpw_tipping_collect" value='false' />
+                <input type="checkbox" id="lnpw_tipping_collect" class="lnpw_tipping_collect" name="lnpw_tipping_collect" <?php echo $collect === 'true' ? 'checked' : ''; ?> value="true" />
 
             </div>
         </div>
