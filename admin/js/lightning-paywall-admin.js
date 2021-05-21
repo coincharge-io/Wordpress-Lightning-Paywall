@@ -159,6 +159,15 @@
       },
     });
   });
+  $(document).ready(function () {
+    $('.lnpw_tipping_collect').click(function () {
+      if (!$(this).is(':checked')) {
+        $(".container_donor_information").hide();
+      }else{
+        $(".container_donor_information").show()
+      }
+    });
+  });
   $(document).ready(function (){
     $('#lnpw_tipping_button_text_color, #lnpw_tipping_background, #lnpw_tipping_button_color').iris({
       
