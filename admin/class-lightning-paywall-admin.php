@@ -157,6 +157,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_button_text', array('type' => 'string', 'default' => 'Tip', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_general_settings', 'lnpw_tipping_button_text_color', array('type' => 'string', 'default' => '#FFFFFF', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_general_settings', 'lnpw_tipping_banner', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_image')));

@@ -7,6 +7,7 @@ $used_dimension      = get_option('lnpw_tipping_dimension');
 $title = get_option('lnpw_tipping_title');
 $description = get_option('lnpw_tipping_description');
 $btn_text = get_option('lnpw_tipping_button_text');
+$btn_text_color = get_option('lnpw_tipping_button_text_color');
 $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
 $banner = get_option('lnpw_tipping_banner');
@@ -54,6 +55,15 @@ $banner = get_option('lnpw_tipping_banner');
             </div>
             <div class="col-80">
                 <textarea id="lnpw_tipping_button_text" name="lnpw_tipping_button_text"><?php echo $btn_text; ?></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_button_text_color">Button text color</label>
+            </div>
+            <div class="col-80">
+                <input id="lnpw_tipping_button_text_color" class="lnpw_tipping_button_text_color" name="lnpw_tipping_button_text_color" type="text" value=<?php echo $btn_text_color; ?> />
+
             </div>
         </div>
         <div class="row">
