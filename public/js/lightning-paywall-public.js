@@ -73,9 +73,7 @@
           data: {
             action: "lnpw_donate",
             currency: $("#lnpw_tipping_currency").val(),
-            default_currency: $("#lnpw_tipping_default_currency").val(),
-            amount: $("#lnpw_tipping_custom_amount").val(),
-            default_amount: $("#lnpw_tipping_default_amount").val(),
+            amount: $("#lnpw_tipping_amount").val(),
           },
           success: function (response) {
             $(".lnpw_pay__loading p.loading").removeClass("spinner");

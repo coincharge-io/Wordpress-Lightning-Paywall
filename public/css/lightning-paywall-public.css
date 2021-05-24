@@ -91,12 +91,27 @@ a.lnpw_pay__download{
 }
 .lnpw_donation_container{
   display: flex;
-  justify-content: center;
   background-color: #E6E6E6;
 }
 
 
-.lnpw_donation_amount_container{
+.lnpw_donor_information{
   display: flex;
   flex-direction: column;
+  width: 50%;
 }
+
+#tipping_form{
+  margin: 20px 0;
+}
+
+#lnpw_tipping_currency, 
+#lnpw_tipping_amount{
+  height: 40px;
+}
+
+#lnpw_tipping_currency{
+  margin-right: -4px;
+  width: 3.5em;
+}
+

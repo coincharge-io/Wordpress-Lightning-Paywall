@@ -48,6 +48,13 @@ class Lightning_Paywall_Admin
 		'EUR',
 	];
 
+	const TIPPING_CURRENCIES = [
+		'SATS',
+		'BTC',
+		'USD',
+		'EUR',
+	];
+
 	const BTC_FORMAT = [
 		'SATS',
 		'BTC',

@@ -779,13 +779,8 @@ class Lightning_Paywall_Public
 	 */
 	public function render_shortcode_tipping()
 	{
-		/*$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
-		$banner = get_option('lnpw_tipping_banner');
-		$btn_text = get_option('lnpw_tipping_button_text', 'Tip');
-		$btn_color = get_option('lnpw_tipping_button_color');
-		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
-		$background_color = get_option('lnpw_tipping_background');*/
-		$supported_currencies = Lightning_Paywall_Admin::CURRENCIES;
+
+		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$used_currency  = get_option('lnpw_tipping_currency');
 		$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
 		$title = get_option('lnpw_tipping_title');
@@ -802,7 +797,6 @@ class Lightning_Paywall_Public
 		$email = get_option('lnpw_tipping_collect_email');
 		$address = get_option('lnpw_tipping_collect_address');
 		$message = get_option('lnpw_tipping_collect_message');
-		$style = "background: {$btn_color}, color: {$btn_text_color}";
 		ob_start();
 	?>
 		<style>
@@ -816,13 +810,28 @@ class Lightning_Paywall_Public
 			}
 		</style>
 		<div class="lnpw_tipping_container">
+			<?php if ($banner) : ?>
+				<div>
+					<img width=<?php echo $dimension[0]; ?> height=<?php echo $dimension[1]; ?> src=<?php echo $banner; ?> />
+				</div>
+			<?php endif; ?>
 			<div class="lnpw_tipping_info">
 				<h2><?php echo esc_html($title); ?></h2>
 				<p><?php echo esc_html($description); ?></p>
-				<img width=<?php echo $dimension[0]; ?> height=<?php echo $dimension[1]; ?> src=<?php echo $banner; ?> />
-			</div>
-			<div>
-				<div>
+				<div id="tipping_form">
+					<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
+						<option disabled value="">Select currency</option>
+						<?php foreach ($supported_currencies as $currency) : ?>
+							<option <?php echo $used_currency === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+								<?php echo $currency; ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+					<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="Enter amount">
+				</div>
+
+				<h4>Personal info</h4>
+				<div class="lnpw_donor_information">
 					<?php if ($collect === 'true') : ?>
 						<?php if ($name === 'true') : ?>
 							<label for="lnpw_tipping_donor_name">Full name</label>
@@ -846,23 +855,8 @@ class Lightning_Paywall_Public
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>
-				<div id="tipping_form">
-					<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
-						<option disabled value="">Select currency</option>
-						<?php foreach ($supported_currencies as $currency) : ?>
-							<option value="<?php echo $currency; ?>">
-								<?php echo $currency; ?>
-							</option>
-						<?php endforeach; ?>
-					</select>
-					<div class="lnpw_tipping__container">
-						<p>Select amount:</p>
 
-						<label for="lnpw_tipping_custom_amount">Enter amount:</label>
-						<input type="number" id="lnpw_tipping_custom_amount" name="lnpw_tipping_custom_amount">
-
-					</div>
-
+				<div>
 					<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
 					<div class="lnpw_pay__loading">
 						<p class="loading"></p>

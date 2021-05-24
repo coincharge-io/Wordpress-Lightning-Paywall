@@ -1,6 +1,5 @@
 <?php
-$supported_currencies   = Lightning_Paywall_Admin::CURRENCIES;
-array_push($supported_currencies, 'BTC');
+$supported_currencies   = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 $dimensions = ['250x250', '300x250', '240x400'];
 $used_currency  = get_option('lnpw_tipping_currency');
 $used_dimension      = get_option('lnpw_tipping_dimension');
