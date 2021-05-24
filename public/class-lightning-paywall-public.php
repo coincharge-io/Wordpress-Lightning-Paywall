@@ -303,7 +303,7 @@ class Lightning_Paywall_Public
 	public function ajax_donate()
 	{
 
-		if (!empty($_POST['default_amount'])) {
+		/*if (!empty($_POST['default_amount'])) {
 			$amount = sanitize_text_field($_POST['default_amount']);
 			$currency = sanitize_text_field($_POST['default_currency']);
 		}
@@ -311,7 +311,9 @@ class Lightning_Paywall_Public
 		if (!empty($_POST['amount'])) {
 			$amount = sanitize_text_field($_POST['amount']);
 			$currency = sanitize_text_field($_POST['currency']);
-		}
+		}*/
+		$currency = sanitize_text_field($_POST['currency']);
+		$amount = sanitize_text_field($_POST['amount']);
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
 		$data = array(
@@ -775,79 +777,100 @@ class Lightning_Paywall_Public
 	 *
 	 * @return string
 	 */
-	public function render_shortcode_tipping($atts)
+	public function render_shortcode_tipping()
 	{
-
-		$atts = shortcode_atts(array(
-			'title' => 'Donation',
-			'description' => 'No description',
-			'img'	=> '',
-			'val1'	=> '1000',
-			'val2'	=> '2000',
-			'val3'	=> '3000',
-			'curr'	=> 'SATS'
-
-		), $atts);
-		$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
+		/*$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
 		$banner = get_option('lnpw_tipping_banner');
 		$btn_text = get_option('lnpw_tipping_button_text', 'Tip');
 		$btn_color = get_option('lnpw_tipping_button_color');
 		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
-		$background_color = get_option('lnpw_tipping_background');
+		$background_color = get_option('lnpw_tipping_background');*/
 		$supported_currencies = Lightning_Paywall_Admin::CURRENCIES;
+		$used_currency  = get_option('lnpw_tipping_currency');
+		$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
+		$title = get_option('lnpw_tipping_title');
+		$description = get_option('lnpw_tipping_description');
+		$btn_text = get_option('lnpw_tipping_button_text', 'Tip');
+		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
+		$btn_color = get_option('lnpw_tipping_button_color');
+		$background_color = get_option('lnpw_tipping_background');
+		$banner = get_option('lnpw_tipping_banner');
+		$collect = get_option('lnpw_tipping_collect');
+		$redirect = get_option('lnpw_tipping_redirect');
+		$name = get_option('lnpw_tipping_collect_name');
+		$phone = get_option('lnpw_tipping_collect_phone');
+		$email = get_option('lnpw_tipping_collect_email');
+		$address = get_option('lnpw_tipping_collect_address');
+		$message = get_option('lnpw_tipping_collect_message');
 		$style = "background: {$btn_color}, color: {$btn_text_color}";
-
 		ob_start();
 	?>
 		<style>
-			.lnpw_donation_container {
+			.lnpw_tipping_container {
 				background-color: <?php echo $background_color; ?>
 			}
 
-			#lnpw_donation__button {
+			#lnpw_tipping__button {
 				color: <?php echo $btn_text_color; ?>;
 				background: <?php echo $btn_color; ?>;
 			}
 		</style>
-		<div class="lnpw_donation_container">
-			<div class="lnpw_donation_info">
-				<h2><?php echo esc_html($atts['title']); ?></h2>
-				<p><?php echo esc_html($atts['description']); ?></p>
-				<img width=<?php echo $dimension[0]; ?> height=<?php echo $dimension[1]; ?> src=<?php echo $banner; ?> </div>
+		<div class="lnpw_tipping_container">
+			<div class="lnpw_tipping_info">
+				<h2><?php echo esc_html($title); ?></h2>
+				<p><?php echo esc_html($description); ?></p>
+				<img width=<?php echo $dimension[0]; ?> height=<?php echo $dimension[1]; ?> src=<?php echo $banner; ?> />
+			</div>
+			<div>
 				<div>
-					<div id="donation_form">
-						<select required name="lnpw_donation_currency" id="lnpw_donation_currency">
-							<option disabled value="">Select currency</option>
-							<?php foreach ($supported_currencies as $currency) : ?>
-								<option value="<?php echo $currency; ?>">
-									<?php echo $currency; ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-						<div class="lnpw_donation__container">
-							<p>Select amount:</p>
-							<input type="hidden" id="lnpw_donation_default_currency" name="lnpw_donation_default_currency" value="<?php echo esc_html($atts['curr']); ?>">
-							<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val1']) . ' ' . esc_html($atts['curr']); ?></label>
-							<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val1']); ?>">
+					<?php if ($collect === 'true') : ?>
+						<?php if ($name === 'true') : ?>
+							<label for="lnpw_tipping_donor_name">Full name</label>
+							<input type="text" id="lnpw_tipping_donor_name" name="lnpw_tipping_donor_name">
+						<?php endif; ?>
+						<?php if ($email === 'true') : ?>
+							<label for="lnpw_tipping_donor_email">Email</label>
+							<input type="text" id="lnpw_tipping_donor_email" name="lnpw_tipping_donor_email">
+						<?php endif; ?>
+						<?php if ($address === 'true') : ?>
+							<label for="lnpw_tipping_donor_address">Address</label>
+							<input type="text" id="lnpw_tipping_donor_address" name="lnpw_tipping_donor_address">
+						<?php endif; ?>
+						<?php if ($phone === 'true') : ?>
+							<label for="lnpw_tipping_donor_phone">Phone</label>
+							<input type="text" id="lnpw_tipping_donor_phone" name="lnpw_tipping_donor_phone">
+						<?php endif; ?>
+						<?php if ($message === 'true') : ?>
+							<label for="lnpw_tipping_donor_message">Message</label>
+							<input type="text" id="lnpw_tipping_donor_message" name="lnpw_tipping_donor_message">
+						<?php endif; ?>
+					<?php endif; ?>
+				</div>
+				<div id="tipping_form">
+					<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
+						<option disabled value="">Select currency</option>
+						<?php foreach ($supported_currencies as $currency) : ?>
+							<option value="<?php echo $currency; ?>">
+								<?php echo $currency; ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+					<div class="lnpw_tipping__container">
+						<p>Select amount:</p>
 
-							<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val2']) . ' ' . esc_html($atts['curr']);; ?> </label>
-							<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val2']); ?>">
-							<label for="lnpw_donation_default_amount"><?php echo esc_html($atts['val3']) . ' ' . esc_html($atts['curr']);; ?></label>
-							<input type="radio" id="lnpw_donation_default_amount" name="lnpw_donation_default_amount" value="<?php echo esc_html($atts['val3']); ?>">
+						<label for="lnpw_tipping_custom_amount">Enter amount:</label>
+						<input type="number" id="lnpw_tipping_custom_amount" name="lnpw_tipping_custom_amount">
 
-							<label for="lnpw_donation_custom_amount">Enter amount:</label>
-							<input type="number" id="lnpw_donation_custom_amount" name="lnpw_donation_custom_amount">
+					</div>
 
-						</div>
-
-						<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_donation__button"><?php echo $btn_text; ?></button>
-						<div class="lnpw_pay__loading">
-							<p class="loading"></p>
-						</div>
+					<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
+					<div class="lnpw_pay__loading">
+						<p class="loading"></p>
 					</div>
 				</div>
 			</div>
-		<?php
+		</div>
+	<?php
 
 		return ob_get_clean();
 	}
@@ -871,34 +894,34 @@ class Lightning_Paywall_Public
 		$myposts = get_posts($args);
 		ob_start();
 
-		?>
-			<div class="lnpw_store">
-				<?php foreach ($myposts as $post) : setup_postdata($post); ?>
-					<?php
-					$gutenberg = $this->extract_gutenberg_preview($post);
-					$elementor = $this->extract_elementor_preview($post);
-					$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
-					$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
-					$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode);
+	?>
+		<div class="lnpw_store">
+			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
+				<?php
+				$gutenberg = $this->extract_gutenberg_preview($post);
+				$elementor = $this->extract_elementor_preview($post);
+				$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
+				$shortcode = $this->extract_shortcode_preview($post, 'lnpw_start_video');
+				$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode);
 
-					if (null !== $integrated) : ?>
-						<div class="lnpw_store_video">
-							<div class="lnpw_store_video_preview">
-								<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
-							</div>
-							<div class="lnpw_store_video_information">
-								<a href="<?php the_permalink($post); ?>">
-									<h5><?php echo esc_html($integrated['title']); ?></h5>
-
-									<h6><?php echo esc_html($integrated['description']); ?></h6>
-								</a>
-							</div>
+				if (null !== $integrated) : ?>
+					<div class="lnpw_store_video">
+						<div class="lnpw_store_video_preview">
+							<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
 						</div>
-					<?php endif; ?>
-				<?php endforeach;
-				wp_reset_postdata(); ?>
-			</div>
-	<?php
+						<div class="lnpw_store_video_information">
+							<a href="<?php the_permalink($post); ?>">
+								<h5><?php echo esc_html($integrated['title']); ?></h5>
+
+								<h6><?php echo esc_html($integrated['description']); ?></h6>
+							</a>
+						</div>
+					</div>
+				<?php endif; ?>
+			<?php endforeach;
+			wp_reset_postdata(); ?>
+		</div>
+<?php
 
 		return ob_get_clean();
 	}

@@ -128,7 +128,7 @@ class Lightning_Paywall_Admin
 		add_menu_page('Lightning Paywall', 'Lightning Paywall', 'manage_options', 'lnpw_general_settings', '', 'dashicons-tickets');
 		add_submenu_page('lnpw_general_settings', 'Settings', 'Settings', 'manage_options', 'lnpw_general_settings', array($this, 'render_general_settings_page'));
 		add_submenu_page('lnpw_general_settings', 'Invoices', 'Invoices', 'manage_options', 'lnpw_invoices', array($this, 'render_invoices_page'));
-		add_submenu_page('lnpw_general_settings', 'Tipping', 'Tipping', 'manage_options', 'lnpw_tipping', array($this, 'render_tipping_page'));
+		add_submenu_page('lnpw_general_settings', 'Tipping', 'Tipping', 'manage_options', 'lnpw_tipping-settings', array($this, 'render_tipping_page'));
 	}
 
 	/**
@@ -151,24 +151,24 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_view', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 
-		register_setting('lnpw_general_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_dimension')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => ''));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_dimension')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => ''));
 
-		register_setting('lnpw_general_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_collect_name', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_collect_email', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_collect_address', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_collect_phone', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_collect_message', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_email', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message', array('type' => 'string', 'default' => 'false'));
 
-		register_setting('lnpw_general_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_button_text', array('type' => 'string', 'default' => 'Tip', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_button_text_color', array('type' => 'string', 'default' => '#FFFFFF', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_general_settings', 'lnpw_tipping_banner', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_image')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text', array('type' => 'string', 'default' => 'Tip', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text_color', array('type' => 'string', 'default' => '#FFFFFF', 'sanitize_callback' => array($this, 'sanitize_color')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_banner', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_image')));
 	}
 
 	public function sanitize_btcpay_server_url($value)
@@ -394,7 +394,7 @@ class Lightning_Paywall_Admin
 	 */
 	public function render_tipping_page()
 	{
-		include 'partials/page-tipping.php';
+		include 'partials/page-tipping-settings.php';
 	}
 
 	/**

@@ -61,7 +61,7 @@
   $(document).ready(function () {
     var lnpw_invoice_id = null;
 
-    $("#lnpw_donation__button").click(function () {
+    $("#lnpw_tipping__button").click(function () {
       $(".lnpw_pay__loading p.loading").addClass("spinner");
       if (lnpw_invoice_id) {
         lnpwShowDonationInvoice(lnpw_invoice_id);
@@ -72,10 +72,10 @@
           method: "POST",
           data: {
             action: "lnpw_donate",
-            currency: $("#lnpw_donation_currency").val(),
-            default_currency: $("#lnpw_donation_default_currency").val(),
-            amount: $("#lnpw_donation_custom_amount").val(),
-            default_amount: $("#lnpw_donation_default_amount").val(),
+            currency: $("#lnpw_tipping_currency").val(),
+            default_currency: $("#lnpw_tipping_default_currency").val(),
+            amount: $("#lnpw_tipping_custom_amount").val(),
+            default_amount: $("#lnpw_tipping_default_amount").val(),
           },
           success: function (response) {
             $(".lnpw_pay__loading p.loading").removeClass("spinner");

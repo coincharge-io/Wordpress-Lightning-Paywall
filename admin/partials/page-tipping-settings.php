@@ -28,7 +28,7 @@ $message = get_option('lnpw_tipping_collect_message');
 <div>
     <h1>Tipping</h1>
     <form method="POST" action="options.php">
-        <?php settings_fields('lnpw_general_settings'); ?>
+        <?php settings_fields('lnpw_tipping_settings'); ?>
         <div class="row">
             <div class="col-20">
                 <label for="lnpw_tipping_dimension">Dimension</label>
