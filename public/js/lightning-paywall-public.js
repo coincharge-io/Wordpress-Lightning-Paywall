@@ -96,4 +96,18 @@
 
     btcpay.showInvoice(invoice_id);
   }
+  $(document).ready(function () {
+    $("#lnpw_tipping_currency").change(function () {
+      var stepValue =
+        $(this).val() === "BTC"
+          ? "0.00000001"
+          : $(this).val() === "SATS"
+          ? "1"
+          : "0.50";
+      $("#lnpw_tipping_amount").attr({
+        step: stepValue,
+        value: parseInt($("#lnpw_default_price").val()),
+      });
+    });
+  });
 })(jQuery);

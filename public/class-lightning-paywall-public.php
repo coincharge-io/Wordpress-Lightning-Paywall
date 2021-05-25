@@ -827,7 +827,7 @@ class Lightning_Paywall_Public
 							</option>
 						<?php endforeach; ?>
 					</select>
-					<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="Enter amount">
+					<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00">
 				</div>
 
 				<h4>Personal info</h4>
