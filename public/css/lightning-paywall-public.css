@@ -89,11 +89,13 @@ a.lnpw_pay__download{
   line-height: 1.8;
   font-weight: bold;
 }
-.lnpw_donation_container{
+.lnpw_tipping_container{
   display: flex;
-  background-color: #E6E6E6;
 }
 
+#tipping_form fieldset:not(:first-of-type) {
+	display: none;
+}
 
 .lnpw_donor_information{
   display: flex;
