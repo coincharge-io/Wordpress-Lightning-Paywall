@@ -830,8 +830,12 @@ class Lightning_Paywall_Public
 			}
 		</style>
 		<div>
-			<h2><?php echo esc_html($title); ?></h2>
-			<p><?php echo esc_html($description); ?></p>
+			<?php if ($title) : ?>
+				<h2><?php echo esc_html($title); ?></h2>
+			<?php endif; ?>
+			<?php if ($description) : ?>
+				<p><?php echo esc_html($description); ?></p>
+			<?php endif; ?>
 			<?php if ($banner) : ?>
 				<div>
 					<img alt="Tipping banner" src=<?php echo $banner; ?> />

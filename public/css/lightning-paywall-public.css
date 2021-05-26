@@ -98,9 +98,8 @@ a.lnpw_pay__download{
 }
 
 .lnpw_donor_information{
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 #tipping_form{
