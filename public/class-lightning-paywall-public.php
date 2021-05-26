@@ -59,10 +59,11 @@ class Lightning_Paywall_Public
 	 */
 	public function enqueue_scripts()
 	{
+		if (!is_admin()) {
+			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/lightning-paywall-public.js', array('jquery'), null, false);
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/lightning-paywall-public.js', array('jquery'), null, false);
-
-		wp_enqueue_script('btcpay', get_option('lnpw_btcpay_server_url', '') . '/modal/btcpay.js', array(), null, true);
+			wp_enqueue_script('btcpay', get_option('lnpw_btcpay_server_url', '') . '/modal/btcpay.js', array(), null, true);
+		}
 	}
 
 	private function is_paid_content($post_id = null)
@@ -314,6 +315,12 @@ class Lightning_Paywall_Public
 		}*/
 		$currency = sanitize_text_field($_POST['currency']);
 		$amount = sanitize_text_field($_POST['amount']);
+
+		if (!empty($_POST['predefined_amount'])) {
+			$extract = explode(' ', sanitize_text_field($_POST['predefined_amount']));
+			$amount = $extract[0];
+			$currency = $extract[1];
+		}
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
 		$data = array(
@@ -797,7 +804,18 @@ class Lightning_Paywall_Public
 		$email = get_option('lnpw_tipping_collect_email');
 		$address = get_option('lnpw_tipping_collect_address');
 		$message = get_option('lnpw_tipping_collect_message');
+		$default_price1 = get_option('lnpw_default_price1', 1000);
+		$default_currency1 = get_option('lnpw_default_currency1', 'SATS');
+		$default_price2 = get_option('lnpw_default_price2', 2000);
+		$default_currency2 = get_option('lnpw_default_currency2', 'SATS');
+		$default_price3 = get_option('lnpw_default_price3', 3000);
+		$default_currency3 = get_option('lnpw_default_currency3', 'SATS');
+		$predefined1 = "{$default_price1} {$default_currency1}";
+		$predefined2 = "{$default_price2} {$default_currency2}";
+		$predefined3 = "{$default_price3} {$default_currency3}";
+
 		ob_start();
+
 	?>
 		<style>
 			.lnpw_tipping_container {
@@ -824,6 +842,15 @@ class Lightning_Paywall_Public
 
 					<div id="tipping_form">
 						<fieldset>
+							<div>
+								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
+								<input type="radio" class="lnpw_tipping_default_amount" id="predefined1" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined1); ?>">
+
+								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined2); ?> </label>
+								<input type="radio" id="predefined2" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined2); ?>">
+								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined3); ?></label>
+								<input type="radio" id="predefined3" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined3); ?>">
+							</div>
 							<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
 								<option disabled value="">Select currency</option>
 								<?php foreach ($supported_currencies as $currency) : ?>
@@ -834,12 +861,20 @@ class Lightning_Paywall_Public
 							</select>
 							<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00">
 
-							<input type="button" name="next" class="next-form" value="Next" />
+							<?php if ($collect === 'true') : ?>
+								<input type="button" name="next" class="next-form" value="Next" />
+							<?php else : ?>
+								<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
+								<div class="lnpw_pay__loading">
+									<p class="loading"></p>
+								</div>
+							<?php endif; ?>
+
 						</fieldset>
-						<fieldset>
-							<h4>Personal info</h4>
-							<div class="lnpw_donor_information">
-								<?php if ($collect === 'true') : ?>
+						<?php if ($collect === 'true') : ?>
+							<fieldset>
+								<h4>Personal info</h4>
+								<div class="lnpw_donor_information">
 									<?php if ($name === 'true') : ?>
 										<label for="lnpw_tipping_donor_name">Full name</label>
 										<input type="text" id="lnpw_tipping_donor_name" name="lnpw_tipping_donor_name">
@@ -860,19 +895,15 @@ class Lightning_Paywall_Public
 										<label for="lnpw_tipping_donor_message">Message</label>
 										<input type="text" id="lnpw_tipping_donor_message" name="lnpw_tipping_donor_message">
 									<?php endif; ?>
-								<?php endif; ?>
-							</div>
-							<input type="button" name="previous" class="previous-form" value="Previous" />
-							<input type="button" name="next" class="next-form" value="Next" />
-						</fieldset>
-						<fieldset>
-							<input type="button" name="previous" class="previous-form" value="Previous" />
 
-							<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
-							<div class="lnpw_pay__loading">
-								<p class="loading"></p>
-							</div>
-						</fieldset>
+								</div>
+								<input type="button" name="previous" class="previous-form" value="Previous" />
+								<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
+								<div class="lnpw_pay__loading">
+									<p class="loading"></p>
+								</div>
+							</fieldset>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

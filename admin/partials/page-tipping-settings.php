@@ -17,6 +17,12 @@ $phone = get_option('lnpw_tipping_collect_phone');
 $email = get_option('lnpw_tipping_collect_email');
 $address = get_option('lnpw_tipping_collect_address');
 $message = get_option('lnpw_tipping_collect_message');
+$default_price1 = get_option('lnpw_default_price1');
+$default_currency1 = get_option('lnpw_default_currency1');
+$default_price2 = get_option('lnpw_default_price2');
+$default_currency2 = get_option('lnpw_default_currency2');
+$default_price3 = get_option('lnpw_default_price3');
+$default_currency3 = get_option('lnpw_default_currency3');
 ?>
 
 <style>
@@ -73,6 +79,57 @@ $message = get_option('lnpw_tipping_collect_message');
             </div>
             <div class="col-80">
                 <textarea id="lnpw_tipping_button_text" name="lnpw_tipping_button_text"><?php echo $btn_text; ?></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_default_price1">Default price1</label>
+            </div>
+            <div class="col-80">
+                <input required type="number" min=0 placeholder="Default Price1" step=1 name="lnpw_default_price1" id="lnpw_default_price1" value="<?php echo $default_price1 ?>">
+
+                <select required name="lnpw_default_currency1" id="lnpw_default_currency1">
+                    <option disabled value="">Select currency</option>
+                    <?php foreach ($supported_currencies as $currency) : ?>
+                        <option <?php echo $default_currency1 === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+                            <?php echo $currency; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_default_price2">Default price2</label>
+            </div>
+            <div class="col-80">
+                <input required type="number" min=0 placeholder="Default Price2" step=1 name="lnpw_default_price2" id="lnpw_default_price2" value="<?php echo $default_price2 ?>">
+
+                <select required name="lnpw_default_currency2" id="lnpw_default_currency2">
+                    <option disabled value="">Select currency</option>
+                    <?php foreach ($supported_currencies as $currency) : ?>
+                        <option <?php echo $default_currency2 === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+                            <?php echo $currency; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_default_price3">Default price3</label>
+            </div>
+            <div class="col-80">
+                <input required type="number" min=0 placeholder="Default Price3" step=1 name="lnpw_default_price3" id="lnpw_default_price3" value="<?php echo $default_price3 ?>">
+
+                <select required name="lnpw_default_currency3" id="lnpw_default_currency3">
+                    <option disabled value="">Select currency</option>
+                    <?php foreach ($supported_currencies as $currency) : ?>
+                        <option <?php echo $default_currency3 === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+                            <?php echo $currency; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
         </div>
         <div class="row">

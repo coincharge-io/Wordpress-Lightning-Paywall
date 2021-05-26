@@ -74,6 +74,7 @@
             action: "lnpw_donate",
             currency: $("#lnpw_tipping_currency").val(),
             amount: $("#lnpw_tipping_amount").val(),
+            predefined_amount: $("input[name=lnpw_tipping_default_amount]:checked").val(),
           },
           success: function (response) {
             $(".lnpw_pay__loading p.loading").removeClass("spinner");
@@ -83,6 +84,9 @@
             } else {
                console.error(response);
             }
+          },
+          error: function (error){
+            console.log(error)
         }
       })
     })
