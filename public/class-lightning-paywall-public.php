@@ -839,15 +839,17 @@ class Lightning_Paywall_Public
 			<?php endif; ?>
 			<div class="lnpw_tipping_container">
 				<div class="lnpw_tipping_info">
-
 					<div id="tipping_form">
 						<fieldset>
 							<div>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
 								<input type="radio" class="lnpw_tipping_default_amount" id="predefined1" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined1); ?>">
-
+							</div>
+							<div>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined2); ?> </label>
 								<input type="radio" id="predefined2" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined2); ?>">
+							</div>
+							<div>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined3); ?></label>
 								<input type="radio" id="predefined3" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined3); ?>">
 							</div>
@@ -864,7 +866,7 @@ class Lightning_Paywall_Public
 							<?php if ($collect === 'true') : ?>
 								<input type="button" name="next" class="next-form" value="Next" />
 							<?php else : ?>
-								<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
+								<button type="submit" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
 								<div class="lnpw_pay__loading">
 									<p class="loading"></p>
 								</div>
@@ -898,7 +900,7 @@ class Lightning_Paywall_Public
 
 								</div>
 								<input type="button" name="previous" class="previous-form" value="Previous" />
-								<button type="submit" data-post_id=" <?php echo  get_the_ID(); ?>" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
+								<button type="submit" id="lnpw_tipping__button"><?php echo $btn_text; ?></button>
 								<div class="lnpw_pay__loading">
 									<p class="loading"></p>
 								</div>

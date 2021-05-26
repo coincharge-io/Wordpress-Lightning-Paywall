@@ -74,7 +74,7 @@
             action: "lnpw_donate",
             currency: $("#lnpw_tipping_currency").val(),
             amount: $("#lnpw_tipping_amount").val(),
-            predefined_amount: $("input[name=lnpw_tipping_default_amount]:checked").val(),
+            predefined_amount: $("input[type=radio][name=lnpw_tipping_default_amount]:checked").val(),
           },
           success: function (response) {
             $(".lnpw_pay__loading p.loading").removeClass("spinner");
@@ -131,4 +131,13 @@ $(document).ready(function(){
     previous_form.hide();
   }); 
 });
+
+$(document).ready(function(){
+    $("input[type=radio][name=lnpw_tipping_default_amount]").change(function () {
+      $("#lnpw_tipping_amount").val('')
+  })
+  $("#lnpw_tipping_amount").click(function () {
+      $("input[type=radio][name=lnpw_tipping_default_amount]").prop('checked', false);
+  })
+  })
 })(jQuery);
