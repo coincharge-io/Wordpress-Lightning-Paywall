@@ -9,7 +9,7 @@ $btn_text = get_option('lnpw_tipping_button_text');
 $btn_text_color = get_option('lnpw_tipping_button_text_color');
 $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
-$banner = get_option('lnpw_tipping_banner');
+$image = get_option('lnpw_tipping_image');
 $collect = get_option('lnpw_tipping_collect');
 $redirect = get_option('lnpw_tipping_redirect');
 $name = get_option('lnpw_tipping_collect_name');
@@ -176,11 +176,11 @@ $default_currency3 = get_option('lnpw_default_currency3');
         </div>
         <div class="row">
             <div class="col-20">
-                <label for="lnpw_tipping_banner">Banner</label>
+                <label for="lnpw_tipping_image">Image</label>
             </div>
             <div class="col-80">
-                <input type="text" id="lnpw_tipping_banner" class="lnpw_tipping_banner" name="lnpw_tipping_banner" value=<?php echo $banner; ?> />
-                <button id="lnpw_tipping_button_banner" class="lnpw_tipping_button_banner" name="lnpw_tipping_button_banner">Upload</button>
+                <input type="text" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image; ?> />
+                <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image">Upload</button>
 
             </div>
         </div>

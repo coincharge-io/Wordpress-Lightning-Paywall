@@ -185,12 +185,12 @@
 $(document).ready(function($){
 
             var custom_uploader
-              , click_elem = $('.lnpw_tipping_button_banner')
-              , target = $('#lnpw_tipping_banner')
+              , click_elem = $('#lnpw_tipping_button_image')
+              , target = $('#lnpw_tipping_image')
 
             click_elem.click(function(e) {
                 e.preventDefault();
-                
+
                 if (custom_uploader) {
                     custom_uploader.open();
                     return;

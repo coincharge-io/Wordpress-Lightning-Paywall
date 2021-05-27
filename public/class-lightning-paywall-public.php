@@ -304,15 +304,6 @@ class Lightning_Paywall_Public
 	public function ajax_donate()
 	{
 
-		/*if (!empty($_POST['default_amount'])) {
-			$amount = sanitize_text_field($_POST['default_amount']);
-			$currency = sanitize_text_field($_POST['default_currency']);
-		}
-
-		if (!empty($_POST['amount'])) {
-			$amount = sanitize_text_field($_POST['amount']);
-			$currency = sanitize_text_field($_POST['currency']);
-		}*/
 		$currency = sanitize_text_field($_POST['currency']);
 		$amount = sanitize_text_field($_POST['amount']);
 
@@ -321,6 +312,7 @@ class Lightning_Paywall_Public
 			$amount = $extract[0];
 			$currency = $extract[1];
 		}
+
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
 		$data = array(
@@ -796,7 +788,7 @@ class Lightning_Paywall_Public
 		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
 		$btn_color = get_option('lnpw_tipping_button_color');
 		$background_color = get_option('lnpw_tipping_background');
-		$banner = get_option('lnpw_tipping_banner');
+		$image = get_option('lnpw_tipping_image');
 		$collect = get_option('lnpw_tipping_collect');
 		$redirect = get_option('lnpw_tipping_redirect');
 		$name = get_option('lnpw_tipping_collect_name');
@@ -836,14 +828,14 @@ class Lightning_Paywall_Public
 			<?php if ($description) : ?>
 				<p><?php echo esc_html($description); ?></p>
 			<?php endif; ?>
-			<?php if ($banner) : ?>
+			<?php if ($image) : ?>
 				<div>
-					<img alt="Tipping banner" src=<?php echo $banner; ?> />
+					<img alt="Tipping banner" src=<?php echo $image; ?> />
 				</div>
 			<?php endif; ?>
 			<div class="lnpw_tipping_container">
 				<div class="lnpw_tipping_info">
-					<div id="tipping_form">
+					<form method="POST" action="" id="tipping_form">
 						<fieldset>
 							<div>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
@@ -910,7 +902,7 @@ class Lightning_Paywall_Public
 								</div>
 							</fieldset>
 						<?php endif; ?>
-					</div>
+					</form>
 				</div>
 			</div>
 		<?php

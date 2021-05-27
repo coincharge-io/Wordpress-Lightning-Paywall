@@ -61,7 +61,9 @@
   $(document).ready(function () {
     var lnpw_invoice_id = null;
 
-    $("#lnpw_tipping__button").click(function () {
+    //$("#lnpw_tipping__button").click(function () {
+    $("#tipping_form").submit(function (e) {
+      e.preventDefault();
       $(".lnpw_pay__loading p.loading").addClass("spinner");
       if (lnpw_invoice_id) {
         lnpwShowDonationInvoice(lnpw_invoice_id);
@@ -115,14 +117,24 @@
     });
   });
 
-$(document).ready(function(){  
+$(document).ready(function(){ 
+  
   var form_count = 1, previous_form, next_form, total_forms;
   total_forms = $("fieldset").length;  
   $(".next-form").click(function(){
-    previous_form = $(this).parent();
-    next_form = $(this).parent().next();
-    next_form.show();
-    previous_form.hide();
+    var predefinedAmount = $("input[type=radio][name=lnpw_tipping_default_amount]:checked").val();
+    var customAmount = $("#lnpw_tipping_amount").val(); 
+    var amountIsNotSet = typeof predefinedAmount === 'undefined' && customAmount.length === 0;
+    if(amountIsNotSet){
+      $(".error").remove();
+      $("#lnpw_tipping_amount").after('<span class="error">You need to specify amount</span>');
+    }else{
+      $(".error").remove();
+      previous_form = $(this).parent();
+      next_form = $(this).parent().next();
+      next_form.show();
+      previous_form.hide();
+    }
   });  
   $(".previous-form").click(function(){
     previous_form = $(this).parent();
@@ -140,4 +152,15 @@ $(document).ready(function(){
       $("input[type=radio][name=lnpw_tipping_default_amount]").prop('checked', false);
   })
   })
+
+  function validateAmount(predefinedAmount, customAmount){
+    /*var predefinedAmount = $("input[type=radio][name=lnpw_tipping_default_amount]:checked").val();
+    var customAmount = $("#lnpw_tipping_amount").val();*/
+    $(".error").remove();
+      if(typeof predefinedAmount === 'undefined' && customAmount.length === 0){
+        $("#lnpw_tipping_amount").after('<span class="error">This field is required</span>');
+      }
+    
+  }
+  
 })(jQuery);

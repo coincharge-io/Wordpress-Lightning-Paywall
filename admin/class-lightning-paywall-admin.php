@@ -90,14 +90,11 @@ class Lightning_Paywall_Admin
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/lightning-paywall-admin.js', array('jquery'), $this->version, false);
 
-		wp_enqueue_style('wp-color-picker');
-		wp_enqueue_script('iris', admin_url('js/iris.min.js'), array('jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch'), false, 1);
-		wp_enqueue_script('lightning-paywall-admin', plugin_dir_url(__FILE__) . 'js/lightning-paywall-admin.js', array('jquery'), '', true);
-
-		if (empty($_GET['page']) || "lnpw_tipping" !== $_GET['page']) {
+		if (empty($_GET['page']) || "lnpw_tipping-settings" !== $_GET['page']) {
 			return;
 		}
-
+		wp_enqueue_style('wp-color-picker');
+		wp_enqueue_script('iris', admin_url('js/iris.min.js'), array('jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch'), false, 1);
 		wp_enqueue_media();
 	}
 
@@ -175,7 +172,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text_color', array('type' => 'string', 'default' => '#FFFFFF', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_banner', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_image')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_image')));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency1', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price1', array('type' => 'number', 'default' => 1000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency2', array('type' => 'string', 'default' => 'SATS'));
