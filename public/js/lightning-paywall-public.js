@@ -122,18 +122,13 @@ $(document).ready(function(){
   var form_count = 1, previous_form, next_form, total_forms;
   total_forms = $("fieldset").length;  
   $(".next-form").click(function(){
-    var predefinedAmount = $("input[type=radio][name=lnpw_tipping_default_amount]:checked").val();
-    var customAmount = $("#lnpw_tipping_amount").val(); 
-    var amountIsNotSet = typeof predefinedAmount === 'undefined' && customAmount.length === 0;
-    if(amountIsNotSet){
-      $(".error").remove();
-      $("#lnpw_tipping_amount").after('<span class="error">You need to specify amount</span>');
-    }else{
-      $(".error").remove();
+    if ($("#lnpw_tipping_amount")[0].checkValidity()){
       previous_form = $(this).parent();
       next_form = $(this).parent().next();
       next_form.show();
       previous_form.hide();
+    }else{
+      $("#lnpw_tipping_amount")[0].reportValidity()
     }
   });  
   $(".previous-form").click(function(){
@@ -146,21 +141,17 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("input[type=radio][name=lnpw_tipping_default_amount]").change(function () {
-      $("#lnpw_tipping_amount").val('')
+      $("input[type=radio][name=lnpw_tipping_default_amount]").attr('required', true);
+      $("#lnpw_tipping_amount").removeAttr('required');
+      $("#lnpw_tipping_amount").val('');
   })
   $("#lnpw_tipping_amount").click(function () {
-      $("input[type=radio][name=lnpw_tipping_default_amount]").prop('checked', false);
+    $("#lnpw_tipping_amount").attr('required', true);
+    $("input[type=radio][name=lnpw_tipping_default_amount]").removeAttr('required');
+    $("input[type=radio][name=lnpw_tipping_default_amount]").prop('checked', false);
+      
   })
   })
 
-  function validateAmount(predefinedAmount, customAmount){
-    /*var predefinedAmount = $("input[type=radio][name=lnpw_tipping_default_amount]:checked").val();
-    var customAmount = $("#lnpw_tipping_amount").val();*/
-    $(".error").remove();
-      if(typeof predefinedAmount === 'undefined' && customAmount.length === 0){
-        $("#lnpw_tipping_amount").after('<span class="error">This field is required</span>');
-      }
-    
-  }
   
 })(jQuery);

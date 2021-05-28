@@ -796,6 +796,11 @@ class Lightning_Paywall_Public
 		$email = get_option('lnpw_tipping_collect_email');
 		$address = get_option('lnpw_tipping_collect_address');
 		$message = get_option('lnpw_tipping_collect_message');
+		$mandatory_name = get_option('lnpw_tipping_collect_name_mandatory');
+		$mandatory_phone = get_option('lnpw_tipping_collect_phone_mandatory');
+		$mandatory_email = get_option('lnpw_tipping_collect_email_mandatory');
+		$mandatory_address = get_option('lnpw_tipping_collect_address_mandatory');
+		$mandatory_message = get_option('lnpw_tipping_collect_message_mandatory');
 		$default_price1 = get_option('lnpw_default_price1', 1000);
 		$default_currency1 = get_option('lnpw_default_currency1', 'SATS');
 		$default_price2 = get_option('lnpw_default_price2', 2000);
@@ -805,7 +810,7 @@ class Lightning_Paywall_Public
 		$predefined1 = "{$default_price1} {$default_currency1}";
 		$predefined2 = "{$default_price2} {$default_currency2}";
 		$predefined3 = "{$default_price3} {$default_currency3}";
-
+		
 		ob_start();
 
 	?>
@@ -857,7 +862,7 @@ class Lightning_Paywall_Public
 									</option>
 								<?php endforeach; ?>
 							</select>
-							<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00">
+							<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required/>
 
 							<?php if ($collect === 'true') : ?>
 								<input type="button" name="next" class="next-form" value="Next" />
@@ -875,23 +880,23 @@ class Lightning_Paywall_Public
 								<div class="lnpw_donor_information">
 									<?php if ($name === 'true') : ?>
 										<label for="lnpw_tipping_donor_name">Full name</label>
-										<input type="text" id="lnpw_tipping_donor_name" name="lnpw_tipping_donor_name">
+										<input type="text" id="lnpw_tipping_donor_name" name="lnpw_tipping_donor_name" <?php echo $mandatory_name==='true' ? 'required' : '';?>/>
 									<?php endif; ?>
 									<?php if ($email === 'true') : ?>
 										<label for="lnpw_tipping_donor_email">Email</label>
-										<input type="text" id="lnpw_tipping_donor_email" name="lnpw_tipping_donor_email">
+										<input type="text" id="lnpw_tipping_donor_email" name="lnpw_tipping_donor_email"<?php echo $mandatory_email==='true' ? 'required' : '';?> />
 									<?php endif; ?>
 									<?php if ($address === 'true') : ?>
 										<label for="lnpw_tipping_donor_address">Address</label>
-										<input type="text" id="lnpw_tipping_donor_address" name="lnpw_tipping_donor_address">
+										<input type="text" id="lnpw_tipping_donor_address" name="lnpw_tipping_donor_address" <?php echo $mandatory_address==='true' ? 'required' : '';?>/>
 									<?php endif; ?>
 									<?php if ($phone === 'true') : ?>
 										<label for="lnpw_tipping_donor_phone">Phone</label>
-										<input type="text" id="lnpw_tipping_donor_phone" name="lnpw_tipping_donor_phone">
+										<input type="text" id="lnpw_tipping_donor_phone" name="lnpw_tipping_donor_phone"<?php echo $mandatory_phone==='true' ? 'required' : '';?> />
 									<?php endif; ?>
 									<?php if ($message === 'true') : ?>
 										<label for="lnpw_tipping_donor_message">Message</label>
-										<input type="text" id="lnpw_tipping_donor_message" name="lnpw_tipping_donor_message">
+										<input type="text" id="lnpw_tipping_donor_message" name="lnpw_tipping_donor_message" <?php echo $mandatory_message==='true' ? 'required' : '';?>/>
 									<?php endif; ?>
 
 								</div>

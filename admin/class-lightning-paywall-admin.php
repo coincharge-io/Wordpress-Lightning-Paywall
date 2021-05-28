@@ -165,6 +165,12 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone', array('type' => 'string', 'default' => 'false'));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message', array('type' => 'string', 'default' => 'false'));
 
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name_mandatory', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_email_mandatory', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address_mandatory', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone_mandatory', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message_mandatory', array('type' => 'string', 'default' => 'false'));
+
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text', array('type' => 'string', 'default' => 'Tip', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
