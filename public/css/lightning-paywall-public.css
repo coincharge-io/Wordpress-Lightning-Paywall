@@ -91,8 +91,11 @@ a.lnpw_pay__download{
 }
 .lnpw_tipping_container{
   display: flex;
+  flex-direction: column;
 }
-
+.header_container{
+  display: flex;
+}
 #tipping_form fieldset:not(:first-of-type) {
 	display: none;
 }

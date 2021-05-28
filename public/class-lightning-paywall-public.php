@@ -826,22 +826,28 @@ class Lightning_Paywall_Public
 				background: <?php echo $btn_color; ?>;
 			}
 		</style>
-		<div>
+			
+			
+	<div class="lnpw_tipping_container">
+		<div class="header_container">
+		<div class="image_container">
+			<?php if ($image) : ?>
+					<img alt="Tipping banner" src=<?php echo $image; ?> />
+			<?php endif; ?>
+			</div>
+			<div class="info_container">
 			<?php if ($title) : ?>
 				<h2><?php echo esc_html($title); ?></h2>
 			<?php endif; ?>
 			<?php if ($description) : ?>
 				<p><?php echo esc_html($description); ?></p>
 			<?php endif; ?>
-			<?php if ($image) : ?>
-				<div>
-					<img alt="Tipping banner" src=<?php echo $image; ?> />
-				</div>
-			<?php endif; ?>
-			<div class="lnpw_tipping_container">
+			</div>
+			</div>
 				<div class="lnpw_tipping_info">
 					<form method="POST" action="" id="tipping_form">
 						<fieldset>
+						<h4>Enter Tipping Amount</h4>
 							<div>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
 								<input type="radio" class="lnpw_tipping_default_amount" id="predefined1" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined1); ?>">
@@ -863,7 +869,6 @@ class Lightning_Paywall_Public
 								<?php endforeach; ?>
 							</select>
 							<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required/>
-
 							<?php if ($collect === 'true') : ?>
 								<input type="button" name="next" class="next-form" value="Next" />
 							<?php else : ?>
@@ -872,7 +877,6 @@ class Lightning_Paywall_Public
 									<p class="loading"></p>
 								</div>
 							<?php endif; ?>
-
 						</fieldset>
 						<?php if ($collect === 'true') : ?>
 							<fieldset>
@@ -909,7 +913,7 @@ class Lightning_Paywall_Public
 						<?php endif; ?>
 					</form>
 				</div>
-			</div>
+		</div>
 		<?php
 
 		return ob_get_clean();
