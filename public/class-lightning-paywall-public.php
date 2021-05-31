@@ -120,8 +120,6 @@ class Lightning_Paywall_Public
 			return $content;
 		}
 
-		//wp_enqueue_script('btcpay', get_option('lnpw_btcpay_server_url', '') . '/modal/btcpay.js', array(), null, true);
-
 		$content_start = substr($content, 0, $start_pos);
 
 		if (($end_pos = strpos($content, '<!-- /lnpw:end_content -->')) === false) {
@@ -301,6 +299,41 @@ class Lightning_Paywall_Public
 
 		return $body['id'];
 	}
+
+	public function ajax_convert_currencies()
+	{
+
+		$url = 'https://api.coingecko.com/api/v3/exchange_rates';
+
+		$args = array(
+			'headers'     => array(
+				'Content-Type'  => 'application/json',
+			),
+			'method'      => 'GET',
+			'timeout'     => 10,
+		);
+
+		$response = wp_remote_request($url, $args);
+
+		if (is_wp_error($response)) {
+			return $response;
+		}
+
+		if ($response['response']['code'] != 200) {
+			return new WP_Error($response['response']['code'], 'HTTP Error ' . $response['response']['code']);
+		}
+
+		$body = json_decode($response['body'], true);
+
+		if (empty($body) || !empty($body['error'])) {
+			return new WP_Error('converter_error', $body['error'] ?? 'Something went wrong');
+		}
+
+		wp_send_json_success(
+			$body['rates'],
+		);
+	}
+
 	public function ajax_donate()
 	{
 
@@ -810,15 +843,12 @@ class Lightning_Paywall_Public
 		$predefined1 = "{$default_price1} {$default_currency1}";
 		$predefined2 = "{$default_price2} {$default_currency2}";
 		$predefined3 = "{$default_price3} {$default_currency3}";
-		var_dump(get_option('lnpw_tipping_settings'));
 		ob_start();
 
 	?>
 		<style>
 			.lnpw_tipping_container {
 				background-color: <?php echo $background_color; ?>;
-				width: <?php echo $dimension[0]; ?>;
-				height: <?php echo $dimension[1]; ?>
 			}
 
 			#lnpw_tipping__button {
@@ -832,7 +862,7 @@ class Lightning_Paywall_Public
 			<div class="header_container">
 				<div class="image_container">
 					<?php if ($image) : ?>
-						<img width="150" height="150" alt="Tipping banner" src=<?php echo $image; ?> />
+						<img width="200" height="200" alt="Tipping banner" src=<?php echo $image; ?> />
 					<?php endif; ?>
 				</div>
 				<div class="info_container">
@@ -869,6 +899,7 @@ class Lightning_Paywall_Public
 							<?php endforeach; ?>
 						</select>
 						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
+						<input type="number" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
 						<?php if ($collect === 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>
@@ -888,7 +919,7 @@ class Lightning_Paywall_Public
 								<?php endif; ?>
 								<?php if ($email === 'true') : ?>
 									<label for="lnpw_tipping_donor_email">Email</label>
-									<input type="text" id="lnpw_tipping_donor_email" name="lnpw_tipping_donor_email" <?php echo $mandatory_email === 'true' ? 'required' : ''; ?> />
+									<input type="email" id="lnpw_tipping_donor_email" name="lnpw_tipping_donor_email" <?php echo $mandatory_email === 'true' ? 'required' : ''; ?> />
 								<?php endif; ?>
 								<?php if ($address === 'true') : ?>
 									<label for="lnpw_tipping_donor_address">Address</label>
@@ -896,7 +927,7 @@ class Lightning_Paywall_Public
 								<?php endif; ?>
 								<?php if ($phone === 'true') : ?>
 									<label for="lnpw_tipping_donor_phone">Phone</label>
-									<input type="text" id="lnpw_tipping_donor_phone" name="lnpw_tipping_donor_phone" <?php echo $mandatory_phone === 'true' ? 'required' : ''; ?> />
+									<input type="tel" id="lnpw_tipping_donor_phone" name="lnpw_tipping_donor_phone" <?php echo $mandatory_phone === 'true' ? 'required' : ''; ?> />
 								<?php endif; ?>
 								<?php if ($message === 'true') : ?>
 									<label for="lnpw_tipping_donor_message">Message</label>

@@ -95,7 +95,9 @@ a.lnpw_pay__download{
 }
 .header_container{
   display: flex;
+  justify-content: space-evenly;
 }
+
 #tipping_form fieldset:not(:first-of-type) {
 	display: none;
 }

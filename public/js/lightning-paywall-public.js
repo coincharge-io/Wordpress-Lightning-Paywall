@@ -102,6 +102,7 @@
 
     btcpay.showInvoice(invoice_id);
   }
+  
   $(document).ready(function () {
     $("#lnpw_tipping_currency").change(function () {
       var stepValue =
@@ -116,9 +117,47 @@
       });
     });
   });
-
+$(document).ready(function(){
+  var eur, usd, sats;
+  //if(eur) $("#lpnw_converted_amount").val($(this).val()*eur)
+  $.ajax({
+        url: "/wp-admin/admin-ajax.php",
+        method: "GET",
+        data: {
+          action: "lnpw_convert_currencies",
+        },
+        success: function (response) {
+          if (response.success) {
+            eur = response['data']['eur']['value'];
+            usd = response['data']['usd']['value'];
+            sats = response['data']['sats']['value'];
+          } else {
+            console.error(response);
+          }
+        },
+      });
+    $("#lnpw_tipping_amount").change(function(){
+      var currency = $("#lnpw_tipping_currency").val();
+      var amount = $(this).val();
+      var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
+    
+      $("#lnpw_converted_amount").attr('readonly', false).val(converted).attr('readonly', true);
+    })
+})
+function fiat_to_crypto(currency, val, usd, eur, sats){
+  var value = Number(val);
+  switch (currency){
+    case 'BTC':
+       return value*usd;
+    case 'USD':
+        return (sats/usd)*value;
+    case 'EUR':
+        return (sats/eur)*value;
+    default:
+        return (usd/sats)*value;
+  }
+}
 $(document).ready(function(){ 
-  
   var form_count = 1, previous_form, next_form, total_forms;
   total_forms = $("fieldset").length;  
   $(".next-form").click(function(){
