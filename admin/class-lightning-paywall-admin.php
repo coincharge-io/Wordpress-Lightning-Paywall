@@ -129,7 +129,7 @@ class Lightning_Paywall_Admin
 	public function add_menu_pages()
 	{
 
-		add_menu_page('Lightning Paywall', 'Lightning Paywall', 'manage_options', 'lnpw_general_settings', '', 'dashicons-tickets');
+		add_menu_page('Lightning Paywall', 'Lightning Paywall', 'manage_options', 'lnpw_general_settings', '', plugin_dir_url(__FILE__) . 'img/dashboard-icon.png');
 		add_submenu_page('lnpw_general_settings', 'Settings', 'Settings', 'manage_options', 'lnpw_general_settings', array($this, 'render_general_settings_page'));
 		add_submenu_page('lnpw_general_settings', 'Invoices', 'Invoices', 'manage_options', 'lnpw_invoices', array($this, 'render_invoices_page'));
 		add_submenu_page('lnpw_general_settings', 'Tipping', 'Tipping', 'manage_options', 'lnpw_tipping-settings', array($this, 'render_tipping_page'));
