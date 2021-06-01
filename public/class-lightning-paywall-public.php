@@ -358,7 +358,6 @@ class Lightning_Paywall_Public
 				)
 			)
 		);
-
 		$args = array(
 			'headers'     => array(
 				'Authorization' => 'token ' . get_option('lnpw_btcpay_auth_key_create'),
@@ -384,9 +383,6 @@ class Lightning_Paywall_Public
 		if (empty($body) || !empty($body['error'])) {
 			return new WP_Error('invoice_error', $body['error'] ?? 'Something went wrong');
 		}
-
-		//update_post_meta($order_id, 'lnpw_invoice_id', $body['id']);
-
 
 		wp_send_json_success([
 			'invoice_id' => $body['id'],
@@ -900,6 +896,7 @@ class Lightning_Paywall_Public
 						</select>
 						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
 						<input type="number" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
+						
 						<?php if ($collect === 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>

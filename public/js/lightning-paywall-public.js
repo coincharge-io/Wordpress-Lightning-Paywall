@@ -93,12 +93,12 @@
       })
     })
   })
-  function lnpwShowDonationInvoice(invoice_id) {
+  function lnpwShowDonationInvoice(invoice_id, url) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
               location.reload(true);
             }
-          })
+          });
 
     btcpay.showInvoice(invoice_id);
   }
@@ -150,9 +150,9 @@ function fiat_to_crypto(currency, val, usd, eur, sats){
     case 'BTC':
        return value*usd;
     case 'USD':
-        return (sats/usd)*value;
+        return ((sats/usd)*value).toFixed(0);
     case 'EUR':
-        return (sats/eur)*value;
+        return ((sats/eur)*value).toFixed(0);
     default:
         return (usd/sats)*value;
   }

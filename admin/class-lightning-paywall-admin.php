@@ -90,11 +90,10 @@ class Lightning_Paywall_Admin
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/lightning-paywall-admin.js', array('jquery'), $this->version, false);
 
-		if (empty($_GET['page']) || "lnpw_tipping-settings" !== $_GET['page']) {
-			return;
-		}
 		wp_enqueue_style('wp-color-picker');
+
 		wp_enqueue_script('iris', admin_url('js/iris.min.js'), array('jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch'), false, 1);
+
 		wp_enqueue_media();
 	}
 
@@ -234,6 +233,7 @@ class Lightning_Paywall_Admin
 
 		return $value;
 	}
+
 	public function sanitize_dimension($value)
 	{
 
@@ -285,6 +285,8 @@ class Lightning_Paywall_Admin
 			add_option("lnpw_btcpay_store_id", $store_id, null, 'no');
 		}
 	}
+
+
 	/**
 	 *	Check connection with a server
 	 */
@@ -342,7 +344,7 @@ class Lightning_Paywall_Admin
 
 		if ($valid_permissions && $valid_store_id && $valid_response_code) {
 			$this->check_store_id($view_store_id);
-			wp_send_json_success();
+			wp_send_json_success(["store_id" => $view_store_id]);
 		} else {
 			wp_send_json_error(['message' => 'Something went wrong. Please check your credentials.']);
 		}

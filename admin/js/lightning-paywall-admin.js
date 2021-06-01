@@ -15,6 +15,7 @@
         },
         success: function (response) {
           if (response.success) {
+            $("#lnpw_btcpay_store_id").val(response.data.store_id);
             $("#lnpw_btcpay_status_success").fadeIn(500);
           } else {
             $("#lnpw_btcpay_status_error")

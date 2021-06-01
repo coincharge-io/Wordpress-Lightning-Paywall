@@ -14,6 +14,7 @@ $supported_btc_format   = Lightning_Paywall_Admin::BTC_FORMAT;
 $btcpay_server_url      = get_option('lnpw_btcpay_server_url');
 $btcpay_auth_key_view   = get_option('lnpw_btcpay_auth_key_view');
 $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
+$store_id               = get_option('lnpw_btcpay_store_id');
 ?>
 <style>
     .lnpw_price_format {
@@ -27,7 +28,17 @@ $btcpay_auth_key_create = get_option('lnpw_btcpay_auth_key_create');
 
         <form method="POST" action="options.php">
             <?php settings_fields('lnpw_general_settings'); ?>
-
+            <div>
+                <h2>Store</h2>
+                <div class="row">
+                    <div class="col-20">
+                        <label for="lnpw_btcpay_store_id">Store id</label>
+                    </div>
+                    <div class="col-80">
+                        <input type='text' id="lnpw_btcpay_store_id" name="lnpw_btcpay_store_id" value='<?php echo $store_id ?: 'Not connected to the store'; ?>' disabled />
+                    </div>
+                </div>
+            </div>
             <div>
                 <h2>Payment Block</h2>
                 <div class="row">
