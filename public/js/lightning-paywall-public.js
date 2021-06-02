@@ -75,6 +75,11 @@
             currency: $("#lnpw_tipping_currency").val(),
             amount: $("#lnpw_tipping_amount").val(),
             predefined_amount: $("input[type=radio][name=lnpw_tipping_default_amount]:checked").val(),
+            name: $("#lnpw_tipping_donor_name").val(),
+            email: $("#lnpw_tipping_donor_email").val(),
+            address: $("#lnpw_tipping_donor_address").val(),
+            phone: $("#lnpw_tipping_donor_phone").val(),
+            message: $("#lnpw_tipping_donor_message").val(),
           },
           success: function (response) {
             $(".lnpw_pay__loading p.loading").removeClass("spinner");
@@ -95,7 +100,6 @@
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
         ($("#lnpw_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
-          //location.reload(true);
           }});
 
     btcpay.showInvoice(invoice_id);
