@@ -85,6 +85,8 @@
             $(".lnpw_pay__loading p.loading").removeClass("spinner");
             if (response.success) {
               lnpw_invoice_id=response.data.invoice_id;
+              notifyAdmin(response.data.amount, response.data.currency, $("#lnpw_tipping_donor_name").val(), $("#lnpw_tipping_donor_email").val(), $("#lnpw_tipping_donor_address").val(), $("#lnpw_tipping_donor_phone").val(), 
+              $("#lnpw_tipping_donor_message").val())
               lnpwShowDonationInvoice(lnpw_invoice_id);
             } else {
                console.error(response);
@@ -104,7 +106,21 @@
 
     btcpay.showInvoice(invoice_id);
   }
-  
+  function notifyAdmin(amount, currency, name, email, address, phone, message){
+    $.ajax({
+          url: "/wp-admin/admin-ajax.php",
+          method: "POST",
+          data: {
+            action: "lnpw_notify_admin",
+            currency: currency,
+            amount: amount,
+            name: name,
+            email: email,
+            address: address,
+            phone: phone,
+            message: message,
+          }})
+  }
   $(document).ready(function () {
     $("#lnpw_tipping_currency").change(function () {
       var stepValue =

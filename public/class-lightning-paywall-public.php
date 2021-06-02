@@ -336,28 +336,10 @@ class Lightning_Paywall_Public
 
 	public function ajax_donate()
 	{
-		$collect = array();
-
-		if (!empty($_POST['name'])) {
-			$collect['name'] = sanitize_text_field($_POST['name']);
-		}
-		if (!empty($_POST['email'])) {
-			$collect['email'] =  sanitize_email($_POST['email']);
-		}
-		if (!empty($_POST['address'])) {
-			$collect['address'] = sanitize_text_field($_POST['address']);
-		}
-		if (!empty($_POST['phone'])) {
-			$collect['phone'] = sanitize_text_field($_POST['phone']);
-		}
-		if (!empty($_POST['message'])) {
-			$collect['message'] = sanitize_text_field($_POST['message']);
-		}
 
 		$currency = sanitize_text_field($_POST['currency']);
 		$amount = sanitize_text_field($_POST['amount']);
 
-		$collect['amount'] = "{$amount} {$currency}";
 
 		if (!empty($_POST['predefined_amount'])) {
 			$extract = explode(' ', sanitize_text_field($_POST['predefined_amount']));
@@ -404,24 +386,43 @@ class Lightning_Paywall_Public
 		}
 
 
-		$this->notify_administrator($collect);
+		//$this->notify_administrator($collect);
 
 		wp_send_json_success([
 			'invoice_id' => $body['id'],
 		]);
 	}
-	public function notify_administrator($content)
+	public function ajax_notify_administrator()
 	{
+		$collect = array();
+
+		if (!empty($_POST['name'])) {
+			$collect['name'] = sanitize_text_field($_POST['name']);
+		}
+		if (!empty($_POST['email'])) {
+			$collect['email'] =  sanitize_email($_POST['email']);
+		}
+		if (!empty($_POST['address'])) {
+			$collect['address'] = sanitize_text_field($_POST['address']);
+		}
+		if (!empty($_POST['phone'])) {
+			$collect['phone'] = sanitize_text_field($_POST['phone']);
+		}
+		if (!empty($_POST['message'])) {
+			$collect['message'] = sanitize_text_field($_POST['message']);
+		}
+		$currency = sanitize_text_field($_POST['currency']);
+		$amount = sanitize_text_field($_POST['amount']);
+		$collect['amount'] = "{$amount} {$currency}";
 		$admins = array();
 		foreach (get_users('role=Administrator') as $admin) {
 			$admins[] = $admin->user_email;
 		}
-		$sent = wp_mail($admins, 'Lightning Paywall Plugin', $content);
-
-		if ($sent) {
-			return true;
+		foreach ($collect as $key => $value) {
+			$body = '';
+			$body .= "{$key}: {$value}";
 		}
-		return false;
+		wp_mail($admins, 'Lightning Paywall Plugin', $body);
 	}
 	/**
 	 * @param $post_id
