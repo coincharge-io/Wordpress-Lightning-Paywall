@@ -339,25 +339,25 @@ class Lightning_Paywall_Public
 		$collect = array();
 
 		if (!empty($_POST['name'])) {
-			$collect[] = ['name' => sanitize_text_field($_POST['name'])];
+			$collect['name'] = sanitize_text_field($_POST['name']);
 		}
 		if (!empty($_POST['email'])) {
-			$collect[] = ['email' => sanitize_email($_POST['email'])];
+			$collect['email'] =  sanitize_email($_POST['email']);
 		}
 		if (!empty($_POST['address'])) {
-			$collect[] = ['address' => sanitize_text_field($_POST['address'])];
+			$collect['address'] = sanitize_text_field($_POST['address']);
 		}
 		if (!empty($_POST['phone'])) {
-			$collect[] = ['phone' => sanitize_text_field($_POST['phone'])];
+			$collect['phone'] = sanitize_text_field($_POST['phone']);
 		}
 		if (!empty($_POST['message'])) {
-			$collect[] = ['message' => sanitize_text_field($_POST['message'])];
+			$collect['message'] = sanitize_text_field($_POST['message']);
 		}
 
 		$currency = sanitize_text_field($_POST['currency']);
 		$amount = sanitize_text_field($_POST['amount']);
 
-		$collect[] = ['amount' => "${$amount} ${currency}"];
+		$collect['amount'] = "{$amount} {$currency}";
 
 		if (!empty($_POST['predefined_amount'])) {
 			$extract = explode(' ', sanitize_text_field($_POST['predefined_amount']));
@@ -402,6 +402,8 @@ class Lightning_Paywall_Public
 		if (empty($body) || !empty($body['error'])) {
 			return new WP_Error('invoice_error', $body['error'] ?? 'Something went wrong');
 		}
+
+
 		$this->notify_administrator($collect);
 
 		wp_send_json_success([
@@ -410,9 +412,16 @@ class Lightning_Paywall_Public
 	}
 	public function notify_administrator($content)
 	{
+		$admins = array();
 		foreach (get_users('role=Administrator') as $admin) {
-			wp_mail($admin->user_email, 'Lightning Paywall Plugin', $content);
+			$admins[] = $admin->user_email;
 		}
+		$sent = wp_mail($admins, 'Lightning Paywall Plugin', $content);
+
+		if ($sent) {
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * @param $post_id
