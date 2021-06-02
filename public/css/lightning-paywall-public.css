@@ -112,7 +112,8 @@ a.lnpw_pay__download{
 }
 
 #lnpw_tipping_currency, 
-#lnpw_tipping_amount{
+#lnpw_tipping_amount,
+#lnpw_converted_amount{
   height: 40px;
 }
 

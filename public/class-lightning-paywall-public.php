@@ -896,7 +896,7 @@ class Lightning_Paywall_Public
 						</select>
 						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
 						<input type="number" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
-						
+						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
 						<?php if ($collect === 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>

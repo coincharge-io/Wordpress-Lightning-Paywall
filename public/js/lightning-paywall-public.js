@@ -3,7 +3,7 @@
   $(document).ready(function () {
     var lnpw_invoice_id = null;
     var lnpw_order_id = null;
-
+  
     $("#lnpw_pay__button").click(function () {
       $(".lnpw_pay__loading p.loading").addClass("spinner");
       var post_id = $(this).data("post_id");
@@ -60,8 +60,6 @@
 
   $(document).ready(function () {
     var lnpw_invoice_id = null;
-
-    //$("#lnpw_tipping__button").click(function () {
     $("#tipping_form").submit(function (e) {
       e.preventDefault();
       $(".lnpw_pay__loading p.loading").addClass("spinner");
@@ -93,12 +91,12 @@
       })
     })
   })
-  function lnpwShowDonationInvoice(invoice_id, url) {
+  function lnpwShowDonationInvoice(invoice_id) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
-              location.reload(true);
-            }
-          });
+        ($("#lnpw_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
+          //location.reload(true);
+          }});
 
     btcpay.showInvoice(invoice_id);
   }
@@ -119,7 +117,6 @@
   });
 $(document).ready(function(){
   var eur, usd, sats;
-  //if(eur) $("#lpnw_converted_amount").val($(this).val()*eur)
   $.ajax({
         url: "/wp-admin/admin-ajax.php",
         method: "GET",
