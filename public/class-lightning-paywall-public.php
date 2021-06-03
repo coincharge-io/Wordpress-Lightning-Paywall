@@ -256,7 +256,7 @@ class Lightning_Paywall_Public
 
 		$currency_scope = get_post_meta($post_id, 'lnpw_currency', true) ?: get_option('lnpw_default_currency', 'SATS');
 		$currency = $currency_scope != 'SATS' ? $currency_scope : 'BTC';
-
+		
 		$data = array(
 			'amount'    => $amount,
 			'currency' => $currency,
@@ -336,16 +336,42 @@ class Lightning_Paywall_Public
 
 	public function ajax_donate()
 	{
+		$collect = '';
+
+		if (!empty($_POST['name'])) {
+			$name = sanitize_text_field($_POST['name']);
+			$collect .= "Name: {$name}; ";
+		}
+		if (!empty($_POST['email'])) {
+			$email = sanitize_text_field($_POST['email']);
+			$collect .= "Email: {$email}; ";
+		}
+		if (!empty($_POST['address'])) {
+			$address = sanitize_text_field($_POST['address']);
+			$collect .= "Address: {$address}; ";
+		}
+		if (!empty($_POST['phone'])) {
+			$phone = sanitize_text_field($_POST['phone']);
+			$collect .= "Phone: {$phone}; ";
+		}
+		if (!empty($_POST['message'])) {
+			$email = sanitize_text_field($_POST['message']);
+			$collect .= "Message: {$message}; ";
+		}
 
 		$currency = sanitize_text_field($_POST['currency']);
 		$amount = sanitize_text_field($_POST['amount']);
-
+		
 
 		if (!empty($_POST['predefined_amount'])) {
 			$extract = explode(' ', sanitize_text_field($_POST['predefined_amount']));
 			$amount = $extract[0];
 			$currency = $extract[1];
 		}
+
+		$collect .= "Amount: {$amount} {$currency}";
+
+		
 
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
@@ -354,9 +380,7 @@ class Lightning_Paywall_Public
 			'currency' => $currency,
 			'metadata' => array(
 				'itemDesc' => 'Donation from: ' . $_SERVER['REMOTE_ADDR'],
-				'donor'    => array(
-					'name'   => (string) $_SERVER['REMOTE_ADDR']
-				)
+				'donor'    => $collect,
 			)
 		);
 		$args = array(
@@ -385,43 +409,20 @@ class Lightning_Paywall_Public
 			return new WP_Error('invoice_error', $body['error'] ?? 'Something went wrong');
 		}
 
-
-		//$this->notify_administrator($collect);
-
 		wp_send_json_success([
 			'invoice_id' => $body['id'],
+			'donor'	 => $body['metadata']['donor'],
 		]);
 	}
 	public function ajax_notify_administrator()
 	{
-		$collect = array();
-
-		if (!empty($_POST['name'])) {
-			$collect['name'] = sanitize_text_field($_POST['name']);
-		}
-		if (!empty($_POST['email'])) {
-			$collect['email'] =  sanitize_email($_POST['email']);
-		}
-		if (!empty($_POST['address'])) {
-			$collect['address'] = sanitize_text_field($_POST['address']);
-		}
-		if (!empty($_POST['phone'])) {
-			$collect['phone'] = sanitize_text_field($_POST['phone']);
-		}
-		if (!empty($_POST['message'])) {
-			$collect['message'] = sanitize_text_field($_POST['message']);
-		}
-		$currency = sanitize_text_field($_POST['currency']);
-		$amount = sanitize_text_field($_POST['amount']);
-		$collect['amount'] = "{$amount} {$currency}";
+		
 		$admins = array();
 		foreach (get_users('role=Administrator') as $admin) {
 			$admins[] = $admin->user_email;
 		}
-		foreach ($collect as $key => $value) {
-			$body = '';
-			$body .= "{$key}: {$value}";
-		}
+		$body = sanitize_text_field($_POST['donor_info']);
+		
 		wp_mail($admins, 'Lightning Paywall Plugin', $body);
 	}
 	/**

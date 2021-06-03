@@ -60,6 +60,7 @@
 
   $(document).ready(function () {
     var lnpw_invoice_id = null;
+    var donor;
     $("#tipping_form").submit(function (e) {
       e.preventDefault();
       $(".lnpw_pay__loading p.loading").addClass("spinner");
@@ -84,10 +85,9 @@
           success: function (response) {
             $(".lnpw_pay__loading p.loading").removeClass("spinner");
             if (response.success) {
-              lnpw_invoice_id=response.data.invoice_id;
-              notifyAdmin(response.data.amount, response.data.currency, $("#lnpw_tipping_donor_name").val(), $("#lnpw_tipping_donor_email").val(), $("#lnpw_tipping_donor_address").val(), $("#lnpw_tipping_donor_phone").val(), 
-              $("#lnpw_tipping_donor_message").val())
-              lnpwShowDonationInvoice(lnpw_invoice_id);
+              lnpw_invoice_id = response.data.invoice_id;
+              donor = response.data.donor;
+              lnpwShowDonationInvoice(lnpw_invoice_id, donor);
             } else {
                console.error(response);
             }
@@ -98,27 +98,22 @@
       })
     })
   })
-  function lnpwShowDonationInvoice(invoice_id) {
+  function lnpwShowDonationInvoice(invoice_id, donor) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
+        notifyAdmin(donor)
         ($("#lnpw_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
           }});
 
     btcpay.showInvoice(invoice_id);
   }
-  function notifyAdmin(amount, currency, name, email, address, phone, message){
+  function notifyAdmin(donor_info){
     $.ajax({
           url: "/wp-admin/admin-ajax.php",
           method: "POST",
           data: {
             action: "lnpw_notify_admin",
-            currency: currency,
-            amount: amount,
-            name: name,
-            email: email,
-            address: address,
-            phone: phone,
-            message: message,
+            donor_info: donor_info
           }})
   }
   $(document).ready(function () {
