@@ -153,7 +153,8 @@ class Lightning_Paywall_Public
 		}
 
 		wp_send_json_success([
-			'invoice_id' => $invoice_id,
+			'amount'	 =>	$invoice_id['amount'],
+			'invoice_id' => $invoice_id['id'],
 			'order_id'   => $order_id,
 		]);
 	}
@@ -297,7 +298,9 @@ class Lightning_Paywall_Public
 
 		update_post_meta($order_id, 'lnpw_invoice_id', $body['id']);
 
-		return $body['id'];
+		return array(
+			'id'     => $body['id'],
+			'amount' => $body['amount'] . $body['currency']);
 	}
 
 	public function ajax_convert_currencies()
@@ -462,6 +465,9 @@ class Lightning_Paywall_Public
 		$post_id    = get_post_meta($order_id, 'lnpw_post_id', true);
 		$invoice_id = get_post_meta($order_id, 'lnpw_invoice_id', true);
 		$secret     = get_post_meta($order_id, 'lnpw_secret', true);
+		$content_title = get_post_meta($post_id, 'lnpw_invoice_content', true)['title'];
+		$store_id = get_option('lnpw_btcpay_store_id');
+
 
 		if (empty($post_id) || empty($invoice_id)) {
 			wp_send_json_error();
@@ -493,6 +499,12 @@ class Lightning_Paywall_Public
 		if (empty($body) || !empty($body['error'])) {
 			return new WP_Error('invoice_error', $body['error'] ?? 'Something went wrong');
 		}
+		$amount = sanitize_text_field($_POST['amount']);
+		$message = '';
+		$message .= "Invoice was confirmed paid ";
+		$message .= "Store id: {$store_id}";
+		$message .= $content_title;
+		$message .= "Amount: {$amount}";
 
 		if ($body['status'] === 'Settled') {
 			$cookie_path = parse_url(get_permalink($post_id), PHP_URL_PATH);
@@ -501,7 +513,7 @@ class Lightning_Paywall_Public
 
 			update_post_meta($order_id, 'lnpw_status', 'success');
 
-			wp_send_json_success();
+			wp_send_json_success(['notify' => $message]);
 		}
 		wp_send_json_error(['message' => 'invoice is not paid']);
 	}

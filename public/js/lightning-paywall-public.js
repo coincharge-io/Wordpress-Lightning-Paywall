@@ -3,6 +3,7 @@
   $(document).ready(function () {
     var lnpw_invoice_id = null;
     var lnpw_order_id = null;
+    var amount;
   
     $("#lnpw_pay__button").click(function () {
       $(".lnpw_pay__loading p.loading").addClass("spinner");
@@ -24,7 +25,8 @@
           if (response.success) {
             lnpw_invoice_id = response.data.invoice_id;
             lnpw_order_id = response.data.order_id;
-            lnpwShowInvoice(lnpw_invoice_id, lnpw_order_id);
+            amount = response.data.amount
+            lnpwShowInvoice(lnpw_invoice_id, lnpw_order_id, amount);
           } else {
             console.error(response);
           }
@@ -33,7 +35,7 @@
     });
   });
 
-  function lnpwShowInvoice(invoice_id, order_id) {
+  function lnpwShowInvoice(invoice_id, order_id, amount) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
         $.ajax({
@@ -43,9 +45,11 @@
             action: "lnpw_paid_invoice",
             invoice_id: invoice_id,
             order_id: order_id,
+            amount: amount,
           },
           success: function (response) {
             if (response.success) {
+              notifyAdmin(response.data.notify);
               location.reload(true);
             } else {
               console.error(response);
