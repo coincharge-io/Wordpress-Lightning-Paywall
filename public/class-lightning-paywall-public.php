@@ -420,13 +420,11 @@ class Lightning_Paywall_Public
 	public function ajax_notify_administrator()
 	{
 		
-		$admins = array();
-		foreach (get_users('role=Administrator') as $admin) {
-			$admins[] = $admin->user_email;
-		}
+		
+		$admin = get_bloginfo( 'admin_email' );
 		$body = sanitize_text_field($_POST['donor_info']);
 		
-		wp_mail($admins, 'Lightning Paywall Plugin', $body);
+		wp_mail($admin, 'Lightning Paywall Plugin', $body);
 	}
 	/**
 	 * @param $post_id
