@@ -9,7 +9,9 @@ $btn_text = get_option('lnpw_tipping_button_text');
 $btn_text_color = get_option('lnpw_tipping_button_text_color');
 $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
-$image = get_option('lnpw_tipping_image');
+$image_id = get_option('lnpw_tipping_image');
+$image = wp_get_attachment_image_src($image_id);
+
 $collect = get_option('lnpw_tipping_collect');
 $redirect = get_option('lnpw_tipping_redirect');
 $name = get_option('lnpw_tipping_collect_name');
@@ -184,9 +186,15 @@ $default_currency3 = get_option('lnpw_default_currency3');
                 <label for="lnpw_tipping_image">Image</label>
             </div>
             <div class="col-80">
-                <input type="text" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image; ?> />
-                <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image">Upload</button>
-
+                <?php if ($image) : ?>
+                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image"><img src="<?php echo $image[0]; ?>" /></a></button>
+                    <button class="lnpw_tipping_button_remove">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
+                <?php else : ?>
+                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image">Upload</button>
+                    <button class="lnpw_tipping_button_remove" style="display:none">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
+                <?php endif; ?>
             </div>
         </div>
         <div class="row">
@@ -205,11 +213,11 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_tipping_collect_name">Full name</label>
                 </div>
                 <div class="col-80">
-                    <input type="hidden" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_name" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" <?php echo $name === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect_name" <?php echo $name === 'true' ? 'checked' : ''; ?> value="true" />
 
-                    <input type="hidden" id="lnpw_tipping_collect_name_mandatory" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect_name_mandatory" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_name_mandatory" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect_name_mandatory" <?php echo $mandatory_name === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect_name_mandatory" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect_name_mandatory" <?php echo $mandatory_name === 'true' ? 'checked' : ''; ?> value="true" />
 
                 </div>
             </div>
@@ -218,11 +226,11 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_tipping_collect_email">Email</label>
                 </div>
                 <div class="col-80">
-                    <input type="hidden" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_email" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" <?php echo $email === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect_email" <?php echo $email === 'true' ? 'checked' : ''; ?> value="true" />
 
-                    <input type="hidden" id="lnpw_tipping_collect_email_mandatory" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect_email_mandatory" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_email_mandatory" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect_email_mandatory" <?php echo $mandatory_email === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect_email_mandatory" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect_email_mandatory" <?php echo $mandatory_email === 'true' ? 'checked' : ''; ?> value="true" />
                 </div>
             </div>
             <div class="row">
@@ -230,11 +238,11 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_tipping_collect_address">Address</label>
                 </div>
                 <div class="col-80">
-                    <input type="hidden" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_address" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" <?php echo $address === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect_address" <?php echo $address === 'true' ? 'checked' : ''; ?> value="true" />
 
-                    <input type="hidden" id="lnpw_tipping_collect_address_mandatory" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect_address_mandatory" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_address_mandatory" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect_address_mandatory" <?php echo $mandatory_address === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect_address_mandatory" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect_address_mandatory" <?php echo $mandatory_address === 'true' ? 'checked' : ''; ?> value="true" />
                 </div>
             </div>
             <div class="row">
@@ -242,11 +250,11 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_tipping_collect_phone">Phone number</label>
                 </div>
                 <div class="col-80">
-                    <input type="hidden" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_phone" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" <?php echo $phone === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect_phone" <?php echo $phone === 'true' ? 'checked' : ''; ?> value="true" />
 
-                    <input type="hidden" id="lnpw_tipping_collect_phone_mandatory" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect_phone_mandatory" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_phone_mandatory" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect_phone_mandatory" <?php echo $mandatory_phone === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect_phone_mandatory" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect_phone_mandatory" <?php echo $mandatory_phone === 'true' ? 'checked' : ''; ?> value="true" />
                 </div>
             </div>
             <div class="row">
@@ -254,11 +262,11 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_tipping_collect_message">Message</label>
                 </div>
                 <div class="col-80">
-                    <input type="hidden" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_message" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" <?php echo $message === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect_message" <?php echo $message === 'true' ? 'checked' : ''; ?> value="true" />
 
-                    <input type="hidden" id="lnpw_tipping_collect_message_mandatory" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect_message_mandatory" value='false' />
-                    <input type="checkbox" id="lnpw_tipping_collect_message_mandatory" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect_message_mandatory" <?php echo $mandatory_message === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="hidden" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect_message_mandatory" value='false' />
+                    <input type="checkbox" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect_message_mandatory" <?php echo $mandatory_message === 'true' ? 'checked' : ''; ?> value="true" />
                 </div>
             </div>
         </div>

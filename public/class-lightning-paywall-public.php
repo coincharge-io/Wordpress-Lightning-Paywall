@@ -257,7 +257,7 @@ class Lightning_Paywall_Public
 
 		$currency_scope = get_post_meta($post_id, 'lnpw_currency', true) ?: get_option('lnpw_default_currency', 'SATS');
 		$currency = $currency_scope != 'SATS' ? $currency_scope : 'BTC';
-		
+
 		$data = array(
 			'amount'    => $amount,
 			'currency' => $currency,
@@ -300,7 +300,8 @@ class Lightning_Paywall_Public
 
 		return array(
 			'id'     => $body['id'],
-			'amount' => $body['amount'] . $body['currency']);
+			'amount' => $body['amount'] . $body['currency']
+		);
 	}
 
 	public function ajax_convert_currencies()
@@ -364,7 +365,7 @@ class Lightning_Paywall_Public
 
 		$currency = sanitize_text_field($_POST['currency']);
 		$amount = sanitize_text_field($_POST['amount']);
-		
+
 
 		if (!empty($_POST['predefined_amount'])) {
 			$extract = explode(' ', sanitize_text_field($_POST['predefined_amount']));
@@ -374,7 +375,7 @@ class Lightning_Paywall_Public
 
 		$collect .= "Amount: {$amount} {$currency}";
 
-		
+
 
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
 
@@ -419,11 +420,11 @@ class Lightning_Paywall_Public
 	}
 	public function ajax_notify_administrator()
 	{
-		
-		
-		$admin = get_bloginfo( 'admin_email' );
+
+
+		$admin = get_bloginfo('admin_email');
 		$body = sanitize_text_field($_POST['donor_info']);
-		
+
 		wp_mail($admin, 'Lightning Paywall Plugin', $body);
 	}
 	/**
@@ -891,6 +892,8 @@ class Lightning_Paywall_Public
 		<style>
 			.lnpw_tipping_container {
 				background-color: <?php echo $background_color; ?>;
+				width: <?php echo $dimension[0] . 'px'; ?>;
+				height: <?php echo $dimension[1] . 'px'; ?>;
 			}
 
 			#lnpw_tipping__button {

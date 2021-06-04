@@ -187,7 +187,7 @@ $(document).ready(function($){
 
             var custom_uploader
               , click_elem = $('#lnpw_tipping_button_image')
-              , target = $('#lnpw_tipping_image')
+              , target = $('#lnpw_tipping_image');
 
             click_elem.click(function(e) {
                 e.preventDefault();
@@ -207,10 +207,20 @@ $(document).ready(function($){
                 
                 custom_uploader.on('select', function() {
                     var attachment = custom_uploader.state().get('selection').first().toJSON();
-                    target.val(attachment.url);
+                    target.val(attachment.id);
+                    click_elem.html('<img src="' + attachment.url + '">').next().show();
                 });
                 
                 custom_uploader.open();
-            });      
+            });
+            $('.lnpw_tipping_button_remove').click(function(e){
+ 
+                e.preventDefault();
+            
+                var button = $(this);
+                button.next().val(''); 
+                button.hide().prev().html('Upload image');
+      });      
         });
+  
 })(jQuery);

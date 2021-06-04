@@ -94,7 +94,9 @@ class Lightning_Paywall_Admin
 
 		wp_enqueue_script('iris', admin_url('js/iris.min.js'), array('jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch'), false, 1);
 
-		wp_enqueue_media();
+		if (!did_action('wp_enqueue_media')) {
+			wp_enqueue_media();
+		}
 	}
 
 	public function register_post_types()
@@ -177,7 +179,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text_color', array('type' => 'string', 'default' => '#FFFFFF', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_image')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_dimension')));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency1', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price1', array('type' => 'number', 'default' => 1000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency2', array('type' => 'string', 'default' => 'SATS'));
@@ -201,7 +203,7 @@ class Lightning_Paywall_Admin
 		return $value;
 	}
 
-	public function sanitize_image($value)
+	/*public function sanitize_image($value)
 	{
 
 		$output = '';
@@ -216,7 +218,7 @@ class Lightning_Paywall_Admin
 		}
 
 		return $output;
-	}
+	}*/
 
 	public function sanitize_payblock_area($value)
 	{
