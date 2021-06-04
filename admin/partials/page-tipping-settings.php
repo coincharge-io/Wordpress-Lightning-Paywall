@@ -1,6 +1,6 @@
 <?php
 $supported_currencies   = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-$dimensions = ['250x250', '300x250', '240x400'];
+$dimensions = ['250x250', '300x250', '240x400', '400x400', '500x500', '600x600'];
 $used_currency  = get_option('lnpw_tipping_currency');
 $used_dimension      = get_option('lnpw_tipping_dimension');
 $title = get_option('lnpw_tipping_title');
@@ -11,7 +11,13 @@ $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
 $image_id = get_option('lnpw_tipping_image');
 $image = wp_get_attachment_image_src($image_id);
-
+$icon1_id = get_option('lnpw_tipping_icon1');
+$icon1 = wp_get_attachment_image_src($icon1_id, array('20', '20'), true);
+var_dump($icon1);
+$icon2_id = get_option('lnpw_tipping_icon2');
+$icon2 = wp_get_attachment_image_src($icon2_id, array('20', '20'), true);
+$icon3_id = get_option('lnpw_tipping_icon3');
+$icon3 = wp_get_attachment_image_src($icon3_id, array('20', '20'), true);
 $collect = get_option('lnpw_tipping_collect');
 $redirect = get_option('lnpw_tipping_redirect');
 $name = get_option('lnpw_tipping_collect_name');
@@ -103,6 +109,16 @@ $default_currency3 = get_option('lnpw_default_currency3');
                         </option>
                     <?php endforeach; ?>
                 </select>
+
+                <?php if ($icon1) : ?>
+                    <button id="lnpw_tipping_button_icon1" class="lnpw_tipping_button_icon1" name="lnpw_tipping_button_icon1"><img src="<?php echo $icon1[0]; ?>" /></a></button>
+                    <button class="lnpw_tipping_button_remove_icon1">Remove icon1</button>
+                    <input type="hidden" id="lnpw_tipping_icon1" class="lnpw_tipping_icon1" name="lnpw_tipping_icon1" value=<?php echo $icon1_id; ?> />
+                <?php else : ?>
+                    <button id="lnpw_tipping_button_icon1" class="lnpw_tipping_button_icon1" name="lnpw_tipping_button_icon1">Upload</button>
+                    <button class="lnpw_tipping_button_remove_icon1" style="display:none">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_icon1" class="lnpw_tipping_icon1" name="lnpw_tipping_icon1" value=<?php echo $icon1_id; ?> />
+                <?php endif; ?>
             </div>
         </div>
         <div class="row">
@@ -120,6 +136,16 @@ $default_currency3 = get_option('lnpw_default_currency3');
                         </option>
                     <?php endforeach; ?>
                 </select>
+
+                <?php if ($icon2) : ?>
+                    <button id="lnpw_tipping_button_icon2" class="lnpw_tipping_button_icon2" name="lnpw_tipping_button_icon2"><img src="<?php echo $icon2[0]; ?>" /></a></button>
+                    <button class="lnpw_tipping_button_remove_icon2">Remove icon2</button>
+                    <input type="hidden" id="lnpw_tipping_icon2" class="lnpw_tipping_icon2" name="lnpw_tipping_icon2" value=<?php echo $icon2_id; ?> />
+                <?php else : ?>
+                    <button id="lnpw_tipping_button_icon2" class="lnpw_tipping_button_icon2" name="lnpw_tipping_button_icon2">Upload</button>
+                    <button class="lnpw_tipping_button_remove_icon2" style="display:none">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_icon2" class="lnpw_tipping_icon2" name="lnpw_tipping_icon2" value=<?php echo $icon2_id; ?> />
+                <?php endif; ?>
             </div>
         </div>
         <div class="row">
@@ -137,6 +163,16 @@ $default_currency3 = get_option('lnpw_default_currency3');
                         </option>
                     <?php endforeach; ?>
                 </select>
+
+                <?php if ($icon3) : ?>
+                    <button id="lnpw_tipping_button_icon3" class="lnpw_tipping_button_icon3" name="lnpw_tipping_button_icon3"><img src="<?php echo $icon3[0]; ?>" /></a></button>
+                    <button class="lnpw_tipping_button_remove_icon3">Remove icon1</button>
+                    <input type="hidden" id="lnpw_tipping_icon3" class="lnpw_tipping_icon3" name="lnpw_tipping_icon3" value=<?php echo $icon3_id; ?> />
+                <?php else : ?>
+                    <button id="lnpw_tipping_button_icon3" class="lnpw_tipping_button_icon3" name="lnpw_tipping_button_icon3">Upload</button>
+                    <button class="lnpw_tipping_button_remove_icon3" style="display:none">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_icon3" class="lnpw_tipping_icon3" name="lnpw_tipping_icon3" value=<?php echo $icon3_id; ?> />
+                <?php endif; ?>
             </div>
         </div>
         <div class="row">

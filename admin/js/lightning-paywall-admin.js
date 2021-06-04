@@ -184,10 +184,20 @@
       });
   });
 $(document).ready(function($){
+            imagePreview($('#lnpw_tipping_button_image'), $('#lnpw_tipping_image'));
+            imagePreview($('#lnpw_tipping_button_icon1'), $('#lnpw_tipping_icon1'));
+            imageRemove($('.lnpw_tipping_button_remove'));
+            imageRemove($('.lnpw_tipping_button_remove_icon1'));
+            imagePreview($('#lnpw_tipping_button_icon2'), $('#lnpw_tipping_icon2'));
+            imageRemove($('.lnpw_tipping_button_remove_icon2'));
+            imagePreview($('#lnpw_tipping_button_icon3'), $('#lnpw_tipping_icon3'));
+            imageRemove($('.lnpw_tipping_button_remove_icon3'));
+        });
 
-            var custom_uploader
-              , click_elem = $('#lnpw_tipping_button_image')
-              , target = $('#lnpw_tipping_image');
+function imagePreview(click_elem, target){
+  var custom_uploader
+              , click_elem
+              , target 
 
             click_elem.click(function(e) {
                 e.preventDefault();
@@ -213,7 +223,9 @@ $(document).ready(function($){
                 
                 custom_uploader.open();
             });
-            $('.lnpw_tipping_button_remove').click(function(e){
+}
+function imageRemove(remove){
+  $(remove).click(function(e){
  
                 e.preventDefault();
             
@@ -221,6 +233,5 @@ $(document).ready(function($){
                 button.next().val(''); 
                 button.hide().prev().html('Upload image');
       });      
-        });
-  
+}
 })(jQuery);

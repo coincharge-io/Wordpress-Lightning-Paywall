@@ -156,7 +156,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_view', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_dimension')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => ''));
 
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false'));
@@ -179,7 +179,10 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text_color', array('type' => 'string', 'default' => '#FFFFFF', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_dimension')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon1', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon2', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon3', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency1', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price1', array('type' => 'number', 'default' => 1000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency2', array('type' => 'string', 'default' => 'SATS'));
@@ -236,7 +239,7 @@ class Lightning_Paywall_Admin
 		return $value;
 	}
 
-	public function sanitize_dimension($value)
+	public function sanitize_text($value)
 	{
 
 		$value = sanitize_text_field($value);
