@@ -864,7 +864,7 @@ class Lightning_Paywall_Public
 		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
 		$btn_color = get_option('lnpw_tipping_button_color');
 		$background_color = get_option('lnpw_tipping_background');
-		$image = get_option('lnpw_tipping_image');
+		$image = wp_get_attachment_image_src(get_option('lnpw_tipping_image'));
 		$collect = get_option('lnpw_tipping_collect');
 		$redirect = get_option('lnpw_tipping_redirect');
 		$name = get_option('lnpw_tipping_collect_name');
@@ -886,8 +886,10 @@ class Lightning_Paywall_Public
 		$predefined1 = "{$default_price1} {$default_currency1}";
 		$predefined2 = "{$default_price2} {$default_currency2}";
 		$predefined3 = "{$default_price3} {$default_currency3}";
+		$icon1 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon1'), array('20', '20'));
+		$icon2 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon2'), array('20', '20'));
+		$icon3 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon3'), array('20', '20'));
 		ob_start();
-
 	?>
 		<style>
 			.lnpw_tipping_container {
@@ -907,7 +909,7 @@ class Lightning_Paywall_Public
 			<div class="header_container">
 				<div class="image_container">
 					<?php if ($image) : ?>
-						<img width="200" height="200" alt="Tipping banner" src=<?php echo $image; ?> />
+						<img width="200" height="200" alt="Tipping banner" src=<?php echo $image[0]; ?> />
 					<?php endif; ?>
 				</div>
 				<div class="info_container">
@@ -923,17 +925,32 @@ class Lightning_Paywall_Public
 				<form method="POST" action="" id="tipping_form">
 					<fieldset>
 						<h4>Enter Tipping Amount</h4>
-						<div>
-							<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
+						<div class="predefined_container">
 							<input type="radio" class="lnpw_tipping_default_amount" id="predefined1" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined1); ?>">
+							<?php if ($icon1) : ?>
+								<img src=<?php echo $icon1[0]; ?> alt="Value 1" />
+							<?php else : ?>
+								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
+							<?php endif; ?>
+
 						</div>
-						<div>
-							<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined2); ?> </label>
+						<div class="predefined_container">
 							<input type="radio" id="predefined2" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined2); ?>">
+							<?php if ($icon2) : ?>
+								<img src=<?php echo $icon2[0]; ?> alt="Value 2" />
+							<?php else : ?>
+								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined2); ?></label>
+							<?php endif; ?>
+
 						</div>
-						<div>
-							<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined3); ?></label>
+						<div class="predefined_container">
 							<input type="radio" id="predefined3" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined3); ?>">
+							<?php if ($icon3) : ?>
+								<img src=<?php echo $icon3[0]; ?> alt="Value 3" />
+							<?php else : ?>
+								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined3); ?></label>
+							<?php endif; ?>
+
 						</div>
 						<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
 							<option disabled value="">Select currency</option>

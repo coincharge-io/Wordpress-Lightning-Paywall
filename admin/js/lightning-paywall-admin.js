@@ -227,11 +227,11 @@ function imagePreview(click_elem, target){
 function imageRemove(remove){
   $(remove).click(function(e){
  
-                e.preventDefault();
-            
-                var button = $(this);
-                button.next().val(''); 
-                button.hide().prev().html('Upload image');
+  e.preventDefault();
+
+  var button = $(this);
+  button.next().val(''); 
+  button.hide().prev().html('Upload image');
       });      
 }
 })(jQuery);
