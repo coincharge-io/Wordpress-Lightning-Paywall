@@ -63,6 +63,22 @@ $default_currency3 = get_option('lnpw_default_currency3');
         </div>
         <div class="row">
             <div class="col-20">
+                <label for="lnpw_tipping_image">Tipping Logo</label>
+            </div>
+            <div class="col-80">
+                <?php if ($image) : ?>
+                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image"><img src="<?php echo $image[0]; ?>" /></a></button>
+                    <button class="lnpw_tipping_button_remove">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
+                <?php else : ?>
+                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image">Upload</button>
+                    <button class="lnpw_tipping_button_remove" style="display:none">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
                 <label for="lnpw_tipping_title">Title</label>
             </div>
             <div class="col-80">
@@ -216,25 +232,10 @@ $default_currency3 = get_option('lnpw_default_currency3');
 
             </div>
         </div>
+
         <div class="row">
             <div class="col-20">
-                <label for="lnpw_tipping_image">Image</label>
-            </div>
-            <div class="col-80">
-                <?php if ($image) : ?>
-                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image"><img src="<?php echo $image[0]; ?>" /></a></button>
-                    <button class="lnpw_tipping_button_remove">Remove image</button>
-                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
-                <?php else : ?>
-                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image">Upload</button>
-                    <button class="lnpw_tipping_button_remove" style="display:none">Remove image</button>
-                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
-                <?php endif; ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-20">
-                <label for="lnpw_tipping_collect">Do you want to collect information?</label>
+                <label for="lnpw_tipping_collect">Collect further information?</label>
             </div>
             <div class="col-80">
                 <input type="hidden" class="lnpw_tipping_collect" name="lnpw_tipping_collect" value='false' />

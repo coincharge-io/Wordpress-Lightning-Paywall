@@ -359,7 +359,7 @@ class Lightning_Paywall_Public
 			$collect .= "Phone: {$phone}; ";
 		}
 		if (!empty($_POST['message'])) {
-			$email = sanitize_text_field($_POST['message']);
+			$message = sanitize_text_field($_POST['message']);
 			$collect .= "Message: {$message}; ";
 		}
 
@@ -858,8 +858,8 @@ class Lightning_Paywall_Public
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$used_currency  = get_option('lnpw_tipping_currency');
 		$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
-		$title = get_option('lnpw_tipping_title');
-		$description = get_option('lnpw_tipping_description');
+		$title = get_option('lnpw_tipping_title', 'Tipping');
+		$description = get_option('lnpw_tipping_description', 'No description');
 		$btn_text = get_option('lnpw_tipping_button_text', 'Tip');
 		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
 		$btn_color = get_option('lnpw_tipping_button_color');
@@ -889,6 +889,7 @@ class Lightning_Paywall_Public
 		$icon1 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon1'), array('20', '20'));
 		$icon2 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon2'), array('20', '20'));
 		$icon3 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon3'), array('20', '20'));
+
 		ob_start();
 	?>
 		<style>
@@ -907,19 +908,21 @@ class Lightning_Paywall_Public
 
 		<div class="lnpw_tipping_container">
 			<div class="header_container">
-				<div class="image_container">
-					<?php if ($image) : ?>
-						<img width="200" height="200" alt="Tipping banner" src=<?php echo $image[0]; ?> />
-					<?php endif; ?>
-				</div>
-				<div class="info_container">
-					<?php if ($title) : ?>
-						<h2><?php echo esc_html($title); ?></h2>
-					<?php endif; ?>
-					<?php if ($description) : ?>
-						<p><?php echo esc_html($description); ?></p>
-					<?php endif; ?>
-				</div>
+				<?php if ($image) : ?>
+					<div>
+						<img width="100" height="100" alt="Tipping banner" src=<?php echo $image[0]; ?> />
+					</div>
+				<?php endif; ?>
+				<?php if ($title) : ?>
+					<div>
+						<h6><?php echo esc_html($title); ?></h6>
+					</div>
+				<?php endif; ?>
+			</div>
+			<div class="info_container">
+				<?php if ($description) : ?>
+					<p><?php echo esc_html($description); ?></p>
+				<?php endif; ?>
 			</div>
 			<div class="lnpw_tipping_info">
 				<form method="POST" action="" id="tipping_form">
@@ -961,7 +964,7 @@ class Lightning_Paywall_Public
 							<?php endforeach; ?>
 						</select>
 						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
-						<input type="number" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
+						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
 						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
 						<?php if ($collect === 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />

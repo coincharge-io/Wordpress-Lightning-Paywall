@@ -156,21 +156,33 @@ $(document).ready(function(){
       var currency = $("#lnpw_tipping_currency").val();
       var amount = $(this).val();
       var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
-    
-      $("#lnpw_converted_amount").attr('readonly', false).val(converted).attr('readonly', true);
+      var converted_amount = '~' + fiat_to_crypto(currency, amount, usd, eur, sats)+ ' '+get_currency(currency)
+      $("#lnpw_converted_amount").attr('readonly', false).val(converted_amount).attr('readonly', true);
     })
 })
 function fiat_to_crypto(currency, val, usd, eur, sats){
   var value = Number(val);
   switch (currency){
     case 'BTC':
-       return value*usd;
+       return (value*usd).toFixed(2);
     case 'USD':
         return ((sats/usd)*value).toFixed(0);
     case 'EUR':
         return ((sats/eur)*value).toFixed(0);
     default:
-        return (usd/sats)*value;
+        return ((usd/sats)*value).toFixed(2);
+  }
+}
+function get_currency(currency){
+  switch (currency){
+    case 'BTC':
+       return 'USD';
+    case 'USD':
+        return 'SATS';
+    case 'EUR':
+        return 'SATS';
+    default:
+        return 'USD';
   }
 }
 $(document).ready(function(){ 
