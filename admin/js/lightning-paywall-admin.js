@@ -185,13 +185,13 @@
   });
 $(document).ready(function($){
             imagePreview($('#lnpw_tipping_button_image'), $('#lnpw_tipping_image'));
-            imagePreview($('#lnpw_tipping_button_icon1'), $('#lnpw_tipping_icon1'));
+            //imagePreview($('#lnpw_tipping_button_icon1'), $('#lnpw_tipping_icon1'));
             imageRemove($('.lnpw_tipping_button_remove'));
-            imageRemove($('.lnpw_tipping_button_remove_icon1'));
+           /* imageRemove($('.lnpw_tipping_button_remove_icon1'));
             imagePreview($('#lnpw_tipping_button_icon2'), $('#lnpw_tipping_icon2'));
             imageRemove($('.lnpw_tipping_button_remove_icon2'));
             imagePreview($('#lnpw_tipping_button_icon3'), $('#lnpw_tipping_icon3'));
-            imageRemove($('.lnpw_tipping_button_remove_icon3'));
+            imageRemove($('.lnpw_tipping_button_remove_icon3'));*/
         });
 
 function imagePreview(click_elem, target){

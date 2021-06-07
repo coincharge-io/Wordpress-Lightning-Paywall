@@ -96,7 +96,6 @@ a.lnpw_pay__download{
 .header_container{
   display: flex;
   justify-content: space-around;
-  border: solid;
 }
 .info_container{
   text-align: center;

@@ -51,6 +51,8 @@ class Lightning_Paywall_Public
 	{
 
 		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/lightning-paywall-public.css', array(), null, 'all');
+
+		wp_enqueue_style('load-fa', 'https://use.fontawesome.com/releases/v5.12.1/css/all.css');
 	}
 
 	/**
@@ -886,10 +888,10 @@ class Lightning_Paywall_Public
 		$predefined1 = "{$default_price1} {$default_currency1}";
 		$predefined2 = "{$default_price2} {$default_currency2}";
 		$predefined3 = "{$default_price3} {$default_currency3}";
-		$icon1 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon1'), array('20', '20'));
-		$icon2 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon2'), array('20', '20'));
-		$icon3 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon3'), array('20', '20'));
-
+		$icon1 = get_option('lnpw_tipping_icon1');
+		//$icon2 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon2'), array('20', '20'));
+		$icon2 = get_option('lnpw_tipping_icon2');
+		$icon3 = get_option('lnpw_tipping_icon3');
 		ob_start();
 	?>
 		<style>
@@ -931,7 +933,7 @@ class Lightning_Paywall_Public
 						<div class="predefined_container">
 							<input type="radio" class="lnpw_tipping_default_amount" id="predefined1" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined1); ?>">
 							<?php if ($icon1) : ?>
-								<img src=<?php echo $icon1[0]; ?> alt="Value 1" />
+								<i class="<?php echo $icon1; ?>"></i>
 							<?php else : ?>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
 							<?php endif; ?>
@@ -940,7 +942,7 @@ class Lightning_Paywall_Public
 						<div class="predefined_container">
 							<input type="radio" id="predefined2" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined2); ?>">
 							<?php if ($icon2) : ?>
-								<img src=<?php echo $icon2[0]; ?> alt="Value 2" />
+								<i class="<?php echo $icon2; ?>"></i>
 							<?php else : ?>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined2); ?></label>
 							<?php endif; ?>
@@ -949,7 +951,7 @@ class Lightning_Paywall_Public
 						<div class="predefined_container">
 							<input type="radio" id="predefined3" class="lnpw_tipping_default_amount" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined3); ?>">
 							<?php if ($icon3) : ?>
-								<img src=<?php echo $icon3[0]; ?> alt="Value 3" />
+								<i class="<?php echo $icon3; ?>"></i>
 							<?php else : ?>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined3); ?></label>
 							<?php endif; ?>
