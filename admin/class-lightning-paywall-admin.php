@@ -159,18 +159,18 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => ''));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_email', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_email', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name_mandatory', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_email_mandatory', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address_mandatory', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone_mandatory', array('type' => 'string', 'default' => 'false'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message_mandatory', array('type' => 'string', 'default' => 'false'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_email_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
@@ -185,7 +185,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon3', array('type' => 'string', 'default' => 'fas fa-cocktail
 		', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency1', array('type' => 'string', 'default' => 'SATS'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_predefined', array('type' => 'string', 'default' => 'true'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_predefined', array('type' => 'string', 'default' => 'true', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price1', array('type' => 'number', 'default' => 1000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency2', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price2', array('type' => 'number', 'default' => 2000));
@@ -208,22 +208,6 @@ class Lightning_Paywall_Admin
 		return $value;
 	}
 
-	/*public function sanitize_image($value)
-	{
-
-		$output = '';
-
-
-		$filetype = wp_check_filetype($value);
-		$mime_type = $filetype['type'];
-
-
-		if (strpos($mime_type, 'image') !== false) {
-			$output = $value;
-		}
-
-		return $output;
-	}*/
 
 	public function sanitize_payblock_area($value)
 	{
@@ -245,8 +229,11 @@ class Lightning_Paywall_Admin
 	{
 
 		$value = sanitize_text_field($value);
-
+		
 		return $value;
+	}
+	public function sanitize_mandatory($value){
+		return ( isset( $value ) ? 'true' : 'false' );
 	}
 	/**
 	 * Helper function for extracting permission string from server
