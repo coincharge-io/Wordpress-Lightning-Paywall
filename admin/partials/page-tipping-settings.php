@@ -12,11 +12,8 @@ $background_color = get_option('lnpw_tipping_background');
 $image_id = get_option('lnpw_tipping_image');
 $image = wp_get_attachment_image_src($image_id);
 $icon1 = get_option('lnpw_tipping_icon1');
-//$icon1 = wp_get_attachment_image_src($icon1_id, array('20', '20'), false);
 $icon2 = get_option('lnpw_tipping_icon2');
-//$icon2 = wp_get_attachment_image_src($icon2_id, array('20', '20'), false);
 $icon3 = get_option('lnpw_tipping_icon3');
-//$icon3 = wp_get_attachment_image_src($icon3_id, array('20', '20'), false);
 $collect = get_option('lnpw_tipping_collect');
 $redirect = get_option('lnpw_tipping_redirect');
 $name = get_option('lnpw_tipping_collect_name');
@@ -29,6 +26,7 @@ $mandatory_phone = get_option('lnpw_tipping_collect_phone_mandatory');
 $mandatory_email = get_option('lnpw_tipping_collect_email_mandatory');
 $mandatory_address = get_option('lnpw_tipping_collect_address_mandatory');
 $mandatory_message = get_option('lnpw_tipping_collect_message_mandatory');
+$predefined_enabled = get_option('lnpw_tipping_predefined');
 $default_price1 = get_option('lnpw_default_price1');
 $default_currency1 = get_option('lnpw_default_currency1');
 $default_price2 = get_option('lnpw_default_price2');
@@ -40,6 +38,9 @@ $default_currency3 = get_option('lnpw_default_currency3');
 <style>
     .container_donor_information {
         display: <?php echo $collect === 'true' ? 'block' : 'none'; ?>;
+    }
+    .container_predefined_amount {
+        display: <?php echo $predefined_enabled === 'true' ? 'block' : 'none'; ?>;
     }
 </style>
 <div>
@@ -111,6 +112,17 @@ $default_currency3 = get_option('lnpw_default_currency3');
         </div>
         <div class="row">
             <div class="col-20">
+                <label for="lnpw_tipping_predefined">Self-selected amount</label>
+            </div>
+            <div class="col-80">
+                <input type="hidden" class="lnpw_tipping_predefined" name="lnpw_tipping_predefined" value='false' />
+                <input type="checkbox" class="lnpw_tipping_predefined" name="lnpw_tipping_predefined" <?php echo $predefined_enabled === 'true' ? 'checked' : ''; ?> value="true" />
+
+            </div>
+        </div>
+        <div class="container_predefined_amount">
+        <div class="row">
+            <div class="col-20">
                 <label for="lnpw_default_price1">Default price1</label>
             </div>
             <div class="col-80">
@@ -166,6 +178,7 @@ $default_currency3 = get_option('lnpw_default_currency3');
                 </select>
 
                 <input type="text" id="lnpw_tipping_icon3" class="lnpw_tipping_icon3" name="lnpw_tipping_icon3" value="<?php echo $icon3; ?>" />
+            </div>
             </div>
         </div>
         <div class="row">

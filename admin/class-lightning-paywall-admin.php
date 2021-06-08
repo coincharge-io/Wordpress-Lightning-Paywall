@@ -180,10 +180,12 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon1', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon2', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon3', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon1', array('type' => 'string', 'default' => 'fas fa-coffee', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon2', array('type' => 'string', 'default' => 'fas fa-beer', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon3', array('type' => 'string', 'default' => 'fas fa-cocktail
+		', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency1', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_predefined', array('type' => 'string', 'default' => 'true'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price1', array('type' => 'number', 'default' => 1000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency2', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price2', array('type' => 'number', 'default' => 2000));

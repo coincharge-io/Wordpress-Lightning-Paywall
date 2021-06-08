@@ -889,9 +889,9 @@ class Lightning_Paywall_Public
 		$predefined2 = "{$default_price2} {$default_currency2}";
 		$predefined3 = "{$default_price3} {$default_currency3}";
 		$icon1 = get_option('lnpw_tipping_icon1');
-		//$icon2 = wp_get_attachment_image_src(get_option('lnpw_tipping_icon2'), array('20', '20'));
 		$icon2 = get_option('lnpw_tipping_icon2');
 		$icon3 = get_option('lnpw_tipping_icon3');
+
 		ob_start();
 	?>
 		<style>
