@@ -42,8 +42,20 @@ $default_currency3 = get_option('lnpw_default_currency3');
     .container_predefined_amount {
         display: <?php echo $predefined_enabled === 'true' ? 'block' : 'none'; ?>;
     }
-    .lnpw_tipping_collect_name_mandatory,{
-        display: <?php echo $name === 'true' ? 'inline' : 'none'; ?>;
+    .lnpw_tipping_collect_name_mandatory, label[for="lnpw_tipping_collect_name_mandatory"] {
+        visibility: <?php echo $name === 'true' ? '' : 'hidden'; ?>;
+    }
+    .lnpw_tipping_collect_email_mandatory, label[for="lnpw_tipping_collect_email_mandatory"] {
+        visibility: <?php echo $email === 'true' ? '' : 'hidden'; ?>;
+    }
+    .lnpw_tipping_collect_address_mandatory, label[for="lnpw_tipping_collect_address_mandatory"] {
+        visibility: <?php echo $address === 'true' ? '' : 'hidden'; ?>;
+    }
+    .lnpw_tipping_collect_phone_mandatory, label[for="lnpw_tipping_collect_phone_mandatory"] {
+        visibility: <?php echo $phone === 'true' ? '' : 'hidden'; ?>;
+    }
+    .lnpw_tipping_collect_message_mandatory, label[for="lnpw_tipping_collect_message_mandatory"] {
+        visibility: <?php echo $message === 'true' ? '' : 'hidden'; ?>;
     }
 </style>
 <div>

@@ -197,7 +197,17 @@ $(document).ready(function($){
             imageRemove($('.lnpw_tipping_button_remove'));
            
         });
+$(document).ready(function () {
+    showMore($('.lnpw_tipping_collect_name'), $('.lnpw_tipping_collect_name_mandatory, label[for="lnpw_tipping_collect_name_mandatory"]'));
 
+    showMore($('.lnpw_tipping_collect_email'), $('.lnpw_tipping_collect_email_mandatory, label[for="lnpw_tipping_collect_email_mandatory"]'));
+
+    showMore($('.lnpw_tipping_collect_phone'), $('.lnpw_tipping_collect_phone_mandatory, label[for="lnpw_tipping_collect_phone_mandatory"]'));
+
+    showMore($('.lnpw_tipping_collect_address'), $('.lnpw_tipping_collect_address_mandatory, label[for="lnpw_tipping_collect_address_mandatory"]'));
+
+    showMore($('.lnpw_tipping_collect_message'), $('.lnpw_tipping_collect_message_mandatory, label[for="lnpw_tipping_collect_message_mandatory"]'));
+  });
 function imagePreview(click_elem, target){
   var custom_uploader
               , click_elem
@@ -237,5 +247,14 @@ function imageRemove(remove){
   button.next().val(''); 
   button.hide().prev().html('Upload image');
       });      
+}
+function showMore(click_elem, target){
+  $(click_elem).click(function () {
+      if (!$(this).is(':checked')) {
+        $(target).css('visibility', 'hidden');
+      }else{
+        $(target).css('visibility', 'visible');
+      }
+    });
 }
 })(jQuery);
