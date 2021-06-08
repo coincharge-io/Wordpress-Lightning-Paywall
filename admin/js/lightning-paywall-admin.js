@@ -195,6 +195,9 @@
 $(document).ready(function($){
             imagePreview($('#lnpw_tipping_button_image'), $('#lnpw_tipping_image'));
             imageRemove($('.lnpw_tipping_button_remove'));
+
+            imagePreview($('#lnpw_tipping_button_image_background'), $('#lnpw_tipping_image_background'));
+            imageRemove($('.lnpw_tipping_button_remove_background'));
            
         });
 $(document).ready(function () {

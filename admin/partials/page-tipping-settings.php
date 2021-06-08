@@ -1,6 +1,7 @@
 <?php
 $supported_currencies   = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-$dimensions = ['250x250', '300x250', '240x400', '400x400', '500x500', '600x600'];
+$predefined_enabled = get_option('lnpw_tipping_predefined', 'true');
+$dimensions = $predefined_enabled === 'false' ? ['250x250', '300x250'] : ['400x400', '500x500', '600x600'];
 $used_currency  = get_option('lnpw_tipping_currency');
 $used_dimension      = get_option('lnpw_tipping_dimension');
 $title = get_option('lnpw_tipping_title');
@@ -9,8 +10,11 @@ $btn_text = get_option('lnpw_tipping_button_text');
 $btn_text_color = get_option('lnpw_tipping_button_text_color');
 $btn_color = get_option('lnpw_tipping_button_color');
 $background_color = get_option('lnpw_tipping_background');
+$background_text = get_option('lnpw_tipping_text');
 $image_id = get_option('lnpw_tipping_image');
 $image = wp_get_attachment_image_src($image_id);
+$image_background_id = get_option('lnpw_tipping_image_background');
+$image_background = wp_get_attachment_image_src($image_background_id);
 $icon1 = get_option('lnpw_tipping_icon1');
 $icon2 = get_option('lnpw_tipping_icon2');
 $icon3 = get_option('lnpw_tipping_icon3');
@@ -26,7 +30,6 @@ $mandatory_phone = get_option('lnpw_tipping_collect_phone_mandatory');
 $mandatory_email = get_option('lnpw_tipping_collect_email_mandatory');
 $mandatory_address = get_option('lnpw_tipping_collect_address_mandatory');
 $mandatory_message = get_option('lnpw_tipping_collect_message_mandatory');
-$predefined_enabled = get_option('lnpw_tipping_predefined');
 $default_price1 = get_option('lnpw_default_price1');
 $default_currency1 = get_option('lnpw_default_currency1');
 $default_price2 = get_option('lnpw_default_price2');
@@ -95,6 +98,22 @@ $default_currency3 = get_option('lnpw_default_currency3');
         </div>
         <div class="row">
             <div class="col-20">
+                <label for="lnpw_tipping_image_background">Tipping Background</label>
+            </div>
+            <div class="col-80">
+                <?php if ($image_background) : ?>
+                    <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background"><img src="<?php echo $image_background[0]; ?>" /></a></button>
+                    <button class="lnpw_tipping_button_remove_background">Remove background image</button>
+                    <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image_background" value=<?php echo $image_background_id; ?> />
+                <?php else : ?>
+                    <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background">Upload background image</button>
+                    <button class="lnpw_tipping_button_remove_background" style="display:none">Remove image</button>
+                    <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image_background" value=<?php echo $image_background_id; ?> />
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
                 <label for="lnpw_tipping_title">Title</label>
             </div>
             <div class="col-80">
@@ -107,6 +126,14 @@ $default_currency3 = get_option('lnpw_default_currency3');
             </div>
             <div class="col-80">
                 <textarea id="lnpw_tipping_description" name="lnpw_tipping_description"><?php echo $description; ?></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_text">Tipping text</label>
+            </div>
+            <div class="col-80">
+                <textarea id="lnpw_tipping_text" name="lnpw_tipping_text"><?php echo $background_text; ?></textarea>
             </div>
         </div>
         <div class="row">
@@ -131,7 +158,6 @@ $default_currency3 = get_option('lnpw_default_currency3');
             </div>
             <div class="col-80">
                 <input type="checkbox" class="lnpw_tipping_predefined" name="lnpw_tipping_predefined" <?php echo $predefined_enabled === 'true' ? 'checked' : ''; ?> value="true" />
-
             </div>
         </div>
         <div class="container_predefined_amount">
@@ -240,7 +266,7 @@ $default_currency3 = get_option('lnpw_default_currency3');
 
         <div class="row">
             <div class="col-20">
-                <label for="lnpw_tipping_collect">Collect further information?</label>
+                <label for="lnpw_tipping_collect">Collect further information</label>
             </div>
             <div class="col-80">
                 <input type="checkbox" class="lnpw_tipping_collect" name="lnpw_tipping_collect" <?php echo $collect === 'true' ? 'checked' : ''; ?> value="true" />

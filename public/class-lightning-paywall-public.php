@@ -891,6 +891,9 @@ class Lightning_Paywall_Public
 		$icon1 = get_option('lnpw_tipping_icon1');
 		$icon2 = get_option('lnpw_tipping_icon2');
 		$icon3 = get_option('lnpw_tipping_icon3');
+		$background_text = get_option('lnpw_tipping_text', 'Enter Tipping Amount');
+		$predefined_enabled = get_option('lnpw_tipping_predefined');
+		$image_background = wp_get_attachment_image_src(get_option('lnpw_tipping_image_background'));
 
 		ob_start();
 	?>
@@ -899,11 +902,17 @@ class Lightning_Paywall_Public
 				background-color: <?php echo $background_color; ?>;
 				width: <?php echo $dimension[0] . 'px'; ?>;
 				height: <?php echo $dimension[1] . 'px'; ?>;
+				background-image: url(<?php echo $image_background[0]; ?>);
+				background-size: cover;
+			    background-repeat: no-repeat;
 			}
 
 			#lnpw_tipping__button {
 				color: <?php echo $btn_text_color; ?>;
 				background: <?php echo $btn_color; ?>;
+			}
+			.predefined_container{
+				display: <?php echo $predefined_enabled === 'true' ? 'block' : 'none';?>;
 			}
 		</style>
 
@@ -929,7 +938,7 @@ class Lightning_Paywall_Public
 			<div class="lnpw_tipping_info">
 				<form method="POST" action="" id="tipping_form">
 					<fieldset>
-						<h4>Enter Tipping Amount</h4>
+						<h4><?php echo $background_text; ?></h4>
 						<div class="predefined_container">
 							<input type="radio" class="lnpw_tipping_default_amount" id="predefined1" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined1); ?>">
 							<?php if ($icon1) : ?>
