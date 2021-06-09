@@ -159,8 +159,31 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => ''));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'array', 'default' => array(
+			'name' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'email' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'address' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'phone' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'message' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+
+		), 'sanitize_callback' => array($this, 'validate_collect_info')));
+		//register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		/*register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_name', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_email', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
@@ -171,7 +194,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_address_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
-
+*/
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_text', array('type' => 'string', 'default' => 'Enter Tipping Amount', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
@@ -193,9 +216,22 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price2', array('type' => 'number', 'default' => 2000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency3', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price3', array('type' => 'number', 'default' => 3000));
-
 	}
 
+	public function validate_collect_info($values)
+	{
+		$default_values	= array();
+
+		if (!is_array($values)) {
+			return $default_values;
+		}
+
+		foreach ($values as $key => $value) {
+			$default_values[$key]['collect'] = (isset($value['collect']) ? 'true' : 'false');
+			$default_values[$key]['mandatory'] = (isset($value['mandatory']) ? 'true' : 'false');
+		}
+		return $default_values;
+	}
 	public function sanitize_btcpay_server_url($value)
 	{
 
@@ -232,14 +268,14 @@ class Lightning_Paywall_Admin
 	{
 
 		$value = sanitize_text_field($value);
-		
+
 		return $value;
 	}
 
-	public function sanitize_mandatory($value){
+	public function sanitize_mandatory($value)
+	{
 
-		return ( isset( $value ) ? 'true' : 'false' );
-	
+		return (isset($value) ? 'true' : 'false');
 	}
 	/**
 	 * Helper function for extracting permission string from server

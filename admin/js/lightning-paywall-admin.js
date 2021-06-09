@@ -161,20 +161,11 @@
     });
   });
   $(document).ready(function () {
-    $('.lnpw_tipping_collect').click(function () {
-      if (!$(this).is(':checked')) {
-        $(".container_donor_information").hide();
-      }else{
-        $(".container_donor_information").show()
-      }
-    });
-  });
-  $(document).ready(function () {
     $('.lnpw_tipping_predefined').click(function () {
       if (!$(this).is(':checked')) {
-        $(".container_predefined_amount").hide();
+        $(".container_predefined_amount").show();
       }else{
-        $(".container_predefined_amount").show()
+        $(".container_predefined_amount").hide()
       }
     });
   });
@@ -254,7 +245,7 @@ function imageRemove(remove){
 function showMore(click_elem, target){
   $(click_elem).click(function () {
       if (!$(this).is(':checked')) {
-        $(target).css('visibility', 'hidden');
+        $(target).prop('checked', false).css('visibility', 'hidden');
       }else{
         $(target).css('visibility', 'visible');
       }

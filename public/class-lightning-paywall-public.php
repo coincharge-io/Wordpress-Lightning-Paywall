@@ -904,15 +904,16 @@ class Lightning_Paywall_Public
 				height: <?php echo $dimension[1] . 'px'; ?>;
 				background-image: url(<?php echo $image_background[0]; ?>);
 				background-size: cover;
-			    background-repeat: no-repeat;
+				background-repeat: no-repeat;
 			}
 
 			#lnpw_tipping__button {
 				color: <?php echo $btn_text_color; ?>;
 				background: <?php echo $btn_color; ?>;
 			}
-			.predefined_container{
-				display: <?php echo $predefined_enabled === 'true' ? 'block' : 'none';?>;
+
+			.predefined_container {
+				display: <?php echo $predefined_enabled === 'true' ? 'none' : 'block'; ?>;
 			}
 		</style>
 
