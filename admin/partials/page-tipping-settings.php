@@ -15,17 +15,10 @@ $image_id = get_option('lnpw_tipping_image');
 $image = wp_get_attachment_image_src($image_id);
 $image_background_id = get_option('lnpw_tipping_image_background');
 $image_background = wp_get_attachment_image_src($image_background_id);
-$icon1 = get_option('lnpw_tipping_icon1');
-$icon2 = get_option('lnpw_tipping_icon2');
-$icon3 = get_option('lnpw_tipping_icon3');
 $redirect = get_option('lnpw_tipping_redirect');
 $collect = get_option('lnpw_tipping_collect');
-$default_price1 = get_option('lnpw_default_price1');
-$default_currency1 = get_option('lnpw_default_currency1');
-$default_price2 = get_option('lnpw_default_price2');
-$default_currency2 = get_option('lnpw_default_currency2');
-$default_price3 = get_option('lnpw_default_price3');
-$default_currency3 = get_option('lnpw_default_currency3');
+$fixed_amount = get_option('lnpw_tipping_fixed_amount');
+var_dump($fixed_amount)
 ?>
 
 <style>
@@ -34,28 +27,28 @@ $default_currency3 = get_option('lnpw_default_currency3');
     }
 
     .lnpw_tipping_collect_name_mandatory,
-    label[for="lnpw_tipping_collect_name_mandatory"] {
-        visibility: <?php echo $name === 'true' ? '' : 'hidden'; ?>;
+    label[for="lnpw_tipping_collect[name][mandatory]"] {
+        visibility: <?php echo $collect['name']['collect'] === 'true' ? '' : 'hidden'; ?>;
     }
 
     .lnpw_tipping_collect_email_mandatory,
-    label[for="lnpw_tipping_collect_email_mandatory"] {
-        visibility: <?php echo $email === 'true' ? '' : 'hidden'; ?>;
+    label[for="lnpw_tipping_collect[email][mandatory]"] {
+        visibility: <?php echo $collect['email']['collect'] === 'true' ? '' : 'hidden'; ?>;
     }
 
     .lnpw_tipping_collect_address_mandatory,
-    label[for="lnpw_tipping_collect_address_mandatory"] {
-        visibility: <?php echo $address === 'true' ? '' : 'hidden'; ?>;
+    label[for="lnpw_tipping_collect[address][mandatory]"] {
+        visibility: <?php echo $collect['address']['collect'] === 'true' ? '' : 'hidden'; ?>;
     }
 
     .lnpw_tipping_collect_phone_mandatory,
-    label[for="lnpw_tipping_collect_phone_mandatory"] {
-        visibility: <?php echo $phone === 'true' ? '' : 'hidden'; ?>;
+    label[for="lnpw_tipping_collect[phone][mandatory]"] {
+        visibility: <?php echo $collect['phone']['collect'] === 'true' ? '' : 'hidden'; ?>;
     }
 
     .lnpw_tipping_collect_message_mandatory,
-    label[for="lnpw_tipping_collect_message_mandatory"] {
-        visibility: <?php echo $message === 'true' ? '' : 'hidden'; ?>;
+    label[for="lnpw_tipping_collect[message][mandatory]"] {
+        visibility: <?php echo $collect['message']['collect'] === 'true' ? '' : 'hidden'; ?>;
     }
 </style>
 <div>
@@ -163,18 +156,19 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_default_price1">Default price1</label>
                 </div>
                 <div class="col-80">
-                    <input required type="number" min=0 placeholder="Default Price1" step=1 name="lnpw_default_price1" id="lnpw_default_price1" value="<?php echo $default_price1 ?>">
+                    <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_fixed_amount[value1][enabled]" <?php echo $fixed_amount['value1']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="number" min=0 placeholder="Default Price1" step=1 name="lnpw_tipping_fixed_amount[value1][amount]" id="lnpw_default_price1" value="<?php echo $fixed_amount['value1']['amount']; ?>">
 
-                    <select required name="lnpw_default_currency1" id="lnpw_default_currency1">
+                    <select required name="lnpw_tipping_fixed_amount[value1][currency]" id="lnpw_default_currency1">
                         <option disabled value="">Select currency</option>
                         <?php foreach ($supported_currencies as $currency) : ?>
-                            <option <?php echo $default_currency1 === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+                            <option <?php echo $fixed_amount['value1']['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
                                 <?php echo $currency; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
 
-                    <input type="text" id="lnpw_tipping_icon1" class="lnpw_tipping_icon1" name="lnpw_tipping_icon1" value="<?php echo $icon1; ?>" />
+                    <input type="text" id="lnpw_tipping_icon1" class="lnpw_tipping_icon1" name="lnpw_tipping_fixed_amount[value1][icon]" value="<?php echo $fixed_amount['value1']['icon']; ?>" />
                 </div>
             </div>
             <div class="row">
@@ -182,20 +176,19 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_default_price2">Default price2</label>
                 </div>
                 <div class="col-80">
-                    <input required type="number" min=0 placeholder="Default Price2" step=1 name="lnpw_default_price2" id="lnpw_default_price2" value="<?php echo $default_price2 ?>">
+                    <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_fixed_amount[value2][enabled]" <?php echo $fixed_amount['value2']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="number" min=0 placeholder="Default Price2" step=1 name="lnpw_tipping_fixed_amount[value2][amount]" id="lnpw_default_price2" value="<?php echo $fixed_amount['value2']['amount']; ?>">
 
-                    <select required name="lnpw_default_currency2" id="lnpw_default_currency2">
+                    <select required name="lnpw_tipping_fixed_amount[value2][currency]" id="lnpw_default_currency2">
                         <option disabled value="">Select currency</option>
                         <?php foreach ($supported_currencies as $currency) : ?>
-                            <option <?php echo $default_currency2 === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+                            <option <?php echo $fixed_amount['value2']['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
                                 <?php echo $currency; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
 
-
-
-                    <input type="text" id="lnpw_tipping_icon2" class="lnpw_tipping_icon2" name="lnpw_tipping_icon2" value="<?php echo $icon2; ?>" />
+                    <input type="text" id="lnpw_tipping_icon2" class="lnpw_tipping_icon2" name="lnpw_tipping_fixed_amount[value2][icon]" value="<?php echo $fixed_amount['value2']['icon']; ?>" />
                 </div>
             </div>
             <div class="row">
@@ -203,18 +196,19 @@ $default_currency3 = get_option('lnpw_default_currency3');
                     <label for="lnpw_default_price3">Default price3</label>
                 </div>
                 <div class="col-80">
-                    <input required type="number" min=0 placeholder="Default Price3" step=1 name="lnpw_default_price3" id="lnpw_default_price3" value="<?php echo $default_price3 ?>">
+                    <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_fixed_amount[value3][enabled]" <?php echo $fixed_amount['value3']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="number" min=0 placeholder="Default Price3" step=1 name="lnpw_tipping_fixed_amount[value3][amount]" id="lnpw_default_price3" value="<?php echo $fixed_amount['value3']['amount']; ?>">
 
-                    <select required name="lnpw_default_currency3" id="lnpw_default_currency3">
+                    <select required name="lnpw_tipping_fixed_amount[value3][currency]" id="lnpw_default_currency3">
                         <option disabled value="">Select currency</option>
                         <?php foreach ($supported_currencies as $currency) : ?>
-                            <option <?php echo $default_currency3 === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+                            <option <?php echo $fixed_amount['value3']['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
                                 <?php echo $currency; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
 
-                    <input type="text" id="lnpw_tipping_icon3" class="lnpw_tipping_icon3" name="lnpw_tipping_icon3" value="<?php echo $icon3; ?>" />
+                    <input type="text" id="lnpw_tipping_icon3" class="lnpw_tipping_icon3" name="lnpw_tipping_fixed_amount[value3][icon]" value="<?php echo $fixed_amount['value3']['icon']; ?>" />
                 </div>
             </div>
         </div>
@@ -260,67 +254,75 @@ $default_currency3 = get_option('lnpw_default_currency3');
 
             </div>
         </div>
-</div>
-<h4>Collect further information</h4>
-<div class="row">
-    <div class="col-20">
-        <label for="lnpw_tipping_collect[name][collect]">Full name</label>
-    </div>
-    <div class="col-80">
-        <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect[name][collect]" <?php echo $collect['name']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
+        <h4>Collect further information</h4>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_collect[name][collect]">Full name</label>
+            </div>
+            <div class="col-80">
+                <label for="lnpw_tipping_collect[name][collect]">Display</label>
+
+                <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect[name][collect]" <?php echo $collect['name']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
 
 
-        <input type="checkbox" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect[name][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-        <label for="lnpw_tipping_collect[name][mandatory]">Mandatory</label>
-    </div>
-</div>
-<div class="row">
-    <div class="col-20">
-        <label for="lnpw_tipping_collect[email][collect]">Email</label>
-    </div>
-    <div class="col-80">
-        <input type="checkbox" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect[email][collect]" <?php echo $collect['email']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <input type="checkbox" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect[name][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <label for="lnpw_tipping_collect[name][mandatory]">Mandatory</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_collect[email][collect]">Email</label>
+            </div>
+            <div class="col-80">
+                <label for="lnpw_tipping_collect[email][collect]">Display</label>
 
-        <input type="checkbox" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect[email][mandatory]" <?php echo $collect['email']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-        <label for="lnpw_tipping_collect[email][mandatory]">Mandatory</label>
-    </div>
-</div>
-<div class="row">
-    <div class="col-20">
-        <label for="lnpw_tipping_collect[address][collect]">Address</label>
-    </div>
-    <div class="col-80">
-        <input type="checkbox" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect[address][collect]" <?php echo $collect['address']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <input type="checkbox" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect[email][collect]" <?php echo $collect['email']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
 
-        <input type="checkbox" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect[address][mandatory]" <?php echo $collect['address']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-        <label for="lnpw_tipping_collect[address][mandatory]">Mandatory</label>
-    </div>
-</div>
-<div class="row">
-    <div class="col-20">
-        <label for="lnpw_tipping_collect[phone][collect]">Phone number</label>
-    </div>
-    <div class="col-80">
-        <input type="checkbox" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect[phone][collect]" <?php echo $collect['phone']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <input type="checkbox" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect[email][mandatory]" <?php echo $collect['email']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <label for="lnpw_tipping_collect[email][mandatory]">Mandatory</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_collect[address][collect]">Address</label>
+            </div>
+            <div class="col-80">
+                <label for="lnpw_tipping_collect[address][collect]">Display</label>
 
-        <input type="checkbox" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect[phone][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-        <label for="lnpw_tipping_collect[phone][mandatory]">Mandatory</label>
-    </div>
-</div>
-<div class="row">
-    <div class="col-20">
-        <label for="lnpw_tipping_collect[message][collect]">Message</label>
-    </div>
-    <div class="col-80">
-        <input type="checkbox" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect[message][collect]" <?php echo $collect['message']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <input type="checkbox" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect[address][collect]" <?php echo $collect['address']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
 
-        <input type="checkbox" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect[message][mandatory]" <?php echo $collect['message']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-        <label for="lnpw_tipping_collect[message][mandatory]">Mandatory</label>
-    </div>
-</div>
+                <input type="checkbox" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect[address][mandatory]" <?php echo $collect['address']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <label for="lnpw_tipping_collect[address][mandatory]">Mandatory</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_collect[phone][collect]">Phone number</label>
+            </div>
+            <div class="col-80">
+                <label for="lnpw_tipping_collect[phone][collect]">Display</label>
 
-<div style="display: inline-block; margin-top: 25px;">
-    <button class="button button-primary" type="submit">Save</button>
-</div>
-</form>
+                <input type="checkbox" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect[phone][collect]" <?php echo $collect['phone']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
+
+                <input type="checkbox" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect[phone][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <label for="lnpw_tipping_collect[phone][mandatory]">Mandatory</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_collect[message][collect]">Message</label>
+            </div>
+            <div class="col-80">
+                <label for="lnpw_tipping_collect[message][collect]">Display</label>
+                <input type="checkbox" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect[message][collect]" <?php echo $collect['message']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
+
+                <input type="checkbox" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect[message][mandatory]" <?php echo $collect['message']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                <label for="lnpw_tipping_collect[message][mandatory]">Mandatory</label>
+            </div>
+        </div>
+
+        <div style="display: inline-block; margin-top: 25px;">
+            <button class="button button-primary" type="submit">Save</button>
+        </div>
+    </form>
 </div>

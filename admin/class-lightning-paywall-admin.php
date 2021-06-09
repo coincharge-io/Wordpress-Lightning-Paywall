@@ -195,6 +195,28 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_phone_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect_message_mandatory', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 */
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_fixed_amount', array(
+			'type' => 'array', 'default' => array(
+				'value1' => array(
+					'enabled' 	=> 'false',
+					'currency' => 'SATS',
+					'amount'	=> 1000,
+					'icon'		=> 'fas fa-coffee'
+				),
+				'value2' => array(
+					'enabled' 	=> 'false',
+					'currency' => 'SATS',
+					'amount'	=> 2000,
+					'icon'		=> 'fas fa-beer'
+				),
+				'value3' => array(
+					'enabled' 	=> 'false',
+					'currency' => 'SATS',
+					'amount'	=> 3000,
+					'icon'		=> 'fas fa-cocktail'
+				),
+			), 'sanitize_callback' => array($this, 'validate_predefined_values')
+		));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_text', array('type' => 'string', 'default' => 'Enter Tipping Amount', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
@@ -205,22 +227,83 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image_background', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon1', array('type' => 'string', 'default' => 'fas fa-coffee', 'sanitize_callback' => array($this, 'sanitize_text')));
+		/*register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon1', array('type' => 'string', 'default' => 'fas fa-coffee', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon2', array('type' => 'string', 'default' => 'fas fa-beer', 'sanitize_callback' => array($this, 'sanitize_text')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_icon3', array('type' => 'string', 'default' => 'fas fa-cocktail
 		', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_default_currency1', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_tipping_settings', 'lnpw_default_currency1', array('type' => 'string', 'default' => 'SATS'));*/
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_predefined', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
-		register_setting('lnpw_tipping_settings', 'lnpw_default_price1', array('type' => 'number', 'default' => 1000));
+		/*register_setting('lnpw_tipping_settings', 'lnpw_default_price1', array('type' => 'number', 'default' => 1000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency2', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_price2', array('type' => 'number', 'default' => 2000));
 		register_setting('lnpw_tipping_settings', 'lnpw_default_currency3', array('type' => 'string', 'default' => 'SATS'));
-		register_setting('lnpw_tipping_settings', 'lnpw_default_price3', array('type' => 'number', 'default' => 3000));
+		register_setting('lnpw_tipping_settings', 'lnpw_default_price3', array('type' => 'number', 'default' => 3000));*/
+	}
+
+	public function validate_predefined_values($values)
+	{
+
+		$default_values	= array(
+			'value1' => array(
+				'enabled' 	=> 'false',
+				'currency' => 'SATS',
+				'amount'	=> 1000,
+				'icon'		=> 'fas fa-coffee'
+			),
+			'value2' => array(
+				'enabled' 	=> 'false',
+				'currency' => 'SATS',
+				'amount'	=> 2000,
+				'icon'		=> 'fas fa-beer'
+			),
+			'value3' => array(
+				'enabled' 	=> 'false',
+				'currency' => 'SATS',
+				'amount'	=> 3000,
+				'icon'		=> 'fas fa-cocktail'
+			),
+
+		);
+
+		if (!is_array($values)) {
+			return $default_values;
+		}
+
+		foreach ($values as $key => $value) {
+			$default_values[$key]['enabled'] = (isset($value['enabled']) ? 'true' : 'false');
+			$default_values[$key]['currency'] = $value['currency'];
+			$default_values[$key]['amount'] = $value['amount'];
+			$default_values[$key]['icon'] = sanitize_text_field($value['icon']);
+		}
+		return $default_values;
 	}
 
 	public function validate_collect_info($values)
 	{
-		$default_values	= array();
+
+		$default_values	= array(
+			'name' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'email' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'address' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'phone' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+			'message' => array(
+				'collect'	=> 'false',
+				'mandatory'	=> 'false'
+			),
+
+		);
 
 		if (!is_array($values)) {
 			return $default_values;

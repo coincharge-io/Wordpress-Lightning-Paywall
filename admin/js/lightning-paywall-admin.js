@@ -192,15 +192,15 @@ $(document).ready(function($){
            
         });
 $(document).ready(function () {
-    showMore($('.lnpw_tipping_collect_name'), $('.lnpw_tipping_collect_name_mandatory, label[for="lnpw_tipping_collect_name_mandatory"]'));
+    showMore($('.lnpw_tipping_collect_name'), $('.lnpw_tipping_collect_name_mandatory, label[for="lnpw_tipping_collect[name][mandatory]"]'));
 
-    showMore($('.lnpw_tipping_collect_email'), $('.lnpw_tipping_collect_email_mandatory, label[for="lnpw_tipping_collect_email_mandatory"]'));
+    showMore($('.lnpw_tipping_collect_email'), $('.lnpw_tipping_collect_email_mandatory, label[for="lnpw_tipping_collect[email][mandatory]"]'));
 
-    showMore($('.lnpw_tipping_collect_phone'), $('.lnpw_tipping_collect_phone_mandatory, label[for="lnpw_tipping_collect_phone_mandatory"]'));
+    showMore($('.lnpw_tipping_collect_phone'), $('.lnpw_tipping_collect_phone_mandatory, label[for="lnpw_tipping_collect[phone][mandatory]"]'));
 
-    showMore($('.lnpw_tipping_collect_address'), $('.lnpw_tipping_collect_address_mandatory, label[for="lnpw_tipping_collect_address_mandatory"]'));
+    showMore($('.lnpw_tipping_collect_address'), $('.lnpw_tipping_collect_address_mandatory, label[for="lnpw_tipping_collect[address][mandatory]"]'));
 
-    showMore($('.lnpw_tipping_collect_message'), $('.lnpw_tipping_collect_message_mandatory, label[for="lnpw_tipping_collect_message_mandatory"]'));
+    showMore($('.lnpw_tipping_collect_message'), $('.lnpw_tipping_collect_message_mandatory, label[for="lnpw_tipping_collect[message][mandatory]"]'));
   });
 function imagePreview(click_elem, target){
   var custom_uploader
