@@ -160,6 +160,11 @@
       },
     });
   });
+  $(document).ready(function(){
+  $(".lnpw_fixed_amount_enable").change(function(){
+    ($(this).is(':checked') ? $(this).next().prop('required', true) : $(this).next().prop('required', false));
+  })
+});
   $(document).ready(function () {
     $('.lnpw_tipping_enter_amount').click(function () {
       if (!$(this).is(':checked')) {

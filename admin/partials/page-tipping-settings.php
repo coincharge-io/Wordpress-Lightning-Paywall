@@ -146,7 +146,7 @@ $background = wp_get_attachment_image_src($image['background']);
                     <label for="lnpw_default_price1">Default price1</label>
                 </div>
                 <div class="col-80">
-                    <input type="checkbox" name="lnpw_tipping_fixed_amount[value1][enabled]" <?php echo $fixed_amount['value1']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="checkbox" class="lnpw_fixed_amount_enable" name="lnpw_tipping_fixed_amount[value1][enabled]" <?php echo $fixed_amount['value1']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
                     <input type="number" min=0 placeholder="Default Price1" step=1 name="lnpw_tipping_fixed_amount[value1][amount]" id="lnpw_default_price1" value="<?php echo $fixed_amount['value1']['amount']; ?>">
 
                     <select required name="lnpw_tipping_fixed_amount[value1][currency]" id="lnpw_default_currency1">
@@ -166,7 +166,7 @@ $background = wp_get_attachment_image_src($image['background']);
                     <label for="lnpw_default_price2">Default price2</label>
                 </div>
                 <div class="col-80">
-                    <input type="checkbox" name="lnpw_tipping_fixed_amount[value2][enabled]" <?php echo $fixed_amount['value2']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="checkbox" class="lnpw_fixed_amount_enable" name="lnpw_tipping_fixed_amount[value2][enabled]" <?php echo $fixed_amount['value2']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
                     <input type="number" min=0 placeholder="Default Price2" step=1 name="lnpw_tipping_fixed_amount[value2][amount]" id="lnpw_default_price2" value="<?php echo $fixed_amount['value2']['amount']; ?>">
 
                     <select required name="lnpw_tipping_fixed_amount[value2][currency]" id="lnpw_default_currency2">
@@ -186,7 +186,7 @@ $background = wp_get_attachment_image_src($image['background']);
                     <label for="lnpw_default_price3">Default price3</label>
                 </div>
                 <div class="col-80">
-                    <input type="checkbox" name="lnpw_tipping_fixed_amount[value3][enabled]" <?php echo $fixed_amount['value3']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="checkbox" class="lnpw_fixed_amount_enable" name="lnpw_tipping_fixed_amount[value3][enabled]" <?php echo $fixed_amount['value3']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
                     <input type="number" min=0 placeholder="Default Price3" step=1 name="lnpw_tipping_fixed_amount[value3][amount]" id="lnpw_default_price3" value="<?php echo $fixed_amount['value3']['amount']; ?>">
 
                     <select required name="lnpw_tipping_fixed_amount[value3][currency]" id="lnpw_default_currency3">

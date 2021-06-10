@@ -862,8 +862,8 @@ class Lightning_Paywall_Public
 			
 			}
 			
-			return;
 		}
+		return false;
 	}
 	/**
 	 * @param $atts
@@ -932,17 +932,17 @@ class Lightning_Paywall_Public
 			<div class="lnpw_tipping_info">
 				<form method="POST" action="" id="tipping_form">
 					<fieldset>
-						<h4><?php echo (!empty($text['background']) ?: 'Enter Tipping Amount'); ?></h4>
+						<h4><?php echo (!empty($text['info']) ? $text['info'] : 'Enter Tipping Amount'); ?></h4>
 						
 						<?php foreach($fixed_amount as $key=>$value): ?>
 						<?php if($fixed_amount[$key]['enabled'] === 'true'): ?>
 						<div class="predefined_container">
 							<input type="radio" class="lnpw_tipping_default_amount" id="<?php echo $key;?>" name="lnpw_tipping_default_amount" value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
-							<?php if ($fixed_amount[$key]['icon']) : ?>
+							<?php if(!empty($fixed_amount[$key]['amount'])) :?>
 								<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
-							<?php else : ?>
-								<label for="lnpw_tipping_default_amount"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
 							<?php endif; ?>
+								<label for="lnpw_tipping_default_amount"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
+							
 							</div>
 						<?php endif; ?>
 						<?php endforeach; ?>
@@ -957,9 +957,9 @@ class Lightning_Paywall_Public
 							<?php endforeach; ?>
 						</select>
 						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
-						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
+						
 						<?php endif; ?>
-
+						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
 						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
 						<?php if ($collect_data == 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
