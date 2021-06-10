@@ -874,36 +874,7 @@ class Lightning_Paywall_Public
 	{
 
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-		/*$used_currency  = get_option('lnpw_tipping_currency');
-		$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
-		$title = get_option('lnpw_tipping_title', 'Tipping');
-		$description = get_option('lnpw_tipping_description', 'No description');
-		$btn_text = get_option('lnpw_tipping_button_text', 'Tip');
-		$btn_text_color = get_option('lnpw_tipping_button_text_color', '#FFFFFF');
-		$btn_color = get_option('lnpw_tipping_button_color');
-		$background_color = get_option('lnpw_tipping_background');
-		$image = wp_get_attachment_image_src(get_option('lnpw_tipping_image'));
-		$collect = get_option('lnpw_tipping_collect');
-		$redirect = get_option('lnpw_tipping_redirect');
-		$name = get_option('lnpw_tipping_collect_name');
-		$phone = get_option('lnpw_tipping_collect_phone');
-		$email = get_option('lnpw_tipping_collect_email');
-		$address = get_option('lnpw_tipping_collect_address');
-		$message = get_option('lnpw_tipping_collect_message');
-		$mandatory_name = get_option('lnpw_tipping_collect_name_mandatory');
-		$mandatory_phone = get_option('lnpw_tipping_collect_phone_mandatory');
-		$mandatory_email = get_option('lnpw_tipping_collect_email_mandatory');
-		$mandatory_address = get_option('lnpw_tipping_collect_address_mandatory');
-		$mandatory_message = get_option('lnpw_tipping_collect_message_mandatory');
-		$default_price1 = get_option('lnpw_default_price1', 1000);
-		$default_currency1 = get_option('lnpw_default_currency1', 'SATS');
-		$default_price2 = get_option('lnpw_default_price2', 2000);
-		$default_currency2 = get_option('lnpw_default_currency2', 'SATS');
-		$default_price3 = get_option('lnpw_default_price3', 3000);
-		$default_currency3 = get_option('lnpw_default_currency3', 'SATS');
-		*/
 		$predefined_enabled = get_option('lnpw_tipping_enter_amount');
-		/*$dimensions = $predefined_enabled === 'true' ? ['250x250', '300x300'] : ['400x400', '500x500', '600x600'];*/
 		$used_currency  = get_option('lnpw_tipping_currency');
 		$used_dimension      = get_option('lnpw_tipping_dimension');
 		$redirect = get_option('lnpw_tipping_redirect');
@@ -916,20 +887,6 @@ class Lightning_Paywall_Public
 		$background = wp_get_attachment_image_src($image['background']);
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
 		$collect_data = $this->collect_is_enabled($collect);
-		var_dump($collect_data == 'true');
-		/*$predefined1 = "{$fixed_amount['value1']['amount']} {$fixed_amount['value1']['currency']}";
-		$predefined2 = "{$fixed_amount['value2']['amount']} {$fixed_amount['value2']['currency']}";
-		$predefined3 = "{$fixed_amount['value3']['amount']} {$fixed_amount['value3']['currency']}";*/
-		/*$icon1 = get_option('lnpw_tipping_icon1');
-		$icon2 = get_option('lnpw_tipping_icon2');
-		$icon3 = get_option('lnpw_tipping_icon3');
-		$background_text = get_option('lnpw_tipping_text', 'Enter Tipping Amount');
-		$predefined_enabled = get_option('lnpw_tipping_predefined');
-		$image_background = wp_get_attachment_image_src(get_option('lnpw_tipping_image_background'));*/
-		foreach($collect as $key => $value){
-			echo $key;
-			echo $collect[$key]['collect'];
-		}
 		ob_start();
 	?>
 		<style>

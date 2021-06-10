@@ -152,7 +152,7 @@ $(document).ready(function(){
           }
         },
       });
-    $("#lnpw_tipping_amount").change(function(){
+    $("#lnpw_tipping_amount").on('input', function(){
       var currency = $("#lnpw_tipping_currency").val();
       var amount = $(this).val();
       var converted = fiat_to_crypto(currency, amount, usd, eur, sats);

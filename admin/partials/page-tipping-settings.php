@@ -12,13 +12,6 @@ $color = get_option('lnpw_tipping_color');
 $image = get_option('lnpw_tipping_image');
 $logo = wp_get_attachment_image_src($image['logo']);
 $background = wp_get_attachment_image_src($image['background']);
-/*foreach (wp_load_alloptions() as $option => $value) {
-
-    if (strpos($option, 'lnpw_tipping') !== false) {
-
-        delete_option($option);
-    }
-}*/
 ?>
 
 <style>
