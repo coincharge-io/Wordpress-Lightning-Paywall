@@ -885,9 +885,10 @@ class Lightning_Paywall_Public
 		$default_currency2 = get_option('lnpw_default_currency2', 'SATS');
 		$default_price3 = get_option('lnpw_default_price3', 3000);
 		$default_currency3 = get_option('lnpw_default_currency3', 'SATS');
-		$predefined1 = "{$default_price1} {$default_currency1}";
-		$predefined2 = "{$default_price2} {$default_currency2}";
-		$predefined3 = "{$default_price3} {$default_currency3}";
+		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
+		$predefined1 = "{$fixed_amount['value1']['amount']} {$fixed_amount['value1']['currency']}";
+		$predefined2 = "{$fixed_amount['value2']['amount']} {$fixed_amount['value2']['currency']}";
+		$predefined3 = "{$fixed_amount['value3']['amount']} {$fixed_amount['value3']['currency']}";
 		$icon1 = get_option('lnpw_tipping_icon1');
 		$icon2 = get_option('lnpw_tipping_icon2');
 		$icon3 = get_option('lnpw_tipping_icon3');
@@ -942,8 +943,8 @@ class Lightning_Paywall_Public
 						<h4><?php echo $background_text; ?></h4>
 						<div class="predefined_container">
 							<input type="radio" class="lnpw_tipping_default_amount" id="predefined1" name="lnpw_tipping_default_amount" value="<?php echo esc_html($predefined1); ?>">
-							<?php if ($icon1) : ?>
-								<i class="<?php echo $icon1; ?>"></i>
+							<?php if ($fixed_amount['value1']['icon']) : ?>
+								<i class="<?php echo $fixed_amount['value1']['icon']; ?>"></i>
 							<?php else : ?>
 								<label for="lnpw_tipping_default_amount"><?php echo esc_html($predefined1); ?></label>
 							<?php endif; ?>

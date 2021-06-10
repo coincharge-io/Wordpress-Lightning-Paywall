@@ -158,7 +158,20 @@ $(document).ready(function(){
       var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
       var converted_amount = '~' + fiat_to_crypto(currency, amount, usd, eur, sats)+ ' '+get_currency(currency)
       $("#lnpw_converted_amount").attr('readonly', false).val(converted_amount).attr('readonly', true);
-    })
+    });
+    $("#predefined1, #predefined2, #predefined3").hover(function(){
+      var predefined = $(this).val().split(' ');
+      var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
+      var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
+      $("#lnpw_converted_amount").attr('readonly', false).val(converted_icon_amount).attr('readonly', true);
+    }, function(){
+      $("#lnpw_converted_amount").attr('readonly', false).val('').attr('readonly', true);
+    });
+    /*$("#predefined1, #predefined2, #predefined3").hover(function() {
+        $( this ).append( $( "<span>"+converted_icon_amount+"</span>" ) );
+      }, function() {
+        $( this ).find( "span" ).last().remove();
+      })*/
 })
 function fiat_to_crypto(currency, val, usd, eur, sats){
   var value = Number(val);

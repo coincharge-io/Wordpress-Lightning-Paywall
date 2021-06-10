@@ -1,7 +1,7 @@
 <?php
 $supported_currencies   = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-$predefined_enabled = get_option('lnpw_tipping_predefined', 'true');
-$dimensions = $predefined_enabled === 'false' ? ['250x250', '300x250'] : ['400x400', '500x500', '600x600'];
+$predefined_enabled = get_option('lnpw_tipping_enter_amount', 'true');
+$dimensions = $predefined_enabled === 'true' ? ['250x250', '300x300'] : ['400x400', '500x500', '600x600'];
 $used_currency  = get_option('lnpw_tipping_currency');
 $used_dimension      = get_option('lnpw_tipping_dimension');
 $title = get_option('lnpw_tipping_title');
@@ -18,7 +18,8 @@ $image_background = wp_get_attachment_image_src($image_background_id);
 $redirect = get_option('lnpw_tipping_redirect');
 $collect = get_option('lnpw_tipping_collect');
 $fixed_amount = get_option('lnpw_tipping_fixed_amount');
-var_dump($fixed_amount)
+$text = get_option('lnpw_tipping_text');
+$color = get_option('lnpw_tipping_color');
 ?>
 
 <style>
@@ -107,7 +108,7 @@ var_dump($fixed_amount)
                 <label for="lnpw_tipping_title">Title</label>
             </div>
             <div class="col-80">
-                <textarea id="lnpw_tipping_title" name="lnpw_tipping_title"><?php echo $title; ?></textarea>
+                <textarea id="lnpw_tipping_title" name="lnpw_tipping_text[title]"><?php echo $text['title']; ?></textarea>
             </div>
         </div>
         <div class="row">
@@ -115,7 +116,7 @@ var_dump($fixed_amount)
                 <label for="lnpw_tipping_description">Description</label>
             </div>
             <div class="col-80">
-                <textarea id="lnpw_tipping_description" name="lnpw_tipping_description"><?php echo $description; ?></textarea>
+                <textarea id="lnpw_tipping_description" name="lnpw_tipping_text[description]"><?php echo $text['description']; ?></textarea>
             </div>
         </div>
         <div class="row">
@@ -123,7 +124,7 @@ var_dump($fixed_amount)
                 <label for="lnpw_tipping_text">Tipping text</label>
             </div>
             <div class="col-80">
-                <textarea id="lnpw_tipping_text" name="lnpw_tipping_text"><?php echo $background_text; ?></textarea>
+                <textarea id="lnpw_tipping_text" name="lnpw_tipping_text[info]"><?php echo $text['info']; ?></textarea>
             </div>
         </div>
         <div class="row">
@@ -139,7 +140,7 @@ var_dump($fixed_amount)
                 <label for="lnpw_tipping_button_text">Button text</label>
             </div>
             <div class="col-80">
-                <textarea id="lnpw_tipping_button_text" name="lnpw_tipping_button_text"><?php echo $btn_text; ?></textarea>
+                <textarea id="lnpw_tipping_button_text" name="lnpw_tipping_text[button]"><?php echo $text['button']; ?></textarea>
             </div>
         </div>
         <div class="row">
@@ -156,7 +157,7 @@ var_dump($fixed_amount)
                     <label for="lnpw_default_price1">Default price1</label>
                 </div>
                 <div class="col-80">
-                    <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_fixed_amount[value1][enabled]" <?php echo $fixed_amount['value1']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="checkbox" name="lnpw_tipping_fixed_amount[value1][enabled]" <?php echo $fixed_amount['value1']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
                     <input type="number" min=0 placeholder="Default Price1" step=1 name="lnpw_tipping_fixed_amount[value1][amount]" id="lnpw_default_price1" value="<?php echo $fixed_amount['value1']['amount']; ?>">
 
                     <select required name="lnpw_tipping_fixed_amount[value1][currency]" id="lnpw_default_currency1">
@@ -176,7 +177,7 @@ var_dump($fixed_amount)
                     <label for="lnpw_default_price2">Default price2</label>
                 </div>
                 <div class="col-80">
-                    <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_fixed_amount[value2][enabled]" <?php echo $fixed_amount['value2']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="checkbox" name="lnpw_tipping_fixed_amount[value2][enabled]" <?php echo $fixed_amount['value2']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
                     <input type="number" min=0 placeholder="Default Price2" step=1 name="lnpw_tipping_fixed_amount[value2][amount]" id="lnpw_default_price2" value="<?php echo $fixed_amount['value2']['amount']; ?>">
 
                     <select required name="lnpw_tipping_fixed_amount[value2][currency]" id="lnpw_default_currency2">
@@ -196,7 +197,7 @@ var_dump($fixed_amount)
                     <label for="lnpw_default_price3">Default price3</label>
                 </div>
                 <div class="col-80">
-                    <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_fixed_amount[value3][enabled]" <?php echo $fixed_amount['value3']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
+                    <input type="checkbox" name="lnpw_tipping_fixed_amount[value3][enabled]" <?php echo $fixed_amount['value3']['enabled'] === 'true' ? 'checked' : ''; ?> value="true" />
                     <input type="number" min=0 placeholder="Default Price3" step=1 name="lnpw_tipping_fixed_amount[value3][amount]" id="lnpw_default_price3" value="<?php echo $fixed_amount['value3']['amount']; ?>">
 
                     <select required name="lnpw_tipping_fixed_amount[value3][currency]" id="lnpw_default_currency3">
@@ -217,7 +218,7 @@ var_dump($fixed_amount)
                 <label for="lnpw_tipping_button_text_color">Button text color</label>
             </div>
             <div class="col-80">
-                <input id="lnpw_tipping_button_text_color" class="lnpw_tipping_button_text_color" name="lnpw_tipping_button_text_color" type="text" value=<?php echo $btn_text_color; ?> />
+                <input id="lnpw_tipping_button_text_color" class="lnpw_tipping_button_text_color" name="lnpw_tipping_color[button_text]" type="text" value=<?php echo $color['button_text']; ?> />
 
             </div>
         </div>
@@ -241,7 +242,7 @@ var_dump($fixed_amount)
                 <label for="lnpw_tipping_background">Background color</label>
             </div>
             <div class="col-80">
-                <input id="lnpw_tipping_background" class="lnpw_tipping_background" name="lnpw_tipping_background" type="text" value=<?php echo $background_color; ?> />
+                <input id="lnpw_tipping_background" class="lnpw_tipping_background" name="lnpw_tipping_color[background]" type="text" value=<?php echo $color['background']; ?> />
 
             </div>
         </div>
@@ -250,7 +251,16 @@ var_dump($fixed_amount)
                 <label for="lnpw_tipping_button_color">Button color</label>
             </div>
             <div class="col-80">
-                <input id="lnpw_tipping_button_color" class="lnpw_tipping_button_color" name="lnpw_tipping_button_color" type="text" value=<?php echo $btn_color; ?> />
+                <input id="lnpw_tipping_button_color" class="lnpw_tipping_button_color" name="lnpw_tipping_color[button]" type="text" value=<?php echo $color['button']; ?> />
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+                <label for="lnpw_tipping_header_color">Header text color</label>
+            </div>
+            <div class="col-80">
+                <input id="lnpw_tipping_header_color" class="lnpw_tipping_header_color" name="lnpw_tipping_color[info]" type="text" value=<?php echo $color['info']; ?> />
 
             </div>
         </div>
