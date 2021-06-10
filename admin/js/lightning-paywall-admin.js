@@ -161,7 +161,7 @@
     });
   });
   $(document).ready(function () {
-    $('.lnpw_tipping_predefined').click(function () {
+    $('.lnpw_tipping_enter_amount').click(function () {
       if (!$(this).is(':checked')) {
         $(".container_predefined_amount").show();
       }else{

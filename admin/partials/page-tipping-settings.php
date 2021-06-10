@@ -1,25 +1,24 @@
 <?php
 $supported_currencies   = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-$predefined_enabled = get_option('lnpw_tipping_enter_amount', 'true');
+$predefined_enabled = get_option('lnpw_tipping_enter_amount');
 $dimensions = $predefined_enabled === 'true' ? ['250x250', '300x300'] : ['400x400', '500x500', '600x600'];
 $used_currency  = get_option('lnpw_tipping_currency');
 $used_dimension      = get_option('lnpw_tipping_dimension');
-$title = get_option('lnpw_tipping_title');
-$description = get_option('lnpw_tipping_description');
-$btn_text = get_option('lnpw_tipping_button_text');
-$btn_text_color = get_option('lnpw_tipping_button_text_color');
-$btn_color = get_option('lnpw_tipping_button_color');
-$background_color = get_option('lnpw_tipping_background');
-$background_text = get_option('lnpw_tipping_text');
-$image_id = get_option('lnpw_tipping_image');
-$image = wp_get_attachment_image_src($image_id);
-$image_background_id = get_option('lnpw_tipping_image_background');
-$image_background = wp_get_attachment_image_src($image_background_id);
 $redirect = get_option('lnpw_tipping_redirect');
 $collect = get_option('lnpw_tipping_collect');
 $fixed_amount = get_option('lnpw_tipping_fixed_amount');
 $text = get_option('lnpw_tipping_text');
 $color = get_option('lnpw_tipping_color');
+$image = get_option('lnpw_tipping_image');
+$logo = wp_get_attachment_image_src($image['logo']);
+$background = wp_get_attachment_image_src($image['background']);
+/*foreach (wp_load_alloptions() as $option => $value) {
+
+    if (strpos($option, 'lnpw_tipping') !== false) {
+
+        delete_option($option);
+    }
+}*/
 ?>
 
 <style>
@@ -76,14 +75,14 @@ $color = get_option('lnpw_tipping_color');
                 <label for="lnpw_tipping_image">Tipping Logo</label>
             </div>
             <div class="col-80">
-                <?php if ($image) : ?>
-                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image"><img src="<?php echo $image[0]; ?>" /></a></button>
+                <?php if ($logo) : ?>
+                    <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image"><img src="<?php echo $logo[0]; ?>" /></a></button>
                     <button class="lnpw_tipping_button_remove">Remove image</button>
-                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
+                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image[logo]" value=<?php echo $image['logo']; ?> />
                 <?php else : ?>
                     <button id="lnpw_tipping_button_image" class="lnpw_tipping_button_image" name="lnpw_tipping_button_image">Upload</button>
                     <button class="lnpw_tipping_button_remove" style="display:none">Remove image</button>
-                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image" value=<?php echo $image_id; ?> />
+                    <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image[logo]" value=<?php echo $image['logo']; ?> />
                 <?php endif; ?>
             </div>
         </div>
@@ -92,14 +91,14 @@ $color = get_option('lnpw_tipping_color');
                 <label for="lnpw_tipping_image_background">Tipping Background</label>
             </div>
             <div class="col-80">
-                <?php if ($image_background) : ?>
-                    <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background"><img src="<?php echo $image_background[0]; ?>" /></a></button>
+                <?php if ($background) : ?>
+                    <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background"><img src="<?php echo $background[0]; ?>" /></a></button>
                     <button class="lnpw_tipping_button_remove_background">Remove background image</button>
-                    <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image_background" value=<?php echo $image_background_id; ?> />
+                    <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image[background]" value=<?php echo $image['background']; ?> />
                 <?php else : ?>
                     <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background">Upload background image</button>
                     <button class="lnpw_tipping_button_remove_background" style="display:none">Remove image</button>
-                    <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image_background" value=<?php echo $image_background_id; ?> />
+                    <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image[background]" value=<?php echo $image['background']; ?> />
                 <?php endif; ?>
             </div>
         </div>
@@ -145,10 +144,10 @@ $color = get_option('lnpw_tipping_color');
         </div>
         <div class="row">
             <div class="col-20">
-                <label for="lnpw_tipping_predefined">Free input of amount</label>
+                <label for="lnpw_tipping_enter_amount">Free input of amount</label>
             </div>
             <div class="col-80">
-                <input type="checkbox" class="lnpw_tipping_predefined" name="lnpw_tipping_predefined" <?php echo $predefined_enabled === 'true' ? 'checked' : ''; ?> value="true" />
+                <input type="checkbox" id="lnpw_tipping_enter_amount" class="lnpw_tipping_enter_amount" name="lnpw_tipping_enter_amount" <?php echo $predefined_enabled === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
         </div>
         <div class="container_predefined_amount">
@@ -169,7 +168,7 @@ $color = get_option('lnpw_tipping_color');
                         <?php endforeach; ?>
                     </select>
 
-                    <input type="text" id="lnpw_tipping_icon1" class="lnpw_tipping_icon1" name="lnpw_tipping_fixed_amount[value1][icon]" value="<?php echo $fixed_amount['value1']['icon']; ?>" />
+                    <input type="text" id="lnpw_tipping_icon1" class="lnpw_tipping_icon1" name="lnpw_tipping_fixed_amount[value1][icon]" placeholder="Font Awesome Icon - fas fa-coffee" value="<?php echo $fixed_amount['value1']['icon']; ?>" />
                 </div>
             </div>
             <div class="row">
@@ -189,7 +188,7 @@ $color = get_option('lnpw_tipping_color');
                         <?php endforeach; ?>
                     </select>
 
-                    <input type="text" id="lnpw_tipping_icon2" class="lnpw_tipping_icon2" name="lnpw_tipping_fixed_amount[value2][icon]" value="<?php echo $fixed_amount['value2']['icon']; ?>" />
+                    <input type="text" id="lnpw_tipping_icon2" class="lnpw_tipping_icon2" name="lnpw_tipping_fixed_amount[value2][icon]" placeholder="Font Awesome Icon - fas fa-coffee" value="<?php echo $fixed_amount['value2']['icon']; ?>" />
                 </div>
             </div>
             <div class="row">
@@ -209,7 +208,7 @@ $color = get_option('lnpw_tipping_color');
                         <?php endforeach; ?>
                     </select>
 
-                    <input type="text" id="lnpw_tipping_icon3" class="lnpw_tipping_icon3" name="lnpw_tipping_fixed_amount[value3][icon]" value="<?php echo $fixed_amount['value3']['icon']; ?>" />
+                    <input type="text" id="lnpw_tipping_icon3" class="lnpw_tipping_icon3" name="lnpw_tipping_fixed_amount[value3][icon]" placeholder="Font Awesome Icon - fas fa-coffee" value="<?php echo $fixed_amount['value3']['icon']; ?>" />
                 </div>
             </div>
         </div>

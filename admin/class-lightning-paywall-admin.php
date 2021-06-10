@@ -205,26 +205,16 @@ class Lightning_Paywall_Admin
 				),
 			), 'sanitize_callback' => array($this, 'validate_predefined_values')
 		));
-		/*register_setting('lnpw_tipping_settings', 'lnpw_tipping_title', array('type' => 'string', 'default' => 'Tipping', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_description', array('type' => 'string', 'default' => 'No description', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_text', array('type' => 'string', 'default' => 'Enter Tipping Amount', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text', array('type' => 'string', 'default' => 'Tip', 'sanitize_callback' => array($this, 'sanitize_payblock_area')));
-		*/
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_text', array(
 			'type'	=> 'array', 'default' => array(
-				'title'			=> 'Tipping',
-				'description'	=>	'No description',
+				'title'			=> '',
+				'description'	=> '',
 				'info'			=> 'Enter Tipping Amount',
-				'button'		=> 'Tip'	
+				'button'		=> ''	
 			), 'sanitize_callback' => array($this, 'validate_textarea')
 		));
 
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
-		
-		
-		/*register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_text_color', array('type' => 'string', 'default' => '#FFFFFF', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_background', array('type' => 'string', 'default' => '#E6E6E6', 'sanitize_callback' => array($this, 'sanitize_color')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_button_color', array('type' => 'string', 'default' => '#FE642E', 'sanitize_callback' => array($this, 'sanitize_color')));*/
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_color', array(
 			'type' => 'array', 'default' => array(
 				'button_text'		=> '#FFFFFF',
@@ -232,12 +222,34 @@ class Lightning_Paywall_Admin
 				'button'			=> '#FE642E',
 				'info'				=> '#000000',
 			), 'sanitize_callback'	=> array($this, 'validate_colors')));
-		
-		
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image_background', array('type' => 'string', 'default' => '', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array(
+			'type' => 'array', 'default' => array(
+			'logo'			=> '',
+			'background'	=> '',
+		), 'sanitize_callback'	=> array($this, 'validate_images')
+	));
 
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_enter_amount', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+	}
+	public function validate_images($values)
+	{
+		$default_values = array(
+			'logo'		 => '',
+			'background' => '',	
+		);
+
+		if (!is_array($values)) {
+			return $default_values;
+		}
+
+		foreach ($values as $key => $value) {
+			
+			$default_values[$key] = sanitize_text_field($value);
+		
+		}
+		
+		return $default_values;
+
 	}
 	public function validate_colors($values)
 	{
@@ -263,10 +275,10 @@ class Lightning_Paywall_Admin
 	public function validate_textarea($values)
 	{
 		$default_values = array(
-			'title'			=> 'Tipping',
-			'description'	=> 'No description',
+			'title'			=> '',
+			'description'	=> '',
 			'info'			=> 'Enter Tipping Amount',
-			'button'		=> 'Tip'	
+			'button'		=> ''	
 		);
 
 		if (!is_array($values)) {
