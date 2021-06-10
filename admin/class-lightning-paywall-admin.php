@@ -338,22 +338,27 @@ class Lightning_Paywall_Admin
 
 		$default_values	= array(
 			'name' => array(
+				'label'		=> 'Full name',
 				'collect'	=> 'false',
 				'mandatory'	=> 'false'
 			),
 			'email' => array(
+				'label'		=> 'Email',
 				'collect'	=> 'false',
 				'mandatory'	=> 'false'
 			),
 			'address' => array(
+				'label'		=> 'Address',
 				'collect'	=> 'false',
 				'mandatory'	=> 'false'
 			),
 			'phone' => array(
+				'label'		=> 'Phone',
 				'collect'	=> 'false',
 				'mandatory'	=> 'false'
 			),
 			'message' => array(
+				'label'		=> 'Message',
 				'collect'	=> 'false',
 				'mandatory'	=> 'false'
 			),

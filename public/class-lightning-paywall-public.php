@@ -848,7 +848,23 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
+	private function collect_is_enabled($arr){
+		
+		if(!is_array($arr)){
+			return;
+		}
 
+		foreach($arr as $key => $value){
+			
+			if($arr[$key]['collect'] === 'true'){
+			
+				return true;
+			
+			}
+			
+			return;
+		}
+	}
 	/**
 	 * @param $atts
 	 *
@@ -857,8 +873,8 @@ class Lightning_Paywall_Public
 	public function render_shortcode_tipping()
 	{
 
-		/*$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-		$used_currency  = get_option('lnpw_tipping_currency');
+		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
+		/*$used_currency  = get_option('lnpw_tipping_currency');
 		$dimension = explode('x', get_option('lnpw_tipping_dimension', '250x250'));
 		$title = get_option('lnpw_tipping_title', 'Tipping');
 		$description = get_option('lnpw_tipping_description', 'No description');
@@ -899,7 +915,8 @@ class Lightning_Paywall_Public
 		$logo = wp_get_attachment_image_src($image['logo']);
 		$background = wp_get_attachment_image_src($image['background']);
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
-		var_dump($text);
+		$collect_data = $this->collect_is_enabled($collect);
+		var_dump($collect_data == 'true');
 		/*$predefined1 = "{$fixed_amount['value1']['amount']} {$fixed_amount['value1']['currency']}";
 		$predefined2 = "{$fixed_amount['value2']['amount']} {$fixed_amount['value2']['currency']}";
 		$predefined3 = "{$fixed_amount['value3']['amount']} {$fixed_amount['value3']['currency']}";*/
@@ -909,7 +926,10 @@ class Lightning_Paywall_Public
 		$background_text = get_option('lnpw_tipping_text', 'Enter Tipping Amount');
 		$predefined_enabled = get_option('lnpw_tipping_predefined');
 		$image_background = wp_get_attachment_image_src(get_option('lnpw_tipping_image_background'));*/
-
+		foreach($collect as $key => $value){
+			echo $key;
+			echo $collect[$key]['collect'];
+		}
 		ob_start();
 	?>
 		<style>
@@ -984,7 +1004,7 @@ class Lightning_Paywall_Public
 						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
 						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
 						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
-						<?php if ($collect === 'true') : ?>
+						<?php if ($collect_data == 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>
 							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ?: 'Tip'); ?></button>
@@ -993,34 +1013,19 @@ class Lightning_Paywall_Public
 							</div>
 						<?php endif; ?>
 					</fieldset>
-					<?php if ($collect === 'true') : ?>
+					<?php if ($collect_data == 'true') : ?>
 						<fieldset>
 							<h4>Personal info</h4>
 							<div class="lnpw_donor_information">
-								<?php if ($collect['name']['collect'] === 'true') : ?>
-									<label for="lnpw_tipping_donor_name">Full name</label>
-									<input type="text" id="lnpw_tipping_donor_name" name="lnpw_tipping_donor_name" <?php echo $collect['name']['mandatory'] === 'true' ? 'required' : ''; ?> />
+							<?php foreach($collect as $key=>$value): ?>
+								<?php if ($collect[$key]['collect'] == 'true') : ?>
+									<label for="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}";?>"> <?php echo $collect[$key]['label'];?></label>
+									<input type="text" id="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}";?>" name="lnpw_tipping_donor_name" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
 								<?php endif; ?>
-								<?php if ($collect['email']['collect'] === 'true') : ?>
-									<label for="lnpw_tipping_donor_email">Email</label>
-									<input type="email" id="lnpw_tipping_donor_email" name="lnpw_tipping_donor_email" <?php echo $collect['email']['mandatory'] === 'true' ? 'required' : ''; ?> />
-								<?php endif; ?>
-								<?php if ($$collect['address']['collect'] === 'true') : ?>
-									<label for="lnpw_tipping_donor_address">Address</label>
-									<input type="text" id="lnpw_tipping_donor_address" name="lnpw_tipping_donor_address" <?php echo $collect['address']['mandatory'] === 'true' ? 'required' : ''; ?> />
-								<?php endif; ?>
-								<?php if ($collect['phone']['collect'] === 'true') : ?>
-									<label for="lnpw_tipping_donor_phone">Phone</label>
-									<input type="tel" id="lnpw_tipping_donor_phone" name="lnpw_tipping_donor_phone" <?php echo $collect['phone']['mandatory'] === 'true' ? 'required' : ''; ?> />
-								<?php endif; ?>
-								<?php if ($collect['message']['collect'] === 'true') : ?>
-									<label for="lnpw_tipping_donor_message">Message</label>
-									<input type="text" id="lnpw_tipping_donor_message" name="lnpw_tipping_donor_message" <?php echo $collect['message']['mandatory'] === 'true' ? 'required' : ''; ?> />
-								<?php endif; ?>
-
+							<?php endforeach; ?>
 							</div>
 							<input type="button" name="previous" class="previous-form" value="Previous" />
-							<button type="submit" id="lnpw_tipping__button"><?php echo $text['button_text']; ?></button>
+							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button_text']) ?: 'Tip'); ?></button>
 							<div class="lnpw_pay__loading">
 								<p class="loading"></p>
 							</div>
