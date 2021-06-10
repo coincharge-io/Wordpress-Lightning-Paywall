@@ -15,9 +15,6 @@ $background = wp_get_attachment_image_src($image['background']);
 ?>
 
 <style>
-    .container_predefined_amount {
-        display: <?php echo $predefined_enabled === 'true' ? 'none' : 'block'; ?>;
-    }
 
     .lnpw_tipping_collect_name_mandatory,
     label[for="lnpw_tipping_collect[name][mandatory]"] {

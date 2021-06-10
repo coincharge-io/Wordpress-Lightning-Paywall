@@ -96,6 +96,8 @@ a.lnpw_pay__download{
 .header_container{
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  padding: 0.5em 0;
 }
 .info_container{
   text-align: center;
@@ -136,3 +138,4 @@ a.lnpw_pay__download{
   height: 5%;
   opacity: 0;
 }
+

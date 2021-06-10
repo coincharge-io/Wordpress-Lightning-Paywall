@@ -887,14 +887,15 @@ class Lightning_Paywall_Public
 		$background = wp_get_attachment_image_src($image['background']);
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
 		$collect_data = $this->collect_is_enabled($collect);
+
 		ob_start();
 	?>
 		<style>
 			.lnpw_tipping_container {
-				background-color: <?php echo $color['background']; ?>;
+				background-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 				width: <?php echo $dimension[0] . 'px'; ?>;
 				height: <?php echo $dimension[1] . 'px'; ?>;
-				background-image: url(<?php echo $background[0] ?: ''; ?>);
+				background-image: url(<?php echo ($background[0] ? $background[0] : ''); ?>);
 				background-size: cover;
 				background-repeat: no-repeat;
 			}
@@ -904,9 +905,6 @@ class Lightning_Paywall_Public
 				background: <?php echo $color['button']; ?>;
 			}
 
-			.predefined_container {
-				display: <?php echo $predefined_enabled === 'true' ? 'none' : 'block'; ?>;
-			}
 			.header_container h4, .info_container p{
 				color: <?php echo $color['info'];?>
 			}
@@ -935,7 +933,7 @@ class Lightning_Paywall_Public
 				<form method="POST" action="" id="tipping_form">
 					<fieldset>
 						<h4><?php echo (!empty($text['background']) ?: 'Enter Tipping Amount'); ?></h4>
-						<?php if($predefined_enabled === 'false'): ?>
+						
 						<?php foreach($fixed_amount as $key=>$value): ?>
 						<?php if($fixed_amount[$key]['enabled'] === 'true'): ?>
 						<div class="predefined_container">
@@ -948,8 +946,8 @@ class Lightning_Paywall_Public
 							</div>
 						<?php endif; ?>
 						<?php endforeach; ?>
-						<?php endif; ?>
-					
+						<?php if($predefined_enabled === 'true'): ?>
+
 						<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
 							<option disabled value="">Select currency</option>
 							<?php foreach ($supported_currencies as $currency) : ?>
@@ -960,11 +958,13 @@ class Lightning_Paywall_Public
 						</select>
 						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
 						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
+						<?php endif; ?>
+
 						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
 						<?php if ($collect_data == 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ?: 'Tip'); ?></button>
+							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button'] : 'Tip'); ?></button>
 							<div class="lnpw_pay__loading">
 								<p class="loading"></p>
 							</div>
