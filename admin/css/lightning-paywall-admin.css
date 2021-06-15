@@ -28,8 +28,19 @@ label {
   flex: 1;
   margin-top: 8px;
 }
+
+.col-50 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  flex-grow: 0.1;
+}
+.col-50 label {
+  display: inline-block;
+  width: 30px;
+}​
 .col-80 {
-  flex: 4;
+  flex: 1;
   margin-top: 8px;
 }
 
@@ -114,6 +125,11 @@ td.Settled {
   font-weight: bold;
 }
 
-.container_predefined_amount input:not([type="checkbox"]), .container_predefined_amount select{
-  width: 100px;
+.tipping_settings input:not([type="checkbox"]), .tipping_settings select {
+  height: 30px;
 }
+
+.container_predefined_amount input:not([type="checkbox"]), .container_predefined_amount select{
+  width: 150px;
+}
+
