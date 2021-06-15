@@ -19,6 +19,7 @@ label {
   padding: 10px 10px 10px 0;
   display: inline-block;
 }
+
 .row {
   display: flex;
   flex-direction: row;
@@ -113,3 +114,6 @@ td.Settled {
   font-weight: bold;
 }
 
+.container_predefined_amount input:not([type="checkbox"]), .container_predefined_amount select{
+  width: 100px;
+}

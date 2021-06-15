@@ -220,7 +220,9 @@ class Lightning_Paywall_Admin
 				'button_text'		=> '#FFFFFF',
 				'background'		=> '#E6E6E6',
 				'button'			=> '#FE642E',
-				'info'				=> '#000000',
+				'title'				=> '#000000',
+				'description'		=> '#000000',
+				'tipping'			=> '#000000',
 			), 'sanitize_callback'	=> array($this, 'validate_colors')));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array(
 			'type' => 'array', 'default' => array(
@@ -257,7 +259,9 @@ class Lightning_Paywall_Admin
 			'button_text'		=> '#FFFFFF',
 			'background'		=> '#E6E6E6',
 			'button'			=> '#FE642E',
-			'info'				=> '#000000',	
+			'title'				=> '#000000',
+			'description'		=> '#000000',
+			'tipping'			=> '#000000',	
 		);
 
 		if (!is_array($values)) {

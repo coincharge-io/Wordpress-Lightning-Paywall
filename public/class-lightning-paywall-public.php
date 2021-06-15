@@ -909,7 +909,7 @@ class Lightning_Paywall_Public
 				color: <?php echo $color['info'];?>
 			}
 			
-		</style>
+	 </style>
 
 
 		<div class="lnpw_tipping_container">

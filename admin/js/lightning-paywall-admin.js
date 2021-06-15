@@ -175,7 +175,7 @@
     });
   });
   $(document).ready(function (){
-    $('#lnpw_tipping_button_text_color, #lnpw_tipping_background, #lnpw_tipping_button_color, #lnpw_tipping_header_color').iris({
+    $('#lnpw_tipping_button_text_color, #lnpw_tipping_background, #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color, #lnpw_tipping_tipping_color').iris({
       
       defaultColor: true,
       
