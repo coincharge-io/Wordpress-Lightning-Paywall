@@ -908,6 +908,7 @@ class Lightning_Paywall_Public
 			.header_container h4, .info_container p{
 				color: <?php echo $color['info'];?>
 			}
+			
 		</style>
 
 
@@ -941,7 +942,7 @@ class Lightning_Paywall_Public
 							<?php if(!empty($fixed_amount[$key]['amount'])) :?>
 								<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
 							<?php endif; ?>
-								<label for="lnpw_tipping_default_amount"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
+								<label style="display: <?php echo empty($fixed_amount[$key]['icon']) ? 'block' : 'none';?>" for="<?php echo $key;?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
 							
 							</div>
 						<?php endif; ?>
