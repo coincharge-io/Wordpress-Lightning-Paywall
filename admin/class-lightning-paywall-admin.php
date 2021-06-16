@@ -157,7 +157,7 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x250', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => ''));
+		register_setting('lnpw_tipping_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => get_site_url()));
 
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'array', 'default' => array(
 			'name' => array(
@@ -207,10 +207,10 @@ class Lightning_Paywall_Admin
 		));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_text', array(
 			'type'	=> 'array', 'default' => array(
-				'title'			=> '',
+				'title'			=> 'Support my work',
 				'description'	=> '',
 				'info'			=> 'Enter Tipping Amount',
-				'button'		=> ''	
+				'button'		=> 'Tipping now'	
 			), 'sanitize_callback' => array($this, 'validate_textarea')
 		));
 
@@ -279,10 +279,10 @@ class Lightning_Paywall_Admin
 	public function validate_textarea($values)
 	{
 		$default_values = array(
-			'title'			=> '',
+			'title'			=> 'Support my work',
 			'description'	=> '',
 			'info'			=> 'Enter Tipping Amount',
-			'button'		=> ''	
+			'button'		=> 'Tipping now'	
 		);
 
 		if (!is_array($values)) {

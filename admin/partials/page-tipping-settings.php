@@ -259,9 +259,9 @@ $background = wp_get_attachment_image_src($image['background']);
 
                 <input type="checkbox" class="lnpw_tipping_collect_name" name="lnpw_tipping_collect[name][collect]" <?php echo $collect['name']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
 
-
-                <input type="checkbox" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect[name][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
                 <label for="lnpw_tipping_collect[name][mandatory]">Mandatory</label>
+                <input type="checkbox" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect[name][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                
             </div>
         </div>
         <div class="row">
@@ -272,9 +272,10 @@ $background = wp_get_attachment_image_src($image['background']);
                 <label for="lnpw_tipping_collect[email][collect]">Display</label>
 
                 <input type="checkbox" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect[email][collect]" <?php echo $collect['email']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
-
-                <input type="checkbox" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect[email][mandatory]" <?php echo $collect['email']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                
                 <label for="lnpw_tipping_collect[email][mandatory]">Mandatory</label>
+                <input type="checkbox" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect[email][mandatory]" <?php echo $collect['email']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                
             </div>
         </div>
         <div class="row">
@@ -286,8 +287,8 @@ $background = wp_get_attachment_image_src($image['background']);
 
                 <input type="checkbox" class="lnpw_tipping_collect_address" name="lnpw_tipping_collect[address][collect]" <?php echo $collect['address']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
 
-                <input type="checkbox" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect[address][mandatory]" <?php echo $collect['address']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
                 <label for="lnpw_tipping_collect[address][mandatory]">Mandatory</label>
+                <input type="checkbox" class="lnpw_tipping_collect_address_mandatory" name="lnpw_tipping_collect[address][mandatory]" <?php echo $collect['address']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
         </div>
         <div class="row">
@@ -299,8 +300,9 @@ $background = wp_get_attachment_image_src($image['background']);
 
                 <input type="checkbox" class="lnpw_tipping_collect_phone" name="lnpw_tipping_collect[phone][collect]" <?php echo $collect['phone']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
 
-                <input type="checkbox" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect[phone][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
                 <label for="lnpw_tipping_collect[phone][mandatory]">Mandatory</label>
+                <input type="checkbox" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect[phone][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                
             </div>
         </div>
         <div class="row">
@@ -310,9 +312,10 @@ $background = wp_get_attachment_image_src($image['background']);
             <div class="col-50">
                 <label for="lnpw_tipping_collect[message][collect]">Display</label>
                 <input type="checkbox" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect[message][collect]" <?php echo $collect['message']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
-
-                <input type="checkbox" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect[message][mandatory]" <?php echo $collect['message']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                
                 <label for="lnpw_tipping_collect[message][mandatory]">Mandatory</label>
+                <input type="checkbox" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect[message][mandatory]" <?php echo $collect['message']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
+                
             </div>
         </div>
 

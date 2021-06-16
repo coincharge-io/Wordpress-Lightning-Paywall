@@ -76,7 +76,7 @@
           url: "/wp-admin/admin-ajax.php",
           method: "POST",
           data: {
-            action: "lnpw_donate",
+            action: "lnpw_tipping",
             currency: $("#lnpw_tipping_currency").val(),
             amount: $("#lnpw_tipping_amount").val(),
             predefined_amount: $("input[type=radio][name=lnpw_tipping_default_amount]:checked").val(),
@@ -205,19 +205,20 @@ $(document).ready(function(){
   var freeInput = $("#lnpw_tipping_amount");
   var fixedAmount = $('.lnpw_tipping_default_amount');
   var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
-  $(".next-form").click(function(){
+  
+  $("input.next-form").click(function(){
     if (validationField[0].checkValidity()){
-      previous_form = $(this).parent();
-      next_form = $(this).parent().next();
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().next();
       next_form.show();
       previous_form.hide();
     }else{
       validationField[0].reportValidity()
     }
   });  
-  $(".previous-form").click(function(){
-    previous_form = $(this).parent();
-    next_form = $(this).parent().prev();
+  $("input.previous-form").click(function(){
+    previous_form = $(this).parent().parent();
+    next_form = $(this).parent().parent().prev();
     next_form.show();
     previous_form.hide();
   }); 

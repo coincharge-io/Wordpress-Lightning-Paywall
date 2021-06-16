@@ -340,7 +340,7 @@ class Lightning_Paywall_Public
 		);
 	}
 
-	public function ajax_donate()
+	public function ajax_tipping()
 	{
 		$collect = '';
 
@@ -376,7 +376,7 @@ class Lightning_Paywall_Public
 		}
 
 		$collect .= "Amount: {$amount} {$currency}";
-
+		$collect .= 'Time:' . ' ' . date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
 
 
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
@@ -427,7 +427,7 @@ class Lightning_Paywall_Public
 		$admin = get_bloginfo('admin_email');
 		$body = sanitize_text_field($_POST['donor_info']);
 
-		wp_mail($admin, 'Lightning Paywall Plugin', $body);
+		wp_mail($admin, 'You have received a donation', $body);
 	}
 	/**
 	 * @param $post_id
@@ -880,7 +880,12 @@ class Lightning_Paywall_Public
 		$redirect = get_option('lnpw_tipping_redirect');
 		$collect = get_option('lnpw_tipping_collect');
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
-		$text = get_option('lnpw_tipping_text');
+		$text = get_option('lnpw_tipping_text', array(
+			'title'			=> 'Support my work',
+			'description'	=> '',
+			'info'			=> 'Enter Tipping Amount',
+			'button'		=> 'Tipping now'	
+		));
 		$color = get_option('lnpw_tipping_color');
 		$image = get_option('lnpw_tipping_image');
 		$logo = wp_get_attachment_image_src($image['logo']);
@@ -888,12 +893,22 @@ class Lightning_Paywall_Public
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
 		$collect_data = $this->collect_is_enabled($collect);
 		$first_enabled = array_column($fixed_amount, 'enabled');
-    	$d =array_search('true', $first_enabled);
+    	$d = array_search('true', $first_enabled);
     	$index = 'value' . ($d + 1);
-
 		ob_start();
 	?>
 		<style>
+			.lnpw_tipping_values, .lnpw_donor_information{
+				margin: 30px 0 100px 0;
+			}
+			.lnpw_tipping_info fieldset{
+				position: relative;
+			}
+			#button {
+				position:absolute;
+				bottom: 0;
+				right: 0;
+			}
 			.lnpw_tipping_container {
 				background-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 				width: <?php echo $dimension[0] . 'px'; ?>;
@@ -944,7 +959,7 @@ class Lightning_Paywall_Public
 				<form method="POST" action="" id="tipping_form">
 					<fieldset>
 						<h4><?php echo (!empty($text['info']) ? $text['info'] : 'Enter Tipping Amount'); ?></h4>
-						
+						<div class="lnpw_tipping_values">
 						<?php foreach($fixed_amount as $key=>$value): ?>
 						<?php if($fixed_amount[$key]['enabled'] === 'true'): ?>
 						<div class="predefined_container">
@@ -971,7 +986,9 @@ class Lightning_Paywall_Public
 						
 						<?php endif; ?>
 						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
+							</div>
 						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
+						<div id="button">
 						<?php if ($collect_data == 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>
@@ -980,6 +997,7 @@ class Lightning_Paywall_Public
 								<p class="loading"></p>
 							</div>
 						<?php endif; ?>
+						</div>
 					</fieldset>
 					<?php if ($collect_data == 'true') : ?>
 						<fieldset>
@@ -992,11 +1010,13 @@ class Lightning_Paywall_Public
 								<?php endif; ?>
 							<?php endforeach; ?>
 							</div>
+							<div id="button">
 							<input type="button" name="previous" class="previous-form" value="Previous" />
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button_text']) ?: 'Tip'); ?></button>
+							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button']: 'Tip'); ?></button>
 							<div class="lnpw_pay__loading">
 								<p class="loading"></p>
 							</div>
+								</div>
 						</fieldset>
 					<?php endif; ?>
 				</form>

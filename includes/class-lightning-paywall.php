@@ -179,8 +179,8 @@ class Lightning_Paywall
 		$this->loader->add_action('wp_ajax_lnpw_paid_invoice', $plugin_public, 'ajax_paid_invoice');
 		$this->loader->add_action('wp_ajax_nopriv_lnpw_paid_invoice', $plugin_public, 'ajax_paid_invoice');
 
-		$this->loader->add_action('wp_ajax_lnpw_donate', $plugin_public, 'ajax_donate');
-		$this->loader->add_action('wp_ajax_nopriv_lnpw_donate', $plugin_public, 'ajax_donate');
+		$this->loader->add_action('wp_ajax_lnpw_tipping', $plugin_public, 'ajax_tipping');
+		$this->loader->add_action('wp_ajax_nopriv_lnpw_tipping', $plugin_public, 'ajax_tipping');
 
 		$this->loader->add_action('wp_ajax_lnpw_convert_currencies', $plugin_public, 'ajax_convert_currencies');
 		$this->loader->add_action('wp_ajax_nopriv_lnpw_convert_currencies', $plugin_public, 'ajax_convert_currencies');
