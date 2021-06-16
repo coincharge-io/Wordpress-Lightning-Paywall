@@ -165,7 +165,7 @@
     ($(this).is(':checked') ? $(this).next().prop('required', true) : $(this).next().prop('required', false));
   })
 });
-  $(document).ready(function () {
+ /* $(document).ready(function () {
     $('.lnpw_tipping_enter_amount').click(function () {
       if (!$(this).is(':checked')) {
         $(".container_predefined_amount").show();
@@ -173,7 +173,7 @@
         $(".container_predefined_amount").hide()
       }
     });
-  });
+  });*/
   $(document).ready(function (){
     $('#lnpw_tipping_button_text_color, #lnpw_tipping_background, #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color, #lnpw_tipping_tipping_color').iris({
       

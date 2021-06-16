@@ -45,7 +45,6 @@ $background = wp_get_attachment_image_src($image['background']);
     <h1>Tipping</h1>
     <form method="POST" action="options.php">
         <?php settings_fields('lnpw_tipping_settings'); ?>
-        <h3>Background</h3>
         <div class="row">
             <div class="col-50">
                 <label for="lnpw_tipping_dimension">Dimension</label>
@@ -63,15 +62,15 @@ $background = wp_get_attachment_image_src($image['background']);
         </div>
         <div class="row">
             <div class="col-50">
-                <label for="lnpw_tipping_image_background">Image</label>
+                <label for="lnpw_tipping_image_background">Background image</label>
             </div>
             <div class="col-50">
             <?php if ($background) : ?>
                     <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background"><img src="<?php echo $background[0]; ?>" /></a></button>
-                    <button class="lnpw_tipping_button_remove_background">Remove background image</button>
+                    <button class="lnpw_tipping_button_remove_background">Remove image</button>
                     <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image[background]" value=<?php echo $image['background']; ?> />
                 <?php else : ?>
-                    <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background">Upload background image</button>
+                    <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background">Upload </button>
                     <button class="lnpw_tipping_button_remove_background" style="display:none">Remove image</button>
                     <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image[background]" value=<?php echo $image['background']; ?> />
                 <?php endif; ?>
@@ -79,45 +78,14 @@ $background = wp_get_attachment_image_src($image['background']);
         </div>
         <div class="row">
             <div class="col-50">
-                <label for="lnpw_tipping_background">Color</label>
+                <label for="lnpw_tipping_background">Background color</label>
             </div>
             <div class="col-50">
             <input id="lnpw_tipping_background" class="lnpw_tipping_background" name="lnpw_tipping_color[background]" type="text" value=<?php echo $color['background']; ?> />
             </div>
         </div>
-        <h3>Header</h3>
+        <h3>Description</h3>
         
-        
-        <div class="row">
-            <div class="col-50">
-                <label for="lnpw_tipping_title">Title</label>
-                <textarea id="lnpw_tipping_title" name="lnpw_tipping_text[title]"><?php echo $text['title']; ?></textarea>
-            </div>
-            <div class="col-50">
-                <label for="lnpw_tipping_title_color">Text color</label>
-                <input id="lnpw_tipping_title_color" class="lnpw_tipping_title_color" name="lnpw_tipping_color[title]" type="text" value=<?php echo $color['title']; ?> />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-50">
-                <label for="lnpw_tipping_description">Description</label>
-                <textarea id="lnpw_tipping_description" name="lnpw_tipping_text[description]"><?php echo $text['description']; ?></textarea>
-            </div>
-            <div class="col-50">
-            <label for="lnpw_tipping_description_color">Text color</label>
-                <input id="lnpw_tipping_description_color" class="lnpw_tipping_description_color" name="lnpw_tipping_color[description]" type="text" value=<?php echo $color['description']; ?> />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-50">
-                <label for="lnpw_tipping_text">Tipping text</label>
-                <textarea id="lnpw_tipping_text" name="lnpw_tipping_text[info]"><?php echo $text['info']; ?></textarea>
-            </div>
-            <div class="col-50">
-            <label for="lnpw_tipping_tipping_color">Text color</label>
-                <input id="lnpw_tipping_tipping_color" class="lnpw_tipping_tipping_color" name="lnpw_tipping_color[tipping]" type="text" value=<?php echo $color['tipping']; ?> />
-            </div>
-        </div>
         <div class="row">
             <div class="col-50">
                 <label for="lnpw_tipping_image">Tipping Logo</label>
@@ -132,6 +100,36 @@ $background = wp_get_attachment_image_src($image['background']);
                     <button class="lnpw_tipping_button_remove" style="display:none">Remove image</button>
                     <input type="hidden" id="lnpw_tipping_image" class="lnpw_tipping_image" name="lnpw_tipping_image[logo]" value=<?php echo $image['logo']; ?> />
                 <?php endif; ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-50">
+                <label for="lnpw_tipping_title">Title</label>
+                <textarea id="lnpw_tipping_title" name="lnpw_tipping_text[title]"><?php echo $text['title']; ?></textarea>
+            </div>
+            <div class="col-50">
+                <label for="lnpw_tipping_title_color">Title text color</label>
+                <input id="lnpw_tipping_title_color" class="lnpw_tipping_title_color" name="lnpw_tipping_color[title]" type="text" value=<?php echo $color['title']; ?> />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-50">
+                <label for="lnpw_tipping_description">Description</label>
+                <textarea id="lnpw_tipping_description" name="lnpw_tipping_text[description]"><?php echo $text['description']; ?></textarea>
+            </div>
+            <div class="col-50">
+            <label for="lnpw_tipping_description_color">Description text color</label>
+                <input id="lnpw_tipping_description_color" class="lnpw_tipping_description_color" name="lnpw_tipping_color[description]" type="text" value=<?php echo $color['description']; ?> />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-50">
+                <label for="lnpw_tipping_text">Tipping text</label>
+                <textarea id="lnpw_tipping_text" name="lnpw_tipping_text[info]"><?php echo $text['info']; ?></textarea>
+            </div>
+            <div class="col-50">
+            <label for="lnpw_tipping_tipping_color">Tipping text color</label>
+                <input id="lnpw_tipping_tipping_color" class="lnpw_tipping_tipping_color" name="lnpw_tipping_color[tipping]" type="text" value=<?php echo $color['tipping']; ?> />
             </div>
         </div>
         <div class="row">
@@ -225,7 +223,7 @@ $background = wp_get_attachment_image_src($image['background']);
         <h3>Button</h3>
         <div class="row">
             <div class="col-50">
-                <label for="lnpw_tipping_button_text">Text</label>
+                <label for="lnpw_tipping_button_text">Button text</label>
             </div>
             <div class="col-50">
                 <textarea id="lnpw_tipping_button_text" name="lnpw_tipping_text[button]"><?php echo $text['button']; ?></textarea>
@@ -233,7 +231,7 @@ $background = wp_get_attachment_image_src($image['background']);
         </div>
         <div class="row">
             <div class="col-50">
-                <label for="lnpw_tipping_button_text_color">Text color</label>
+                <label for="lnpw_tipping_button_text_color">Button text color</label>
             </div>
             <div class="col-50">
                 <input id="lnpw_tipping_button_text_color" class="lnpw_tipping_button_text_color" name="lnpw_tipping_color[button_text]" type="text" value=<?php echo $color['button_text']; ?> />
@@ -244,7 +242,7 @@ $background = wp_get_attachment_image_src($image['background']);
         
         <div class="row">
             <div class="col-50">
-                <label for="lnpw_tipping_button_color">Color</label>
+                <label for="lnpw_tipping_button_color">Button color</label>
             </div>
             <div class="col-50">
                 <input id="lnpw_tipping_button_color" class="lnpw_tipping_button_color" name="lnpw_tipping_color[button]" type="text" value=<?php echo $color['button']; ?> />

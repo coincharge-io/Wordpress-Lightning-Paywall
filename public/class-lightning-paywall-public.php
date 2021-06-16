@@ -887,6 +887,9 @@ class Lightning_Paywall_Public
 		$background = wp_get_attachment_image_src($image['background']);
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
 		$collect_data = $this->collect_is_enabled($collect);
+		$first_enabled = array_column($fixed_amount, 'enabled');
+    	$d =array_search('true', $first_enabled);
+    	$index = 'value' . ($d + 1);
 
 		ob_start();
 	?>
@@ -905,8 +908,15 @@ class Lightning_Paywall_Public
 				background: <?php echo $color['button']; ?>;
 			}
 
-			.header_container h4, .info_container p{
-				color: <?php echo $color['info'];?>
+			.header_container h4{
+				color: <?php echo $color['title'];?>
+			}
+
+			.info_container p{
+				color: <?php echo $color['description'];?>
+			}
+			.lnpw_tipping_info fieldset h4{
+				color: <?php echo $color['tipping']; ?>
 			}
 			
 	 </style>
@@ -938,7 +948,7 @@ class Lightning_Paywall_Public
 						<?php foreach($fixed_amount as $key=>$value): ?>
 						<?php if($fixed_amount[$key]['enabled'] === 'true'): ?>
 						<div class="predefined_container">
-							<input type="radio" class="lnpw_tipping_default_amount" id="<?php echo $key;?>" name="lnpw_tipping_default_amount" value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
+							<input type="radio" class="lnpw_tipping_default_amount" id="<?php echo $key;?>" name="lnpw_tipping_default_amount" <?php echo $key==$index ? 'required' : '';?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
 							<?php if(!empty($fixed_amount[$key]['amount'])) :?>
 								<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
 							<?php endif; ?>

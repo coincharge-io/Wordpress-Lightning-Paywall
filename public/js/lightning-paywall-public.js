@@ -202,14 +202,17 @@ function get_currency(currency){
 $(document).ready(function(){ 
   var form_count = 1, previous_form, next_form, total_forms;
   total_forms = $("fieldset").length;  
+  var freeInput = $("#lnpw_tipping_amount");
+  var fixedAmount = $('.lnpw_tipping_default_amount');
+  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
   $(".next-form").click(function(){
-    if ($("#lnpw_tipping_amount")[0].checkValidity()){
+    if (validationField[0].checkValidity()){
       previous_form = $(this).parent();
       next_form = $(this).parent().next();
       next_form.show();
       previous_form.hide();
     }else{
-      $("#lnpw_tipping_amount")[0].reportValidity()
+      validationField[0].reportValidity()
     }
   });  
   $(".previous-form").click(function(){
@@ -234,5 +237,4 @@ $(document).ready(function(){
   })
   })
 
-  
 })(jQuery);
