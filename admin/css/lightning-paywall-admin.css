@@ -120,12 +120,9 @@ td.Settled {
   font-weight: bold;
 }
 
-/*.tipping_settings input:not([type="checkbox"]), .tipping_settings select {
-  height: 30px;
-}
-*/
+
 .container_predefined_amount input:not([type="checkbox"]), .container_predefined_amount select{
-  width: 150px;
+  width: 100px;
 }
 
 .tipping_settings textarea {

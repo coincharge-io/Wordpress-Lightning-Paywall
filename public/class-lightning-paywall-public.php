@@ -877,6 +877,7 @@ class Lightning_Paywall_Public
 		$predefined_enabled = get_option('lnpw_tipping_enter_amount');
 		$used_currency  = get_option('lnpw_tipping_currency');
 		$used_dimension      = get_option('lnpw_tipping_dimension');
+		$dimension = explode('x', $used_dimension);
 		$redirect = get_option('lnpw_tipping_redirect');
 		$collect = get_option('lnpw_tipping_collect');
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
@@ -895,6 +896,7 @@ class Lightning_Paywall_Public
 		$first_enabled = array_column($fixed_amount, 'enabled');
     	$d = array_search('true', $first_enabled);
     	$index = 'value' . ($d + 1);
+		
 		ob_start();
 	?>
 		<style>
