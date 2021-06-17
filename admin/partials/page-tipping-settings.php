@@ -1,7 +1,7 @@
 <?php
 $supported_currencies   = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 $predefined_enabled = get_option('lnpw_tipping_enter_amount');
-$dimensions = $predefined_enabled === 'true' ? ['250x250', '300x300'] : ['400x400', '500x500', '600x600'];
+$dimensions = $predefined_enabled === 'true' ? ['250x300', '300x300'] : ['400x400', '500x500', '600x600'];
 $used_currency  = get_option('lnpw_tipping_currency');
 $used_dimension      = get_option('lnpw_tipping_dimension');
 $redirect = get_option('lnpw_tipping_redirect');

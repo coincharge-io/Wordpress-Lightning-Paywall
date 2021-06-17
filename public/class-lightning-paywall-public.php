@@ -876,7 +876,7 @@ class Lightning_Paywall_Public
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$predefined_enabled = get_option('lnpw_tipping_enter_amount');
 		$used_currency  = get_option('lnpw_tipping_currency');
-		$used_dimension      = get_option('lnpw_tipping_dimension');
+		$used_dimension      = get_option('lnpw_tipping_dimension', '250x500');
 		$dimension = explode('x', $used_dimension);
 		$redirect = get_option('lnpw_tipping_redirect');
 		$collect = get_option('lnpw_tipping_collect');
@@ -901,7 +901,7 @@ class Lightning_Paywall_Public
 	?>
 		<style>
 			.lnpw_tipping_values, .lnpw_donor_information{
-				margin: 30px 0 100px 0;
+				margin: 2em 0 3em 0;
 			}
 			.lnpw_tipping_info fieldset{
 				position: relative;
@@ -915,7 +915,7 @@ class Lightning_Paywall_Public
 				background-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 				width: <?php echo $dimension[0] . 'px'; ?>;
 				height: <?php echo $dimension[1] . 'px'; ?>;
-				background-image: url(<?php echo ($background[0] ? $background[0] : ''); ?>);
+				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
 				background-size: cover;
 				background-repeat: no-repeat;
 			}
@@ -936,6 +936,7 @@ class Lightning_Paywall_Public
 				color: <?php echo $color['tipping']; ?>
 			}
 			
+			
 	 </style>
 
 
@@ -943,12 +944,12 @@ class Lightning_Paywall_Public
 			<div class="header_container">
 				<?php if ($logo) : ?>
 					<div>
-						<img width="100" height="100" alt="Tipping banner" src=<?php echo $logo[0]; ?> />
+						<img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
 					</div>
 				<?php endif; ?>
 				<?php if (!empty($text['title'])) : ?>
 					<div>
-						<h4><?php echo esc_html($text['title']); ?></h4>
+						<h6><?php echo esc_html($text['title']); ?></h6>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -960,11 +961,13 @@ class Lightning_Paywall_Public
 			<div class="lnpw_tipping_info">
 				<form method="POST" action="" id="tipping_form">
 					<fieldset>
-						<h4><?php echo (!empty($text['info']) ? $text['info'] : 'Enter Tipping Amount'); ?></h4>
+						<h6><?php echo (!empty($text['info']) ? $text['info'] : 'Enter Tipping Amount'); ?></h6>
 						<div class="lnpw_tipping_values">
-						<?php foreach($fixed_amount as $key=>$value): ?>
-						<?php if($fixed_amount[$key]['enabled'] === 'true'): ?>
 						<div class="predefined_container">
+						<?php foreach($fixed_amount as $key=>$value): ?>
+							
+						<?php if($fixed_amount[$key]['enabled'] === 'true'): ?>
+						<div>
 							<input type="radio" class="lnpw_tipping_default_amount" id="<?php echo $key;?>" name="lnpw_tipping_default_amount" <?php echo $key==$index ? 'required' : '';?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
 							<?php if(!empty($fixed_amount[$key]['amount'])) :?>
 								<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
@@ -973,7 +976,11 @@ class Lightning_Paywall_Public
 							
 							</div>
 						<?php endif; ?>
+						
 						<?php endforeach; ?>
+						</div>
+						<div class="lnpw_tipping_free_input">
+						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
 						<?php if($predefined_enabled === 'true'): ?>
 
 						<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
@@ -984,20 +991,21 @@ class Lightning_Paywall_Public
 								</option>
 							<?php endforeach; ?>
 						</select>
-						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
+						
 						
 						<?php endif; ?>
+						</div>
+						<div class="lnpw_tipping_converted_values">
 						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
-							</div>
+						<input type="text" id="lnpw_converted_currency" name="lnpw_converted_currency" readonly />
+						</div>
+						</div>
 						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
 						<div id="button">
 						<?php if ($collect_data == 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>
 							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button'] : 'Tip'); ?></button>
-							<div class="lnpw_pay__loading">
-								<p class="loading"></p>
-							</div>
 						<?php endif; ?>
 						</div>
 					</fieldset>
@@ -1015,9 +1023,6 @@ class Lightning_Paywall_Public
 							<div id="button">
 							<input type="button" name="previous" class="previous-form" value="Previous" />
 							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button']: 'Tip'); ?></button>
-							<div class="lnpw_pay__loading">
-								<p class="loading"></p>
-							</div>
 								</div>
 						</fieldset>
 					<?php endif; ?>

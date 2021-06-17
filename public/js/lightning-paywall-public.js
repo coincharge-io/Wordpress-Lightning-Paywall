@@ -67,7 +67,7 @@
     var donor;
     $("#tipping_form").submit(function (e) {
       e.preventDefault();
-      $(".lnpw_pay__loading p.loading").addClass("spinner");
+      //$(".lnpw_pay__loading p.loading").addClass("spinner");
       if (lnpw_invoice_id) {
         lnpwShowDonationInvoice(lnpw_invoice_id);
         return;
@@ -87,7 +87,7 @@
             message: $("#lnpw_tipping_donor_message").val(),
           },
           success: function (response) {
-            $(".lnpw_pay__loading p.loading").removeClass("spinner");
+            //$(".lnpw_pay__loading p.loading").removeClass("spinner");
             if (response.success) {
               lnpw_invoice_id = response.data.invoice_id;
               donor = response.data.donor;
@@ -156,14 +156,17 @@ $(document).ready(function(){
       var currency = $("#lnpw_tipping_currency").val();
       var amount = $(this).val();
       var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
-      var converted_amount = '~' + fiat_to_crypto(currency, amount, usd, eur, sats)+ ' '+get_currency(currency)
-      $("#lnpw_converted_amount").attr('readonly', false).val(converted_amount).attr('readonly', true);
+      //var converted_amount = '~' + fiat_to_crypto(currency, amount, usd, eur, sats)+ ' '+get_currency(currency)
+      $("#lnpw_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
+      $("#lnpw_converted_currency").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
     });
     $("#value1, #value2, #value3").hover(function(){
       var predefined = $(this).val().split(' ');
       var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
       var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
-      $("#lnpw_converted_amount").attr('readonly', false).val(converted_icon_amount).attr('readonly', true);
+      //$("#lnpw_converted_amount").attr('readonly', false).val(converted_icon_amount).attr('readonly', true);
+      $("#lnpw_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
+      $("#lnpw_converted_currency").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
       if($(this).parent().find('i')[0].className) {
         $("label[for='"+this.id+"']").show();
       }
