@@ -900,17 +900,6 @@ class Lightning_Paywall_Public
 		ob_start();
 	?>
 		<style>
-			.lnpw_tipping_values, .lnpw_donor_information{
-				margin: 2em 0 3em 0;
-			}
-			.lnpw_tipping_info fieldset{
-				position: relative;
-			}
-			#button {
-				position:absolute;
-				bottom: 0;
-				right: 0;
-			}
 			.lnpw_tipping_container {
 				background-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 				width: <?php echo $dimension[0] . 'px'; ?>;
@@ -934,6 +923,12 @@ class Lightning_Paywall_Public
 			}
 			.lnpw_tipping_info fieldset h4{
 				color: <?php echo $color['tipping']; ?>
+			}
+
+			#lnpw_converted_amount,
+			#lnpw_tipping_currency,
+			#lnpw_converted_currency{
+				border-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 			}
 			
 			
