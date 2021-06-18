@@ -67,7 +67,6 @@
     var donor;
     $("#tipping_form").submit(function (e) {
       e.preventDefault();
-      //$(".lnpw_pay__loading p.loading").addClass("spinner");
       if (lnpw_invoice_id) {
         lnpwShowDonationInvoice(lnpw_invoice_id);
         return;
@@ -87,7 +86,6 @@
             message: $("#lnpw_tipping_donor_message").val(),
           },
           success: function (response) {
-            //$(".lnpw_pay__loading p.loading").removeClass("spinner");
             if (response.success) {
               lnpw_invoice_id = response.data.invoice_id;
               donor = response.data.donor;

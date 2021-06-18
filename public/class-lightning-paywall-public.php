@@ -977,7 +977,7 @@ class Lightning_Paywall_Public
 								<?php endforeach; ?>
 							</div>
 							<div class="lnpw_tipping_free_input">
-								<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" min="0.00000001" required />
+								<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
 								<?php if ($predefined_enabled === 'true') : ?>
 
 									<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
