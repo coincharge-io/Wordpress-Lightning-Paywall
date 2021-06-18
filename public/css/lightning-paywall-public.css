@@ -93,7 +93,9 @@ a.lnpw_pay__download{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
+
 .lnpw_tipping_info h6,
 .lnpw_tipping_info .lnpw_tipping_free_input, 
 .lnpw_tipping_info .lnpw_tipping_converted_values{
@@ -108,12 +110,12 @@ a.lnpw_pay__download{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0.2em 0;
+  padding: 0.1em 0;
 }
 
 .header_container h6{
   padding: 0 0.4em;
-} 
+}
 
 .info_container{
   text-align: center;
@@ -157,16 +159,20 @@ a.lnpw_pay__download{
 	display: flex;
 }
 
+.lnpw_tipping_converted_values{
+  margin-bottom: 1em;
+}
+
 #button button,#button input[type="button"] {
 	font-size: 14px;
   padding: 10.5px 14px;
 }
 
 #tipping_form > fieldset:nth-child(1) > h6{
-  margin: 1em 0 0 0;
+  margin: -2em 0 1em 0;
 }
-.lnpw_tipping_values, .lnpw_donor_information{
-				margin: 2em 0 1.5em 0;
+ .lnpw_donor_information{
+	margin: 2em 0 1.5em 0;
 }
 #tipping_form{
   position: relative;

@@ -376,7 +376,7 @@ class Lightning_Paywall_Public
 		}
 
 		$collect .= "Amount: {$amount} {$currency}";
-		$collect .= 'Time:' . ' ' . date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
+		$collect .= 'Time:' . ' ' . date('Y-m-d H:i:s', current_time('timestamp', 0));
 
 
 		$url = get_option('lnpw_btcpay_server_url') . '/api/v1/stores/' . get_option('lnpw_btcpay_store_id') . '/invoices';
@@ -848,20 +848,19 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
-	private function collect_is_enabled($arr){
-		
-		if(!is_array($arr)){
+	private function collect_is_enabled($arr)
+	{
+
+		if (!is_array($arr)) {
 			return;
 		}
 
-		foreach($arr as $key => $value){
-			
-			if($arr[$key]['collect'] === 'true'){
-			
+		foreach ($arr as $key => $value) {
+
+			if ($arr[$key]['collect'] === 'true') {
+
 				return true;
-			
 			}
-			
 		}
 		return false;
 	}
@@ -885,7 +884,7 @@ class Lightning_Paywall_Public
 			'title'			=> 'Support my work',
 			'description'	=> '',
 			'info'			=> 'Enter Tipping Amount',
-			'button'		=> 'Tipping now'	
+			'button'		=> 'Tipping now'
 		));
 		$color = get_option('lnpw_tipping_color');
 		$image = get_option('lnpw_tipping_image');
@@ -894,16 +893,16 @@ class Lightning_Paywall_Public
 		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
 		$collect_data = $this->collect_is_enabled($collect);
 		$first_enabled = array_column($fixed_amount, 'enabled');
-    	$d = array_search('true', $first_enabled);
-    	$index = 'value' . ($d + 1);
-		
+		$d = array_search('true', $first_enabled);
+		$index = 'value' . ($d + 1);
+
 		ob_start();
 	?>
 		<style>
 			.lnpw_tipping_container {
 				background-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
-				width: <?php echo $dimension[0] . 'px'; ?>;
-				height: <?php echo $dimension[1] . 'px'; ?>;
+				width: <?php echo $dimension[0] . 'px !important'; ?>;
+				height: <?php echo $dimension[1] . 'px !important'; ?>;
 				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
 				background-size: cover;
 				background-repeat: no-repeat;
@@ -914,31 +913,34 @@ class Lightning_Paywall_Public
 				background: <?php echo $color['button']; ?>;
 			}
 
-			.header_container h4{
-				color: <?php echo $color['title'];?>
+			.header_container h4 {
+				color: <?php echo $color['title']; ?>
 			}
 
-			.info_container p{
-				color: <?php echo $color['description'];?>
+			.lnpw_tipping_container.info_container {
+				display: <?php echo (empty($text['description'])) ? 'none' : 'block'; ?>
 			}
-			.lnpw_tipping_info fieldset h4{
+
+			.info_container p {
+				color: <?php echo $color['description']; ?>
+			}
+
+			.lnpw_tipping_info fieldset h4 {
 				color: <?php echo $color['tipping']; ?>
 			}
 
 			#lnpw_converted_amount,
 			#lnpw_tipping_currency,
-			#lnpw_converted_currency{
-				border-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
+			#lnpw_converted_currency {
+				background: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 			}
-			
-			
-	 </style>
+		</style>
 
 
 		<div class="lnpw_tipping_container">
 			<div class="header_container">
 				<?php if ($logo) : ?>
-					<div>
+					<div class="lnpw_logo_wrap">
 						<img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
 					</div>
 				<?php endif; ?>
@@ -958,67 +960,67 @@ class Lightning_Paywall_Public
 					<fieldset>
 						<h6><?php echo (!empty($text['info']) ? $text['info'] : 'Enter Tipping Amount'); ?></h6>
 						<div class="lnpw_tipping_values">
-						<div class="predefined_container">
-						<?php foreach($fixed_amount as $key=>$value): ?>
-							
-						<?php if($fixed_amount[$key]['enabled'] === 'true'): ?>
-						<div>
-							<input type="radio" class="lnpw_tipping_default_amount" id="<?php echo $key;?>" name="lnpw_tipping_default_amount" <?php echo $key==$index ? 'required' : '';?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
-							<?php if(!empty($fixed_amount[$key]['amount'])) :?>
-								<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
-							<?php endif; ?>
-								<label style="display: <?php echo empty($fixed_amount[$key]['icon']) ? 'block' : 'none';?>" for="<?php echo $key;?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
-							
-							</div>
-						<?php endif; ?>
-						
-						<?php endforeach; ?>
-						</div>
-						<div class="lnpw_tipping_free_input">
-						<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
-						<?php if($predefined_enabled === 'true'): ?>
+							<div class="predefined_container">
+								<?php foreach ($fixed_amount as $key => $value) : ?>
 
-						<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
-							<option disabled value="">Select currency</option>
-							<?php foreach ($supported_currencies as $currency) : ?>
-								<option <?php echo $used_currency === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
-									<?php echo $currency; ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-						
-						
-						<?php endif; ?>
-						</div>
-						<div class="lnpw_tipping_converted_values">
-						<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
-						<input type="text" id="lnpw_converted_currency" name="lnpw_converted_currency" readonly />
-						</div>
+									<?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
+										<div>
+											<input type="radio" class="lnpw_tipping_default_amount" id="<?php echo $key; ?>" name="lnpw_tipping_default_amount" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
+											<?php if (!empty($fixed_amount[$key]['amount'])) : ?>
+												<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
+											<?php endif; ?>
+											<label style="display: <?php echo empty($fixed_amount[$key]['icon']) ? 'block' : 'none'; ?>" for="<?php echo $key; ?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
+
+										</div>
+									<?php endif; ?>
+
+								<?php endforeach; ?>
+							</div>
+							<div class="lnpw_tipping_free_input">
+								<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" min="0.00000001" required />
+								<?php if ($predefined_enabled === 'true') : ?>
+
+									<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
+										<option disabled value="">Select currency</option>
+										<?php foreach ($supported_currencies as $currency) : ?>
+											<option <?php echo $used_currency === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+												<?php echo $currency; ?>
+											</option>
+										<?php endforeach; ?>
+									</select>
+
+
+								<?php endif; ?>
+							</div>
+							<div class="lnpw_tipping_converted_values">
+								<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
+								<input type="text" id="lnpw_converted_currency" name="lnpw_converted_currency" readonly />
+							</div>
 						</div>
 						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $redirect; ?> />
 						<div id="button">
-						<?php if ($collect_data == 'true') : ?>
-							<input type="button" name="next" class="next-form" value="Next" />
-						<?php else : ?>
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button'] : 'Tip'); ?></button>
-						<?php endif; ?>
+							<?php if ($collect_data == 'true') : ?>
+								<input type="button" name="next" class="next-form" value="Next" />
+							<?php else : ?>
+								<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button'] : 'Tip'); ?></button>
+							<?php endif; ?>
 						</div>
 					</fieldset>
 					<?php if ($collect_data == 'true') : ?>
 						<fieldset>
 							<h4>Personal info</h4>
 							<div class="lnpw_donor_information">
-							<?php foreach($collect as $key=>$value): ?>
-								<?php if ($collect[$key]['collect'] == 'true') : ?>
-									<label for="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}";?>"> <?php echo $collect[$key]['label'];?></label>
-									<input type="text" id="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}";?>" name="lnpw_tipping_donor_name" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
-								<?php endif; ?>
-							<?php endforeach; ?>
+								<?php foreach ($collect as $key => $value) : ?>
+									<?php if ($collect[$key]['collect'] == 'true') : ?>
+										<label for="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}"; ?>"> <?php echo $collect[$key]['label']; ?></label>
+										<input type="text" id="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}"; ?>" name="lnpw_tipping_donor_name" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
+									<?php endif; ?>
+								<?php endforeach; ?>
 							</div>
 							<div id="button">
-							<input type="button" name="previous" class="previous-form" value="Previous" />
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button']: 'Tip'); ?></button>
-								</div>
+								<input type="button" name="previous" class="previous-form" value="Previous" />
+								<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button'] : 'Tip'); ?></button>
+							</div>
 						</fieldset>
 					<?php endif; ?>
 				</form>
