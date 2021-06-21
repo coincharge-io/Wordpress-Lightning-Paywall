@@ -112,11 +112,11 @@ a.lnpw_pay__download{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0.1em 0;
+  padding: 0.1em 1em;
 }
 
 .header_container h6{
-  padding: 0 0.4em;
+  padding: 0 0.6em;
 }
 
 .info_container{
@@ -170,7 +170,9 @@ a.lnpw_pay__download{
 .lnpw_tipping_converted_values{
   margin-bottom: 2em;
 }
-
+.lnpw_tipping_container fieldset input:not([type=submit]) {
+   margin-bottom: 0;
+}
 #button button,
 #button input[type="button"] {
 	font-size: 14px;
