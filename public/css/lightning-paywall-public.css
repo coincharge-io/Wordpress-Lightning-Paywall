@@ -94,6 +94,7 @@ a.lnpw_pay__download{
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  font-size: 16px
 }
 
 .lnpw_tipping_info h6,
@@ -133,7 +134,7 @@ a.lnpw_pay__download{
 #lnpw_tipping_amount,
 #lnpw_converted_amount{
   height: 40px;
-  width: 45%;
+  width: 50%;
 }
 #lnpw_tipping_currency,
 #lnpw_converted_currency{
@@ -141,7 +142,13 @@ a.lnpw_pay__download{
   width: 35%;
   font-size: 15px;
 }
-
+.lnpw_tipping_container h6{
+  line-height: 2;
+  font-size: 0.8em;
+}
+.lnpw_tipping_container select{
+  line-height: 1;
+}
 .predefined_container input[type="radio"]:checked + i, .predefined_container input[type="radio"]:checked + label{
 	background-color: #18f98d;
 	color: #ffffff;
@@ -160,7 +167,7 @@ a.lnpw_pay__download{
 }
 
 .lnpw_tipping_converted_values{
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 #button button,#button input[type="button"] {

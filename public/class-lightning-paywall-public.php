@@ -932,6 +932,7 @@ class Lightning_Paywall_Public
 			#lnpw_converted_amount,
 			#lnpw_tipping_currency,
 			#lnpw_converted_currency {
+				border-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 				background: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 			}
 		</style>
