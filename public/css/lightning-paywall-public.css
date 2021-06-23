@@ -122,6 +122,11 @@ a.lnpw_pay__download{
 .info_container{
   text-align: center;
 }
+
+.info_container p{
+  font-size: 0.6em;
+}
+
 #tipping_form fieldset:not(:first-of-type) {
 	display: none;
 }
@@ -145,7 +150,7 @@ a.lnpw_pay__download{
 }
 .lnpw_tipping_container h6{
   line-height: 2;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 .lnpw_tipping_container select{
   line-height: 1;
@@ -193,4 +198,11 @@ a.lnpw_pay__download{
   bottom: 0;
   right: 0;
 }
-
+#lnpw_tipping_amount{
+  background-color: white;
+}
+#lnpw_converted_amount,
+#lnpw_tipping_currency,
+#lnpw_converted_currency {
+  border: none;
+}

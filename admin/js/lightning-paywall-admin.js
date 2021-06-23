@@ -165,6 +165,7 @@
     ($(this).is(':checked') ? $(this).next().prop('required', true) : $(this).next().prop('required', false));
   })
 });
+
  /* $(document).ready(function () {
     $('.lnpw_tipping_enter_amount').click(function () {
       if (!$(this).is(':checked')) {
@@ -175,8 +176,7 @@
     });
   });*/
   $(document).ready(function (){
-    $('#lnpw_tipping_button_text_color, #lnpw_tipping_background, #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color, #lnpw_tipping_tipping_color').iris({
-      
+    $('#lnpw_tipping_button_text_color,       #lnpw_tipping_background,              #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color,      #lnpw_tipping_tipping_color,                                      .widget-tipping-basic-background_color,                           .widget-tipping-basic-title_text_color,                           .widget-tipping-basic-button_text_color,                          .widget-tipping-basic-button_color,                               .widget-tipping-basic-description-color,                          .widget-tipping-basic-title_text_color,                           .widget-tipping-basic-tipping-color').iris({
       defaultColor: true,
       
       change: function(event, ui){},
@@ -189,13 +189,20 @@
       });
   });
 $(document).ready(function($){
+
             imagePreview($('#lnpw_tipping_button_image'), $('#lnpw_tipping_image'));
             imageRemove($('.lnpw_tipping_button_remove'));
 
             imagePreview($('#lnpw_tipping_button_image_background'), $('#lnpw_tipping_image_background'));
             imageRemove($('.lnpw_tipping_button_remove_background'));
+
+            imagePreview($('.widget-tipping-basic-upload_image'),     $('.widget-tipping-basic-background_id'));
+            imageRemove($('.widget-tipping-basic-remove_image'));
+
+            imagePreview($('.widget-tipping-basic-upload_logo'),      $('.widget-tipping-basic-background_logo'));
+            imageRemove($('.widget-tipping-basic-remove_logo'));
            
-        });
+});
 $(document).ready(function () {
     showMore($('.lnpw_tipping_collect_name'), $('.lnpw_tipping_collect_name_mandatory, label[for="lnpw_tipping_collect[name][mandatory]"]'));
 
@@ -208,13 +215,13 @@ $(document).ready(function () {
     showMore($('.lnpw_tipping_collect_message'), $('.lnpw_tipping_collect_message_mandatory, label[for="lnpw_tipping_collect[message][mandatory]"]'));
   });
 function imagePreview(click_elem, target){
+
   var custom_uploader
               , click_elem
               , target 
 
             click_elem.click(function(e) {
                 e.preventDefault();
-
                 if (custom_uploader) {
                     custom_uploader.open();
                     return;

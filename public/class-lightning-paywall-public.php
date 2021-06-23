@@ -864,6 +864,137 @@ class Lightning_Paywall_Public
 		}
 		return false;
 	}
+
+	/**
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	 public function render_shortcode_basic_tipping($atts)
+	 {
+		$atts = shortcode_atts(array(
+			'dimension' 	=> '250x300',
+			'title'			=> 'Support my work',
+			'description'	=> '',
+			'currency'		=> 'SATS',
+			'background_color'	=> '#E6E6E6',
+			'title_text_color'	=> '#000000',
+			'tipping_text'	=> 'Enter Tipping Amount',
+			'tipping_text_color'	=> '#000000',
+			'redirect'		=> get_site_url(),
+			'amount'		=> '',
+			'description_color'	=> '#000000',
+			'button_text'	=> 'Tipping now',
+			'button_text_color'	=> '#FFFFFF',
+			'button_color'	=> '#FE642E',
+			'logo_id'		=> '',
+			'background_id'	=> '',
+		), $atts);
+		
+		$dimension = explode('x', $atts['dimension']);
+        $supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
+        $logo = wp_get_attachment_image_src($atts['logo_id']);
+        $background = wp_get_attachment_image_src($atts['background_id']);
+
+		ob_start();
+	?>
+		<style>
+			.lnpw_tipping_container {
+				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
+				width: <?php echo $dimension[0] . 'px !important'; ?>;
+				height: <?php echo $dimension[1] . 'px !important'; ?>;
+				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+
+			#lnpw_tipping__button {
+				color: <?php echo $atts['button_text_color']; ?>;
+				background: <?php echo $atts['button_color']; ?>;
+			}
+
+			.header_container h4 {
+				color: <?php echo $atts['title_text_color']; ?>
+			}
+
+			.lnpw_tipping_container.info_container {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block'; ?>
+			}
+
+			.info_container p {
+				color: <?php echo $atts['description_color']; ?>
+			}
+
+			.lnpw_tipping_info fieldset h4 {
+				color: <?php echo $atts['tipping_text_color']; ?>
+			}
+
+			#lnpw_converted_amount,
+			#lnpw_tipping_currency,
+			#lnpw_converted_currency {
+				background: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
+			}
+		</style>
+
+
+		<div class="lnpw_tipping_container">
+			<div class="header_container">
+				<?php if ($logo) : ?>
+					<div class="lnpw_logo_wrap">
+						<img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+					</div>
+				<?php endif; ?>
+				<?php if (!empty($atts['title'])) : ?>
+					<div>
+						<h6><?php echo esc_html($atts['title']); ?></h6>
+					</div>
+				<?php endif; ?>
+			</div>
+			<div class="info_container">
+				<?php if (!empty($atts['description'])) : ?>
+					<p><?php echo esc_html($atts['description']); ?></p>
+				<?php endif; ?>
+			</div>
+			<div class="lnpw_tipping_info">
+				<form method="POST" action="" id="tipping_form">
+					<fieldset>
+						<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?></h6>
+						<div class="lnpw_tipping_values">
+							
+							<div class="lnpw_tipping_free_input">
+								<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
+								
+
+									<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
+										<option disabled value="">Select currency</option>
+										<?php foreach ($supported_currencies as $currency) : ?>
+											<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+												<?php echo $currency; ?>
+											</option>
+										<?php endforeach; ?>
+									</select>
+
+
+							</div>
+							<div class="lnpw_tipping_converted_values">
+								<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
+								<input type="text" id="lnpw_converted_currency" name="lnpw_converted_currency" readonly />
+							</div>
+						</div>
+						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $atts['redirect']; ?> />
+						<div id="button">
+							
+								<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button_text']) ? $text['button_text'] : 'Tip'); ?></button>
+							
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	<?php
+
+		return ob_get_clean();
+	 }
 	/**
 	 * @param $atts
 	 *
@@ -932,7 +1063,6 @@ class Lightning_Paywall_Public
 			#lnpw_converted_amount,
 			#lnpw_tipping_currency,
 			#lnpw_converted_currency {
-				border-color: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 				background: <?php echo ($color['background'] ? $color['background'] : ''); ?>;
 			}
 		</style>

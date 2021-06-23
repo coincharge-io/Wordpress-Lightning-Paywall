@@ -151,6 +151,7 @@ class Lightning_Paywall
 		$this->loader->add_action('init', $plugin_admin, 'load_gutenberg');
 		$this->loader->add_action('vc_before_init', $plugin_admin, 'load_vc_widgets');
 		$this->loader->add_action('elementor/widgets/widgets_registered', $plugin_admin, 'load_elementor_widgets');
+		$this->loader->add_action('widgets_init', $plugin_admin, 'wpdocs_register_widgets');
 	}
 
 	/**
@@ -193,6 +194,7 @@ class Lightning_Paywall
 		$this->loader->add_shortcode('lnpw_start_video', $plugin_public, 'render_shortcode_lnpw_start_video');
 		$this->loader->add_shortcode('lnpw_file', $plugin_public, 'render_shortcode_lnpw_file');
 		$this->loader->add_shortcode('lnpw_tipping', $plugin_public, 'render_shortcode_tipping');
+		$this->loader->add_shortcode('lnpw_tipping_basic', $plugin_public, 'render_shortcode_basic_tipping');
 		$this->loader->add_shortcode('lnpw_protected_file', $plugin_public, 'render_shortcode_protected_file');
 		$this->loader->add_shortcode('lnpw_end_video', $plugin_public, 'render_shortcode_lnpw_end_content');
 		$this->loader->add_shortcode('lnpw_video_catalog', $plugin_public, 'render_shortcode_lnpw_video_catalog');

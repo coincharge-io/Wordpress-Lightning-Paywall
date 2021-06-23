@@ -210,7 +210,7 @@ class Lightning_Paywall_Admin
 				'title'			=> 'Support my work',
 				'description'	=> '',
 				'info'			=> 'Enter Tipping Amount',
-				'button'		=> 'Tipping now'	
+				'button'		=> 'Tipping now'
 			), 'sanitize_callback' => array($this, 'validate_textarea')
 		));
 
@@ -223,13 +223,14 @@ class Lightning_Paywall_Admin
 				'title'				=> '#000000',
 				'description'		=> '#000000',
 				'tipping'			=> '#000000',
-			), 'sanitize_callback'	=> array($this, 'validate_colors')));
+			), 'sanitize_callback'	=> array($this, 'validate_colors')
+		));
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array(
 			'type' => 'array', 'default' => array(
-			'logo'			=> '',
-			'background'	=> '',
-		), 'sanitize_callback'	=> array($this, 'validate_images')
-	));
+				'logo'			=> '',
+				'background'	=> '',
+			), 'sanitize_callback'	=> array($this, 'validate_images')
+		));
 
 		register_setting('lnpw_tipping_settings', 'lnpw_tipping_enter_amount', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
 	}
@@ -237,7 +238,7 @@ class Lightning_Paywall_Admin
 	{
 		$default_values = array(
 			'logo'		 => '',
-			'background' => '',	
+			'background' => '',
 		);
 
 		if (!is_array($values)) {
@@ -245,13 +246,11 @@ class Lightning_Paywall_Admin
 		}
 
 		foreach ($values as $key => $value) {
-			
-			$default_values[$key] = sanitize_text_field($value);
-		
-		}
-		
-		return $default_values;
 
+			$default_values[$key] = sanitize_text_field($value);
+		}
+
+		return $default_values;
 	}
 	public function validate_colors($values)
 	{
@@ -261,7 +260,7 @@ class Lightning_Paywall_Admin
 			'button'			=> '#FE642E',
 			'title'				=> '#000000',
 			'description'		=> '#000000',
-			'tipping'			=> '#000000',	
+			'tipping'			=> '#000000',
 		);
 
 		if (!is_array($values)) {
@@ -269,11 +268,10 @@ class Lightning_Paywall_Admin
 		}
 
 		foreach ($values as $key => $value) {
-			
+
 			$default_values[$key] = sanitize_hex_color($value);
-		
 		}
-		
+
 		return $default_values;
 	}
 	public function validate_textarea($values)
@@ -282,7 +280,7 @@ class Lightning_Paywall_Admin
 			'title'			=> 'Support my work',
 			'description'	=> '',
 			'info'			=> 'Enter Tipping Amount',
-			'button'		=> 'Tipping now'	
+			'button'		=> 'Tipping now'
 		);
 
 		if (!is_array($values)) {
@@ -290,14 +288,11 @@ class Lightning_Paywall_Admin
 		}
 
 		foreach ($values as $key => $value) {
-			
+
 			$default_values[$key] = sanitize_textarea_field($value);
-		
 		}
-		
+
 		return $default_values;
-
-
 	}
 	public function validate_predefined_values($values)
 	{
@@ -1073,5 +1068,13 @@ class Lightning_Paywall_Admin
 				'render_callback' => (array($this, 'render_file_gutenberg')),
 			]
 		);
+	}
+	public function wpdocs_register_widgets()
+	{
+		require_once __DIR__ . '/widgets/basic_form.php';
+		/*$my_widget = new My_Widget();
+		register_widget($my_widget);*/
+		//var_dump(new My_Widget());
+		register_widget(new Basic_Form());
 	}
 }
