@@ -1072,9 +1072,6 @@ class Lightning_Paywall_Admin
 	public function wpdocs_register_widgets()
 	{
 		require_once __DIR__ . '/widgets/basic_form.php';
-		/*$my_widget = new My_Widget();
-		register_widget($my_widget);*/
-		//var_dump(new My_Widget());
 		register_widget(new Basic_Form());
 	}
 }

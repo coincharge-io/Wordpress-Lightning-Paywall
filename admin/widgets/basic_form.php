@@ -39,26 +39,26 @@ class Basic_Form extends WP_Widget
 
         $dimensions = array('250x300', '300x300');
         $supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('', 'text_domain');
+        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('Support my work', 'text_domain');
         
         $description = !empty($instance['description']) ? $instance['description'] : esc_html__('', 'text_domain');
 
-        $dimension = !empty($instance['dimension']) ? $instance['dimension'] : esc_html__('', 'text_domain');
-        $currency = !empty($instance['currency']) ? $instance['currency'] : esc_html__('', 'text_domain');
+        $dimension = !empty($instance['dimension']) ? $instance['dimension'] : esc_html__('250x300', 'text_domain');
+        $currency = !empty($instance['currency']) ? $instance['currency'] : esc_html__('SATS', 'text_domain');
 
-        $background_color = !empty($instance['background_color']) ? $instance['background_color'] : esc_html__('', 'text_domain');
-        $title_text_color = !empty($instance['title_text_color']) ? $instance['title_text_color'] : esc_html__('', 'text_domain');
+        $background_color = !empty($instance['background_color']) ? $instance['background_color'] : esc_html__('#E6E6E6', 'text_domain');
+        $title_text_color = !empty($instance['title_text_color']) ? $instance['title_text_color'] : esc_html__('#000000', 'text_domain');
 
-        $tipping_text = !empty($instance['tipping_text']) ? $instance['tipping_text'] : esc_html__('', 'text_domain');
-        $tipping_text_color = !empty($instance['tipping_text_color']) ? $instance['tipping_text_color'] : esc_html__('', 'text_domain');
+        $tipping_text = !empty($instance['tipping_text']) ? $instance['tipping_text'] : esc_html__('Enter Tipping Amount', 'text_domain');
+        $tipping_text_color = !empty($instance['tipping_text_color']) ? $instance['tipping_text_color'] : esc_html__('#000000', 'text_domain');
         $redirect = !empty($instance['redirect']) ? $instance['redirect'] : esc_html__('', 'text_domain');
         $amount = !empty($instance['amount']) ? $instance['amount'] : esc_html__('', 'text_domain');
-        $description_color = !empty($instance['description_color']) ? $instance['description_color'] : esc_html__('', 'text_domain');
+        $description_color = !empty($instance['description_color']) ? $instance['description_color'] : esc_html__('#000000', 'text_domain');
 
-        $button_text = !empty($instance['button_text']) ? $instance['button_text'] : esc_html__('', 'text_domain');
-        $button_text_color = !empty($instance['button_text_color']) ? $instance['button_text_color'] : esc_html__('', 'text_domain');
+        $button_text = !empty($instance['button_text']) ? $instance['button_text'] : esc_html__('Tipping now', 'text_domain');
+        $button_text_color = !empty($instance['button_text_color']) ? $instance['button_text_color'] : esc_html__('#FFFFFF', 'text_domain');
         
-        $button_color = !empty($instance['button_color']) ? $instance['button_color'] : esc_html__('', 'text_domain');
+        $button_color = !empty($instance['button_color']) ? $instance['button_color'] : esc_html__('#FE642E', 'text_domain');
 
 
         $logo_id = !empty($instance['logo_id']) ? $instance['logo_id'] : esc_html__('', 'text_domain');
