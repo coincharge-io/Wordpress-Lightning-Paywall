@@ -15,7 +15,6 @@ $background = wp_get_attachment_image_src($image['background']);
 ?>
 
 <style>
-
     .lnpw_tipping_collect_name_mandatory,
     label[for="lnpw_tipping_collect[name][mandatory]"] {
         visibility: <?php echo $collect['name']['collect'] === 'true' ? '' : 'hidden'; ?>;
@@ -65,7 +64,7 @@ $background = wp_get_attachment_image_src($image['background']);
                 <label for="lnpw_tipping_image_background">Background image</label>
             </div>
             <div class="col-50">
-            <?php if ($background) : ?>
+                <?php if ($background) : ?>
                     <button id="lnpw_tipping_button_image_background" class="lnpw_tipping_button_image_background" name="lnpw_tipping_button_image_background"><img src="<?php echo $background[0]; ?>" /></a></button>
                     <button class="lnpw_tipping_button_remove_background">Remove image</button>
                     <input type="hidden" id="lnpw_tipping_image_background" class="lnpw_tipping_image_background" name="lnpw_tipping_image[background]" value=<?php echo $image['background']; ?> />
@@ -81,11 +80,11 @@ $background = wp_get_attachment_image_src($image['background']);
                 <label for="lnpw_tipping_background">Background color</label>
             </div>
             <div class="col-50">
-            <input id="lnpw_tipping_background" class="lnpw_tipping_background" name="lnpw_tipping_color[background]" type="text" value=<?php echo $color['background']; ?> />
+                <input id="lnpw_tipping_background" class="lnpw_tipping_background" name="lnpw_tipping_color[background]" type="text" value=<?php echo $color['background']; ?> />
             </div>
         </div>
         <h3>Description</h3>
-        
+
         <div class="row">
             <div class="col-50">
                 <label for="lnpw_tipping_image">Tipping Logo</label>
@@ -118,7 +117,7 @@ $background = wp_get_attachment_image_src($image['background']);
                 <textarea id="lnpw_tipping_description" name="lnpw_tipping_text[description]"><?php echo $text['description']; ?></textarea>
             </div>
             <div class="col-50">
-            <label for="lnpw_tipping_description_color">Description text color</label>
+                <label for="lnpw_tipping_description_color">Description text color</label>
                 <input id="lnpw_tipping_description_color" class="lnpw_tipping_description_color" name="lnpw_tipping_color[description]" type="text" value=<?php echo $color['description']; ?> />
             </div>
         </div>
@@ -128,7 +127,7 @@ $background = wp_get_attachment_image_src($image['background']);
                 <textarea id="lnpw_tipping_text" name="lnpw_tipping_text[info]"><?php echo $text['info']; ?></textarea>
             </div>
             <div class="col-50">
-            <label for="lnpw_tipping_tipping_color">Tipping text color</label>
+                <label for="lnpw_tipping_tipping_color">Tipping text color</label>
                 <input id="lnpw_tipping_tipping_color" class="lnpw_tipping_tipping_color" name="lnpw_tipping_color[tipping]" type="text" value=<?php echo $color['tipping']; ?> />
             </div>
         </div>
@@ -238,8 +237,8 @@ $background = wp_get_attachment_image_src($image['background']);
 
             </div>
         </div>
-        
-        
+
+
         <div class="row">
             <div class="col-50">
                 <label for="lnpw_tipping_button_color">Button color</label>
@@ -261,7 +260,7 @@ $background = wp_get_attachment_image_src($image['background']);
 
                 <label for="lnpw_tipping_collect[name][mandatory]">Mandatory</label>
                 <input type="checkbox" class="lnpw_tipping_collect_name_mandatory" name="lnpw_tipping_collect[name][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-                
+
             </div>
         </div>
         <div class="row">
@@ -272,10 +271,10 @@ $background = wp_get_attachment_image_src($image['background']);
                 <label for="lnpw_tipping_collect[email][collect]">Display</label>
 
                 <input type="checkbox" class="lnpw_tipping_collect_email" name="lnpw_tipping_collect[email][collect]" <?php echo $collect['email']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
-                
+
                 <label for="lnpw_tipping_collect[email][mandatory]">Mandatory</label>
                 <input type="checkbox" class="lnpw_tipping_collect_email_mandatory" name="lnpw_tipping_collect[email][mandatory]" <?php echo $collect['email']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-                
+
             </div>
         </div>
         <div class="row">
@@ -302,7 +301,7 @@ $background = wp_get_attachment_image_src($image['background']);
 
                 <label for="lnpw_tipping_collect[phone][mandatory]">Mandatory</label>
                 <input type="checkbox" class="lnpw_tipping_collect_phone_mandatory" name="lnpw_tipping_collect[phone][mandatory]" <?php echo $collect['name']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-                
+
             </div>
         </div>
         <div class="row">
@@ -312,10 +311,10 @@ $background = wp_get_attachment_image_src($image['background']);
             <div class="col-50">
                 <label for="lnpw_tipping_collect[message][collect]">Display</label>
                 <input type="checkbox" class="lnpw_tipping_collect_message" name="lnpw_tipping_collect[message][collect]" <?php echo $collect['message']['collect'] === 'true' ? 'checked' : ''; ?> value="true" />
-                
+
                 <label for="lnpw_tipping_collect[message][mandatory]">Mandatory</label>
                 <input type="checkbox" class="lnpw_tipping_collect_message_mandatory" name="lnpw_tipping_collect[message][mandatory]" <?php echo $collect['message']['mandatory'] === 'true' ? 'checked' : ''; ?> value="true" />
-                
+
             </div>
         </div>
 

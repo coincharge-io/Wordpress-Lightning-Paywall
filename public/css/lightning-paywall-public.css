@@ -97,15 +97,15 @@ a.lnpw_pay__download{
   font-size: 16px
 }
 
-.lnpw_tipping_info h6,
-.lnpw_tipping_info .lnpw_tipping_free_input, 
-.lnpw_tipping_info .lnpw_tipping_converted_values{
+.lnpw_tipping_container h6,
+.lnpw_tipping_container .lnpw_tipping_free_input, 
+.lnpw_tipping_container .lnpw_tipping_converted_values{
   display:flex;
   justify-content: center;
 }
 .lnpw_tipping_container fieldset{
   border:0;
-  padding: 2em 1em;
+  padding: 0 1em;
 }
 
 .header_container{
@@ -116,20 +116,22 @@ a.lnpw_pay__download{
 }
 
 .header_container h6{
-  padding: 0 0.6em;
+  margin-top: 0;
+  font-size: 1em;
 }
 
 .info_container{
   text-align: center;
 }
 
-.info_container p{
+/*.info_container p{
   font-size: 0.6em;
 }
-
+*/
 #tipping_form fieldset:not(:first-of-type) {
 	display: none;
 }
+
 
 .lnpw_donor_information{
   display: grid;
@@ -148,10 +150,14 @@ a.lnpw_pay__download{
   width: 35%;
   font-size: 15px;
 }
-.lnpw_tipping_container h6{
-  line-height: 2;
+.lnpw_tipping_container h6 {
   font-size: 0.9em;
 }
+
+.lnpw_tipping_container h4 {
+  font-size: 1em;
+}
+
 .lnpw_tipping_container select{
   line-height: 1;
 }
@@ -184,13 +190,13 @@ a.lnpw_pay__download{
   padding: 10.5px 14px;
 }
 
-#tipping_form > fieldset:nth-child(1) > h6{
+/*#tipping_form > fieldset:nth-child(1) > h6{
   margin: -2em 0 1em 0;
-}
+}*/
 .lnpw_donor_information{
 	margin: 2em 0 1.5em 0;
 }
-#tipping_form{
+.lnpw_tipping_container{
   position: relative;
 }
 #button {

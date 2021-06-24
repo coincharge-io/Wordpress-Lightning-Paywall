@@ -1,49 +1,29 @@
 <?php
 
-class Basic_Form extends WP_Widget
-{
 
+class Tipping_Banner extends WP_Widget
+{
     public function __construct()
     {
-
         parent::__construct(
-            'tipping-basic',  // Base ID
-            'Tipping form - basic'   // Name
+            'tipping-banner',
+            'Tipping banner'
         );
     }
 
-    
-
     public function widget($args, $instance)
     {
-        
-        echo do_shortcode("[lnpw_tipping_basic dimension='{$instance['dimension']}' title = '{$instance['title']}' description	= '{$instance['description']}'
-        currency = '{$instance['currency']}'
-        background_color = '{$instance['background_color']}'
-        title_text_color = '{$instance['title_text_color']}'
-        tipping_text = '{$instance['tipping_text']}'
-        tipping_text_color = '{$instance['tipping_text_color']}'
-        redirect = '{$instance['redirect']}'
-        amount = '{$instance['redirect']}'
-        description_color = '{$instance['description_color']}'
-        button_text = '{$instance['button_text']}'
-        button_text_color = '{$instance['button_text_color']}'
-        button_color = '{$instance['button_color']}'
-        logo_id = '{$instance['logo_id']}'
-        background_id = '{$instance['background_id']}']");
- 
     }
 
     public function form($instance)
     {
-
-        $dimensions = array('250x300', '300x300');
+        $dimensions = array('160x600', '600x160');
         $supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
         $title = !empty($instance['title']) ? $instance['title'] : esc_html__('Support my work', 'text_domain');
-        
+
         $description = !empty($instance['description']) ? $instance['description'] : esc_html__('', 'text_domain');
 
-        $dimension = !empty($instance['dimension']) ? $instance['dimension'] : esc_html__('250x300', 'text_domain');
+        $dimension = !empty($instance['dimension']) ? $instance['dimension'] : esc_html__('160x600', 'text_domain');
         $currency = !empty($instance['currency']) ? $instance['currency'] : esc_html__('SATS', 'text_domain');
 
         $background_color = !empty($instance['background_color']) ? $instance['background_color'] : esc_html__('#E6E6E6', 'text_domain');
@@ -57,7 +37,7 @@ class Basic_Form extends WP_Widget
 
         $button_text = !empty($instance['button_text']) ? $instance['button_text'] : esc_html__('Tipping now', 'text_domain');
         $button_text_color = !empty($instance['button_text_color']) ? $instance['button_text_color'] : esc_html__('#FFFFFF', 'text_domain');
-        
+
         $button_color = !empty($instance['button_color']) ? $instance['button_color'] : esc_html__('#FE642E', 'text_domain');
 
 
@@ -67,7 +47,7 @@ class Basic_Form extends WP_Widget
         $logo = wp_get_attachment_image_src($logo_id);
         $background = wp_get_attachment_image_src($background_id);
 
-    ?>
+?>
         <div class="tipping_settings">
             <h1>Tipping</h1>
             <div class="row">
@@ -88,12 +68,11 @@ class Basic_Form extends WP_Widget
                 </div>
                 <div class="col-50">
                     <?php if ($background) : ?>
-                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_image"  name="lnpw_tipping_button_image_background"><img src="<?php echo $background[0]; ?>" /></a></button>
+                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_image" name="lnpw_tipping_button_image_background"><img src="<?php echo $background[0]; ?>" /></a></button>
                         <button class="widget-tipping-basic-remove_image"> <?php echo esc_html__('Remove', 'text_domain'); ?></button>
                         <input type="hidden" class="widget-tipping-basic-background_id" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
                     <?php else : ?>
-                        <button id="lnpw_tipping_button_image_background"
-                        class="widget-tipping-basic-upload_image" name="lnpw_tipping_button_image_background"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
+                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_image" name="lnpw_tipping_button_image_background"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
                         <button class="widget-tipping-basic-remove_image" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
                         <input type="hidden" class="widget-tipping-basic-background_id" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
                     <?php endif; ?>
@@ -126,7 +105,7 @@ class Basic_Form extends WP_Widget
                 </div>
             </div>
             <div>
-            <div class="col-50">
+                <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php echo esc_html__('Title:', 'text_domain'); ?></label>
                     <textarea id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>"><?php echo esc_attr($title); ?></textarea>
                 </div>
@@ -205,42 +184,9 @@ class Basic_Form extends WP_Widget
         </div>
 <?php
     }
-
     public function update($new_instance, $old_instance)
     {
-        $instance = array();
-
-        $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
-        $instance['dimension'] = (!empty($new_instance['dimension'])) ? $new_instance['dimension'] : '';
-
-
-
-        $instance['description'] = !empty($new_instance['description']) ? strip_tags($new_instance['description']) : '';
-
-        //$dimension = !empty($instance['dimension']) ? $instance['dimension'] : esc_html__('', 'text_domain');
-        $instance['currency'] = !empty($new_instance['currency']) ? $new_instance['currency'] : '';
-
-        $instance['background_color'] = !empty($new_instance['background_color']) ? $new_instance['background_color'] : '';
-        $instance['title_text_color'] = !empty($new_instance['title_text_color']) ? $new_instance['title_text_color'] : '';
-        $instance['tipping_text'] = !empty($new_instance['tipping_text']) ? $new_instance['tipping_text'] : '';
-        $instance['tipping_text_color'] = !empty($new_instance['tipping_text_color']) ? $new_instance['tipping_text_color'] : '';
-        $instance['tipping_color'] = !empty($new_instance['tipping_color']) ? $new_instance['tipping_color'] : '';
-        $instance['redirect'] = !empty($new_instance['redirect']) ? $new_instance['redirect'] : '';
-        $instance['amount'] = !empty($new_instance['amount']) ? $new_instance['amount'] : '';
-        $instance['description_color'] = !empty($new_instance['description_color']) ? $new_instance['description_color'] : '';
-
-        $instance['button_text'] = !empty($new_instance['button_text']) ? $new_instance['button_text'] : '';
-        $instance['button_text_color'] = !empty($new_instance['button_text_color']) ? $new_instance['button_text_color'] : '';
-        //$tipping_text = !empty($instance['tipping_text']) ? $instance['tipping_text'] : esc_html__('', 'text_domain');
-        $instance['button_color'] = !empty($new_instance['button_color']) ? $new_instance['button_color'] : '';
-
-        $instance['logo_id'] = !empty($new_instance['logo_id']) ? $new_instance['logo_id'] : '';
-        $instance['background_id'] = !empty($new_instance['background_id']) ? $new_instance['background_id'] : '';
-
-        $instance['predefined_enabled'] = !empty($new_instance['predefined_enabled']) ? $new_instance['predefined_enabled'] : '';
-
-        return $instance;
     }
 }
-$my_widget = new Basic_Form();
+$my_widget = new Tipping_Banner();
 ?>
