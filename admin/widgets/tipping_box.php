@@ -8,7 +8,7 @@ class Tipping_Box extends WP_Widget
 
         parent::__construct(
             'tipping-box',  // Base ID
-            'Tipping box'   // Name
+            'LNPW Tipping Box'   // Name
         );
     }
 
@@ -183,7 +183,7 @@ class Tipping_Box extends WP_Widget
             <div class="col-50">
                 <label for="<?php echo esc_attr($this->get_field_id('redirect')); ?>"><?php echo esc_html__('Link to Thank you page', 'text_domain'); ?></label>
 
-                <input id="<?php echo esc_attr($this->get_field_id('redirect')); ?>" name="<?php echo esc_attr($this->get_field_name('redirect')); ?>" type="text" value="<?php echo esc_attr($redirect); ?>" />
+                <input id="<?php echo esc_attr($this->get_field_id('redirect')); ?>" name="<?php echo esc_attr($this->get_field_name('redirect')); ?>" class="widget-tipping-basic_redirect" type="text" value="<?php echo esc_attr($redirect); ?>" />
             </div>
         </div>
         

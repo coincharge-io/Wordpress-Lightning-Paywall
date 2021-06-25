@@ -1037,13 +1037,13 @@ class Lightning_Paywall_Public
 						<?php if ($collect_data == 'true') : ?>
 							<input type="button" name="next" class="next-form" value="Next" />
 						<?php else : ?>
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button_text']) ? $text['button_text'] : 'Tip'); ?></button>
+							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
 						<?php endif; ?>
 					</div>
 				</fieldset>
 				<?php if ($collect_data == 'true') : ?>
 					<fieldset>
-						<h4>Personal info</h4>
+						<h6>Personal info</h6>
 						<div class="lnpw_donor_information">
 							<?php foreach ($collect as $key => $value) : ?>
 								<?php if ($collect[$key]['display'] == 'true') : ?>
@@ -1054,7 +1054,7 @@ class Lightning_Paywall_Public
 						</div>
 						<div id="button">
 							<input type="button" name="previous" class="previous-form" value="Previous" />
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($text['button']) ? $text['button'] : 'Tip'); ?></button>
+							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
 						</div>
 					</fieldset>
 				<?php endif; ?>

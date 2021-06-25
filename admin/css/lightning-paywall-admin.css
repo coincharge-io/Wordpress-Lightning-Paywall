@@ -144,7 +144,13 @@ td.Settled {
   flex-direction: column;
 }
 
- .tipping_box textarea {
+ .tipping_box textarea,
+ .tipping_banner textarea {
   width: auto;
   height: 100px;
+}
+
+.tipping_box input.widget-tipping-basic_redirect,
+.tipping_banner input.widget-tipping-basic_redirect{
+  width: 100%;
 }

@@ -117,23 +117,15 @@ a.lnpw_pay__download{
   padding: 0.1em 1em;
 }
 
-.header_container h6{
-  margin-top: 0;
-  font-size: 1em;
-}
-
 .info_container{
   text-align: center;
 }
 
-/*.info_container p{
-  font-size: 0.6em;
-}
-*/
+
+
 #tipping_form fieldset:not(:first-of-type) {
 	display: none;
 }
-
 
 .lnpw_donor_information{
   display: grid;
@@ -156,12 +148,9 @@ a.lnpw_pay__download{
   font-size: 15px;
 }
 .lnpw_tipping_container h6 {
-  font-size: 0.9em;
+  font-weight: bold;
 }
 
-.lnpw_tipping_container h4 {
-  font-size: 1em;
-}
 
 .lnpw_tipping_container select{
   line-height: 1;
