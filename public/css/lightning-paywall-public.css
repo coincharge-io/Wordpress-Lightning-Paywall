@@ -138,6 +138,9 @@ a.lnpw_pay__download{
   grid-template-columns: repeat(2, 1fr);
 }
 
+.lnpw_donor_information input[type="text"], .lnpw_donor_information input[type="email"], .lnpw_donor_information input[type="url"], .lnpw_donor_information input[type="password"], .lnpw_donor_information input[type="search"], .lnpw_donor_information input[type="number"], .lnpw_donor_information input[type="tel"], .lnpw_donor_information input[type="range"], .lnpw_donor_information input[type="date"], .lnpw_donor_information input[type="month"], .lnpw_donor_information input[type="week"], .lnpw_donor_information input[type="time"], .lnpw_donor_information input[type="datetime"], .lnpw_donor_information input[type="datetime-local"], .lnpw_donor_information input[type="color"], .lnpw_donor_information textarea{
+  padding: 0;
+}
 
 #lnpw_tipping_amount,
 #lnpw_converted_amount{

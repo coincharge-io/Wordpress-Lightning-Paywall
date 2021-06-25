@@ -16,7 +16,7 @@ class Tipping_Box extends WP_Widget
 
     public function widget($args, $instance)
     {
-
+        
         echo do_shortcode("[lnpw_tipping_basic dimension='{$instance['dimension']}' title = '{$instance['title']}' description	= '{$instance['description']}'
         currency = '{$instance['currency']}'
         background_color = '{$instance['background_color']}'
@@ -306,8 +306,6 @@ class Tipping_Box extends WP_Widget
 
         $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
         $instance['dimension'] = (!empty($new_instance['dimension'])) ? $new_instance['dimension'] : '';
-
-
 
         $instance['description'] = !empty($new_instance['description']) ? wp_strip_all_tags($new_instance['description']) : '';
 
