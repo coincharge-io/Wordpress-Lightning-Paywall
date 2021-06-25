@@ -138,3 +138,7 @@ td.Settled {
   display: inline-block;
   vertical-align: middle;
 }
+.col-2{
+  display:flex;
+  flex-direction: column;
+}

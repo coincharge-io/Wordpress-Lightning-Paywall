@@ -163,7 +163,7 @@ class Tipping_Box extends WP_Widget
         <div class="row">
             <div class="col-50">
                 <label for="<?php echo esc_attr($this->get_field_id('description')); ?>"><?php echo esc_html__('Description:', 'text_domain'); ?></label>
-                <textarea id="<?php echo esc_attr($this->get_field_id('description')); ?>" name="<?php echo esc_attr($this->get_field_name('description')); ?>" type="text" cols="30" rows="10"><?php echo esc_attr($description); ?></textarea>
+                <textarea id="<?php echo esc_attr($this->get_field_id('description')); ?>" name="<?php echo esc_attr($this->get_field_name('description')); ?>" type="text"><?php echo esc_attr($description); ?></textarea>
             </div>
             <div class="col-50">
                 <label for="<?php echo esc_attr($this->get_field_id('description_color')); ?>"><?php echo esc_html__('Description text color:', 'text_domain'); ?></label>
@@ -231,70 +231,80 @@ class Tipping_Box extends WP_Widget
             <div class="col-50">
                 <p>Full name</p>
             </div>
-            <div class="col-50">
+            <div class="col-50 col-2">
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('display_name')); ?>">Display</label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_name')); ?>" name="<?php echo esc_attr($this->get_field_name('display_name')); ?>" type="checkbox" <?php echo $display_name === 'true' ? 'checked' : ''; ?> value="true" />
-
+            </div>
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('mandatory_name')); ?>">Mandatory</label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_name')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_name')); ?>" type="checkbox" <?php echo $mandatory_name === 'true' ? 'checked' : ''; ?> value="true" />
-
+            </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
                 <p>Email</p>
             </div>
-            <div class="col-50">
+            <div class="col-50 col-2">
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('display_email')); ?>">Display</label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_email')); ?>" name="<?php echo esc_attr($this->get_field_name('display_email')); ?>" type="checkbox" <?php echo $display_email === 'true' ? 'checked' : ''; ?> value="true" />
-
+            </div>
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('mandatory_email')); ?>">Mandatory</label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_email')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_email')); ?>" type="checkbox" <?php echo $mandatory_email === 'true' ? 'checked' : ''; ?> value="true" />
-
+            </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
                 <p>Address</p>
             </div>
-            <div class="col-50">
+            <div class="col-50 col-2">
+                <div>
                 <label for="<?php echo esc_attr($this->get_field_id('display_address')); ?>">Display</label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_address')); ?>" name="<?php echo esc_attr($this->get_field_name('display_address')); ?>" type="checkbox" <?php echo $display_address === 'true' ? 'checked' : ''; ?> value="true" />
-
+                </div>
+                <div>
                 <label for="<?php echo esc_attr($this->get_field_id('mandatory_address')); ?>">Mandatory</label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_address')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_address')); ?>" type="checkbox" <?php echo $mandatory_address === 'true' ? 'checked' : ''; ?> value="true" />
-
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
                 <p>Phone number</p>
             </div>
-            <div class="col-50">
+            <div class="col-50 col-2">
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('display_phone')); ?>">Display</label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_phone')); ?>" name="<?php echo esc_attr($this->get_field_name('display_phone')); ?>" type="checkbox" <?php echo $display_phone === 'true' ? 'checked' : ''; ?> value="true" />
-
+            </div>
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('mandatory_phone')); ?>">Mandatory</label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_phone')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_phone')); ?>" type="checkbox" <?php echo $mandatory_phone === 'true' ? 'checked' : ''; ?> value="true" />
-
+            </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
                 <p>Message</p>
             </div>
-            <div class="col-50">
+            <div class="col-50 col-2">
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('display_message')); ?>">Display</label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_message')); ?>" name="<?php echo esc_attr($this->get_field_name('display_message')); ?>" type="checkbox" <?php echo $display_message === 'true' ? 'checked' : ''; ?> value="true" />
-
+            </div>
+            <div>
                 <label for="<?php echo esc_attr($this->get_field_id('mandatory_message')); ?>">Mandatory</label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_message')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_message')); ?>" type="checkbox" value="true" <?php echo $mandatory_message === 'true' ? 'checked' : ''; ?> />
-
+            </div>
             </div>
         </div>
 <?php

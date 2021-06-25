@@ -960,8 +960,7 @@ class Lightning_Paywall_Public
 				width: <?php echo $dimension[0] . 'px !important'; ?>;
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
 				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
-				background-size: cover;
-				background-repeat: no-repeat;
+				
 			}
 
 			#lnpw_tipping__button {
@@ -985,11 +984,7 @@ class Lightning_Paywall_Public
 				color: <?php echo $atts['tipping_text_color']; ?>
 			}
 
-			#lnpw_converted_amount,
-			#lnpw_tipping_currency,
-			#lnpw_converted_currency {
-				background: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
-			}
+			
 		</style>
 
 
