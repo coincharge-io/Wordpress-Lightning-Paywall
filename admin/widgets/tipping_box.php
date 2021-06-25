@@ -93,7 +93,7 @@ class Tipping_Box extends WP_Widget
         $mandatory_message = !empty($instance['mandatory_message']) ? $instance['mandatory_message'] : esc_html__('', 'text_domain');
 
 ?>
-        <div class="tipping_settings">
+        <div class="tipping_box">
             <h1>Tipping</h1>
             <div class="row">
                 <label for="<?php echo esc_attr($this->get_field_id('dimension')); ?>"><?php echo esc_html__('Dimension', 'text_domain'); ?></label>
@@ -113,12 +113,12 @@ class Tipping_Box extends WP_Widget
                 </div>
                 <div class="col-50">
                     <?php if ($background) : ?>
-                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_image" name="lnpw_tipping_button_image_background"><img src="<?php echo $background[0]; ?>" /></a></button>
-                        <button class="widget-tipping-basic-remove_image"> <?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image" name="lnpw_tipping_button_image_background"><img width="100" height="100" alt="Tipping box background"src="<?php echo $background[0]; ?>" /></a></button>
+                        <button class="widget-tipping-basic-remove_box_image"> <?php echo esc_html__('Remove', 'text_domain'); ?></button>
                         <input type="hidden" class="widget-tipping-basic-background_id" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
                     <?php else : ?>
-                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_image" name="lnpw_tipping_button_image_background"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
-                        <button class="widget-tipping-basic-remove_image" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image" name="lnpw_tipping_button_image_background"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
+                        <button class="widget-tipping-basic-remove_box_image" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
                         <input type="hidden" class="widget-tipping-basic-background_id" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
                     <?php endif; ?>
                 </div>
@@ -139,12 +139,12 @@ class Tipping_Box extends WP_Widget
                 </div>
                 <div class="col-50">
                     <?php if ($logo_id) : ?>
-                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_logo" name="lnpw_tipping_button_image"><img src="<?php echo $logo[0]; ?>" /></a></button>
-                        <button class="widget-tipping-basic-remove_image"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo" name="lnpw_tipping_button_image"><img width="100" height="100" alt="Tipping box logo" src="<?php echo $logo[0]; ?>" /></a></button>
+                        <button class="widget-tipping-basic-remove_box_image"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
                         <input type="hidden" class="widget-tipping-basic-logo_id" id="<?php echo esc_attr($this->get_field_id('logo_id')); ?>" name="<?php echo esc_attr($this->get_field_name('logo_id')); ?>" type="text" value="<?php echo esc_attr($logo_id); ?>" />
                     <?php else : ?>
-                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_logo" name="lnpw_tipping_button_image"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
-                        <button class="widget-tipping-basic-remove_image" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo" name="lnpw_tipping_button_image"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
+                        <button class="widget-tipping-basic-remove_box_image" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
                         <input type="hidden" class="widget-tipping-basic-logo_id" id="<?php echo esc_attr($this->get_field_id('logo_id')); ?>" name="<?php echo esc_attr($this->get_field_name('logo_id')); ?>" type="text" value="<?php echo esc_attr($logo_id); ?>" />
                     <?php endif; ?>
                 </div>
@@ -152,13 +152,12 @@ class Tipping_Box extends WP_Widget
             <div class="row">
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php echo esc_html__('Title:', 'text_domain'); ?></label>
-                    <textarea id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>"><?php echo esc_attr($title); ?></textarea>
+                    <textarea id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" ><?php echo esc_attr($title); ?></textarea>
                 </div>
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('title_text_color')); ?>"><?php echo esc_html__('Title text color', 'text_domain'); ?></label>
                     <input id="<?php echo esc_attr($this->get_field_id('title_text_color')); ?>" name="<?php echo esc_attr($this->get_field_name('title_text_color')); ?>" class="widget-tipping-basic-title_text_color" type="text" value="<?php echo esc_attr($title_text_color); ?>" />
                 </div>
-            </div>
         </div>
         <div class="row">
             <div class="col-50">
@@ -187,7 +186,7 @@ class Tipping_Box extends WP_Widget
                 <input id="<?php echo esc_attr($this->get_field_id('redirect')); ?>" name="<?php echo esc_attr($this->get_field_name('redirect')); ?>" type="text" value="<?php echo esc_attr($redirect); ?>" />
             </div>
         </div>
-        <h3><?php echo esc_html__('Amount', 'text_domain'); ?></h3>
+        
         <div class="row">
             <div class="col-50">
                 <label for="<?php echo esc_attr($this->get_field_id('currency')); ?>"><?php echo esc_html__('Currency', 'text_domain'); ?></label>
@@ -226,86 +225,87 @@ class Tipping_Box extends WP_Widget
             <input id="<?php echo esc_attr($this->get_field_id('button_color')); ?>" class="widget-tipping-basic-button_color" name="<?php echo esc_attr($this->get_field_name('button_color')); ?>" type="text" value="<?php echo esc_attr($button_color); ?>" />
 
         </div>
-        <h4>Collect further information</h4>
+        <h4><?php echo esc_html__('Collect further information', 'text_domain'); ?></h4>
         <div class="row">
             <div class="col-50">
-                <p>Full name</p>
+                <p><?php echo esc_html__('Full name', 'text_domain'); ?></p>
             </div>
             <div class="col-50 col-2">
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('display_name')); ?>">Display</label>
+                <label for="<?php echo esc_attr($this->get_field_id('display_name')); ?>"><?php echo esc_html__('Display', 'text_domain'); ?></label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_name')); ?>" name="<?php echo esc_attr($this->get_field_name('display_name')); ?>" type="checkbox" <?php echo $display_name === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('mandatory_name')); ?>">Mandatory</label>
+                <label for="<?php echo esc_attr($this->get_field_id('mandatory_name')); ?>"><?php echo esc_html__('Mandatory', 'text_domain'); ?></label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_name')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_name')); ?>" type="checkbox" <?php echo $mandatory_name === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
-                <p>Email</p>
+                <p><?php echo esc_html__('Email', 'text_domain'); ?></p>
             </div>
             <div class="col-50 col-2">
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('display_email')); ?>">Display</label>
+                <label for="<?php echo esc_attr($this->get_field_id('display_email')); ?>"><?php echo esc_html__('Display', 'text_domain'); ?></label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_email')); ?>" name="<?php echo esc_attr($this->get_field_name('display_email')); ?>" type="checkbox" <?php echo $display_email === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('mandatory_email')); ?>">Mandatory</label>
+                <label for="<?php echo esc_attr($this->get_field_id('mandatory_email')); ?>"><?php echo esc_html__('Mandatory', 'text_domain'); ?></label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_email')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_email')); ?>" type="checkbox" <?php echo $mandatory_email === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
-                <p>Address</p>
+                <p><?php echo esc_html__('Address', 'text_domain'); ?></p>
             </div>
             <div class="col-50 col-2">
                 <div>
-                <label for="<?php echo esc_attr($this->get_field_id('display_address')); ?>">Display</label>
+                <label for="<?php echo esc_attr($this->get_field_id('display_address')); ?>"><?php echo esc_html__('Display', 'text_domain'); ?></label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_address')); ?>" name="<?php echo esc_attr($this->get_field_name('display_address')); ?>" type="checkbox" <?php echo $display_address === 'true' ? 'checked' : ''; ?> value="true" />
                 </div>
                 <div>
-                <label for="<?php echo esc_attr($this->get_field_id('mandatory_address')); ?>">Mandatory</label>
+                <label for="<?php echo esc_attr($this->get_field_id('mandatory_address')); ?>"><?php echo esc_html__('Mandatory', 'text_domain'); ?></label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_address')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_address')); ?>" type="checkbox" <?php echo $mandatory_address === 'true' ? 'checked' : ''; ?> value="true" />
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
-                <p>Phone number</p>
+                <p><?php echo esc_html__('Phone number', 'text_domain'); ?></p>
             </div>
             <div class="col-50 col-2">
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('display_phone')); ?>">Display</label>
+                <label for="<?php echo esc_attr($this->get_field_id('display_phone')); ?>"><?php echo esc_html__('Display', 'text_domain'); ?></label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_phone')); ?>" name="<?php echo esc_attr($this->get_field_name('display_phone')); ?>" type="checkbox" <?php echo $display_phone === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('mandatory_phone')); ?>">Mandatory</label>
+                <label for="<?php echo esc_attr($this->get_field_id('mandatory_phone')); ?>"><?php echo esc_html__('Mandatory', 'text_domain'); ?></label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_phone')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_phone')); ?>" type="checkbox" <?php echo $mandatory_phone === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
             </div>
         </div>
         <div class="row">
             <div class="col-50">
-                <p>Message</p>
+                <p><?php echo esc_html__('Message', 'text_domain'); ?></p>
             </div>
             <div class="col-50 col-2">
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('display_message')); ?>">Display</label>
+                <label for="<?php echo esc_attr($this->get_field_id('display_message')); ?>"><?php echo esc_html__('Display', 'text_domain'); ?></label>
 
                 <input id="<?php echo esc_attr($this->get_field_id('display_message')); ?>" name="<?php echo esc_attr($this->get_field_name('display_message')); ?>" type="checkbox" <?php echo $display_message === 'true' ? 'checked' : ''; ?> value="true" />
             </div>
             <div>
-                <label for="<?php echo esc_attr($this->get_field_id('mandatory_message')); ?>">Mandatory</label>
+                <label for="<?php echo esc_attr($this->get_field_id('mandatory_message')); ?>"><?php echo esc_html__('Mandatory', 'text_domain'); ?></label>
                 <input id="<?php echo esc_attr($this->get_field_id('mandatory_message')); ?>" name="<?php echo esc_attr($this->get_field_name('mandatory_message')); ?>" type="checkbox" value="true" <?php echo $mandatory_message === 'true' ? 'checked' : ''; ?> />
             </div>
             </div>
+        </div>
         </div>
 <?php
     }

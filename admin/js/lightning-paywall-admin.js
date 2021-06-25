@@ -196,11 +196,11 @@ $(document).ready(function($){
             imagePreview($('#lnpw_tipping_button_image_background'), $('#lnpw_tipping_image_background'));
             imageRemove($('.lnpw_tipping_button_remove_background'));
 
-            imagePreview($('.widget-tipping-basic-upload_image'),$('.widget-tipping-basic-background_id'));
-            imageRemove($('.widget-tipping-basic-remove_image'));
+            imagePreview($('.widget-tipping-basic-upload_box_image'), $('.widget-tipping-basic-background_id'));
+            imageRemove($('.widget-tipping-basic-remove_box_image'));
 
-            imagePreview($('.widget-tipping-basic-upload_logo'),$('.widget-tipping-basic-logo_id'));
-            imageRemove($('.widget-tipping-basic-remove_logo'));
+            imagePreview($('.widget-tipping-basic-upload_box_logo'),$('.widget-tipping-basic-logo_id'));
+            imageRemove($('.widget-tipping-basic-remove_box_logo'));
            
 });
 $(document).ready(function () {

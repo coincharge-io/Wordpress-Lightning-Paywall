@@ -138,7 +138,13 @@ td.Settled {
   display: inline-block;
   vertical-align: middle;
 }
+
 .col-2{
   display:flex;
   flex-direction: column;
+}
+
+ .tipping_box textarea {
+  width: auto;
+  height: 100px;
 }
