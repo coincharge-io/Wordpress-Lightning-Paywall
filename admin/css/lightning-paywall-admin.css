@@ -143,7 +143,10 @@ td.Settled {
   display:flex;
   flex-direction: column;
 }
-
+.col-fixed{
+  display:flex;
+  flex-direction: column;
+}
  .tipping_box textarea,
  .tipping_banner textarea {
   width: auto;

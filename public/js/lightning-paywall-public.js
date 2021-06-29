@@ -158,11 +158,17 @@ $(document).ready(function(){
       $("#lnpw_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
       $("#lnpw_converted_currency").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
     });
+     $("#lnpw_skyscraper_tipping_amount").on('input', function(){
+      var currency = $("#lnpw_skyscraper_tipping_currency").val();
+      var amount = $(this).val();
+      var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
+      $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
+      $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
+    });
     $("#value1, #value2, #value3").hover(function(){
       var predefined = $(this).val().split(' ');
       var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
       var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
-      //$("#lnpw_converted_amount").attr('readonly', false).val(converted_icon_amount).attr('readonly', true);
       $("#lnpw_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
       $("#lnpw_converted_currency").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
       if($(this).parent().find('i')[0].className) {
@@ -173,6 +179,23 @@ $(document).ready(function(){
       if($(this).parent().find('i')[0].className) {
         $("label[for='"+this.id+"']").hide();
       }
+    });
+
+    $("#value_1, #value_2, #value_3").hover(function(){
+      var predefined = $(this).val().split(' ');
+      var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
+      var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
+      $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
+      $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
+      /*if($(this).parent().find('i')[0].className) {
+        $("label[for='"+this.id+"']").show();
+      }*/
+    }, function(){
+      $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('').attr('readonly', true);
+      $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val('').attr('readonly', true);
+      /*if($(this).parent().find('i')[0].className) {
+        $("label[for='"+this.id+"']").hide();
+      }*/
     });
 })
 function fiat_to_crypto(currency, val, usd, eur, sats){
@@ -237,6 +260,44 @@ $(document).ready(function(){
     $("input[type=radio][name=lnpw_tipping_default_amount]").prop('checked', false);
       
   })
+
+   $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").change(function () {
+      $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").attr('required', true);
+      $("#lnpw_skyscraper_tipping_amount").removeAttr('required');
+      $("#lnpw_skyscraper_tipping_amount").val('');
+  })
+  $("#lnpw_skyscraper_tipping_amount").click(function () {
+    $("#lnpw_skyscraper_tipping_amount").attr('required', true);
+    $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").removeAttr('required');
+    $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").prop('checked', false);
+      
+  })
   })
 
+
+$(document).ready(function(){ 
+  var form_count = 1, previous_form, next_form, total_forms;
+  total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;  
+  var freeInput = $("#lnpw_skyscraper_tipping_amount");
+  var fixedAmount = $('.lnpw_skyscraper_tipping_default_amount');
+  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
+  
+  
+  $("input.skyscraper-next-form").click(function(){
+    if (validationField[0].checkValidity()){
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().next();
+      next_form.show();
+      previous_form.hide();
+    }else{
+      validationField[0].reportValidity()
+    }
+  });  
+  $("input.skyscraper-previous-form").click(function(){
+    previous_form = $(this).parent().parent();
+    next_form = $(this).parent().parent().prev();
+    next_form.show();
+    previous_form.hide();
+  }); 
+});
 })(jQuery);

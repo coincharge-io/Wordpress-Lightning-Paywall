@@ -960,7 +960,7 @@ class Lightning_Paywall_Public
 				width: <?php echo $dimension[0] . 'px !important'; ?>;
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
 				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
-				
+
 			}
 
 			#lnpw_tipping__button {
@@ -983,8 +983,6 @@ class Lightning_Paywall_Public
 			.lnpw_tipping_info fieldset h4 {
 				color: <?php echo $atts['tipping_text_color']; ?>
 			}
-
-			
 		</style>
 
 
@@ -1059,6 +1057,263 @@ class Lightning_Paywall_Public
 					</fieldset>
 				<?php endif; ?>
 			</form>
+		</div>
+	<?php
+
+		return ob_get_clean();
+	}
+	/**
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	public function render_shortcode_skyscraper_tipping($atts)
+	{
+		$atts = shortcode_atts(array(
+			'dimension' 	=> '160x600',
+			'title'			=> 'Support my work',
+			'description'	=> '',
+			'currency'		=> 'SATS',
+			'background_color'	=> '#E6E6E6',
+			'title_text_color'	=> '#000000',
+			'tipping_text'	=> 'Enter Tipping Amount',
+			'tipping_text_color'	=> '#000000',
+			'redirect'		=> get_site_url(),
+			'amount'		=> '',
+			'description_color'	=> '#000000',
+			'button_text'	=> 'Tipping now',
+			'button_text_color'	=> '#FFFFFF',
+			'button_color'	=> '#FE642E',
+			'logo_id'		=> '',
+			'background_id'	=> '',
+			'free_input'	=> 'false',
+			'value1_enabled' => 'false',
+			'value1_amount' => '',
+			'value1_currency' => '',
+			'value1_icon'	=> '',
+			'value2_enabled' => 'false',
+			'value2_amount' => '',
+			'value2_currency' => '',
+			'value2_icon'	=> '',
+			'value3_enabled' => 'false',
+			'value3_amount' => '',
+			'value3_currency' => '',
+			'value3_icon'	=> '',
+			'display_name'	=> 'false',
+			'mandatory_name' => 'false',
+			'display_email'	=> 'false',
+			'mandatory_email' => 'false',
+			'display_phone'	=> 'false',
+			'mandatory_phone' => 'false',
+			'display_address'	=> 'false',
+			'mandatory_address' => 'false',
+			'display_message'	=> 'false',
+			'mandatory_message' => 'false',
+		), $atts);
+
+		$dimension = explode('x', $atts['dimension']);
+		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
+		$logo = wp_get_attachment_image_src($atts['logo_id']);
+		$background = wp_get_attachment_image_src($atts['background_id']);
+		$collect = array(
+			array(
+				'label' => 'Full name',
+				'display' => $atts['display_name'],
+				'mandatory' => $atts['mandatory_name']
+			),
+			array(
+				'label' => 'Email',
+				'display' => $atts['display_email'],
+				'mandatory' => $atts['mandatory_email']
+			),
+			array(
+				'label' => 'Address',
+				'display' => $atts['display_address'],
+				'mandatory' => $atts['mandatory_address']
+			),
+			array(
+				'label' => 'Phone',
+				'display' => $atts['display_phone'],
+				'mandatory' => $atts['mandatory_phone']
+			),
+			array(
+				'label' => 'Message',
+				'display' => $atts['display_message'],
+				'mandatory' => $atts['mandatory_message']
+			),
+
+		);
+		$collect_data = $this->display_is_enabled($collect);
+		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
+		$predefined_enabled = get_option('lnpw_tipping_enter_amount');
+		/*$used_currency  = get_option('lnpw_tipping_currency');
+		$used_dimension      = get_option('lnpw_tipping_dimension', '250x500');
+		$dimension = explode('x', $used_dimension);
+		$redirect = get_option('lnpw_tipping_redirect');
+		$collect = get_option('lnpw_tipping_collect');
+		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
+		$text = get_option('lnpw_tipping_text', array(
+			'title'			=> 'Support my work',
+			'description'	=> '',
+			'info'			=> 'Enter Tipping Amount',
+			'button'		=> 'Tipping now'
+		));
+		$color = get_option('lnpw_tipping_color');
+		$image = get_option('lnpw_tipping_image');
+		$logo = wp_get_attachment_image_src($image['logo']);
+		$background = wp_get_attachment_image_src($image['background']);
+		$fixed_amount = get_option('lnpw_tipping_fixed_amount');
+		*/
+		$fixed_amount = array(
+			'value_1' => array(
+				'enabled' 	=> $atts['value1_enabled'],
+				'currency' => $atts['value1_currency'],
+				'amount'	=> $atts['value1_amount'],
+				'icon'		=> $atts['value1_icon']
+			),
+			'value_2' => array(
+				'enabled' 	=> $atts['value2_enabled'],
+				'currency' => $atts['value2_currency'],
+				'amount'	=> $atts['value2_amount'],
+				'icon'		=> $atts['value2_icon']
+			),
+			'value_3' => array(
+				'enabled' 	=> $atts['value3_enabled'],
+				'currency' => $atts['value3_currency'],
+				'amount'	=> $atts['value3_amount'],
+				'icon'		=> $atts['value3_icon']
+			),
+		);
+		//$collect_data = $this->collect_is_enabled($collect);
+		$first_enabled = array_column($fixed_amount, 'enabled');
+		$d = array_search('true', $first_enabled);
+		$index = 'value' . ($d + 1);
+		ob_start();
+	?>
+		<style>
+			.lnpw_skyscraper_tipping_container {
+				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
+				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
+			}
+
+			.lnpw_skyscraper_tipping_container {
+				width: <?php echo $dimension[0] . 'px !important'; ?>;
+				height: <?php echo $dimension[1] . 'px !important'; ?>;
+			}
+
+			#lnpw_skyscraper_tipping__button {
+				color: <?php echo $atts['button_text_color']; ?>;
+				background: <?php echo $atts['button_color']; ?>;
+			}
+
+			.lnpw_skyscraper_header_container h4 {
+				color: <?php echo $atts['title_text_color']; ?>
+			}
+
+			.lnpw_skyscraper_tipping_container.info_container {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block'; ?>
+			}
+
+			.lnpw_skyscraper_info_container p {
+				color: <?php echo $atts['description_color']; ?>
+			}
+
+			.lnpw_skyscraper_tipping_info fieldset h4 {
+				color: <?php echo $atts['tipping_text_color']; ?>
+			}
+		</style>
+
+
+		<div>
+			<div class="lnpw_skyscraper_header_container">
+				<?php if ($logo) : ?>
+					<div class="lnpw_logo_wrap">
+						<img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+					</div>
+				<?php endif; ?>
+				<?php if (!empty($atts['title'])) : ?>
+					<div>
+						<h6><?php echo esc_html($atts['title']); ?></h6>
+					</div>
+				<?php endif; ?>
+			</div>
+			<div class="lnpw_skyscraper_info_container">
+				<?php if (!empty($atts['description'])) : ?>
+					<p><?php echo esc_html($atts['description']); ?></p>
+				<?php endif; ?>
+			</div>
+			<div class="lnpw_skyscraper_tipping_container">
+				<form method="POST" action="" id="tipping_form">
+					<fieldset>
+						<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?></h6>
+						<div class="lnpw_skyscraper_fixed_amount">
+							<?php foreach ($fixed_amount as $key => $value) : ?>
+
+								<?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
+									<div class="<?php echo 'lnpw_skyscraper_fixed_amount_' . $key?>">
+									<div>
+										<input type="radio" class="lnpw_skyscraper_tipping_default_amount" id="<?php echo $key; ?>" name="lnpw_skyscraper_tipping_default_amount" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
+										<?php if (!empty($fixed_amount[$key]['amount'])) : ?>
+											<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
+										<?php endif; ?>
+										</div>
+										<label  for="<?php echo $key; ?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
+
+									</div>
+								<?php endif; ?>
+
+							<?php endforeach; ?>
+							<?php if ('true' === $atts['free_input']) : ?>
+								<div class="lnpw_skyscraper_tipping_free_input">
+									<input type="number" id="lnpw_skyscraper_tipping_amount" name="lnpw_skyscraper_tipping_amount" placeholder="0.00" required />
+
+
+									<select required name="lnpw_skyscraper_tipping_currency" id="lnpw_skyscraper_tipping_currency">
+										<option disabled value="">Select currency</option>
+										<?php foreach ($supported_currencies as $currency) : ?>
+											<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+												<?php echo $currency; ?>
+											</option>
+										<?php endforeach; ?>
+									</select>
+								<?php endif; ?>
+								</div>
+						</div>
+						<div class="lnpw_skyscraper_tipping_converted_values">
+									<input type="text" id="lnpw_skyscraper_converted_amount" name="lnpw_skyscraper_converted_amount" readonly />
+									<input type="text" id="lnpw_skyscraper_converted_currency" name="lnpw_skyscraper_converted_currency" readonly />
+						</div>
+
+						
+						<div id="lnpw_skyscraper_button">
+							<input type="hidden" id="lnpw_skyscraper_redirect_link" name="lnpw_skyscraper_redirect_link" value=<?php echo $atts['redirect']; ?> />
+							<?php if ($collect_data == 'true') : ?>
+								<input type="button" name="next" class="skyscraper-next-form" value="Next" />
+							<?php else : ?>
+								<button type="submit" id="lnpw_skyscraper_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+							<?php endif; ?>
+						</div>
+						
+					</fieldset>
+					<?php if ($collect_data == 'true') : ?>
+						<fieldset>
+							<h6>Personal info</h6>
+							<div class="lnpw_skyscraper_donor_information">
+								<?php foreach ($collect as $key => $value) : ?>
+									<?php if ($collect[$key]['display'] == 'true') : ?>
+										<label for="<?php echo "lnpw_skyscraper_tipping_donor_{$collect[$key]['label']}"; ?>"> <?php echo $collect[$key]['label']; ?></label>
+										<input type="text" id="<?php echo "lnpw_skyscraper_tipping_donor_{$collect[$key]['label']}"; ?>" name="lnpw_skyscraper_tipping_donor_name" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</div>
+							<div id="lnpw_skyscraper_button">
+								<input type="button" name="previous" class="skyscraper-previous-form" value="Previous" />
+								<button type="submit" id="lnpw_skyscraper_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+							</div>
+						</fieldset>
+					<?php endif; ?>
+				</form>
+			</div>
 		</div>
 	<?php
 
