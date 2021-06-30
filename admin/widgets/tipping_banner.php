@@ -13,6 +13,7 @@ class Tipping_Banner extends WP_Widget
 
     public function widget($args, $instance)
     {
+
         echo do_shortcode("[lnpw_tipping_skyscraper dimension='{$instance['dimension']}' title = '{$instance['title']}' description	= '{$instance['description']}'
         currency = '{$instance['currency']}'
         background_color = '{$instance['background_color']}'
@@ -49,7 +50,8 @@ class Tipping_Banner extends WP_Widget
         value3_amount = '{$instance['value3_amount']}'
         value3_currency = '{$instance['value3_currency']}'
         value3_icon = '{$instance['value3_icon']}'
-        free_input = '{$instance['free_input']}']");
+        free_input = '{$instance['free_input']}'
+        fixed_background = '{$instance['fixed_background']}']");
     }
 
     public function form($instance)
@@ -115,6 +117,8 @@ class Tipping_Banner extends WP_Widget
         $value3_currency = !empty($instance['value3_currency']) ? $instance['value3_currency'] : esc_html__('', 'text_domain');
 
         $free_input = !empty($instance['free_input']) ? $instance['free_input'] : esc_html__('true', 'text_domain');
+
+        $fixed_background = !empty($instance['fixed_background']) ? $instance['fixed_background'] : esc_html__('#ffa500', 'text_domain');
 ?>
         <div class="tipping_banner">
             <h1>Tipping</h1>
@@ -224,6 +228,12 @@ class Tipping_Banner extends WP_Widget
                             </option>
                         <?php endforeach; ?>
                     </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-50">
+                    <label for="<?php echo esc_attr($this->get_field_id('fixed_background')); ?>"><?php echo esc_html__('Background color for fixed amount', 'text_domain'); ?></label>
+                    <input id="<?php echo esc_attr($this->get_field_id('fixed_background')); ?>" name="<?php echo esc_attr($this->get_field_name('fixed_background')); ?>" type="text" class="widget-tipping-basic-fixed_background" value="<?php echo esc_attr($fixed_background); ?>" />
                 </div>
             </div>
             <div class="row">
@@ -461,6 +471,7 @@ class Tipping_Banner extends WP_Widget
         $instance['value3_icon'] = !empty($new_instance['value3_icon']) ? $new_instance['value3_icon'] : '';
 
         $instance['free_input'] = !empty($new_instance['free_input']) ? $new_instance['free_input'] : 'false';
+        $instance['fixed_background'] = !empty($new_instance['fixed_background']) ? $new_instance['fixed_background'] : '';
 
         return $instance;
     }

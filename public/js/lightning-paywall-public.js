@@ -89,7 +89,42 @@
             if (response.success) {
               lnpw_invoice_id = response.data.invoice_id;
               donor = response.data.donor;
-              lnpwShowDonationInvoice(lnpw_invoice_id, donor);
+              lnpwShowDonationBoxInvoice(lnpw_invoice_id, donor);
+            } else {
+               console.error(response);
+            }
+          },
+          error: function (error){
+            console.log(error)
+        }
+      })
+    })
+
+    $("#skyscraper_tipping_form").submit(function (e) {
+      e.preventDefault();
+      if (lnpw_invoice_id) {
+        lnpwShowDonationInvoice(lnpw_invoice_id);
+        return;
+      }
+        $.ajax({
+          url: "/wp-admin/admin-ajax.php",
+          method: "POST",
+          data: {
+            action: "lnpw_tipping",
+            currency: $("#lnpw_skyscraper_tipping_currency").val(),
+            amount: $("#lnpw_skyscraper_tipping_amount").val(),
+            predefined_amount: $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]:checked").val(),
+            name: $("#lnpw_skyscraper_tipping_donor_name").val(),
+            email: $("#lnpw_skyscraper_tipping_donor_email").val(),
+            address: $("#lnpw_skyscraper_tipping_donor_address").val(),
+            phone: $("#lnpw_skyscraper_tipping_donor_phone").val(),
+            message: $("#lnpw_skyscraper_tipping_donor_message").val(),
+          },
+          success: function (response) {
+            if (response.success) {
+              lnpw_invoice_id = response.data.invoice_id;
+              donor = response.data.donor;
+              lnpwShowDonationBannerInvoice(lnpw_invoice_id, donor);
             } else {
                console.error(response);
             }
@@ -100,11 +135,21 @@
       })
     })
   })
-  function lnpwShowDonationInvoice(invoice_id, donor) {
+  function lnpwShowDonationBoxInvoice(invoice_id, donor) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
         notifyAdmin(donor)
         ($("#lnpw_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
+          }});
+
+    btcpay.showInvoice(invoice_id);
+  }
+
+  function lnpwShowDonationBannerInvoice(invoice_id, donor) {
+    btcpay.onModalReceiveMessage(function (event) {
+      if (event.data.status === "complete") {
+        notifyAdmin(donor)
+        ($("#lnpw_skyscraper_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
           }});
 
     btcpay.showInvoice(invoice_id);

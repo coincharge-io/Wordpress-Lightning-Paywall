@@ -176,7 +176,7 @@
     });
   });*/
   $(document).ready(function (){
-    $('#lnpw_tipping_button_text_color,       #lnpw_tipping_background,              #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color,      #lnpw_tipping_tipping_color,                                      .widget-tipping-basic-background_color,                           .widget-tipping-basic-title_text_color,                           .widget-tipping-basic-button_text_color,                          .widget-tipping-basic-button_color,                               .widget-tipping-basic-description-color,                          .widget-tipping-basic-title_text_color,                           .widget-tipping-basic-tipping-color').iris({
+    $('#lnpw_tipping_button_text_color,       #lnpw_tipping_background,              #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color,      #lnpw_tipping_tipping_color,                                        .widget-tipping-basic-background_color,                             .widget-tipping-basic-title_text_color,                             .widget-tipping-basic-button_text_color,                            .widget-tipping-basic-button_color,                                 .widget-tipping-basic-description-color,                            .widget-tipping-basic-title_text_color,                             .widget-tipping-basic-tipping-color,                                .widget-tipping-basic-fixed_background').iris({
       defaultColor: true,
       
       change: function(event, ui){},

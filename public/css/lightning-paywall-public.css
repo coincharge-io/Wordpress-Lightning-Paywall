@@ -231,52 +231,20 @@ Tipping box
   padding: 0 1em;
   
 }
-/*.lnpw_skyscraper_tipping_amount{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}*/
-/*.lnpw_skyscraper_tipping_container select{
-  line-height: 1;
-}
-*/
+
+
 .lnpw_skyscraper_fixed_amount{
   display: flex;
   justify-content: space-around;
 }
-/*.lnpw_skyscraper_tipping_container h6{ 
-  margin: 0;
-}*/
+
+
 .lnpw_skyscraper_fixed_amount input[type="radio"]:checked + i, .lnpw_skyscraper_fixed_amount input[type="radio"]:checked + label{
 	background-color: #18f98d;
 	color: #ffffff;
 	box-shadow: 0 15px 45px rgb(24,249,141,0.2);
 }
 
-/*.lnpw_skyscraper_fixed_amount input[type="radio"] {
-  width: 10%;
-  height: 5%;
-  opacity: 0;
-}*/
-/*.lnpw_skyscraper_fixed_amount div{
-  width: 130px;
-
-}*/
-/*#lnpw_skyscraper_tipping_amount,
-#lnpw_skyscraper_converted_amount{
-  height: 30px;
-  width: 50%;
-}
-#lnpw_skyscraper_tipping_currency,
-#lnpw_skyscraper_converted_currency{
-  height: 30px;
-  width: 40%;
-  font-size: 15px;
-}
-*/
-/*.lnpw_skyscraper_tipping_converted_values{
-  width: 100px;
-}*/
 #lnpw_skyscraper_converted_amount{
   text-align: right;
 }
@@ -293,6 +261,7 @@ Tipping box
   width: 35%;
   font-size: 15px;
 }
+
 #lnpw_skyscraper_button {
   position:absolute;
   bottom: 0;
@@ -300,7 +269,6 @@ Tipping box
 }
 #lnpw_skyscraper_button button,
 #lnpw_skyscraper_button input[type="button"] {
-	font-size: 14px;
   padding: 10.5px 14px;
 }
 
@@ -315,12 +283,59 @@ Tipping box
 
 .lnpw_skyscraper_tipping_amount, 
 .lnpw_skyscraper_tipping_converted_values,
-.lnpw_skyscraper_tipping_container #tipping_form > fieldset > h6, 
+.lnpw_skyscraper_tipping_container #skyscraper_tipping_form > fieldset > h6, 
 .lnpw_skyscraper_header_container h6,
 .lnpw_skyscraper_info_container p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+
+#skyscraper_tipping_form fieldset:not(:first-of-type) {
+	display: none;
+}
+
+
+.lnpw_skyscraper_donor_information{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.lnpw_skyscraper_donor_information label {
+    display: inline-block;
+    width: 100px;
+    padding-left: 0.5em;
+}
+
+.lnpw_skyscraper_donor_information input[type="text"], .lnpw_skyscraper_donor_information input[type="email"], .lnpw_skyscraper_donor_information input[type="url"], .lnpw_skyscraper_donor_information input[type="password"], .lnpw_skyscraper_donor_information input[type="search"], .lnpw_skyscraper_donor_information input[type="number"], .lnpw_skyscraper_donor_information input[type="tel"], .lnpw_skyscraper_donor_information input[type="range"], .lnpw_skyscraper_donor_information input[type="date"], .lnpw_skyscraper_donor_information input[type="month"], .lnpw_skyscraper_donor_information input[type="week"], .lnpw_skyscraper_donor_information input[type="time"], .lnpw_skyscraper_donor_information input[type="datetime"], .lnpw_skyscraper_donor_information input[type="datetime-local"], .lnpw_skyscraper_donor_information input[type="color"], .lnpw_skyscraper_donor_information textarea{
+  padding: 0;
+}
+
+.lnpw_skyscraper_tipping_free_input {
+  width: 10em;
+}
+
+
+.lnpw_skyscraper_header_container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.1em 1em;
+}
+
+.lnpw_skyscraper_info_container{
   text-align: center;
 }
 
-.lnpw_skyscraper_tipping_free_input{
-  width: 10em;
+.lnpw_skyscraper_tipping_container div, .lnpw_skyscraper_tipping_container img, .lnpw_skyscraper_tipping_container pre, .lnpw_skyscraper_tipping_container figure {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.lnpw_skyscraper_tipping_converted_values {
+  flex-direction: row;
 }
