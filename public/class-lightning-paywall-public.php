@@ -1205,16 +1205,16 @@ class Lightning_Paywall_Public
 				color: <?php echo $atts['tipping_text_color']; ?>
 			}
 
-			.lnpw_skyscraper_fixed_amount_value_1,
-			.lnpw_skyscraper_fixed_amount_value_2,
-			.lnpw_skyscraper_fixed_amount_value_3 {
+			.lnpw_skyscraper_amount_value_1,
+			.lnpw_skyscraper_amount_value_2,
+			.lnpw_skyscraper_amount_value_3 {
 				background: <?php echo $atts['fixed_background']; ?>;
 				display: <?php echo $dimension[0] === '160' ? 'inline-flex' : ''; ?>;
 			}
 
-			.lnpw_skyscraper_fixed_amount_value_1 i,
-			.lnpw_skyscraper_fixed_amount_value_2 i,
-			.lnpw_skyscraper_fixed_amount_value_3 i {
+			.lnpw_skyscraper_amount_value_1 i,
+			.lnpw_skyscraper_amount_value_2 i,
+			.lnpw_skyscraper_amount_value_3 i {
 				margin-right: <?php echo $dimension[0] === '160' ? '10px' : ''; ?>;
 			}
 
@@ -1222,12 +1222,14 @@ class Lightning_Paywall_Public
 				padding: <?php echo $dimension[0] === '160' ? '0' : '0 1em'; ?>;
 			}
 
-			.lnpw_skyscraper_fixed_amount {
+			.lnpw_skyscraper_amount {
 				flex-direction: <?php echo $dimension[0] === '160' ? 'column' : 'row'; ?>;
+				justify-content: <?php echo $dimension[0] === '160' ? '' : 'space-around'; ?>;
 			}
 
-			.lnpw_skyscraper_fixed_amount>div {
-				margin: <?php echo $dimension[0] === '160' ? '5px 0' : '0'; ?>;
+			.lnpw_skyscraper_amount>div {
+				margin: <?php echo $dimension[0] === '160' ? '5px auto' : '5px'; ?>;
+				width: <?php echo $dimension[0] === '160' ? '80%' : ''; ?>;
 			}
 
 			.lnpw_skyscraper_tipping_converted_values {
@@ -1238,20 +1240,22 @@ class Lightning_Paywall_Public
 			.lnpw_skyscraper_tipping_free_input {
 				display: flex;
 				flex-direction: row;
+				justify-content: <?php echo $dimension[0] === '160' ? 'center' : ''; ?>;
+				margin: <?php echo $dimension[0] === '160' ? '1em 0' : ''; ?>;
 			}
 
 			#lnpw_skyscraper_button button,
 			#lnpw_skyscraper_button input[type="button"] {
-				font-size: <?php echo $dimension[0] === '160' ? '0.6em' : '14px' ?>;
+				font-size: <?php echo $dimension[0] === '160' ? '8px' : '14px' ?>;
 
 			}
 		</style>
 		<?php if ($dimension[0] === '600') : ?>
-			<div>
+			<div class="lnpw_skyscraper_banner">
 				<div class="lnpw_skyscraper_header_container">
 					<?php if ($logo) : ?>
 						<div class="lnpw_logo_wrap">
-							<img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+							<img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
 						</div>
 					<?php endif; ?>
 					<?php if (!empty($atts['title'])) : ?>
@@ -1269,12 +1273,13 @@ class Lightning_Paywall_Public
 			<div class="lnpw_skyscraper_tipping_container">
 				<form method="POST" action="" id="skyscraper_tipping_form">
 					<fieldset>
+					<div>
 						<?php if ($dimension[0] === '160') : ?>
 
 							<div class="lnpw_skyscraper_header_container">
 								<?php if ($logo) : ?>
 									<div class="lnpw_logo_wrap">
-										<img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+										<img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
 									</div>
 								<?php endif; ?>
 								<?php if (!empty($atts['title'])) : ?>
@@ -1290,12 +1295,13 @@ class Lightning_Paywall_Public
 							</div>
 
 						<?php endif; ?>
+						</div>
 						<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?></h6>
-						<div class="lnpw_skyscraper_fixed_amount">
+						<div class="lnpw_skyscraper_amount">
 							<?php foreach ($fixed_amount as $key => $value) : ?>
 
 								<?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
-									<div class="<?php echo 'lnpw_skyscraper_fixed_amount_' . $key ?>">
+									<div class="<?php echo 'lnpw_skyscraper_amount_' . $key ?>">
 										<div>
 											<input type="radio" class="lnpw_skyscraper_tipping_default_amount" id="<?php echo $key; ?>" name="lnpw_skyscraper_tipping_default_amount" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
 											<?php if (!empty($fixed_amount[$key]['amount'])) : ?>
@@ -1308,7 +1314,23 @@ class Lightning_Paywall_Public
 								<?php endif; ?>
 
 							<?php endforeach; ?>
-							<?php if ('true' === $atts['free_input']) : ?>
+							<?php if ('true' === $atts['free_input'] && $dimension[0] === '600') : ?>
+								<div class="lnpw_skyscraper_tipping_free_input">
+									<input type="number" id="lnpw_skyscraper_tipping_amount" name="lnpw_skyscraper_tipping_amount" placeholder="0.00" required />
+
+
+									<select required name="lnpw_skyscraper_tipping_currency" id="lnpw_skyscraper_tipping_currency">
+										<option disabled value="">Select currency</option>
+										<?php foreach ($supported_currencies as $currency) : ?>
+											<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+												<?php echo $currency; ?>
+											</option>
+										<?php endforeach; ?>
+									</select>
+								<?php endif; ?>
+								
+						</div>
+						<?php if ('true' === $atts['free_input'] && $dimension[0] === '160') : ?>
 								<div class="lnpw_skyscraper_tipping_free_input">
 									<input type="number" id="lnpw_skyscraper_tipping_amount" name="lnpw_skyscraper_tipping_amount" placeholder="0.00" required />
 
@@ -1323,7 +1345,6 @@ class Lightning_Paywall_Public
 									</select>
 								<?php endif; ?>
 								</div>
-						</div>
 						<div class="lnpw_skyscraper_tipping_converted_values">
 							<input type="text" id="lnpw_skyscraper_converted_amount" name="lnpw_skyscraper_converted_amount" readonly />
 							<input type="text" id="lnpw_skyscraper_converted_currency" name="lnpw_skyscraper_converted_currency" readonly />

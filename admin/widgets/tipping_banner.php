@@ -118,7 +118,7 @@ class Tipping_Banner extends WP_Widget
 
         $free_input = !empty($instance['free_input']) ? $instance['free_input'] : esc_html__('true', 'text_domain');
 
-        $fixed_background = !empty($instance['fixed_background']) ? $instance['fixed_background'] : esc_html__('#ffa500', 'text_domain');
+        $fixed_background = !empty($instance['fixed_background']) ? $instance['fixed_background'] : esc_html__('#fe642e', 'text_domain');
 ?>
         <div class="tipping_banner">
             <h1>Tipping</h1>
