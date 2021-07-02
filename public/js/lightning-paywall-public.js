@@ -210,6 +210,22 @@ $(document).ready(function(){
       $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
       $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
     });
+
+    $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high").on('input', function(){
+      var currency = $("#lnpw_widget_lnpw_skyscraper_tipping_currency_high").val();
+      var amount = $(this).val();
+      var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
+      $("#lnpw_widget_lnpw_skyscraper_converted_amount_high").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
+      $("#lnpw_widget_lnpw_skyscraper_converted_currency_high").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
+    });
+
+    $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").on('input', function(){
+      var currency = $("#lnpw_widget_lnpw_skyscraper_tipping_currency_wide").val();
+      var amount = $(this).val();
+      var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
+      $("#lnpw_widget_lnpw_skyscraper_converted_amount_wide").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
+      $("#lnpw_widget_lnpw_skyscraper_converted_currency_wide").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
+    });
     /*$("#value1, #value2, #value3").hover(function(){
       var predefined = $(this).val().split(' ');
       var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
@@ -232,6 +248,26 @@ $(document).ready(function(){
         var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
         $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
         $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
+      }
+    });
+
+    $("#lnpw_widget-value_1_high, #lnpw_widget-value_2_high, #lnpw_widget-value_3_high").change(function(){
+      if ($(this).is(':checked')){
+        var predefined = $(this).val().split(' ');
+        var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
+        var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
+        $("#lnpw_widget_lnpw_skyscraper_converted_amount_high").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
+        $("#lnpw_widget_lnpw_skyscraper_converted_currency_high").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
+      }
+    });
+
+    $("#lnpw_widget-value_1_wide, #lnpw_widget-value_2_wide, #lnpw_widget-value_3_wide").change(function(){
+      if ($(this).is(':checked')){
+        var predefined = $(this).val().split(' ');
+        var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
+        var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
+        $("#lnpw_widget_lnpw_skyscraper_converted_amount_wide").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
+        $("#lnpw_widget_lnpw_skyscraper_converted_currency_wide").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
       }
     });
     
@@ -317,12 +353,36 @@ $(document).ready(function(){
   $("#lnpw_skyscraper_tipping_amount").click(function () {
     $("#lnpw_skyscraper_tipping_amount").attr('required', true);
     $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").removeAttr('required');
-    $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").prop('checked', false);
-      
+    $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").prop('checked', false);   
   })
+})
+$(document).ready(function(){
+
+  $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]").change(function () {
+      $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]").attr('required', true);
+      $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high").removeAttr('required');
+      $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high").val('');
+  })
+  $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high").click(function () {
+    $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high").attr('required', true);
+    $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]").removeAttr('required');
+    $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]").prop('checked', false);   
   })
 
-
+  
+  })
+$(document).ready(function(){ 
+    $("input[name=lnpw_widget_ lnpw_skyscraper_tipping_default_amount_wide]").change(function () {
+      $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]").attr('required', true);
+      $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").removeAttr('required');
+      $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").val('');
+  })
+  $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").click(function () {
+    $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").attr('required', true);
+    $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]").removeAttr('required');
+    $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]").prop('checked', false);   
+  })
+})
 $(document).ready(function(){ 
   var form_count = 1, previous_form, next_form, total_forms;
   total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;  
@@ -342,6 +402,58 @@ $(document).ready(function(){
     }
   });  
   $("input.skyscraper-previous-form").click(function(){
+    previous_form = $(this).parent().parent();
+    next_form = $(this).parent().parent().prev();
+    next_form.show();
+    previous_form.hide();
+  }); 
+});
+
+$(document).ready(function(){ 
+  var form_count = 1, previous_form, next_form, total_forms;
+  total_forms = $(".lnpw_widget.lnpw_skyscraper_tipping_container_high fieldset").length;  
+  var freeInput = $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high");
+  var fixedAmount = $('.lnpw_widget.lnpw_skyscraper_tipping_default_amount_high');
+  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
+  
+  
+  $(".lnpw_widget_skyscraper-next-form.high").click(function(){
+    if (validationField[0].checkValidity()){
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().next();
+      next_form.show();
+      previous_form.hide();
+    }else{
+      validationField[0].reportValidity()
+    }
+  });  
+  $(".lnpw_widget_skyscraper-previous-form.high").click(function(){
+    previous_form = $(this).parent().parent();
+    next_form = $(this).parent().parent().prev();
+    next_form.show();
+    previous_form.hide();
+  }); 
+});
+
+$(document).ready(function(){ 
+  var form_count = 1, previous_form, next_form, total_forms;
+  total_forms = $(".lnpw_widget.lnpw_skyscraper_tipping_container_wide fieldset").length;  
+  var freeInput = $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide");
+  var fixedAmount = $('.lnpw_widget.lnpw_skyscraper_tipping_default_amount_wide');
+  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
+  
+  
+  $(".lnpw_widget_skyscraper-next-form.wide").click(function(){
+    if (validationField[0].checkValidity()){
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().next();
+      next_form.show();
+      previous_form.hide();
+    }else{
+      validationField[0].reportValidity()
+    }
+  });  
+  $(".lnpw_widget_skyscraper-previous-form.wide").click(function(){
     previous_form = $(this).parent().parent();
     next_form = $(this).parent().parent().prev();
     next_form.show();

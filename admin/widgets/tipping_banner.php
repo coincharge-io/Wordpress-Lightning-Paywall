@@ -51,7 +51,8 @@ class Tipping_Banner extends WP_Widget
         value3_currency = '{$instance['value3_currency']}'
         value3_icon = '{$instance['value3_icon']}'
         free_input = '{$instance['free_input']}'
-        fixed_background = '{$instance['fixed_background']}']");
+        fixed_background = '{$instance['fixed_background']}'
+        widget = 'true']");
     }
 
     public function form($instance)
@@ -199,7 +200,7 @@ class Tipping_Banner extends WP_Widget
             <div class="row">
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('tipping_text')); ?>"><?php echo esc_html__('Tipping text', 'text_domain'); ?></label>
-                    <textarea id="<?php echo esc_attr($this->get_field_id('tipping_text')); ?>" name="<?php echo esc_attr($this->get_field_name('tipping_text')); ?>" type="text" value="<?php echo esc_attr($tipping_text); ?>"></textarea>
+                    <textarea id="<?php echo esc_attr($this->get_field_id('tipping_text')); ?>" name="<?php echo esc_attr($this->get_field_name('tipping_text')); ?>" type="text"><?php echo esc_attr($tipping_text); ?></textarea>
                 </div>
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('tipping_text_color')); ?>"><?php echo esc_html__('Tipping text color', 'text_domain'); ?></label>
