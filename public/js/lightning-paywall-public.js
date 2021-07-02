@@ -210,7 +210,7 @@ $(document).ready(function(){
       $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
       $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
     });
-    $("#value1, #value2, #value3").hover(function(){
+    /*$("#value1, #value2, #value3").hover(function(){
       var predefined = $(this).val().split(' ');
       var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
       var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
@@ -224,24 +224,27 @@ $(document).ready(function(){
       if($(this).parent().find('i')[0].className) {
         $("label[for='"+this.id+"']").hide();
       }
+    });*/
+    $("#value_1, #value_2, #value_3").change(function(){
+      if ($(this).is(':checked')){
+        var predefined = $(this).val().split(' ');
+        var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
+        var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
+        $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
+        $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
+      }
     });
-
-    $("#value_1, #value_2, #value_3").hover(function(){
-      var predefined = $(this).val().split(' ');
-      var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
-      var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
-      $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
-      $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
-      /*if($(this).parent().find('i')[0].className) {
-        $("label[for='"+this.id+"']").show();
-      }*/
-    }, function(){
-      $("#lnpw_skyscraper_converted_amount").attr('readonly', false).val('').attr('readonly', true);
-      $("#lnpw_skyscraper_converted_currency").attr('readonly', false).val('').attr('readonly', true);
-      /*if($(this).parent().find('i')[0].className) {
-        $("label[for='"+this.id+"']").hide();
-      }*/
+    
+    $("#value1, #value2, #value3").change(function(){
+      if ($(this).is(':checked')){
+        var predefined = $(this).val().split(' ');
+        var converted_icon = fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats);
+        var converted_icon_amount = '~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)+ ' '+get_currency(predefined[1]);
+        $("#lnpw_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)).attr('readonly', true);
+        $("#lnpw_converted_currency").attr('readonly', false).val(get_currency(predefined[1])).attr('readonly', true);
+      }
     });
+    
 })
 function fiat_to_crypto(currency, val, usd, eur, sats){
   var value = Number(val);

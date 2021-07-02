@@ -1184,7 +1184,8 @@ class Lightning_Paywall_Public
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
 			}
 
-			#lnpw_skyscraper_tipping__button {
+			#lnpw_skyscraper_tipping__button,
+			.skyscraper-next-form {
 				color: <?php echo $atts['button_text_color']; ?>;
 				background: <?php echo $atts['button_color']; ?>;
 			}
@@ -1246,10 +1247,15 @@ class Lightning_Paywall_Public
 
 			#lnpw_skyscraper_button button,
 			#lnpw_skyscraper_button input[type="button"] {
-				font-size: <?php echo $dimension[0] === '160' ? '8px' : '14px' ?>;
+				font-size: <?php echo $dimension[0] === '160' ? '10px' : '14px' ?>;
 
 			}
+
+			.lnpw_skyscraper_donor_information label {
+				padding-left: <?php echo $dimension[0] === '600' ? '0.5em' : '' ?>;
+			}
 		</style>
+
 		<?php if ($dimension[0] === '600') : ?>
 			<div class="lnpw_skyscraper_banner">
 				<div class="lnpw_skyscraper_header_container">
@@ -1273,28 +1279,28 @@ class Lightning_Paywall_Public
 			<div class="lnpw_skyscraper_tipping_container">
 				<form method="POST" action="" id="skyscraper_tipping_form">
 					<fieldset>
-					<div>
-						<?php if ($dimension[0] === '160') : ?>
+						<div>
+							<?php if ($dimension[0] === '160') : ?>
 
-							<div class="lnpw_skyscraper_header_container">
-								<?php if ($logo) : ?>
-									<div class="lnpw_logo_wrap">
-										<img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
-									</div>
-								<?php endif; ?>
-								<?php if (!empty($atts['title'])) : ?>
-									<div>
-										<h6><?php echo esc_html($atts['title']); ?></h6>
-									</div>
-								<?php endif; ?>
-							</div>
-							<div class="lnpw_skyscraper_info_container">
-								<?php if (!empty($atts['description'])) : ?>
-									<p><?php echo esc_html($atts['description']); ?></p>
-								<?php endif; ?>
-							</div>
+								<div class="lnpw_skyscraper_header_container">
+									<?php if ($logo) : ?>
+										<div class="lnpw_logo_wrap">
+											<img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+										</div>
+									<?php endif; ?>
+									<?php if (!empty($atts['title'])) : ?>
+										<div>
+											<h6><?php echo esc_html($atts['title']); ?></h6>
+										</div>
+									<?php endif; ?>
+								</div>
+								<div class="lnpw_skyscraper_info_container">
+									<?php if (!empty($atts['description'])) : ?>
+										<p><?php echo esc_html($atts['description']); ?></p>
+									<?php endif; ?>
+								</div>
 
-						<?php endif; ?>
+							<?php endif; ?>
 						</div>
 						<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?></h6>
 						<div class="lnpw_skyscraper_amount">
@@ -1328,37 +1334,37 @@ class Lightning_Paywall_Public
 										<?php endforeach; ?>
 									</select>
 								<?php endif; ?>
-								
-						</div>
-						<?php if ('true' === $atts['free_input'] && $dimension[0] === '160') : ?>
-								<div class="lnpw_skyscraper_tipping_free_input">
-									<input type="number" id="lnpw_skyscraper_tipping_amount" name="lnpw_skyscraper_tipping_amount" placeholder="0.00" required />
 
-
-									<select required name="lnpw_skyscraper_tipping_currency" id="lnpw_skyscraper_tipping_currency">
-										<option disabled value="">Select currency</option>
-										<?php foreach ($supported_currencies as $currency) : ?>
-											<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
-												<?php echo $currency; ?>
-											</option>
-										<?php endforeach; ?>
-									</select>
-								<?php endif; ?>
 								</div>
-						<div class="lnpw_skyscraper_tipping_converted_values">
-							<input type="text" id="lnpw_skyscraper_converted_amount" name="lnpw_skyscraper_converted_amount" readonly />
-							<input type="text" id="lnpw_skyscraper_converted_currency" name="lnpw_skyscraper_converted_currency" readonly />
-						</div>
+								<?php if ('true' === $atts['free_input'] && $dimension[0] === '160') : ?>
+									<div class="lnpw_skyscraper_tipping_free_input">
+										<input type="number" id="lnpw_skyscraper_tipping_amount" name="lnpw_skyscraper_tipping_amount" placeholder="0.00" required />
 
 
-						<div id="lnpw_skyscraper_button">
-							<input type="hidden" id="lnpw_skyscraper_redirect_link" name="lnpw_skyscraper_redirect_link" value=<?php echo $atts['redirect']; ?> />
-							<?php if ($collect_data == 'true') : ?>
-								<input type="button" name="next" class="skyscraper-next-form" value="Next" />
-							<?php else : ?>
-								<button type="submit" id="lnpw_skyscraper_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
-							<?php endif; ?>
-						</div>
+										<select required name="lnpw_skyscraper_tipping_currency" id="lnpw_skyscraper_tipping_currency">
+											<option disabled value="">Select currency</option>
+											<?php foreach ($supported_currencies as $currency) : ?>
+												<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+													<?php echo $currency; ?>
+												</option>
+											<?php endforeach; ?>
+										</select>
+									<?php endif; ?>
+									</div>
+									<div class="lnpw_skyscraper_tipping_converted_values">
+										<input type="text" id="lnpw_skyscraper_converted_amount" name="lnpw_skyscraper_converted_amount" readonly />
+										<input type="text" id="lnpw_skyscraper_converted_currency" name="lnpw_skyscraper_converted_currency" readonly />
+									</div>
+
+
+									<div id="lnpw_skyscraper_button">
+										<input type="hidden" id="lnpw_skyscraper_redirect_link" name="lnpw_skyscraper_redirect_link" value=<?php echo $atts['redirect']; ?> />
+										<?php if ($collect_data == 'true') : ?>
+											<input type="button" name="next" class="skyscraper-next-form" value="Next" />
+										<?php else : ?>
+											<button type="submit" id="lnpw_skyscraper_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+										<?php endif; ?>
+									</div>
 
 					</fieldset>
 					<?php if ($collect_data == 'true') : ?>
