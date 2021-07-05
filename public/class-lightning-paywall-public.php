@@ -916,6 +916,7 @@ class Lightning_Paywall_Public
 			'mandatory_address' => 'false',
 			'display_message'	=> 'false',
 			'mandatory_message' => 'false',
+			'widget'		=> 'false',
 		), $atts);
 
 		$dimension = explode('x', $atts['dimension']);
@@ -924,7 +925,7 @@ class Lightning_Paywall_Public
 		$background = wp_get_attachment_image_src($atts['background_id']);
 		$collect = array(
 			array(
-				'label' => 'Full name',
+				'label' => 'Full_name',
 				'display' => $atts['display_name'],
 				'mandatory' => $atts['mandatory_name']
 			),
@@ -951,11 +952,45 @@ class Lightning_Paywall_Public
 
 		);
 		$collect_data = Lightning_Paywall_Public::display_is_enabled($collect);
+		$is_widget = $atts['widget'] === 'true' ? 'lnpw_widget' : '';
+		$form = $is_widget === 'lnpw_widget' ? 'tipping_form_box_widget' : 'tipping_form_box';
+		$suffix = $is_widget === 'lnpw_widget' ? '_lnpw_widget' : '';
+		$version = $is_widget === 'true' ? 'widget' : 'basic';
 
 		ob_start();
 	?>
 		<style>
-			.lnpw_tipping_container {
+			<?php if ($version === 'widget') : ?>.lnpw_tipping_box_container.lnpw_widget {
+				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
+				width: <?php echo $dimension[0] . 'px !important'; ?>;
+				height: <?php echo $dimension[1] . 'px !important'; ?>;
+				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
+
+			}
+
+
+			#lnpw_tipping__button_widget {
+				color: <?php echo $atts['button_text_color']; ?>;
+				background: <?php echo $atts['button_color']; ?>;
+			}
+
+			.lnpw_tipping_box_container_header_container.lnpw_widget h6 {
+				color: <?php echo $atts['title_text_color']; ?>
+			}
+
+			.lnpw_tipping_container_info_container {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block'; ?>
+			}
+
+			.lnpw_tipping_box_container_info_container.lnpw_widget p {
+				color: <?php echo $atts['description_color']; ?>
+			}
+
+			.lnpw_tipping_box_info_container fieldset h6 {
+				color: <?php echo $atts['tipping_text_color']; ?>
+			}
+
+			<?php else : ?>.lnpw_tipping_box_container {
 				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
 				width: <?php echo $dimension[0] . 'px !important'; ?>;
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
@@ -969,29 +1004,31 @@ class Lightning_Paywall_Public
 				background: <?php echo $atts['button_color']; ?>;
 			}
 
-			.header_container h6 {
+			.lnpw_tipping_box_container_header_container h6 {
 				color: <?php echo $atts['title_text_color']; ?>
 			}
 
-			.lnpw_tipping_container.info_container {
+			.lnpw_tipping_container_info_container {
 				display: <?php echo (empty($atts['description'])) ? 'none' : 'block'; ?>
 			}
 
-			.info_container p {
+			.lnpw_tipping_box_container_info_container p {
 				color: <?php echo $atts['description_color']; ?>
 			}
 
-			.lnpw_tipping_info fieldset h6 {
+			.lnpw_tipping_box_info_container fieldset h6 {
 				color: <?php echo $atts['tipping_text_color']; ?>
 			}
+
+			<?php endif; ?>
 		</style>
 
 
-		<div class="lnpw_tipping_container">
+		<div class="<?php echo "lnpw_tipping_box_container {$is_widget}"; ?>">
 
-			<form method="POST" action="" id="tipping_form">
+			<form method="POST" action="" id="<?php echo $form; ?>">
 				<fieldset>
-					<div class="header_container">
+					<div class="lnpw_tipping_box_header_container">
 						<?php if ($logo) : ?>
 							<div class="lnpw_logo_wrap">
 								<img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
@@ -1003,19 +1040,19 @@ class Lightning_Paywall_Public
 							</div>
 						<?php endif; ?>
 					</div>
-					<div class="info_container">
+					<div class="lnpw_tipping_box_info_container">
 						<?php if (!empty($atts['description'])) : ?>
 							<p><?php echo esc_html($atts['description']); ?></p>
 						<?php endif; ?>
 					</div>
 					<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?></h6>
-					<div class="lnpw_tipping_values">
+					<div class="lnpw_tipping_box_amount">
 
-						<div class="lnpw_tipping_free_input">
-							<input type="number" id="lnpw_tipping_amount" name="lnpw_tipping_amount" placeholder="0.00" required />
+						<div class="<?php echo "lnpw_tipping_free_input {$is_widget}"; ?>">
+							<input type="number" id="<?php echo "lnpw_tipping_amount{$suffix}"; ?>" name="<?php echo "lnpw_tipping_amount{$suffix}"; ?>" placeholder="0.00" required />
 
 
-							<select required name="lnpw_tipping_currency" id="lnpw_tipping_currency">
+							<select required name="<?php echo "lnpw_tipping_currency{$suffix}"; ?>" id="<?php echo "lnpw_tipping_currency{$suffix}"; ?>">
 								<option disabled value="">Select currency</option>
 								<?php foreach ($supported_currencies as $currency) : ?>
 									<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
@@ -1027,16 +1064,16 @@ class Lightning_Paywall_Public
 
 						</div>
 						<div class="lnpw_tipping_converted_values">
-							<input type="text" id="lnpw_converted_amount" name="lnpw_converted_amount" readonly />
-							<input type="text" id="lnpw_converted_currency" name="lnpw_converted_currency" readonly />
+							<input type="text" id="<?php echo "lnpw_converted_amount{$suffix}"; ?>" name="lnpw_converted_amount" readonly />
+							<input type="text" id="<?php echo "lnpw_converted_currency{$suffix}"; ?>" name="lnpw_converted_currency" readonly />
 						</div>
 					</div>
 					<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $atts['redirect']; ?> />
 					<div id="button">
 						<?php if ($collect_data == 'true') : ?>
-							<input type="button" name="next" class="next-form" value="Next" />
+							<input type="button" name="next" class="<?php echo "next-form{$suffix}"; ?>" value="Next" />
 						<?php else : ?>
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+							<button type="submit" id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
 						<?php endif; ?>
 					</div>
 				</fieldset>
@@ -1046,13 +1083,13 @@ class Lightning_Paywall_Public
 						<div class="lnpw_donor_information">
 							<?php foreach ($collect as $key => $value) : ?>
 								<?php if ($collect[$key]['display'] == 'true') : ?>
-									<label for="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}"; ?>"> <?php echo $collect[$key]['label']; ?></label>
-									<input type="text" id="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}"; ?>" name="lnpw_tipping_donor_name" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
+									<label for="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}{$suffix}"; ?>"> <?php echo $collect[$key]['label']; ?></label>
+									<input type="text" id="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}{$suffix}"; ?>" name="lnpw_tipping_donor_name" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
 								<?php endif; ?>
 							<?php endforeach; ?>
 						</div>
 						<div id="button">
-							<input type="button" name="previous" class="previous-form" value="Previous" />
+							<input type="button" name="previous" class="<?php echo "previous-form{$suffix}"; ?>" value="Previous" />
 							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
 						</div>
 					</fieldset>

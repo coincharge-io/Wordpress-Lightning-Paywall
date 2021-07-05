@@ -89,7 +89,41 @@
             if (response.success) {
               lnpw_invoice_id = response.data.invoice_id;
               donor = response.data.donor;
-              lnpwShowDonationBoxInvoice(lnpw_invoice_id, donor);
+              lnpwShowDonationBoxInvoice(lnpw_invoice_id, donor, $("#lnpw_redirect_link"));
+            } else {
+               console.error(response);
+            }
+          },
+          error: function (error){
+            console.log(error)
+        }
+      })
+    })
+
+    $("#tipping_form_box_widget").submit(function (e) {
+      e.preventDefault();
+      if (lnpw_invoice_id) {
+        lnpwShowDonationBoxInvoice(lnpw_invoice_id);
+        return;
+      }
+        $.ajax({
+          url: "/wp-admin/admin-ajax.php",
+          method: "POST",
+          data: {
+            action: "lnpw_tipping",
+            currency: $("#lnpw_tipping_currency_lnpw_widget").val(),
+            amount: $("#lnpw_tipping_amount_lnpw_widget").val(),
+            name: $("#lnpw_tipping_donor_name_lnpw_widget").val(),
+            email: $("#lnpw_tipping_donor_email_lnpw_widget").val(),
+            address: $("#lnpw_tipping_donor_address_lnpw_widget").val(),
+            phone: $("#lnpw_tipping_donor_phone_lnpw_widget").val(),
+            message: $("#lnpw_tipping_donor_message_lnpw_widget").val(),
+          },
+          success: function (response) {
+            if (response.success) {
+              lnpw_invoice_id = response.data.invoice_id;
+              donor = response.data.donor;
+              lnpwShowDonationBoxInvoice(lnpw_invoice_id, donor, $("#lnpw_redirect_link_lnpw_widget"));
             } else {
                console.error(response);
             }
@@ -205,11 +239,11 @@
       })
     })
 })
-  function lnpwShowDonationBoxInvoice(invoice_id, donor) {
+  function lnpwShowDonationBoxInvoice(invoice_id, donor, redirect) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
         notifyAdmin(donor)
-        ($("#lnpw_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
+        (redirect.is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
           }});
 
     btcpay.showInvoice(invoice_id);
@@ -275,6 +309,16 @@ $(document).ready(function(){
       $("#lnpw_converted_amount").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
       $("#lnpw_converted_currency").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
     });
+
+    $("#lnpw_tipping_amount_lnpw_widget").on('input', function(){
+      var currency = $("#lnpw_tipping_currency_lnpw_widget").val();
+      var amount = $(this).val();
+      var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
+      //var converted_amount = '~' + fiat_to_crypto(currency, amount, usd, eur, sats)+ ' '+get_currency(currency)
+      $("#lnpw_converted_amount_lnpw_widget").attr('readonly', false).val('~' + fiat_to_crypto(currency, amount, usd, eur, sats)).attr('readonly', true);
+      $("#lnpw_converted_currency_lnpw_widget").attr('readonly', false).val(get_currency(currency)).attr('readonly', true);
+    });
+
      $("#lnpw_skyscraper_tipping_amount").on('input', function(){
       var currency = $("#lnpw_skyscraper_tipping_currency").val();
       var amount = $(this).val();
@@ -379,9 +423,9 @@ function get_currency(currency){
         return 'USD';
   }
 }
-$(document).ready(function(){ 
+/*$(document).ready(function(){ 
   var form_count = 1, previous_form, next_form, total_forms;
-  total_forms = $("fieldset").length;  
+  total_forms = $(".lnpw_tipping_box_container fieldset").length;  
   var freeInput = $("#lnpw_tipping_amount");
   var fixedAmount = $('.lnpw_tipping_default_amount');
   var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
@@ -402,7 +446,7 @@ $(document).ready(function(){
     next_form.show();
     previous_form.hide();
   }); 
-});
+});*/
 
 $(document).ready(function(){
     $("input[type=radio][name=lnpw_tipping_default_amount]").change(function () {
@@ -526,6 +570,57 @@ $(document).ready(function(){
     }
   });  
   $(".lnpw_widget.skyscraper-previous-form.wide").click(function(){
+    previous_form = $(this).parent().parent();
+    next_form = $(this).parent().parent().prev();
+    next_form.show();
+    previous_form.hide();
+  }); 
+});
+
+$(document).ready(function(){ 
+  var form_count = 1, previous_form, next_form, total_forms;
+  total_forms = $(".lnpw_tipping_box_container.lnpw_widget fieldset").length;  
+  var validationField = $("#lnpw_tipping_amount_lnpw_widget");
+  /*var fixedAmount = $('.lnpw_tipping_default_amount');
+  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);*/
+  
+  $("input.next-form_lnpw_widget").click(function(){
+    if (validationField[0].checkValidity()){
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().next();
+      next_form.show();
+      previous_form.hide();
+    }else{
+      validationField[0].reportValidity()
+    }
+  });  
+  $("input.previous-form_lnpw_widget").click(function(){
+    previous_form = $(this).parent().parent();
+    next_form = $(this).parent().parent().prev();
+    next_form.show();
+    previous_form.hide();
+  }); 
+});
+
+
+$(document).ready(function(){ 
+  var form_count = 1, previous_form, next_form, total_forms;
+  total_forms = $(".lnpw_tipping_box_container fieldset").length;  
+  var validationField = $("#lnpw_tipping_amount");
+  /*var fixedAmount = $('.lnpw_tipping_default_amount');
+  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);*/
+  
+  $("input.next-form").click(function(){
+    if (validationField[0].checkValidity()){
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().next();
+      next_form.show();
+      previous_form.hide();
+    }else{
+      validationField[0].reportValidity()
+    }
+  });  
+  $("input.previous-form").click(function(){
     previous_form = $(this).parent().parent();
     next_form = $(this).parent().parent().prev();
     next_form.show();
