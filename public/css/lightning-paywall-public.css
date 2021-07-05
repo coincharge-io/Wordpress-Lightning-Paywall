@@ -315,12 +315,15 @@ Tipping box
   flex-direction: column;
   text-align: center;
 }
-.lnpw_skyscraper_tipping_container #skyscraper_tipping_form > fieldset > h6{
+.lnpw_skyscraper_tipping_container #skyscraper_tipping_form > fieldset > h6,
+.lnpw_skyscraper_tipping_container #lnpw_widget_skyscraper_tipping_form_high > fieldset > h6,
+.lnpw_skyscraper_tipping_container #lnpw_widget_skyscraper_tipping_form_wide > fieldset > h6{
   text-align: left;
   margin-left: 5px;
 }
 #skyscraper_tipping_form fieldset:not(:first-of-type),
-#lnpw_widget_skyscraper_tipping_form_high fieldset:not(:first-of-type) {
+#lnpw_widget_skyscraper_tipping_form_high fieldset:not(:first-of-type),
+#lnpw_widget_skyscraper_tipping_form_wide fieldset:not(:first-of-type) {
 	display: none;
 }
 
@@ -445,8 +448,12 @@ Tipping box
 
 #lnpw_skyscraper_button_wide button,
 #lnpw_skyscraper_button_wide input[type="button"],
+#lnpw_skyscraper_button_high button,
+#lnpw_skyscraper_button_high input[type="button"],
 #lnpw_widget_lnpw_skyscraper_button_wide button,
-#lnpw_widget_lnpw_skyscraper_button_wide input[type="button"] {
+#lnpw_widget_lnpw_skyscraper_button_wide input[type="button"],
+#lnpw_widget_lnpw_skyscraper_button_high button,
+#lnpw_widget_lnpw_skyscraper_button_high input[type="button"] {
   font-size: 14px;
 }
 

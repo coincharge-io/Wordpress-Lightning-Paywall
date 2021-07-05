@@ -1072,8 +1072,10 @@ class Lightning_Paywall_Admin
 	public function wpdocs_register_widgets()
 	{
 		require_once __DIR__ . '/widgets/tipping_box.php';
-		require_once __DIR__ . '/widgets/tipping_banner.php';
+		require_once __DIR__ . '/widgets/tipping_banner_wide.php';
+		require_once __DIR__ . '/widgets/tipping_banner_high.php';
 		register_widget(new Tipping_Box());
-		register_widget(new Tipping_Banner());
+		register_widget(new Tipping_Banner_Wide());
+		register_widget(new Tipping_Banner_High());
 	}
 }

@@ -1,20 +1,19 @@
 <?php
 
 
-class Tipping_Banner extends WP_Widget
+class Tipping_Banner_High extends WP_Widget
 {
     public function __construct()
     {
         parent::__construct(
-            'tipping-banner',
-            'LNPW Tipping Banner'
+            'tipping-banner-high',
+            'LNPW Tipping Banner - High'
         );
     }
 
     public function widget($args, $instance)
     {
-
-        echo do_shortcode("[lnpw_tipping_skyscraper dimension='{$instance['dimension']}' title = '{$instance['title']}' description	= '{$instance['description']}'
+        echo do_shortcode("[lnpw_tipping_skyscraper dimension='160x600' title = '{$instance['title']}' description	= '{$instance['description']}'
         currency = '{$instance['currency']}'
         background_color = '{$instance['background_color']}'
         title_text_color = '{$instance['title_text_color']}'
@@ -63,7 +62,6 @@ class Tipping_Banner extends WP_Widget
 
         $description = !empty($instance['description']) ? $instance['description'] : esc_html__('', 'text_domain');
 
-        $dimension = !empty($instance['dimension']) ? $instance['dimension'] : esc_html__('600x160', 'text_domain');
         $currency = !empty($instance['currency']) ? $instance['currency'] : esc_html__('SATS', 'text_domain');
 
         $background_color = !empty($instance['background_color']) ? $instance['background_color'] : esc_html__('#E6E6E6', 'text_domain');
@@ -124,16 +122,9 @@ class Tipping_Banner extends WP_Widget
         <div class="tipping_banner">
             <h1>Tipping</h1>
             <div class="row">
-                <label for="<?php echo esc_attr($this->get_field_id('dimension')); ?>"><?php echo esc_html__('Dimension', 'text_domain'); ?></label>
 
-                <select required id="<?php echo esc_attr($this->get_field_id('dimension')); ?>" name="<?php echo esc_attr($this->get_field_name('dimension')); ?>" type="text" value="<?php echo esc_attr($dimension); ?>">
-                    <option disabled value=""><?php echo esc_html__('Select dimension:', 'text_domain'); ?></option>
-                    <?php foreach ($dimensions as $dim) : ?>
-                        <option <?php echo $dimension === $dim ? 'selected' : ''; ?> value="<?php echo $dim; ?>">
-                            <?php echo $dim; ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <p>160x600</p>
+
             </div>
             <div class="row">
                 <div class="col-50">
@@ -141,13 +132,13 @@ class Tipping_Banner extends WP_Widget
                 </div>
                 <div class="col-50">
                     <?php if ($background) : ?>
-                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image" name="lnpw_tipping_button_image_background"><img width="100" height="100" alt="Tipping box background" src="<?php echo $background[0]; ?>" /></a></button>
-                        <button class="widget-tipping-basic-remove_box_image"> <?php echo esc_html__('Remove', 'text_domain'); ?></button>
-                        <input type="hidden" class="widget-tipping-basic-background_id" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
+                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image_high" name="lnpw_tipping_button_image_background"><img width="100" height="100" alt="Tipping box background" src="<?php echo $background[0]; ?>" /></a></button>
+                        <button class="widget-tipping-basic-remove_box_image_high"> <?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <input type="hidden" class="widget-tipping-basic-background_id_high" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
                     <?php else : ?>
-                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image" name="lnpw_tipping_button_image_background"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
-                        <button class="widget-tipping-basic-remove_box_image" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
-                        <input type="hidden" class="widget-tipping-basic-background_id" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
+                        <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image_high" name="lnpw_tipping_button_image_background"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
+                        <button class="widget-tipping-basic-remove_box_image_high" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <input type="hidden" class="widget-tipping-basic-background_id_high" id="<?php echo esc_attr($this->get_field_id('background_id')); ?>" name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text" value="<?php echo esc_attr($background_id); ?>" />
                     <?php endif; ?>
                 </div>
             </div>
@@ -156,7 +147,7 @@ class Tipping_Banner extends WP_Widget
                     <label for="<?php echo esc_attr($this->get_field_id('background_color')); ?>"><?php echo esc_html__('Background color', 'text_domain'); ?></label>
                 </div>
                 <div class="col-50">
-                    <input id="<?php echo esc_attr($this->get_field_id('background_color')); ?>" class="widget-tipping-basic-background_color" name="<?php echo esc_attr($this->get_field_name('background_color')); ?>" type="text" value="<?php echo esc_attr($background_color); ?>" type="text" />
+                    <input id="<?php echo esc_attr($this->get_field_id('background_color')); ?>" class="widget-tipping-basic-background_color_high" name="<?php echo esc_attr($this->get_field_name('background_color')); ?>" type="text" value="<?php echo esc_attr($background_color); ?>" type="text" />
                 </div>
             </div>
             <h3><?php echo esc_html__('Description', 'text_domain'); ?></h3>
@@ -167,13 +158,13 @@ class Tipping_Banner extends WP_Widget
                 </div>
                 <div class="col-50">
                     <?php if ($logo_id) : ?>
-                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo" name="lnpw_tipping_button_image"><img width="100" height="100" alt="Tipping box logo" src="<?php echo $logo[0]; ?>" /></a></button>
-                        <button class="widget-tipping-basic-remove_box_image"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
-                        <input type="hidden" class="widget-tipping-basic-logo_id" id="<?php echo esc_attr($this->get_field_id('logo_id')); ?>" name="<?php echo esc_attr($this->get_field_name('logo_id')); ?>" type="text" value="<?php echo esc_attr($logo_id); ?>" />
+                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo_high" name="lnpw_tipping_button_image"><img width="100" height="100" alt="Tipping box logo" src="<?php echo $logo[0]; ?>" /></a></button>
+                        <button class="widget-tipping-basic-remove_box_image_high"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <input type="hidden" class="widget-tipping-basic-logo_id_high" id="<?php echo esc_attr($this->get_field_id('logo_id')); ?>" name="<?php echo esc_attr($this->get_field_name('logo_id')); ?>" type="text" value="<?php echo esc_attr($logo_id); ?>" />
                     <?php else : ?>
-                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo" name="lnpw_tipping_button_image"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
-                        <button class="widget-tipping-basic-remove_box_image" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
-                        <input type="hidden" class="widget-tipping-basic-logo_id" id="<?php echo esc_attr($this->get_field_id('logo_id')); ?>" name="<?php echo esc_attr($this->get_field_name('logo_id')); ?>" type="text" value="<?php echo esc_attr($logo_id); ?>" />
+                        <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo_high" name="lnpw_tipping_button_image"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
+                        <button class="widget-tipping-basic-remove_box_image_high" style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
+                        <input type="hidden" class="widget-tipping-basic-logo_id_high" id="<?php echo esc_attr($this->get_field_id('logo_id')); ?>" name="<?php echo esc_attr($this->get_field_name('logo_id')); ?>" type="text" value="<?php echo esc_attr($logo_id); ?>" />
                     <?php endif; ?>
                 </div>
             </div>
@@ -184,7 +175,7 @@ class Tipping_Banner extends WP_Widget
                 </div>
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('title_text_color')); ?>"><?php echo esc_html__('Title text color', 'text_domain'); ?></label>
-                    <input id="<?php echo esc_attr($this->get_field_id('title_text_color')); ?>" name="<?php echo esc_attr($this->get_field_name('title_text_color')); ?>" class="widget-tipping-basic-title_text_color" type="text" value="<?php echo esc_attr($title_text_color); ?>" />
+                    <input id="<?php echo esc_attr($this->get_field_id('title_text_color')); ?>" name="<?php echo esc_attr($this->get_field_name('title_text_color')); ?>" class="widget-tipping-basic-title_text_color_high" type="text" value="<?php echo esc_attr($title_text_color); ?>" />
                 </div>
             </div>
             <div class="row">
@@ -194,7 +185,7 @@ class Tipping_Banner extends WP_Widget
                 </div>
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('description_color')); ?>"><?php echo esc_html__('Description text color:', 'text_domain'); ?></label>
-                    <input id="<?php echo esc_attr($this->get_field_id('description_color')); ?>" name="<?php echo esc_attr($this->get_field_name('description_color')); ?>" class="widget-tipping-basic-description-color" type="text" value="<?php echo esc_attr($description_color); ?>" />
+                    <input id="<?php echo esc_attr($this->get_field_id('description_color')); ?>" name="<?php echo esc_attr($this->get_field_name('description_color')); ?>" class="widget-tipping-basic-description-color_high" type="text" value="<?php echo esc_attr($description_color); ?>" />
                 </div>
             </div>
             <div class="row">
@@ -204,7 +195,7 @@ class Tipping_Banner extends WP_Widget
                 </div>
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('tipping_text_color')); ?>"><?php echo esc_html__('Tipping text color', 'text_domain'); ?></label>
-                    <input id="<?php echo esc_attr($this->get_field_id('tipping_text_color')); ?>" name="<?php echo esc_attr($this->get_field_name('tipping_text_color')); ?>" type="text" class="widget-tipping-basic-tipping-color" value="<?php echo esc_attr($tipping_text_color); ?>" />
+                    <input id="<?php echo esc_attr($this->get_field_id('tipping_text_color')); ?>" name="<?php echo esc_attr($this->get_field_name('tipping_text_color')); ?>" type="text" class="widget-tipping-basic-tipping-color_high" value="<?php echo esc_attr($tipping_text_color); ?>" />
                 </div>
             </div>
             <div class="row">
@@ -234,7 +225,7 @@ class Tipping_Banner extends WP_Widget
             <div class="row">
                 <div class="col-50">
                     <label for="<?php echo esc_attr($this->get_field_id('fixed_background')); ?>"><?php echo esc_html__('Background color for fixed amount', 'text_domain'); ?></label>
-                    <input id="<?php echo esc_attr($this->get_field_id('fixed_background')); ?>" name="<?php echo esc_attr($this->get_field_name('fixed_background')); ?>" type="text" class="widget-tipping-basic-fixed_background" value="<?php echo esc_attr($fixed_background); ?>" />
+                    <input id="<?php echo esc_attr($this->get_field_id('fixed_background')); ?>" name="<?php echo esc_attr($this->get_field_name('fixed_background')); ?>" type="text" class="widget-tipping-basic-fixed_background_high" value="<?php echo esc_attr($fixed_background); ?>" />
                 </div>
             </div>
             <div class="row">
@@ -315,7 +306,7 @@ class Tipping_Banner extends WP_Widget
                     <label for="<?php echo esc_attr($this->get_field_id('button_text_color')); ?>"><?php echo esc_html__('Button text color', 'text_domain'); ?></label>
                 </div>
                 <div class="col-50">
-                    <input id="<?php echo esc_attr($this->get_field_id('button_text_color')); ?>" class="widget-tipping-basic-button_text_color" name="<?php echo esc_attr($this->get_field_name('button_text_color')); ?>" type="text" value="<?php echo esc_attr($button_text_color); ?>" />
+                    <input id="<?php echo esc_attr($this->get_field_id('button_text_color')); ?>" class="widget-tipping-basic-button_text_color_high" name="<?php echo esc_attr($this->get_field_name('button_text_color')); ?>" type="text" value="<?php echo esc_attr($button_text_color); ?>" />
 
                 </div>
             </div>
@@ -324,7 +315,7 @@ class Tipping_Banner extends WP_Widget
             <div class="row">
                 <label for="<?php echo esc_attr($this->get_field_id('button_color')); ?>"><?php echo esc_html__('Button color', 'text_domain'); ?></label>
 
-                <input id="<?php echo esc_attr($this->get_field_id('button_color')); ?>" class="widget-tipping-basic-button_color" name="<?php echo esc_attr($this->get_field_name('button_color')); ?>" type="text" value="<?php echo esc_attr($button_color); ?>" />
+                <input id="<?php echo esc_attr($this->get_field_id('button_color')); ?>" class="widget-tipping-basic-button_color_high" name="<?php echo esc_attr($this->get_field_name('button_color')); ?>" type="text" value="<?php echo esc_attr($button_color); ?>" />
 
             </div>
             <h4><?php echo esc_html__('Collect further information', 'text_domain'); ?></h4>
@@ -416,7 +407,6 @@ class Tipping_Banner extends WP_Widget
         $instance = array();
 
         $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
-        $instance['dimension'] = (!empty($new_instance['dimension'])) ? $new_instance['dimension'] : '';
 
         $instance['description'] = !empty($new_instance['description']) ? wp_strip_all_tags($new_instance['description']) : '';
 
@@ -477,5 +467,5 @@ class Tipping_Banner extends WP_Widget
         return $instance;
     }
 }
-$my_widget = new Tipping_Banner();
+$my_widget = new Tipping_Banner_High();
 ?>

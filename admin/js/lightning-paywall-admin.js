@@ -176,7 +176,7 @@
     });
   });*/
   $(document).ready(function (){
-    $('#lnpw_tipping_button_text_color,       #lnpw_tipping_background,              #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color,      #lnpw_tipping_tipping_color,                                        .widget-tipping-basic-background_color,                             .widget-tipping-basic-title_text_color,                             .widget-tipping-basic-button_text_color,                            .widget-tipping-basic-button_color,                                 .widget-tipping-basic-description-color,                            .widget-tipping-basic-title_text_color,                             .widget-tipping-basic-tipping-color,                                .widget-tipping-basic-fixed_background').iris({
+    $('#lnpw_tipping_button_text_color,       #lnpw_tipping_background,              #lnpw_tipping_button_color, #lnpw_tipping_title_color, #lnpw_tipping_description_color,      #lnpw_tipping_tipping_color_high,                                   .widget-tipping-basic-background_color_high,.widget-tipping-basic-title_text_color_high,                             .widget-tipping-basic-button_text_color_high,                            .widget-tipping-basic-button_color_high,                                 .widget-tipping-basic-description-color_high,                            .widget-tipping-basic-title_text_color_high,                             .widget-tipping-basic-tipping-color_high,                            .widget-tipping-basic-fixed_background_high, .widget-tipping-basic-background_color_wide,                             .widget-tipping-basic-title_text_color_wide,                             .widget-tipping-basic-button_text_color_wide,                            .widget-tipping-basic-button_color_wide,                                 .widget-tipping-basic-description-color_wide,                            .widget-tipping-basic-title_text_color_wide,                             .widget-tipping-basic-tipping-color_wide,                            .widget-tipping-basic-fixed_background_wide').iris({
       defaultColor: true,
       
       change: function(event, ui){},
@@ -201,6 +201,20 @@ $(document).ready(function($){
 
             imagePreview($('.widget-tipping-basic-upload_box_logo'),$('.widget-tipping-basic-logo_id'));
             imageRemove($('.widget-tipping-basic-remove_box_logo'));
+
+            
+
+            imagePreview($('.widget-tipping-basic-upload_box_image_high'), $('.widget-tipping-basic-background_id_high'));
+            imageRemove($('.widget-tipping-basic-remove_box_image_high'));
+
+            imagePreview($('.widget-tipping-basic-upload_box_logo_high'),$('.widget-tipping-basic-logo_id_high'));
+            imageRemove($('.widget-tipping-basic-remove_box_logo_high'));
+
+            imagePreview($('.widget-tipping-basic-upload_box_image_wide'), $('.widget-tipping-basic-background_id_wide'));
+            imageRemove($('.widget-tipping-basic-remove_box_image_wide'));
+
+            imagePreview($('.widget-tipping-basic-upload_box_logo_wide'),$('.widget-tipping-basic-logo_id_wide'));
+            imageRemove($('.widget-tipping-basic-remove_box_logo_wide'));
            
 });
 $(document).ready(function () {

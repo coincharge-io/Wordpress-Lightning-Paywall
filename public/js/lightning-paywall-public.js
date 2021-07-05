@@ -103,7 +103,7 @@
     $("#skyscraper_tipping_form").submit(function (e) {
       e.preventDefault();
       if (lnpw_invoice_id) {
-        lnpwShowDonationInvoice(lnpw_invoice_id);
+        lnpwShowDonationBannerInvoice(lnpw_invoice_id);
         return;
       }
         $.ajax({
@@ -124,7 +124,7 @@
             if (response.success) {
               lnpw_invoice_id = response.data.invoice_id;
               donor = response.data.donor;
-              lnpwShowDonationBannerInvoice(lnpw_invoice_id, donor);
+              lnpwShowDonationBannerInvoice(lnpw_invoice_id, donor, $("#lnpw_skyscraper_redirect_link"));
             } else {
                console.error(response);
             }
@@ -134,7 +134,77 @@
         }
       })
     })
-  })
+
+    $("#lnpw_widget_skyscraper_tipping_form_high").submit(function (e) {
+      e.preventDefault();
+      if (lnpw_invoice_id) {
+        lnpwShowDonationBannerInvoice(lnpw_invoice_id);
+        return;
+      }
+        $.ajax({
+          url: "/wp-admin/admin-ajax.php",
+          method: "POST",
+          data: {
+            action: "lnpw_tipping",
+            currency: $("#lnpw_widget_lnpw_skyscraper_tipping_currency_high").val(),
+            amount: $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high").val(),
+            predefined_amount: $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]:checked").val(),
+            name: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Full_name_high").val(),
+            email: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Email_high").val(),
+            address: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Address_high").val(),
+            phone: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Phone_high").val(),
+            message: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Message_high").val(),
+          },
+          success: function (response) {
+            if (response.success) {
+              lnpw_invoice_id = response.data.invoice_id;
+              donor = response.data.donor;
+              lnpwShowDonationBannerInvoice(lnpw_invoice_id, donor, $("#lnpw_widget_lnpw_skyscraper_redirect_link_high"));
+            } else {
+               console.error(response);
+            }
+          },
+          error: function (error){
+            console.log(error)
+        }
+      })
+    })
+
+    $("#lnpw_widget_skyscraper_tipping_form_wide").submit(function (e) {
+      e.preventDefault();
+      if (lnpw_invoice_id) {
+        lnpwShowDonationInvoice(lnpw_invoice_id);
+        return;
+      }
+        $.ajax({
+          url: "/wp-admin/admin-ajax.php",
+          method: "POST",
+          data: {
+            action: "lnpw_tipping",
+            currency: $("#lnpw_widget_lnpw_skyscraper_tipping_currency_wide").val(),
+            amount: $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").val(),
+            predefined_amount: $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]:checked").val(),
+            name: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Full_name_wide").val(),
+            email: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Email_wide").val(),
+            address: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Address_wide").val(),
+            phone: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Phone_wide").val(),
+            message: $("#lnpw_widget_lnpw_skyscraper_tipping_donor_Message_wide").val(),
+          },
+          success: function (response) {
+            if (response.success) {
+              lnpw_invoice_id = response.data.invoice_id;
+              donor = response.data.donor;
+              lnpwShowDonationBannerInvoice(lnpw_invoice_id, donor, $("#lnpw_widget_lnpw_skyscraper_redirect_link_wide"));
+            } else {
+               console.error(response);
+            }
+          },
+          error: function (error){
+            console.log(error)
+        }
+      })
+    })
+})
   function lnpwShowDonationBoxInvoice(invoice_id, donor) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
@@ -145,11 +215,13 @@
     btcpay.showInvoice(invoice_id);
   }
 
-  function lnpwShowDonationBannerInvoice(invoice_id, donor) {
+  function lnpwShowDonationBannerInvoice(invoice_id, donor, redirect) {
     btcpay.onModalReceiveMessage(function (event) {
       if (event.data.status === "complete") {
         notifyAdmin(donor)
-        ($("#lnpw_skyscraper_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
+        /*($("#lnpw_skyscraper_redirect_link").is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
+          }});*/
+          (redirect.is(":empty")) ? location.reload(true) : location.replace($("#lnpw_redirect_link").val());
           }});
 
     btcpay.showInvoice(invoice_id);
@@ -372,7 +444,7 @@ $(document).ready(function(){
   
   })
 $(document).ready(function(){ 
-    $("input[name=lnpw_widget_ lnpw_skyscraper_tipping_default_amount_wide]").change(function () {
+    $("input[name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]").change(function () {
       $("input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]").attr('required', true);
       $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").removeAttr('required');
       $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide").val('');
@@ -417,7 +489,8 @@ $(document).ready(function(){
   var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
   
   
-  $(".lnpw_widget_skyscraper-next-form.high").click(function(){
+  $(".lnpw_widget.skyscraper-next-form.high").click(function(){
+    
     if (validationField[0].checkValidity()){
       previous_form = $(this).parent().parent();
       next_form = $(this).parent().parent().next();
@@ -427,7 +500,7 @@ $(document).ready(function(){
       validationField[0].reportValidity()
     }
   });  
-  $(".lnpw_widget_skyscraper-previous-form.high").click(function(){
+  $(".lnpw_widget.skyscraper-previous-form.high").click(function(){
     previous_form = $(this).parent().parent();
     next_form = $(this).parent().parent().prev();
     next_form.show();
@@ -442,8 +515,7 @@ $(document).ready(function(){
   var fixedAmount = $('.lnpw_widget.lnpw_skyscraper_tipping_default_amount_wide');
   var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);
   
-  
-  $(".lnpw_widget_skyscraper-next-form.wide").click(function(){
+  $(".lnpw_widget.skyscraper-next-form.wide").click(function(){
     if (validationField[0].checkValidity()){
       previous_form = $(this).parent().parent();
       next_form = $(this).parent().parent().next();
@@ -453,7 +525,7 @@ $(document).ready(function(){
       validationField[0].reportValidity()
     }
   });  
-  $(".lnpw_widget_skyscraper-previous-form.wide").click(function(){
+  $(".lnpw_widget.skyscraper-previous-form.wide").click(function(){
     previous_form = $(this).parent().parent();
     next_form = $(this).parent().parent().prev();
     next_form.show();
@@ -461,3 +533,4 @@ $(document).ready(function(){
   }); 
 });
 })(jQuery);
+
