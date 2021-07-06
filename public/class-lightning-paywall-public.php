@@ -193,9 +193,13 @@ class Lightning_Paywall_Public
 		$btc_format = get_post_meta(get_the_ID(), 'lnpw_btc_format', true) ?: get_option('lnpw_default_btc_format');
 
 		if ($currency === 'SATS' && $btc_format === 'BTC') {
+			
 			$price = $price / 100000000;
+			
 			$price = sprintf('%.8f', $price);
+			
 			$price = rtrim($price, '0');
+			
 			$currency = 'BTC';
 		}
 
@@ -238,13 +242,20 @@ class Lightning_Paywall_Public
 		if ($currency_scope === 'SATS') {
 
 			if (get_post_meta($post_id, 'lnpw_price', true)) {
+			
 				$price = get_post_meta($post_id, 'lnpw_price', true);
+			
 			} else {
+			
 				$price = get_option('lnpw_default_price');
 			}
+			
 			$value = $price / 100000000;
+			
 			$value = sprintf('%.8f', $value);
+			
 			$value = rtrim($value, '0');
+			
 			return $value;
 		}
 
@@ -865,7 +876,7 @@ class Lightning_Paywall_Public
 		return false;
 	}
 
-	static public function display_is_enabled($arr)
+	public static function display_is_enabled($arr)
 	{
 
 		if (!is_array($arr)) {
@@ -1090,7 +1101,7 @@ class Lightning_Paywall_Public
 						</div>
 						<div id="button">
 							<input type="button" name="previous" class="<?php echo "previous-form{$suffix}"; ?>" value="Previous" />
-							<button type="submit" id="lnpw_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+							<button type="submit" id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
 						</div>
 					</fieldset>
 				<?php endif; ?>
@@ -1124,7 +1135,7 @@ class Lightning_Paywall_Public
 			'button_color'	=> '#FE642E',
 			'logo_id'		=> '',
 			'background_id'	=> '',
-			'free_input'	=> 'false',
+			'free_input'	=> 'true',
 			'fixed_background'	=> '',
 			'value1_enabled' => 'false',
 			'value1_amount' => '',
@@ -1232,7 +1243,8 @@ class Lightning_Paywall_Public
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
 			}
 
-			#lnpw_widget_lnpw_skyscraper_tipping__button_wide .skyscraper-next-form {
+			#lnpw_widget_lnpw_skyscraper_tipping__button_wide,
+			.skyscraper-next-form {
 				color: <?php echo $atts['button_text_color']; ?>;
 				background: <?php echo $atts['button_color']; ?>;
 			}
@@ -1258,13 +1270,13 @@ class Lightning_Paywall_Public
 			.lnpw_widget.lnpw_skyscraper_amount_value_2.wide,
 			.lnpw_widget.lnpw_skyscraper_amount_value_3.wide {
 				background: <?php echo $atts['fixed_background']; ?>;
-
 			}
 
 
 
 
-			<?php elseif ($version === 'high') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.high {
+			<?php elseif ($version === 'high') : ?>
+			.lnpw_widget.lnpw_skyscraper_tipping_container.high {
 				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
 				background-image: url(<?php echo ($background ? $background[0] : ''); ?>);
 				width: <?php echo $dimension[0] . 'px !important'; ?>;
@@ -1308,8 +1320,6 @@ class Lightning_Paywall_Public
 			}
 
 			#lnpw_skyscraper_tipping__button,
-			#lnpw_widget_lnpw_skyscraper_tipping__button_high,
-			#lnpw_widget_lnpw_skyscraper_tipping__button_wide,
 			.skyscraper-next-form {
 				color: <?php echo $atts['button_text_color']; ?>;
 				background: <?php echo $atts['button_color']; ?>;
@@ -1393,7 +1403,7 @@ class Lightning_Paywall_Public
 							<?php foreach ($fixed_amount as $key => $value) : ?>
 
 								<?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
-									<div class="<?php echo $is_widget . ' ' . 'lnpw_skyscraper_amount_' . $key; ?>">
+									<div class="<?php echo $is_widget . ' ' . 'lnpw_skyscraper_amount_' . $key .' '. $is_wide; ?>">
 										<div>
 											<input type="radio" class="<?php echo "{$is_widget} lnpw_skyscraper_tipping_default_amount {$is_wide}"; ?>" id="<?php echo $is_widget_id . $key . '_' . $is_wide; ?>" name="<?php echo "{$is_widget}_lnpw_skyscraper_tipping_default_amount_{$is_wide}"; ?>" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
 											<?php if (!empty($fixed_amount[$key]['amount'])) : ?>

@@ -475,3 +475,21 @@ Tipping box
   width: 160px !important;
 	height: 600px !important;
 }
+
+
+@keyframes tipping-border {
+  to { transform: rotate(360deg); }
+} 
+
+
+.tipping-border{
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #ffa500 #1d5aa3 #ffa500 #1d5aa3;
+  animation: spinner 1s linear infinite;
+}
