@@ -477,10 +477,11 @@ Tipping box
 }
 
 
-@keyframes tipping-border {
-  to { transform: rotate(360deg); }
-} 
 
+/**
+  Tipping button spinner
+
+*/
 
 .tipping-border{
   content: "";

@@ -107,7 +107,6 @@
 
     $("#tipping_form_box_widget").submit(function (e) {
       e.preventDefault();
-      $("#tipping_form_box").submit(function (e) {
       var text = $('#lnpw_tipping__button_lnpw_widget').text();
       $('#lnpw_tipping__button_lnpw_widget').html(
         `<span class="tipping-border" role="status" aria-hidden="true"></span>`
@@ -618,5 +617,4 @@ $(document).ready(function(){
     previous_form.hide();
   }); 
 });
-  })
 })(jQuery);

@@ -966,12 +966,13 @@ class Lightning_Paywall_Public
 		$is_widget = $atts['widget'] === 'true' ? 'lnpw_widget' : '';
 		$form = $is_widget === 'lnpw_widget' ? 'tipping_form_box_widget' : 'tipping_form_box';
 		$suffix = $is_widget === 'lnpw_widget' ? '_lnpw_widget' : '';
-		$version = $is_widget === 'true' ? 'widget' : 'basic';
-
+		$version = $atts['widget'] === 'true' ? 'widget' : 'basic';
+		
 		ob_start();
 	?>
 		<style>
-			<?php if ($version === 'widget') : ?>.lnpw_tipping_box_container.lnpw_widget {
+			<?php if ($version === 'widget') : ?>
+			.lnpw_tipping_box_container.lnpw_widget {
 				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
 				width: <?php echo $dimension[0] . 'px !important'; ?>;
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
@@ -980,7 +981,7 @@ class Lightning_Paywall_Public
 			}
 
 
-			#lnpw_tipping__button_widget {
+			#lnpw_tipping__button_lnpw_widget {
 				color: <?php echo $atts['button_text_color']; ?>;
 				background: <?php echo $atts['button_color']; ?>;
 			}
@@ -1001,7 +1002,8 @@ class Lightning_Paywall_Public
 				color: <?php echo $atts['tipping_text_color']; ?>
 			}
 
-			<?php else : ?>.lnpw_tipping_box_container {
+			<?php else : ?>
+			.lnpw_tipping_box_container {
 				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : ''); ?>;
 				width: <?php echo $dimension[0] . 'px !important'; ?>;
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
@@ -1035,7 +1037,7 @@ class Lightning_Paywall_Public
 		</style>
 
 
-		<div class="<?php echo "lnpw_tipping_box_container {$is_widget}"; ?>">
+		<div class="<?php echo trim("lnpw_tipping_box_container {$is_widget}"); ?>">
 
 			<form method="POST" action="" id="<?php echo $form; ?>">
 				<fieldset>
@@ -1283,7 +1285,8 @@ class Lightning_Paywall_Public
 				height: <?php echo $dimension[1] . 'px !important'; ?>;
 			}
 
-			#lnpw_widget_lnpw_skyscraper_tipping__button_high .skyscraper-next-form.high {
+			#lnpw_widget_lnpw_skyscraper_tipping__button_high,
+			 .skyscraper-next-form.high {
 				color: <?php echo $atts['button_text_color']; ?>;
 				background: <?php echo $atts['button_color']; ?>;
 			}
