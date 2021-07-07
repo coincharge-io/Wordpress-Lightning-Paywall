@@ -156,83 +156,147 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_view', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 		register_setting('lnpw_general_settings', 'lnpw_btcpay_auth_key_create', array('type' => 'string', 'sanitize_callback' => array($this, 'sanitize_btcpay_auth_key')));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x300', 'sanitize_callback' => array($this, 'sanitize_text')));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => get_site_url()));
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x300', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => get_site_url()));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_collect', array('type' => 'array', 'default' => array(
-			'name' => array(
-				'collect'	=> 'false',
-				'mandatory'	=> 'false'
-			),
-			'email' => array(
-				'collect'	=> 'false',
-				'mandatory'	=> 'false'
-			),
-			'address' => array(
-				'collect'	=> 'false',
-				'mandatory'	=> 'false'
-			),
-			'phone' => array(
-				'collect'	=> 'false',
-				'mandatory'	=> 'false'
-			),
-			'message' => array(
-				'collect'	=> 'false',
-				'mandatory'	=> 'false'
-			),
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_collect', array('type' => 'array', 'default' => array(
+		'name' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'email' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'address' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'phone' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'message' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
 
 		), 'sanitize_callback' => array($this, 'validate_collect_info')));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_fixed_amount', array(
-			'type' => 'array', 'default' => array(
-				'value1' => array(
-					'enabled' 	=> 'false',
-					'currency' => 'SATS',
-					'amount'	=> 1000,
-					'icon'		=> 'fas fa-coffee'
-				),
-				'value2' => array(
-					'enabled' 	=> 'false',
-					'currency' => 'SATS',
-					'amount'	=> 2000,
-					'icon'		=> 'fas fa-beer'
-				),
-				'value3' => array(
-					'enabled' 	=> 'false',
-					'currency' => 'SATS',
-					'amount'	=> 3000,
-					'icon'		=> 'fas fa-cocktail'
-				),
-			), 'sanitize_callback' => array($this, 'validate_predefined_values')
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_fixed_amount', array(
+		'type' => 'array', 'default' => array(
+		'value1' => array(
+		'enabled' => 'false',
+		'currency' => 'SATS',
+		'amount' => 1000,
+		'icon' => 'fas fa-coffee'
+		),
+		'value2' => array(
+		'enabled' => 'false',
+		'currency' => 'SATS',
+		'amount' => 2000,
+		'icon' => 'fas fa-beer'
+		),
+		'value3' => array(
+		'enabled' => 'false',
+		'currency' => 'SATS',
+		'amount' => 3000,
+		'icon' => 'fas fa-cocktail'
+		),
+		), 'sanitize_callback' => array($this, 'validate_predefined_values')
 		));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_text', array(
-			'type'	=> 'array', 'default' => array(
-				'title'			=> 'Support my work',
-				'description'	=> '',
-				'info'			=> 'Enter Tipping Amount',
-				'button'		=> 'Tipping now'
-			), 'sanitize_callback' => array($this, 'validate_textarea')
-		));
-
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_color', array(
-			'type' => 'array', 'default' => array(
-				'button_text'		=> '#FFFFFF',
-				'background'		=> '#E6E6E6',
-				'button'			=> '#FE642E',
-				'title'				=> '#000000',
-				'description'		=> '#000000',
-				'tipping'			=> '#000000',
-			), 'sanitize_callback'	=> array($this, 'validate_colors')
-		));
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_image', array(
-			'type' => 'array', 'default' => array(
-				'logo'			=> '',
-				'background'	=> '',
-			), 'sanitize_callback'	=> array($this, 'validate_images')
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_text', array(
+		'type' => 'array', 'default' => array(
+		'title' => 'Support my work',
+		'description' => '',
+		'info' => 'Enter Tipping Amount',
+		'button' => 'Tipping now'
+		), 'sanitize_callback' => array($this, 'validate_textarea')
 		));
 
-		register_setting('lnpw_tipping_settings', 'lnpw_tipping_enter_amount', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_color', array(
+		'type' => 'array', 'default' => array(
+		'button_text' => '#FFFFFF',
+		'background' => '#E6E6E6',
+		'button' => '#FE642E',
+		'title' => '#000000',
+		'description' => '#000000',
+		'tipping' => '#000000',
+		), 'sanitize_callback' => array($this, 'validate_colors')
+		));
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_image', array(
+		'type' => 'array', 'default' => array(
+		'logo' => '',
+		'background' => '',
+		), 'sanitize_callback' => array($this, 'validate_images')
+		));
+
+		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_enter_amount', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
+
+
+
+
+
+
+
+
+
+		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_dimension', array('type' => 'string', 'default' => '250x300', 'sanitize_callback' => array($this, 'sanitize_text')));
+		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_redirect', array('type' => 'string', 'default' => get_site_url()));
+
+		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_collect', array('type' => 'array', 'default' => array(
+		'name' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'email' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'address' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'phone' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+		'message' => array(
+		'collect' => 'false',
+		'mandatory' => 'false'
+		),
+
+		), 'sanitize_callback' => array($this, 'validate_collect_info')));
+
+
+		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_text', array(
+		'type' => 'array', 'default' => array(
+		'title' => 'Support my work',
+		'description' => '',
+		'info' => 'Enter Tipping Amount',
+		'button' => 'Tipping now'
+		), 'sanitize_callback' => array($this, 'validate_textarea')
+		));
+
+		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_currency', array('type' => 'string', 'default' => 'SATS'));
+		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_color', array(
+		'type' => 'array', 'default' => array(
+		'button_text' => '#FFFFFF',
+		'background' => '#E6E6E6',
+		'button' => '#FE642E',
+		'title' => '#000000',
+		'description' => '#000000',
+		'tipping' => '#000000',
+		), 'sanitize_callback' => array($this, 'validate_colors')
+		));
+		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_image', array(
+		'type' => 'array', 'default' => array(
+		'logo' => '',
+		'background' => '',
+		), 'sanitize_callback' => array($this, 'validate_images')
+		));
+
 	}
 	public function validate_images($values)
 	{
