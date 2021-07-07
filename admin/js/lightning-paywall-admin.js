@@ -178,7 +178,7 @@
   
   
   $(document).ready(function (){
-    $(".widget-tipping-basic-background_color,.widget-tipping-basic-title_text_color,.widget-tipping-basic-button_text_color,.widget-tipping-basic-button-color,.widget-tipping-basic-description-color,.widget-tipping-basic-title_text_color,.widget-tipping-basic-tipping-color,.widget-tipping-basic-fixed_background,.widget-tipping-basic-background_color_high,.widget-tipping-basic-title_text_color_high,.widget-tipping-basic-button_text_color_high,.widget-tipping-basic-button_color_high,.widget-tipping-basic-description-color_high,.widget-tipping-basic-title_text_color_high,.widget-tipping-basic-tipping-color_high,.widget-tipping-basic-fixed_background_high,.widget-tipping-basic-background_color_wide,.widget-tipping-basic-title_text_color_wide,.widget-tipping-basic-button_text_color_wide,.widget-tipping-basic-button_color_wide,.widget-tipping-basic-description-color_wide,.widget-tipping-basic-title_text_color_wide,.widget-tipping-basic-tipping-color_wide,.widget-tipping-basic-fixed_background_wide").iris({
+    $(".widget-tipping-basic-background_color,.widget-tipping-basic-title_text_color,.widget-tipping-basic-button_text_color,.widget-tipping-basic-button-color,.widget-tipping-basic-description-color,.widget-tipping-basic-title_text_color,.widget-tipping-basic-tipping-color,.widget-tipping-basic-fixed_background,.widget-tipping-basic-background_color_high,.widget-tipping-basic-title_text_color_high,.widget-tipping-basic-button_text_color_high,.widget-tipping-basic-button_color_high,.widget-tipping-basic-description-color_high,.widget-tipping-basic-title_text_color_high,.widget-tipping-basic-tipping-color_high,.widget-tipping-basic-fixed_background_high,.widget-tipping-basic-background_color_wide,.widget-tipping-basic-title_text_color_wide,.widget-tipping-basic-button_text_color_wide,.widget-tipping-basic-button_color_wide,.widget-tipping-basic-description-color_wide,.widget-tipping-basic-title_text_color_wide,.widget-tipping-basic-tipping-color_wide,.widget-tipping-basic-fixed_background_wide,.lnpw_tipping_box_title_color,.lnpw_tipping_box_description_color,.lnpw_tipping_box_tipping_box_color,.lnpw_tipping_box_button_text_color,.lnpw_tipping_box_button_color,.lnpw_tipping_box_background,.lnpw_tipping_banner_title_color,.lnpw_tipping_banner_description_color,.lnpw_tipping_banner_tipping_box_color,.lnpw_tipping_banner_button_text_color,.lnpw_tipping_banner_button_color,.lnpw_tipping_banner_background").iris({
       defaultColor: true,
       
       change: function(event, ui){},
@@ -192,11 +192,11 @@
   });
 $(document).ready(function($){
 
-            imagePreview($('#lnpw_tipping_button_image'), $('#lnpw_tipping_image'));
-            imageRemove($('.lnpw_tipping_button_remove'));
+            imagePreview($('#lnpw_tipping_banner_button_image'), $('#lnpw_tipping_banner_image'));
+            imageRemove($('.lnpw_tipping_banner_button_remove'));
 
-            imagePreview($('#lnpw_tipping_button_image_background'), $('#lnpw_tipping_image_background'));
-            imageRemove($('.lnpw_tipping_button_remove_background'));
+            imagePreview($('#lnpw_tipping_banner_button_image_background'), $('#lnpw_tipping_banner_image_background'));
+            imageRemove($('.lnpw_tipping_banner_button_remove_background'));
 
             imagePreview($('.widget-tipping-basic-upload_box_image'), $('.widget-tipping-basic-background_id'));
             imageRemove($('.widget-tipping-basic-remove_box_image'));
@@ -217,6 +217,12 @@ $(document).ready(function($){
 
             imagePreview($('.widget-tipping-basic-upload_box_logo_wide'),$('.widget-tipping-basic-logo_id_wide'));
             imageRemove($('.widget-tipping-basic-remove_box_logo_wide'));
+
+            imagePreview($('#lnpw_tipping_box_button_image'), $('#lnpw_tipping_box_image'));
+            imageRemove($('.lnpw_tipping_box_button_remove'));
+
+            imagePreview($('#lnpw_tipping_box_button_image_background'), $('#lnpw_tipping_box_image_background'));
+            imageRemove($('.lnpw_tipping_box_button_remove_background'));
            
 });
 $(document).ready(function () {
