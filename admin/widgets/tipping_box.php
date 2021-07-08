@@ -17,7 +17,7 @@ class Tipping_Box extends WP_Widget
     public function widget($args, $instance)
     {
 
-        echo do_shortcode("[lnpw_tipping_basic dimension='{$instance['dimension']}' title = '{$instance['title']}' description	= '{$instance['description']}'
+        echo do_shortcode("[lnpw_tipping_box dimension='{$instance['dimension']}' title = '{$instance['title']}' description	= '{$instance['description']}'
         currency = '{$instance['currency']}'
         background_color = '{$instance['background_color']}'
         title_text_color = '{$instance['title_text_color']}'

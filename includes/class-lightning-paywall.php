@@ -194,7 +194,8 @@ class Lightning_Paywall
 		$this->loader->add_shortcode('lnpw_start_video', $plugin_public, 'render_shortcode_lnpw_start_video');
 		$this->loader->add_shortcode('lnpw_file', $plugin_public, 'render_shortcode_lnpw_file');
 		$this->loader->add_shortcode('lnpw_tipping', $plugin_public, 'render_shortcode_tipping');
-		$this->loader->add_shortcode('lnpw_tipping_basic', $plugin_public, 'render_shortcode_basic_tipping');
+		$this->loader->add_shortcode('lnpw_tipping_box', $plugin_public, 'render_shortcode_box_tipping');
+		$this->loader->add_shortcode('lnpw_tipping_page', $plugin_public, 'render_shortcode_page_tipping');
 		$this->loader->add_shortcode('lnpw_tipping_skyscraper', $plugin_public, 'render_shortcode_skyscraper_tipping');
 		$this->loader->add_shortcode('lnpw_protected_file', $plugin_public, 'render_shortcode_protected_file');
 		$this->loader->add_shortcode('lnpw_end_video', $plugin_public, 'render_shortcode_lnpw_end_content');

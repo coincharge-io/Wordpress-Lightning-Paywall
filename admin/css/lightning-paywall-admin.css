@@ -125,7 +125,8 @@ td.Settled {
   width: 100px;
 }
 
-.tipping_settings textarea {
+.tipping_box_settings textarea,
+.tipping_banner_settings textarea {
   width: 250px;
   height: 100px;
   padding: 6px;
@@ -134,7 +135,10 @@ td.Settled {
   box-sizing: border-box;
   resize: vertical;
 }
-.tipping_settings label, .tipping_settings textarea{
+.tipping_box_settings label, 
+.tipping_box_settings textarea,
+.tipping_banner_settings label, 
+.tipping_banner_settings textarea{
   display: inline-block;
   vertical-align: middle;
 }
