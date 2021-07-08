@@ -514,14 +514,15 @@ Tipping page
 }
 
 .lnpw_page_tipping_container fieldset {
-  display: flex;
-  flex-direction: column;
   border: 0;
   min-width: 0;
 }
 
 .lnpw_page_amount {
   display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: center;
 }
 
 #lnpw_page_converted_amount {
@@ -562,20 +563,21 @@ Tipping page
   border: none;
   background: transparent;
 }
-
+.lnpw_page_header_container h6 {
+  font-size: 1.2em;
+}
 .lnpw_page_tipping_amount,
 .lnpw_page_tipping_converted_values,
-.lnpw_page_header_container h6,
-.lnpw_page_info_container p {
+.lnpw_page_header_container h6 {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-align: center;
 }
-.lnpw_page_tipping_container #page_tipping_form > fieldset > h6 {
+#page_tipping_form > fieldset > h6 {
   text-align: left;
-  margin-left: 5px;
+  margin: 1em 0 1em 5px;
 }
 #page_tipping_form fieldset:not(:first-of-type) {
   display: none;
@@ -583,14 +585,14 @@ Tipping page
 
 .lnpw_page_donor_information {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-/*.lnpw_page_donor_information label {
+.lnpw_page_donor_information label {
   display: inline-block;
   width: 100px;
   padding-left: 0.5em;
-}*/
+}
 
 .lnpw_page_donor_information input[type="text"],
 .lnpw_page_donor_information input[type="email"],
@@ -611,52 +613,36 @@ Tipping page
   padding: 0;
 }
 
-.lnpw_page_tipping_free_input {
-  width: 10em;
-}
-
 .lnpw_page_header_container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
   padding: 1em;
+  background-color: lavender;
 }
 .lnpw_page_header_container h6 {
   padding-top: 0.5em;
-}
-.lnpw_page_info_container {
-  text-align: center;
-}
-
-.lnpw_page_tipping_container div,
-.lnpw_page_tipping_container img,
-.lnpw_page_tipping_container pre,
-.lnpw_page_tipping_container figure {
-  max-width: 100%;
-  overflow: hidden;
 }
 
 .lnpw_page_tipping_converted_values {
   flex-direction: row;
 }
-.lnpw_page_info_container > p {
-  font-size: 0.8em;
+
+.lnpw_page_amount > div {
+  display: flex;
+  align-items: center;
 }
 
-.lnpw_page_banner {
-  line-height: 1em;
-}
-
-.lnpw_page_amount.high > div {
-  border-radius: 1em;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
-}
-
-.lnpw_page_amount_value_1.high,
-.lnpw_page_amount_value_2.high,
-.lnpw_page_amount_value_3.high {
+.lnpw_page_amount_value_1,
+.lnpw_page_amount_value_2,
+.lnpw_page_amount_value_3 {
   display: inline-flex;
+  width: 50%;
+  height: 2em;
+  border-radius: 2em;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
 }
 
 .lnpw_page_amount_value_1.high i,
@@ -665,33 +651,7 @@ Tipping page
   margin-right: 10px;
 }
 
-.lnpw_page_tipping_container.high fieldset {
-  padding: 0;
-}
-
-.lnpw_page_tipping_container.wide fieldset {
-  padding: 0 1em;
-}
-
-.lnpw_page_amount.high {
-  flex-direction: column;
-}
-
-.lnpw_page_amount.wide {
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.lnpw_page_amount.high > div {
-  margin: 5px auto;
-  width: 80%;
-}
-
-.lnpw_page_amount.wide > div {
-  margin: 5px;
-}
-
-.lnpw_page_tipping_converted_values.high {
+.lnpw_page_tipping_converted_values {
   display: flex;
   margin-bottom: 2em;
 }
@@ -699,17 +659,11 @@ Tipping page
 .lnpw_page_tipping_free_input {
   display: flex;
   flex-direction: row;
-}
-
-.lnpw_page_tipping_free_input.high {
-  justify-content: center;
   margin: 1em 0;
 }
 
-#lnpw_page_button_high button,
-#lnpw_page_button_high input[type="button"],
-#widget_lnpw_page_button_high button,
-#widget_lnpw_page_button_high input[type="button"] {
+#lnpw_page_button button,
+#lnpw_page_button input[type="button"] {
   font-size: 10px;
 }
 

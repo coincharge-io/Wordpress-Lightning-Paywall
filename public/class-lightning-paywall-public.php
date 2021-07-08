@@ -1622,7 +1622,7 @@ class Lightning_Paywall_Public
 			'logo_id'		=> '',
 			'background_id'	=> '',
 			'free_input'	=> 'true',
-			'fixed_background'	=> '',
+			'fixed_background'	=> '#ffa500',
 			'value1_enabled' => 'false',
 			'value1_amount' => '',
 			'value1_currency' => '',
@@ -1649,32 +1649,36 @@ class Lightning_Paywall_Public
 
 		$dimension = explode('x', $atts['dimension']);
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-		//$logo = wp_get_attachment_image_src($atts['logo_id']);
 		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
 
 		$background = wp_get_attachment_image_src($atts['background_id']);
 		$collect = array(
 			array(
-				'label' => 'Full_name',
+				'id'    => 'name',
+				'label' => 'Full name',
 				'display' => $atts['display_name'],
 				'mandatory' => $atts['mandatory_name']
 			),
 			array(
+				'id'    => 'email',
 				'label' => 'Email',
 				'display' => $atts['display_email'],
 				'mandatory' => $atts['mandatory_email']
 			),
 			array(
+				'id'    => 'address',
 				'label' => 'Address',
 				'display' => $atts['display_address'],
 				'mandatory' => $atts['mandatory_address']
 			),
 			array(
+				'id'    => 'phone',
 				'label' => 'Phone',
 				'display' => $atts['display_phone'],
 				'mandatory' => $atts['mandatory_phone']
 			),
 			array(
+				'id'    => 'message',
 				'label' => 'Message',
 				'display' => $atts['display_message'],
 				'mandatory' => $atts['mandatory_message']
@@ -1682,8 +1686,6 @@ class Lightning_Paywall_Public
 
 		);
 		$collect_data = $this->display_is_enabled($collect);
-		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-		//$predefined_enabled = get_option('lnpw_tipping_enter_amount');
 
 		$fixed_amount = array(
 			'value_1' => array(
@@ -1761,7 +1763,7 @@ class Lightning_Paywall_Public
                 <div class="lnpw_page_header_container">
                     <?php if ($logo) : ?>
                     <div class="lnpw_logo_wrap">
-                        <img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+                        <img width="90" height="90" alt="Tipping page logo" src=<?php echo esc_url($logo); ?> />
                     </div>
                     <?php endif; ?>
                     <?php if (!empty($atts['title'])) : ?>
@@ -1778,10 +1780,9 @@ class Lightning_Paywall_Public
                 <?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
                 <div class="<?php echo 'lnpw_page_amount_' . $key; ?>">
                     <div>
-                        <input type="radio" class="lnpw_page_tipping_default_amount" id="<?php echo "{$key}_page" ?>"
-                            name="lnpw_page_tipping_default_amount" ; ?>"
-                        <?php echo $key == $index ? 'required' : ''; ?>
-                        value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
+                        <input type="radio" class="lnpw_page_tipping_default_amount" id="<?php echo "{$key}_page"; ?>"
+                            name="lnpw_page_tipping_default_amount" <?php echo $key == $index ? 'required' : ''; ?>
+                            value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
                         <?php if (!empty($fixed_amount[$key]['amount'])) : ?>
                         <i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
                         <?php endif; ?>
@@ -1837,10 +1838,10 @@ class Lightning_Paywall_Public
             <div class="lnpw_page_donor_information">
                 <?php foreach ($collect as $key => $value) : ?>
                 <?php if ($collect[$key]['display'] == 'true') : ?>
-                <div class="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['label']}_wrap"; ?>">
-                    <label for="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['label']}"; ?>">
+                <div class="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}_wrap"; ?>">
+                    <label for="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}"; ?>">
                         <?php echo $collect[$key]['label']; ?></label>
-                    <input type="text" id="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['label']}"; ?>"
+                    <input type="text" id="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}"; ?>"
                         name="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['label']}"; ?>"
                         <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
                 </div>
