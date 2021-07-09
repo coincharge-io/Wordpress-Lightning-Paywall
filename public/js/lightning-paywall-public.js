@@ -558,9 +558,30 @@
     $(
       ".lnpw_page_amount_value_1, .lnpw_page_amount_value_2, .lnpw_page_amount_value_3"
     ).click(function () {
-      $(this).children().find("input:radio").attr("checked", "checked");
+      switch ($(this)[0].className) {
+        case "lnpw_page_amount_value_1":
+          $(".lnpw_page_amount_value_2").removeClass("selected");
+          $(".lnpw_page_amount_value_3").removeClass("selected");
+          break;
+        case "lnpw_page_amount_value_2":
+          $(".lnpw_page_amount_value_1").removeClass("selected");
+          $(".lnpw_page_amount_value_3").removeClass("selected");
+          break;
+        case "lnpw_page_amount_value_3":
+          $(".lnpw_page_amount_value_1").removeClass("selected");
+          $(".lnpw_page_amount_value_2").removeClass("selected");
+          break;
+        default:
+          $(".lnpw_page_amount_value_1").removeClass("selected");
+          $(".lnpw_page_amount_value_2").removeClass("selected");
+          $(".lnpw_page_amount_value_3").removeClass("selected");
+      }
+      $(this).children().find("input:radio").prop("checked", "true");
+
+      if ($(this).children().find("input:radio").is(":checked")) {
+        $(this).toggleClass("selected");
+      }
       var predefined = $(this).children().find("input:radio").val().split(" ");
-      console.log(predefined);
       var converted_icon = fiat_to_crypto(
         predefined[1],
         predefined[0],

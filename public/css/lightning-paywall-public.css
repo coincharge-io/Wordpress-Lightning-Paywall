@@ -691,6 +691,12 @@ Tipping page
 .lnpw_page_bar_container.active {
   background-color: blue;
 }
+
+.lnpw_page_amount_value_1.selected,
+.lnpw_page_amount_value_2.selected,
+.lnpw_page_amount_value_3.selected {
+  background-color: darkblue;
+}
 /**
   Tipping button spinner
 
