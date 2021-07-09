@@ -520,9 +520,10 @@ Tipping page
 
 .lnpw_page_amount {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1em;
   justify-content: center;
+  cursor: pointer;
 }
 
 #lnpw_page_converted_amount {
@@ -575,7 +576,7 @@ Tipping page
   flex-direction: column;
   text-align: center;
 }
-#page_tipping_form > fieldset > h6 {
+#page_tipping_form > h6 {
   text-align: left;
   margin: 1em 0 1em 5px;
 }
@@ -585,14 +586,18 @@ Tipping page
 
 .lnpw_page_donor_information {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 1em;
 }
-
-.lnpw_page_donor_information label {
+.lnpw_page_donor_information > div {
+  margin: 0 5px;
+}
+/* .lnpw_page_donor_information label {
   display: inline-block;
   width: 100px;
   padding-left: 0.5em;
-}
+} */
 
 .lnpw_page_donor_information input[type="text"],
 .lnpw_page_donor_information input[type="email"],
@@ -619,7 +624,6 @@ Tipping page
   justify-content: space-evenly;
   align-items: center;
   padding: 1em;
-  background-color: lavender;
 }
 .lnpw_page_header_container h6 {
   padding-top: 0.5em;
@@ -634,7 +638,7 @@ Tipping page
   align-items: center;
 }
 
-.lnpw_page_amount_value_1,
+/* .lnpw_page_amount_value_1,
 .lnpw_page_amount_value_2,
 .lnpw_page_amount_value_3 {
   display: inline-flex;
@@ -643,12 +647,17 @@ Tipping page
   border-radius: 2em;
   -moz-border-radius: 2em;
   -webkit-border-radius: 2em;
+} */
+.lnpw_page_amount_value_1 input[type="radio"],
+.lnpw_page_amount_value_2 input[type="radio"],
+.lnpw_page_amount_value_3 input[type="radio"] {
+  display: none;
 }
 
-.lnpw_page_amount_value_1.high i,
-.lnpw_page_amount_value_2.high i,
-.lnpw_page_amount_value_3.high i {
-  margin-right: 10px;
+.lnpw_page_amount_value_1 i,
+.lnpw_page_amount_value_2 i,
+.lnpw_page_amount_value_3 i {
+  margin-right: 1em;
 }
 
 .lnpw_page_tipping_converted_values {
@@ -664,9 +673,24 @@ Tipping page
 
 #lnpw_page_button button,
 #lnpw_page_button input[type="button"] {
-  font-size: 10px;
+  font-size: 1.5em;
+}
+.lnpw_page_bar_container {
+  display: flex;
+}
+.lnpw_page_bar_container div {
+  display: flex;
+  background-color: grey;
+  width: 50%;
+  height: 2em;
+  justify-content: center;
+  align-items: center;
+  color: #a4b0c6;
 }
 
+.lnpw_page_bar_container.active {
+  background-color: blue;
+}
 /**
   Tipping button spinner
 

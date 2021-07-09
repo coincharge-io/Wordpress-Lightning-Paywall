@@ -555,8 +555,34 @@
           .attr("readonly", true);
       }
     });
-
-    $("#value_1_page, #value_2_page, #value_3_page").change(function () {
+    $(
+      ".lnpw_page_amount_value_1, .lnpw_page_amount_value_2, .lnpw_page_amount_value_3"
+    ).click(function () {
+      $(this).children().find("input:radio").attr("checked", "checked");
+      var predefined = $(this).children().find("input:radio").val().split(" ");
+      console.log(predefined);
+      var converted_icon = fiat_to_crypto(
+        predefined[1],
+        predefined[0],
+        usd,
+        eur,
+        sats
+      );
+      var converted_icon_amount =
+        "~" +
+        fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
+        " " +
+        get_currency(predefined[1]);
+      $("#lnpw_page_converted_amount")
+        .attr("readonly", false)
+        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .attr("readonly", true);
+      $("#lnpw_page_converted_currency")
+        .attr("readonly", false)
+        .val(get_currency(predefined[1]))
+        .attr("readonly", true);
+    });
+    /* $("#value_1_page, #value_2_page, #value_3_page").change(function () {
       if ($(this).is(":checked")) {
         var predefined = $(this).val().split(" ");
         var converted_icon = fiat_to_crypto(
@@ -582,7 +608,7 @@
           .val(get_currency(predefined[1]))
           .attr("readonly", true);
       }
-    });
+    }); */
 
     $(
       "#lnpw_widget_value_1_high, #lnpw_widget_value_2_high, #lnpw_widget_value_3_high"
@@ -857,6 +883,8 @@
 
     $("input.page-next-form").click(function () {
       if (validationField[0].checkValidity()) {
+        $(".lnpw_page_bar_container.bar-1").removeClass("active");
+        $(".lnpw_page_bar_container.bar-2").addClass("active");
         previous_form = $(this).parent().parent();
         next_form = $(this).parent().parent().next();
         next_form.show();
@@ -866,6 +894,8 @@
       }
     });
     $("input.page-previous-form").click(function () {
+      $(".lnpw_page_bar_container.bar-2").removeClass("active");
+      $(".lnpw_page_bar_container.bar-1").addClass("active");
       previous_form = $(this).parent().parent();
       next_form = $(this).parent().parent().prev();
       next_form.show();
@@ -979,7 +1009,7 @@
     total_forms = $(".lnpw_tipping_box_container fieldset").length;
     var validationField = $("#lnpw_tipping_amount");
     /*var fixedAmount = $('.lnpw_tipping_default_amount');
-  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);*/
+   var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);*/
 
     $("input.next-form").click(function () {
       if (validationField[0].checkValidity()) {
