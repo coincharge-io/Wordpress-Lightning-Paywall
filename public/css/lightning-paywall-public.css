@@ -509,8 +509,8 @@ Tipping page
   font-size: 16px;
   background-size: cover;
   background-repeat: no-repeat;
-  position: relative;
   line-height: 1em;
+  position: relative;
 }
 
 .lnpw_page_tipping_container fieldset {
@@ -539,7 +539,7 @@ Tipping page
 }
 #lnpw_page_tipping_amount,
 #lnpw_page_tipping_currency {
-  height: 40px;
+  height: 100%;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -553,15 +553,24 @@ Tipping page
 
 #lnpw_page_button {
   position: absolute;
+  display: inline-flex;
   bottom: 0;
-  right: 0;
+  width: 100%;
+  left: 0;
+}
+#lnpw_page_button>input.page-next-form {
+  width: 100%;
+}
+#lnpw_page_button>input.page-previous-form,
+#lnpw_page_tipping__button {
+  width: 50%;
 }
 #lnpw_page_button button,
-#lnpw_page_button input[type="button"] {
+#lnpw_page_button input[type="button"],
+#lnpw_page_button input[type="submit"]  {
   padding: 10.5px 14px;
-  border-radius: 2em;
-  -moz-border-radius: 2em;
-  -webkit-border-radius: 2em;
+  font-size: 1.5em;
+  text-transform: uppercase;
 }
 
 #lnpw_page_converted_amount,
@@ -584,10 +593,8 @@ Tipping page
   flex-direction: column;
   text-align: center;
 }
-/* #page_tipping_form > h6 {
-  text-align: left;
-  margin: 1em 0 1em 5px;
-} */
+
+
 #page_tipping_form fieldset:not(:first-of-type) {
   display: none;
 }
@@ -630,11 +637,15 @@ Tipping page
 .lnpw_page_header_container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
   align-items: center;
   padding: 1em;
 }
-#page_tipping_form h6:first-of-type {
+
+.lnpw_page_header_container h6 {
+  margin: 0 5px;
+}
+
+#page_tipping_form > h6:first-of-type {
   text-align: left;
   margin: 2em 0 2em 5px;
 }
@@ -657,16 +668,7 @@ Tipping page
   -moz-border-radius: 2em;
   -webkit-border-radius: 2em;
 }
-/* .lnpw_page_amount_value_1,
-.lnpw_page_amount_value_2,
-.lnpw_page_amount_value_3 {
-  display: inline-flex;
-  width: 50%;
-  height: 2em;
-  border-radius: 2em;
-  -moz-border-radius: 2em;
-  -webkit-border-radius: 2em;
-} */
+
 .lnpw_page_amount_value_1 input[type="radio"],
 .lnpw_page_amount_value_2 input[type="radio"],
 .lnpw_page_amount_value_3 input[type="radio"] {
@@ -691,16 +693,16 @@ Tipping page
   align-items: flex-start !important;
 }
 
-#lnpw_page_button button,
+/* #lnpw_page_button button,
 #lnpw_page_button input[type="button"] {
   font-size: 1.5em;
-}
+} */
 .lnpw_page_bar_container {
   display: flex;
 }
 .lnpw_page_bar_container div {
   display: flex;
-  background-color: grey;
+  background-color: lightgray;
   width: 50%;
   height: 2em;
   justify-content: center;
@@ -709,7 +711,7 @@ Tipping page
 }
 
 .lnpw_page_bar_container.active {
-  background-color: blue;
+  background-color: grey;
 }
 
 .lnpw_page_amount_value_1.selected,
@@ -717,6 +719,8 @@ Tipping page
 .lnpw_page_amount_value_3.selected {
   background-color: hsl(354, 78%, 7%);
 }
+
+
 
 /**
   Tipping button spinner

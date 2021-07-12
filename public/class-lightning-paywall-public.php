@@ -1115,7 +1115,7 @@ class Lightning_Paywall_Public
                 <input type="button" name="next" class="<?php echo "next-form{$suffix}"; ?>" value="Next" />
                 <?php else : ?>
                 <button type="submit"
-                    id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+                    id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
                 <?php endif; ?>
             </div>
         </fieldset>
@@ -1136,7 +1136,7 @@ class Lightning_Paywall_Public
             <div id="button">
                 <input type="button" name="previous" class="<?php echo "previous-form{$suffix}"; ?>" value="Previous" />
                 <button type="submit"
-                    id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+                    id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
             </div>
         </fieldset>
         <?php endif; ?>
@@ -1556,7 +1556,7 @@ class Lightning_Paywall_Public
                             class="<?php echo  "{$is_widget} skyscraper-next-form {$is_wide}"; ?>" value="Next" />
                         <?php else : ?>
                         <button type="submit"
-                            id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button{$form_suffix}"; ?>"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+                            id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button{$form_suffix}"; ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
                         <?php endif; ?>
                     </div>
 
@@ -1584,7 +1584,7 @@ class Lightning_Paywall_Public
                         class="<?php echo "{$is_widget_id}skyscraper-previous-form{$form_suffix}"; ?>"
                         value="Previous" />
                     <button type="submit"
-                        id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button_{$is_wide}"; ?>"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+                        id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button_{$is_wide}"; ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
                 </div>
             </fieldset>
             <?php endif; ?>
@@ -1624,18 +1624,18 @@ class Lightning_Paywall_Public
 			'free_input'	=> 'true',
 			'show_icon'		=> 'false',
 			'fixed_background'	=> '#ffa500',
-			'header_background'	=> '',
+			'header_background'	=> '#ffa500',
 			'value1_enabled' => 'false',
 			'value1_amount' => '',
-			'value1_currency' => '',
+			'value1_currency' => 'SATS',
 			'value1_icon'	=> '',
 			'value2_enabled' => 'false',
 			'value2_amount' => '',
-			'value2_currency' => '',
+			'value2_currency' => 'SATS',
 			'value2_icon'	=> '',
 			'value3_enabled' => 'false',
 			'value3_amount' => '',
-			'value3_currency' => '',
+			'value3_currency' => 'SATS',
 			'value3_icon'	=> '',
 			'display_name'	=> 'false',
 			'mandatory_name' => 'false',
@@ -1647,6 +1647,10 @@ class Lightning_Paywall_Public
 			'mandatory_address' => 'false',
 			'display_message'	=> 'false',
 			'mandatory_message' => 'false',
+			'step1' 	=> 'Pledge',
+			'active_color'	=> '',
+			'step2' 	=> 'Info',
+			'inactive_color'	=> '',
 		), $atts);
 
 		$dimension = explode('x', $atts['dimension']);
@@ -1729,13 +1733,15 @@ class Lightning_Paywall_Public
 }
 
 #lnpw_page_tipping__button,
-#lnpw_page_button>input.page-next-form {
+#lnpw_page_button>input.page-next-form,
+#lnpw_page_button>input.page-previous-form {
     color: <?php echo $atts['button_text_color'];
     ?>;
-    background: <?php echo $atts['button_color'];
+}
+#lnpw_page_button > *{
+	background-color: <?php echo $atts['header_background'];
     ?>;
 }
-
 .lnpw_page_header_container h6 {
     color: <?php echo $atts['title_text_color'];
     ?>
@@ -1750,14 +1756,25 @@ class Lightning_Paywall_Public
 
 .lnpw_page_amount_value_1,
 .lnpw_page_amount_value_2,
-.lnpw_page_amount_value_3 {
+.lnpw_page_amount_value_3,
+.lnpw_page_tipping_free_input {
     background-color: <?php echo $atts['fixed_background'];
     ?>;
 
 }
 
-.lnpw_page_header_container {
+.lnpw_page_header_container{
     background-color: <?php echo $atts['header_background'];
+    ?>;
+}
+
+.lnpw_page_bar_container.active {
+    background-color: <?php echo $atts['active_color'];
+    ?>;
+}
+
+.lnpw_page_bar_container div {
+    background-color: <?php echo $atts['inactive_color'];
     ?>;
 }
 </style>
@@ -1779,12 +1796,15 @@ class Lightning_Paywall_Public
         </div>
         <?php if ($collect_data == 'true') : ?>
         <div class='lnpw_page_bar_container'>
-            <div class='lnpw_page_bar_container bar-1 active'>1.Pledge</div>
-            <div class='lnpw_page_bar_container bar-2'>2.Info</div>
+            <div class='lnpw_page_bar_container bar-1 active'>
+                <?php echo (!empty($atts['step1']) ? esc_html($atts['step1']) : '1.Pledge'); ?></div>
+            <div class='lnpw_page_bar_container bar-2'>
+                <?php echo (!empty($atts['step2']) ? esc_html($atts['step2']) : '2.Info'); ?></div>
         </div>
         <?php endif; ?>
         <fieldset>
-            <h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?></h6>
+            <h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : 'Enter Tipping Amount'); ?>
+            </h6>
             <div class="lnpw_page_amount">
                 <?php foreach ($fixed_amount as $key => $value) : ?>
 
@@ -1854,10 +1874,10 @@ class Lightning_Paywall_Public
                 <input type="hidden" id="lnpw_page_redirect_link" name="lnpw_page_redirect_link"
                     value=<?php echo $atts['redirect']; ?> />
                 <?php if ($collect_data == 'true') : ?>
-                <input type="button" name="next" class="page-next-form" value="Next" />
+                <input type="button" name="next" class="page-next-form" value="continue >" />
                 <?php else : ?>
-                <button type="submit"
-                    id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+                <button type="submit" style="width:100%;"
+                    id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
                 <?php endif; ?>
             </div>
 
@@ -1869,7 +1889,7 @@ class Lightning_Paywall_Public
                 <?php if ($collect[$key]['display'] == 'true') : ?>
                 <div class="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}_wrap"; ?>">
 
-                    <input type="text" placeholder="<?php echo $collect[$key]['label']; ?>"
+                    <input type="text" placeholder="<?php echo esc_html($collect[$key]['label']); ?>"
                         id="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}"; ?>"
                         name="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['label']}"; ?>"
                         <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
@@ -1878,9 +1898,9 @@ class Lightning_Paywall_Public
                 <?php endforeach; ?>
             </div>
             <div id="lnpw_page_button">
-                <input type="button" name="previous" class="page-previous-form" value="Previous" />
+                <input type="button" name="previous" class="page-previous-form" value="< previous" />
                 <button type="submit"
-                    id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? $atts['button_text'] : 'Tip'); ?></button>
+                    id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
             </div>
         </fieldset>
         <?php endif; ?>
