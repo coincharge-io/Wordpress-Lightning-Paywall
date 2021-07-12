@@ -576,8 +576,7 @@
           $(".lnpw_page_amount_value_2").removeClass("selected");
           $(".lnpw_page_amount_value_3").removeClass("selected");
       }
-      $(this).children().find("input:radio").prop("checked", "true");
-
+      $(this).children().find("input:radio").prop("checked", true).change();
       if ($(this).children().find("input:radio").is(":checked")) {
         $(this).toggleClass("selected");
       }
@@ -856,6 +855,9 @@
         "checked",
         false
       );
+      $(".lnpw_page_amount_value_1").removeClass("selected");
+      $(".lnpw_page_amount_value_2").removeClass("selected");
+      $(".lnpw_page_amount_value_3").removeClass("selected");
     });
   });
   $(document).ready(function () {
