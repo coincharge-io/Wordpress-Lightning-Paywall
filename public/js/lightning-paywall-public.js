@@ -919,8 +919,8 @@
     $("input.page-previous-form").click(function () {
       $(".lnpw_page_bar_container.bar-2").removeClass("active");
       $(".lnpw_page_bar_container.bar-1").addClass("active");
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
       next_form.show();
       previous_form.hide();
     });
