@@ -606,7 +606,10 @@ Tipping page
   font-size: 1.5em;
   text-transform: uppercase;
 }
-
+#lnpw_page_tipping_currency {
+  color: white;
+  font-weight: bold;
+}
 #lnpw_page_converted_amount,
 #lnpw_page_tipping_currency,
 #lnpw_page_converted_currency {
@@ -749,8 +752,20 @@ Tipping page
 .lnpw_page_amount_value_3.selected {
   background-color: hsl(354, 78%, 7%);
 }
+#powered_by_skyscraper {
+  display: flex;
+}
+#powered_by_skyscraper p {
+  margin-top: 0.5em;
+  font-size: 0.7em;
+}
+#powered_by {
+  display: flex;
+  justify-content: center;
+}
 #powered_by p {
-  text-align: center;
+  margin-top: 0.5em;
+  font-size: 1.5em;
 }
 /**
   Tipping button spinner
