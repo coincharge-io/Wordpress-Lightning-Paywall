@@ -996,15 +996,13 @@
     });
   });
 
-  $(document).ready(function () {
+  /* $(document).ready(function () {
     var form_count = 1,
       previous_form,
       next_form,
       total_forms;
     total_forms = $(".lnpw_tipping_box_container.lnpw_widget fieldset").length;
-    var validationField = $("#lnpw_tipping_amount_lnpw_widget");
-    /*var fixedAmount = $('.lnpw_tipping_default_amount');
-  var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);*/
+    
 
     $("input.next-form_lnpw_widget").click(function () {
       if (validationField[0].checkValidity()) {
@@ -1017,22 +1015,21 @@
       }
     });
     $("input.previous-form_lnpw_widget").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().prev().parent();
       next_form.show();
       previous_form.hide();
     });
   });
 
-  $(document).ready(function () {
+   $(document).ready(function () {
     var form_count = 1,
       previous_form,
       next_form,
       total_forms;
     total_forms = $(".lnpw_tipping_box_container fieldset").length;
     var validationField = $("#lnpw_tipping_amount");
-    /*var fixedAmount = $('.lnpw_tipping_default_amount');
-   var validationField = ((fixedAmount.length !== 0 && freeInput.length === 0) ? fixedAmount : freeInput);*/
+    
 
     $("input.next-form").click(function () {
       if (validationField[0].checkValidity()) {
@@ -1045,10 +1042,10 @@
       }
     });
     $("input.previous-form").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
       next_form.show();
       previous_form.hide();
     });
-  });
+  }); */
 })(jQuery);

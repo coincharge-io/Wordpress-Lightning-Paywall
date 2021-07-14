@@ -920,52 +920,15 @@ class Lightning_Paywall_Public
 			'button_color'	=> '#FE642E',
 			'logo_id'		=> '',
 			'background_id'	=> '',
-			'display_name'	=> 'false',
-			'mandatory_name' => 'false',
-			'display_email'	=> 'false',
-			'mandatory_email' => 'false',
-			'display_phone'	=> 'false',
-			'mandatory_phone' => 'false',
-			'display_address'	=> 'false',
-			'mandatory_address' => 'false',
-			'display_message'	=> 'false',
-			'mandatory_message' => 'false',
+			'background' => '#1d5aa3',
 			'widget'		=> 'false',
 		), $atts);
 
 		$dimension = explode('x', $atts['dimension']);
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-		$logo = wp_get_attachment_image_src($atts['logo_id']);
-		$background = wp_get_attachment_image_src($atts['background_id']);
-		$collect = array(
-			array(
-				'label' => 'Full_name',
-				'display' => $atts['display_name'],
-				'mandatory' => $atts['mandatory_name']
-			),
-			array(
-				'label' => 'Email',
-				'display' => $atts['display_email'],
-				'mandatory' => $atts['mandatory_email']
-			),
-			array(
-				'label' => 'Address',
-				'display' => $atts['display_address'],
-				'mandatory' => $atts['mandatory_address']
-			),
-			array(
-				'label' => 'Phone',
-				'display' => $atts['display_phone'],
-				'mandatory' => $atts['mandatory_phone']
-			),
-			array(
-				'label' => 'Message',
-				'display' => $atts['display_message'],
-				'mandatory' => $atts['mandatory_message']
-			),
+		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
+		$background = wp_get_attachment_image_src($atts['background_id']) ? wp_get_attachment_image_src($atts['background_id'])[0] : $atts['background_id'];
 
-		);
-		$collect_data = Lightning_Paywall_Public::display_is_enabled($collect);
 		$is_widget = $atts['widget'] === 'true' ? 'lnpw_widget' : '';
 		$form = $is_widget === 'lnpw_widget' ? 'tipping_form_box_widget' : 'tipping_form_box';
 		$suffix = $is_widget === 'lnpw_widget' ? '_lnpw_widget' : '';
@@ -981,7 +944,7 @@ class Lightning_Paywall_Public
     ?>;
     height: <?php echo $dimension[1] . 'px !important';
     ?>;
-    background-image: url(<?php echo ($background ? $background[0] : '');
+    background-image: url(<?php echo ($background ? $background : '');
     ?>);
 
 }
@@ -1009,6 +972,12 @@ class Lightning_Paywall_Public
     ?>
 }
 
+.lnpw_tipping_box_header_container.lnpw_widget,
+#button {
+    background-color: <?php echo $atts['background'];
+    ?>;
+}
+
 .lnpw_tipping_box_info_container fieldset h6 {
     color: <?php echo $atts['tipping_text_color'];
     ?>
@@ -1021,7 +990,7 @@ class Lightning_Paywall_Public
     ?>;
     height: <?php echo $dimension[1] . 'px !important';
     ?>;
-    background-image: url(<?php echo ($background ? $background[0] : '');
+    background-image: url(<?php echo ($background ? $background : '');
     ?>);
 
 }
@@ -1042,6 +1011,12 @@ class Lightning_Paywall_Public
 .lnpw_tipping_container_info_container {
     display: <?php echo (empty($atts['description'])) ? 'none': 'block';
     ?>
+}
+
+.lnpw_tipping_box_header_container,
+#button {
+    background-color: <?php echo $atts['background'];
+    ?>;
 }
 
 .lnpw_tipping_box_container_info_container p {
@@ -1066,7 +1041,7 @@ class Lightning_Paywall_Public
                 <div class="lnpw_tipping_box_header_container">
                     <?php if ($logo) : ?>
                     <div class="lnpw_logo_wrap">
-                        <img width="50" height="50" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+                        <img width="70" height="70" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
                     </div>
                     <?php endif; ?>
                     <?php if (!empty($atts['title'])) : ?>
@@ -1111,36 +1086,12 @@ class Lightning_Paywall_Public
                 <input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link"
                     value=<?php echo $atts['redirect']; ?> />
                 <div id="button">
-                    <?php if ($collect_data == 'true') : ?>
-                    <input type="button" name="next" class="<?php echo "next-form{$suffix}"; ?>" value="Next" />
-                    <?php else : ?>
-                    <button type="submit"
-                        id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
-                    <?php endif; ?>
-                </div>
-            </fieldset>
-            <?php if ($collect_data == 'true') : ?>
-            <fieldset>
-                <h6>Personal info</h6>
-                <div class="lnpw_donor_information">
-                    <?php foreach ($collect as $key => $value) : ?>
-                    <?php if ($collect[$key]['display'] == 'true') : ?>
-                    <label for="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}{$suffix}"; ?>">
-                        <?php echo $collect[$key]['label']; ?></label>
-                    <input type="text" id="<?php echo "lnpw_tipping_donor_{$collect[$key]['label']}{$suffix}"; ?>"
-                        name="lnpw_tipping_donor_name"
-                        <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <div id="button">
-                    <input type="button" name="previous" class="<?php echo "previous-form{$suffix}"; ?>"
-                        value="Previous" />
+
                     <button type="submit"
                         id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
                 </div>
             </fieldset>
-            <?php endif; ?>
+
         </form>
     </div>
     <div id="powered_by_box">
@@ -1682,7 +1633,7 @@ class Lightning_Paywall_Public
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
 
-		$background = wp_get_attachment_image_src($atts['background_id']);
+		$background = wp_get_attachment_image_src($atts['background_id']) ? wp_get_attachment_image_src($atts['background_id'])[0] : $atts['background_id'];
 		$collect = array(
 			array(
 				'id'    => 'name',
@@ -1749,7 +1700,7 @@ class Lightning_Paywall_Public
 .lnpw_page_tipping_container {
     background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : '');
     ?>;
-    background-image: url(<?php echo ($background ? $background[0] : '');
+    background-image: url(<?php echo ($background ? $background : '');
     ?>);
     width: <?php echo $dimension[0] . 'px !important';
     ?>;

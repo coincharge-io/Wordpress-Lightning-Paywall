@@ -103,59 +103,33 @@ Tipping box
   background-size: cover;
   background-repeat: no-repeat;
 }
-
-.lnpw_tipping_box_container h6,
-.lnpw_tipping_box_container .lnpw_tipping_free_input,
-.lnpw_tipping_box_container .lnpw_tipping_converted_values {
+.lnpw_tipping_box_container div,
+.lnpw_tipping_box_container img,
+.lnpw_tipping_box_container pre,
+.lnpw_tipping_box_container figure {
+  max-width: 100%;
+  overflow: hidden;
+}
+.lnpw_tipping_box_header_container > div > h6,
+.lnpw_tipping_box_container.lnpw_tipping_free_input,
+.lnpw_tipping_box_container.lnpw_tipping_converted_values {
   display: flex;
   justify-content: center;
 }
 .lnpw_tipping_box_container fieldset {
   border: 0;
-  padding: 0 1em;
-}
-
-.lnpw_tipping_box_container_header_container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0.1em 1em;
-}
-
-.lnpw_tipping_box_container_info_container {
-  text-align: center;
-}
-
-#tipping_form fieldset:not(:first-of-type),
-#tipping_form_box_widget fieldset:not(:first-of-type) {
-  display: none;
-}
-
-.lnpw_donor_information {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 2em 0 1.5em 0;
-}
-
-.lnpw_donor_information input[type="text"],
-.lnpw_donor_information input[type="email"],
-.lnpw_donor_information input[type="url"],
-.lnpw_donor_information input[type="password"],
-.lnpw_donor_information input[type="search"],
-.lnpw_donor_information input[type="number"],
-.lnpw_donor_information input[type="tel"],
-.lnpw_donor_information input[type="range"],
-.lnpw_donor_information input[type="date"],
-.lnpw_donor_information input[type="month"],
-.lnpw_donor_information input[type="week"],
-.lnpw_donor_information input[type="time"],
-.lnpw_donor_information input[type="datetime"],
-.lnpw_donor_information input[type="datetime-local"],
-.lnpw_donor_information input[type="color"],
-.lnpw_donor_information textarea {
   padding: 0;
 }
 
+.lnpw_tipping_box_header_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em;
+}
+.lnpw_tipping_box_header_container h6 {
+  margin-left: 5px;
+}
 #lnpw_tipping_amount,
 #lnpw_converted_amount,
 #lnpw_tipping_amount_lnpw_widget,
@@ -168,17 +142,32 @@ Tipping box
 #lnpw_tipping_currency_lnpw_widget,
 #lnpw_converted_currency_lnpw_widget {
   height: 40px;
-  width: 35%;
+  width: 45%;
   font-size: 15px;
 }
+
 .lnpw_tipping_box_container h6 {
   font-weight: bold;
 }
+.lnpw_tipping_box_container fieldset > h6 {
+  margin-left: 1px;
+}
+.lnpw_tipping_box_info_container > p {
+  margin: 0.5em 0;
+}
 
+.lnpw_tipping_box_amount {
+  margin-top: 1em;
+}
 .lnpw_tipping_box_container select {
   line-height: 1;
 }
-
+#lnpw_converted_amount {
+  text-align: right;
+}
+#lnpw_converted_currency {
+  text-align: left;
+}
 .predefined_container input[type="radio"] {
   position: absolute;
   width: 10%;
@@ -189,6 +178,7 @@ Tipping box
 .lnpw_tipping_free_input,
 .lnpw_tipping_converted_values {
   display: flex;
+  justify-content: center;
 }
 
 .lnpw_tipping_converted_values {
@@ -197,20 +187,21 @@ Tipping box
 .lnpw_tipping_box_container fieldset input:not([type="submit"]) {
   margin-bottom: 0;
 }
-#button button,
-#button input[type="button"] {
-  font-size: 14px;
-  padding: 10.5px 14px;
-}
 
 .lnpw_tipping_box_container {
   position: relative;
 }
+.lnpw_tipping_box_header_container {
+  min-height: 40px;
+}
 
 #button {
   position: absolute;
+  display: inline-flex;
   bottom: 0;
-  right: 0;
+  width: 100%;
+  left: 0;
+  height: 40px;
 }
 #lnpw_tipping_amount,
 #lnpw_tipping_amount_lnpw_widget {
@@ -226,6 +217,21 @@ Tipping box
   background: transparent;
 }
 
+#button > button[type="submit"] {
+  width: 50%;
+  margin: 5px auto;
+}
+#lnpw_tipping__button,
+#lnpw_tipping__button_lnpw_widget {
+  border-radius: 2em;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+}
+#button button,
+#button input[type="button"] {
+  font-size: 16px;
+  padding: 0;
+}
 /* 
   Tipping skyscraper
 */
@@ -563,15 +569,6 @@ Tipping page
   left: 0;
   height: 75px;
 }
-/* #lnpw_page_button {
-  display: flex;
-  justify-content: center;
-} */
-/* #lnpw_page_button > input.page-next-form {
-  width: 100%;
-} */
-
-/*#lnpw_page_button > input.page-previous-form*/
 
 #lnpw_page_button > input.page-next-form {
   width: 50%;
