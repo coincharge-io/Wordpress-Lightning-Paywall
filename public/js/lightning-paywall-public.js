@@ -85,11 +85,6 @@
           predefined_amount: $(
             "input[type=radio][name=lnpw_tipping_default_amount]:checked"
           ).val(),
-          name: $("#lnpw_tipping_donor_name").val(),
-          email: $("#lnpw_tipping_donor_email").val(),
-          address: $("#lnpw_tipping_donor_address").val(),
-          phone: $("#lnpw_tipping_donor_phone").val(),
-          message: $("#lnpw_tipping_donor_message").val(),
         },
         success: function (response) {
           $("#lnpw_tipping__button").html(text);
@@ -128,11 +123,6 @@
           action: "lnpw_tipping",
           currency: $("#lnpw_tipping_currency_lnpw_widget").val(),
           amount: $("#lnpw_tipping_amount_lnpw_widget").val(),
-          name: $("#lnpw_tipping_donor_name_lnpw_widget").val(),
-          email: $("#lnpw_tipping_donor_email_lnpw_widget").val(),
-          address: $("#lnpw_tipping_donor_address_lnpw_widget").val(),
-          phone: $("#lnpw_tipping_donor_phone_lnpw_widget").val(),
-          message: $("#lnpw_tipping_donor_message_lnpw_widget").val(),
         },
         success: function (response) {
           $("#lnpw_tipping__button_lnpw_widget").html(text);
@@ -172,7 +162,7 @@
           currency: $("#lnpw_skyscraper_tipping_currency").val(),
           amount: $("#lnpw_skyscraper_tipping_amount").val(),
           predefined_amount: $(
-            "input[type=radio][name=lnpw_skyscraper_tipping_default_amount]:checked"
+            "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]:checked, input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]:checked"
           ).val(),
           name: $("#lnpw_skyscraper_tipping_donor_name").val(),
           email: $("#lnpw_skyscraper_tipping_donor_email").val(),
@@ -630,7 +620,7 @@
       }
     }); */
 
-    $(
+    /* $(
       "#lnpw_widget_value_1_high, #lnpw_widget_value_2_high, #lnpw_widget_value_3_high"
     ).change(function () {
       if ($(this).is(":checked")) {
@@ -689,8 +679,8 @@
           .attr("readonly", true);
       }
     });
-
-    $("#value1, #value2, #value3").change(function () {
+ */
+    /* $("#value1, #value2, #value3").change(function () {
       if ($(this).is(":checked")) {
         var predefined = $(this).val().split(" ");
         var converted_icon = fiat_to_crypto(
@@ -716,6 +706,233 @@
           .val(get_currency(predefined[1]))
           .attr("readonly", true);
       }
+    }); */
+    $(
+      ".lnpw_skyscraper_amount_value_1.high, .lnpw_skyscraper_amount_value_2.high, .lnpw_skyscraper_amount_value_3.high"
+    ).click(function () {
+      switch ($(this)[0].className) {
+        case "lnpw_skyscraper_amount_value_1.high":
+          $(".lnpw_skyscraper_amount_value_2.high").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_3.high").removeClass("selected");
+          break;
+        case "lnpw_skyscraper_amount_value_2.high":
+          $(".lnpw_skyscraper_amount_value_1.high").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_3.high").removeClass("selected");
+          break;
+        case "lnpw_skyscraper_amount_value_3.high":
+          $(".lnpw_skyscraper_amount_value_1.high").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_2.high").removeClass("selected");
+          break;
+        default:
+          $(".lnpw_skyscraper_amount_value_1.high").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_2.high").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_3.high").removeClass("selected");
+      }
+      $(this).children().find("input:radio").prop("checked", true).change();
+      if ($(this).children().find("input:radio").is(":checked")) {
+        $(this).toggleClass("selected");
+      }
+      var predefined = $(this).children().find("input:radio").val().split(" ");
+      var converted_icon = fiat_to_crypto(
+        predefined[1],
+        predefined[0],
+        usd,
+        eur,
+        sats
+      );
+      var converted_icon_amount =
+        "~" +
+        fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
+        " " +
+        get_currency(predefined[1]);
+      $("#lnpw_skyscraper_converted_amount")
+        .attr("readonly", false)
+        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .attr("readonly", true);
+      $("#lnpw_skyscraper_converted_currency")
+        .attr("readonly", false)
+        .val(get_currency(predefined[1]))
+        .attr("readonly", true);
+    });
+
+    $(
+      ".lnpw_skyscraper_amount_value_1.wide, .lnpw_skyscraper_amount_value_2.wide, .lnpw_skyscraper_amount_value_3.wide"
+    ).click(function () {
+      switch ($(this)[0].className) {
+        case "lnpw_skyscraper_amount_value_1.wide":
+          $(".lnpw_skyscraper_amount_value_2.wide").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_3.wide").removeClass("selected");
+          break;
+        case "lnpw_skyscraper_amount_value_2.wide":
+          $(".lnpw_skyscraper_amount_value_1.wide").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_3.wide").removeClass("selected");
+          break;
+        case "lnpw_skyscraper_amount_value_3.wide":
+          $(".lnpw_skyscraper_amount_value_1.wide").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_2.wide").removeClass("selected");
+          break;
+        default:
+          $(".lnpw_skyscraper_amount_value_1.wide").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_2.wide").removeClass("selected");
+          $(".lnpw_skyscraper_amount_value_3.wide").removeClass("selected");
+      }
+      $(this).children().find("input:radio").prop("checked", true).change();
+      if ($(this).children().find("input:radio").is(":checked")) {
+        $(this).toggleClass("selected");
+      }
+      var predefined = $(this).children().find("input:radio").val().split(" ");
+      var converted_icon = fiat_to_crypto(
+        predefined[1],
+        predefined[0],
+        usd,
+        eur,
+        sats
+      );
+      var converted_icon_amount =
+        "~" +
+        fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
+        " " +
+        get_currency(predefined[1]);
+      $("#lnpw_skyscraper_converted_amount")
+        .attr("readonly", false)
+        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .attr("readonly", true);
+      $("#lnpw_skyscraper_converted_currency")
+        .attr("readonly", false)
+        .val(get_currency(predefined[1]))
+        .attr("readonly", true);
+    });
+
+    $(
+      ".lnpw_widget.lnpw_skyscraper_amount_value_1.high, .lnpw_widget.lnpw_skyscraper_amount_value_2.high, .lnpw_widget.lnpw_skyscraper_amount_value_3.high"
+    ).click(function () {
+      switch ($(this)[0].className) {
+        case "lnpw_widget.lnpw_skyscraper_amount_value_1.high":
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_2.high").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_3.high").removeClass(
+            "selected"
+          );
+          break;
+        case "lnpw_widget.lnpw_skyscraper_amount_value_2.high":
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_1.high").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_3.high").removeClass(
+            "selected"
+          );
+          break;
+        case "lnpw_widget.lnpw_skyscraper_amount_value_3.high":
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_1.high").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_2.high").removeClass(
+            "selected"
+          );
+          break;
+        default:
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_1.high").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_2.high").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_3.high").removeClass(
+            "selected"
+          );
+      }
+      $(this).children().find("input:radio").prop("checked", true).change();
+      if ($(this).children().find("input:radio").is(":checked")) {
+        $(this).toggleClass("selected");
+      }
+      var predefined = $(this).children().find("input:radio").val().split(" ");
+      var converted_icon = fiat_to_crypto(
+        predefined[1],
+        predefined[0],
+        usd,
+        eur,
+        sats
+      );
+      var converted_icon_amount =
+        "~" +
+        fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
+        " " +
+        get_currency(predefined[1]);
+      $("#lnpw_widget_lnpw_skyscraper_converted_amount_high")
+        .attr("readonly", false)
+        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .attr("readonly", true);
+      $("#lnpw_widget_lnpw_skyscraper_converted_currency_high")
+        .attr("readonly", false)
+        .val(get_currency(predefined[1]))
+        .attr("readonly", true);
+    });
+
+    $(
+      ".lnpw_widget.lnpw_skyscraper_amount_value_1.wide, .lnpw_widget.lnpw_skyscraper_amount_value_2.wide, .lnpw_widget.lnpw_skyscraper_amount_value_3.wide"
+    ).click(function () {
+      switch ($(this)[0].className) {
+        case "lnpw_widget.lnpw_skyscraper_amount_value_1.wide":
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_2.wide").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_3.wide").removeClass(
+            "selected"
+          );
+          break;
+        case "lnpw_widget.lnpw_skyscraper_amount_value_2.wide":
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_1.wide").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_3.wide").removeClass(
+            "selected"
+          );
+          break;
+        case "lnpw_widget.lnpw_skyscraper_amount_value_3.wide":
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_1.wide").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_2.wide").removeClass(
+            "selected"
+          );
+          break;
+        default:
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_1.wide").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_2.wide").removeClass(
+            "selected"
+          );
+          $(".lnpw_widget.lnpw_skyscraper_amount_value_3.wide").removeClass(
+            "selected"
+          );
+      }
+      $(this).children().find("input:radio").prop("checked", true).change();
+      if ($(this).children().find("input:radio").is(":checked")) {
+        $(this).toggleClass("selected");
+      }
+      var predefined = $(this).children().find("input:radio").val().split(" ");
+      var converted_icon = fiat_to_crypto(
+        predefined[1],
+        predefined[0],
+        usd,
+        eur,
+        sats
+      );
+      var converted_icon_amount =
+        "~" +
+        fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
+        " " +
+        get_currency(predefined[1]);
+      $("#lnpw_widget_lnpw_skyscraper_converted_amount_wide")
+        .attr("readonly", false)
+        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .attr("readonly", true);
+      $("#lnpw_widget_lnpw_skyscraper_converted_currency_wide")
+        .attr("readonly", false)
+        .val(get_currency(predefined[1]))
+        .attr("readonly", true);
     });
   });
   function fiat_to_crypto(currency, val, usd, eur, sats) {
@@ -766,25 +983,129 @@
       );
     });
 
-    $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").change(
+    $(
+      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]"
+    ).change(function () {
+      $(
+        "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]"
+      ).attr("required", true);
+      $("input[name=lnpw_skyscraper_tipping_amount_wide]").removeAttr(
+        "required"
+      );
+      $("input[name=lnpw_skyscraper_tipping_amount_wide]").val("");
+    });
+    $("input[name=lnpw_skyscraper_tipping_amount_wide]").click(function () {
+      $("input[name=lnpw_skyscraper_tipping_amount_wide]").attr(
+        "required",
+        true
+      );
+      $(
+        "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]"
+      ).removeAttr("required");
+      $(
+        "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]"
+      ).prop("checked", false);
+      $(".lnpw_skyscraper_amount_value_1.wide").removeClass("selected");
+      $(".lnpw_skyscraper_amount_value_2.wide").removeClass("selected");
+      $(".lnpw_skyscraper_amount_value_3.wide").removeClass("selected");
+    });
+
+    $(
+      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]"
+    ).change(function () {
+      $(
+        "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]"
+      ).attr("required", true);
+      $("input[name=lnpw_skyscraper_tipping_amount_high]").removeAttr(
+        "required"
+      );
+      $("input[name=lnpw_skyscraper_tipping_amount_high]").val("");
+    });
+    $("input[name=lnpw_skyscraper_tipping_amount_high]").click(function () {
+      $("input[name=lnpw_skyscraper_tipping_amount_high]").attr(
+        "required",
+        true
+      );
+      $(
+        "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]"
+      ).removeAttr("required");
+      $(
+        "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]"
+      ).prop("checked", false);
+      $(".lnpw_skyscraper_amount_value_1.high").removeClass("selected");
+      $(".lnpw_skyscraper_amount_value_2.high").removeClass("selected");
+      $(".lnpw_skyscraper_amount_value_3.high").removeClass("selected");
+    });
+
+    $(
+      "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]"
+    ).change(function () {
+      $(
+        "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]"
+      ).attr("required", true);
+      $(
+        "input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_wide]"
+      ).removeAttr("required");
+      $("input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_wide]").val("");
+    });
+    $("input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_wide]").click(
       function () {
+        $("input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_wide]").attr(
+          "required",
+          true
+        );
         $(
-          "input[type=radio][name=lnpw_skyscraper_tipping_default_amount]"
-        ).attr("required", true);
-        $("#lnpw_skyscraper_tipping_amount").removeAttr("required");
-        $("#lnpw_skyscraper_tipping_amount").val("");
+          "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]"
+        ).removeAttr("required");
+        $(
+          "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]"
+        ).prop("checked", false);
+        $(".lnpw_widget.lnpw_skyscraper_amount_value_1.wide").removeClass(
+          "selected"
+        );
+        $(".lnpw_widget.lnpw_skyscraper_amount_value_2.wide").removeClass(
+          "selected"
+        );
+        $(".lnpw_widget.lnpw_skyscraper_amount_value_3.wide").removeClass(
+          "selected"
+        );
       }
     );
-    $("#lnpw_skyscraper_tipping_amount").click(function () {
-      $("#lnpw_skyscraper_tipping_amount").attr("required", true);
+
+    $(
+      "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]"
+    ).change(function () {
       $(
-        "input[type=radio][name=lnpw_skyscraper_tipping_default_amount]"
+        "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]"
+      ).attr("required", true);
+      $(
+        "input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_high]"
       ).removeAttr("required");
-      $("input[type=radio][name=lnpw_skyscraper_tipping_default_amount]").prop(
-        "checked",
-        false
-      );
+      $("input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_high]").val("");
     });
+    $("input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_high]").click(
+      function () {
+        $("input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_high]").attr(
+          "required",
+          true
+        );
+        $(
+          "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]"
+        ).removeAttr("required");
+        $(
+          "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]"
+        ).prop("checked", false);
+        $("lnpw_widget.lnpw_skyscraper_amount_value_1.high").removeClass(
+          "selected"
+        );
+        $(".lnpw_widget.lnpw_skyscraper_amount_value_2.high").removeClass(
+          "selected"
+        );
+        $(".lnpw_widget.lnpw_skyscraper_amount_value_3.high").removeClass(
+          "selected"
+        );
+      }
+    );
   });
   $(document).ready(function () {
     $(
@@ -866,14 +1187,16 @@
       next_form,
       total_forms;
     total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
-    var freeInput = $("#lnpw_skyscraper_tipping_amount");
-    var fixedAmount = $(".lnpw_skyscraper_tipping_default_amount");
+    var freeInput = $("input[name=lnpw_skyscraper_tipping_amount_high]");
+    var fixedAmount = $(
+      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]"
+    );
     var validationField =
       fixedAmount.length !== 0 && freeInput.length === 0
         ? fixedAmount
         : freeInput;
 
-    $("input.skyscraper-next-form").click(function () {
+    $("input.skyscraper-next-form.high").click(function () {
       if (validationField[0].checkValidity()) {
         previous_form = $(this).parent().parent();
         next_form = $(this).parent().parent().next();
@@ -883,7 +1206,40 @@
         validationField[0].reportValidity();
       }
     });
-    $("input.skyscraper-previous-form").click(function () {
+    $("input.skyscraper-previous-form.high").click(function () {
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().prev();
+      next_form.show();
+      previous_form.hide();
+    });
+  });
+
+  $(document).ready(function () {
+    var form_count = 1,
+      previous_form,
+      next_form,
+      total_forms;
+    total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
+    var freeInput = $("input[name=lnpw_skyscraper_tipping_amount_wide]");
+    var fixedAmount = $(
+      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]"
+    );
+    var validationField =
+      fixedAmount.length !== 0 && freeInput.length === 0
+        ? fixedAmount
+        : freeInput;
+
+    $("input.skyscraper-next-form.wide").click(function () {
+      if (validationField[0].checkValidity()) {
+        previous_form = $(this).parent().parent();
+        next_form = $(this).parent().parent().next();
+        next_form.show();
+        previous_form.hide();
+      } else {
+        validationField[0].reportValidity();
+      }
+    });
+    $("input.skyscraper-previous-form.wide").click(function () {
       previous_form = $(this).parent().parent();
       next_form = $(this).parent().parent().prev();
       next_form.show();
@@ -926,7 +1282,7 @@
     });
   });
 
-  $(document).ready(function () {
+  /* $(document).ready(function () {
     var form_count = 1,
       previous_form,
       next_form,
@@ -994,7 +1350,7 @@
       next_form.show();
       previous_form.hide();
     });
-  });
+  }); */
 
   /* $(document).ready(function () {
     var form_count = 1,
@@ -1048,4 +1404,74 @@
       previous_form.hide();
     });
   }); */
+  $(document).ready(function () {
+    var form_count = 1,
+      previous_form,
+      next_form,
+      total_forms;
+    total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
+    var freeInput = $(
+      "input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_high]"
+    );
+    var fixedAmount = $(
+      "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_high]"
+    );
+    var validationField =
+      fixedAmount.length !== 0 && freeInput.length === 0
+        ? fixedAmount
+        : freeInput;
+
+    $("input.lnpw_widget.skyscraper-next-form.high").click(function () {
+      if (validationField[0].checkValidity()) {
+        previous_form = $(this).parent().parent();
+        next_form = $(this).parent().parent().next();
+        next_form.show();
+        previous_form.hide();
+      } else {
+        validationField[0].reportValidity();
+      }
+    });
+    $("input.lnpw_widget.skyscraper-previous-form.high").click(function () {
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().prev();
+      next_form.show();
+      previous_form.hide();
+    });
+  });
+
+  $(document).ready(function () {
+    var form_count = 1,
+      previous_form,
+      next_form,
+      total_forms;
+    total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
+    var freeInput = $(
+      "input[name=lnpw_widget_lnpw_skyscraper_tipping_amount_wide]"
+    );
+    var fixedAmount = $(
+      "input[type=radio][name=lnpw_widget_lnpw_skyscraper_tipping_default_amount_wide]"
+    );
+
+    var validationField =
+      fixedAmount.length !== 0 && freeInput.length === 0
+        ? fixedAmount
+        : freeInput;
+
+    $("input.lnpw_widget.skyscraper-next-form.wide").click(function () {
+      if (validationField[0].checkValidity()) {
+        previous_form = $(this).parent().parent();
+        next_form = $(this).parent().parent().next();
+        next_form.show();
+        previous_form.hide();
+      } else {
+        validationField[0].reportValidity();
+      }
+    });
+    $("input.lnpw_widget.skyscraper-previous-form.wide").click(function () {
+      previous_form = $(this).parent().parent();
+      next_form = $(this).parent().parent().prev();
+      next_form.show();
+      previous_form.hide();
+    });
+  });
 })(jQuery);

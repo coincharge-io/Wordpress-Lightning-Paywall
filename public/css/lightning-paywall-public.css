@@ -119,6 +119,7 @@ Tipping box
 .lnpw_tipping_box_container fieldset {
   border: 0;
   padding: 0;
+  margin: 0;
 }
 
 .lnpw_tipping_box_header_container {
@@ -135,25 +136,32 @@ Tipping box
 #lnpw_tipping_amount_lnpw_widget,
 #lnpw_converted_amount_lnpw_widget {
   height: 40px;
-  width: 50%;
+  width: 40%;
+  font-size: 15px;
 }
 #lnpw_tipping_currency,
 #lnpw_converted_currency,
 #lnpw_tipping_currency_lnpw_widget,
 #lnpw_converted_currency_lnpw_widget {
   height: 40px;
-  width: 45%;
+  width: 35%;
   font-size: 15px;
 }
-
+#tipping_form_box fieldset h6,
+#tipping_form_box_widget fieldset h6 {
+  text-align: center;
+  margin: 10px 0;
+}
 .lnpw_tipping_box_container h6 {
   font-weight: bold;
+  font-size: 16px;
 }
 .lnpw_tipping_box_container fieldset > h6 {
   margin-left: 1px;
 }
 .lnpw_tipping_box_info_container > p {
   margin: 0.5em 0;
+  font-size: 14px;
 }
 
 .lnpw_tipping_box_amount {
@@ -162,10 +170,12 @@ Tipping box
 .lnpw_tipping_box_container select {
   line-height: 1;
 }
-#lnpw_converted_amount {
+#lnpw_converted_amount,
+#lnpw_converted_amount_lnpw_widget {
   text-align: right;
 }
-#lnpw_converted_currency {
+#lnpw_converted_currency,
+#lnpw_converted_currency_lnpw_widget {
   text-align: left;
 }
 .predefined_container input[type="radio"] {
@@ -251,6 +261,7 @@ Tipping box
   flex-direction: column;
   border: 0;
   min-width: 0;
+  padding: 0;
 }
 
 .lnpw_skyscraper_tipping_container h6 {
@@ -278,13 +289,13 @@ Tipping box
 #lnpw_widget_lnpw_skyscraper_tipping_amount_wide,
 #lnpw_widget_lnpw_skyscraper_tipping_amount_high {
   height: 30px;
-  width: 55%;
+  width: 50%;
 }
 #lnpw_skyscraper_tipping_currency,
 #lnpw_widget_lnpw_skyscraper_tipping_currency_wide,
 #lnpw_widget_lnpw_skyscraper_tipping_currency_high {
   height: 30px;
-  width: 35%;
+  width: 50%;
   font-size: 15px;
 }
 
@@ -353,12 +364,18 @@ Tipping box
   flex-wrap: wrap;
 }
 
-.lnpw_skyscraper_donor_information label {
-  display: inline-block;
-  width: 100px;
-  padding-left: 0.5em;
+.lnpw_skyscraper_donor_information.wide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }
 
+.lnpw_skyscraper_donor_information.high {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1em;
+}
 .lnpw_skyscraper_donor_information input[type="text"],
 .lnpw_skyscraper_donor_information input[type="email"],
 .lnpw_skyscraper_donor_information input[type="url"],
@@ -414,12 +431,26 @@ Tipping box
   line-height: 1em;
 }
 
-.lnpw_skyscraper_amount.high > div {
-  border-radius: 1em;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
+.lnpw_skyscraper_amount > div {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  border-radius: 2em;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
 }
-
+.lnpw_skyscraper_amount {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
 .lnpw_skyscraper_amount_value_1.high,
 .lnpw_skyscraper_amount_value_2.high,
 .lnpw_skyscraper_amount_value_3.high {
@@ -435,11 +466,31 @@ Tipping box
 .lnpw_skyscraper_tipping_container.high fieldset {
   padding: 0;
 }
-
+#lnpw_skyscraper_tipping_amount,
+#lnpw_widget_lnpw_skyscraper_tipping_amount_wide,
+#lnpw_widget_lnpw_skyscraper_tipping_amount_high {
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+}
 .lnpw_skyscraper_tipping_container.wide fieldset {
   padding: 0 1em;
 }
-
+.lnpw_skyscraper_amount_value_1.selected,
+.lnpw_skyscraper_amount_value_2.selected,
+.lnpw_skyscraper_amount_value_3.selected,
+.lnpw_widget.lnpw_skyscraper_amount_value_1.wide.selected,
+.lnpw_widget.lnpw_skyscraper_amount_value_2.wide.selected,
+.lnpw_widget.lnpw_skyscraper_amount_value_3.wide.selected,
+.lnpw_widget.lnpw_skyscraper_amount_value_1.high.selected,
+.lnpw_widget.lnpw_skyscraper_amount_value_2.high.selected,
+.lnpw_widget.lnpw_skyscraper_amount_value_3.high.selected {
+  background-color: hsl(354, 78%, 7%) !important;
+}
+.lnpw_skyscraper_amount_value_1 input[type="radio"],
+.lnpw_skyscraper_amount_value_2 input[type="radio"],
+.lnpw_skyscraper_amount_value_3 input[type="radio"] {
+  display: none;
+}
 .lnpw_skyscraper_amount.high {
   flex-direction: column;
 }
@@ -678,7 +729,7 @@ Tipping page
   margin: 0 5px;
 }
 
-#page_tipping_form > fieldset:nth-child(3) > h6 {
+#page_tipping_form > fieldset > h6 {
   text-align: left;
   margin: 2em 0 2em 5px;
 }
@@ -754,15 +805,23 @@ Tipping page
 }
 #powered_by_skyscraper p {
   margin-top: 0.5em;
-  font-size: 0.7em;
+  font-size: 18px;
 }
 #powered_by {
   display: flex;
   justify-content: center;
 }
+
+#powered_by_box {
+  margin-left: 1.5em;
+}
 #powered_by p {
   margin-top: 0.5em;
-  font-size: 1.5em;
+  font-size: 18px;
+}
+#powered_by_box p {
+  margin-top: 0.5em;
+  font-size: 18px;
 }
 /**
   Tipping button spinner

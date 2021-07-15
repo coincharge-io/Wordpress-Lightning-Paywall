@@ -31,6 +31,7 @@ class Tipping_Box extends WP_Widget
         button_color = '{$instance['button_color']}'
         logo_id = '{$instance['logo_id']}'
         background_id = '{$instance['background_id']}'
+        background = '{$instance['hf_color']}'
         widget = 'true']");
     }
 
@@ -60,7 +61,7 @@ class Tipping_Box extends WP_Widget
         $button_text_color = !empty($instance['button_text_color']) ? $instance['button_text_color'] : esc_html__('#FFFFFF', 'text_domain');
 
         $button_color = !empty($instance['button_color']) ? $instance['button_color'] : esc_html__('#FE642E', 'text_domain');
-
+        $hf_color = !empty($instance['hf_color']) ? $instance['hf_color'] : esc_html__('1d5aa3', 'text_domain');
 
         $logo_id = !empty($instance['logo_id']) ? $instance['logo_id'] : esc_html__('', 'text_domain');
         $background_id = !empty($instance['background_id']) ? $instance['background_id'] : esc_html__('', 'text_domain');
@@ -271,6 +272,15 @@ class Tipping_Box extends WP_Widget
             value="<?php echo esc_attr($button_color); ?>" />
 
     </div>
+    <div class="row">
+        <label
+            for="<?php echo esc_attr($this->get_field_id('hf_color')); ?>"><?php echo esc_html__('Header and footer background color', 'text_domain'); ?></label>
+
+        <input id="<?php echo esc_attr($this->get_field_id('hf_color')); ?>" class="widget-tipping-basic-hf_color"
+            name="<?php echo esc_attr($this->get_field_name('hf_color')); ?>" type="text"
+            value="<?php echo esc_attr($hf_color); ?>" />
+
+    </div>
 
 </div>
 <?php
@@ -300,7 +310,7 @@ class Tipping_Box extends WP_Widget
         $instance['button_text_color'] = !empty($new_instance['button_text_color']) ? wp_strip_all_tags($new_instance['button_text_color']) : '';
 
         $instance['button_color'] = !empty($new_instance['button_color']) ? wp_strip_all_tags($new_instance['button_color']) : '';
-
+        $instance['hf_color'] = !empty($new_instance['hf_color']) ? wp_strip_all_tags($new_instance['hf_color']) : '';
         $instance['logo_id'] = !empty($new_instance['logo_id']) ? $new_instance['logo_id'] : '';
         $instance['background_id'] = !empty($new_instance['background_id']) ? $new_instance['background_id'] : '';
 
