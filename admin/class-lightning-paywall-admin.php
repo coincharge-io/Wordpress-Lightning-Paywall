@@ -160,76 +160,77 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_redirect', array('type' => 'string', 'default' => get_site_url()));
 
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_collect', array('type' => 'array', 'default' => array(
-		'name' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'email' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'address' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'phone' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'message' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
+			'name' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'email' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'address' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'phone' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'message' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
 
 		), 'sanitize_callback' => array($this, 'validate_collect_info')));
 
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_fixed_amount', array(
-		'type' => 'array', 'default' => array(
-		'value1' => array(
-		'enabled' => 'false',
-		'currency' => 'SATS',
-		'amount' => 1000,
-		'icon' => 'fas fa-coffee'
-		),
-		'value2' => array(
-		'enabled' => 'false',
-		'currency' => 'SATS',
-		'amount' => 2000,
-		'icon' => 'fas fa-beer'
-		),
-		'value3' => array(
-		'enabled' => 'false',
-		'currency' => 'SATS',
-		'amount' => 3000,
-		'icon' => 'fas fa-cocktail'
-		),
-		), 'sanitize_callback' => array($this, 'validate_predefined_values')
+			'type' => 'array', 'default' => array(
+				'value1' => array(
+					'enabled' => 'false',
+					'currency' => 'SATS',
+					'amount' => 1000,
+					'icon' => 'fas fa-coffee'
+				),
+				'value2' => array(
+					'enabled' => 'false',
+					'currency' => 'SATS',
+					'amount' => 2000,
+					'icon' => 'fas fa-beer'
+				),
+				'value3' => array(
+					'enabled' => 'false',
+					'currency' => 'SATS',
+					'amount' => 3000,
+					'icon' => 'fas fa-cocktail'
+				),
+			), 'sanitize_callback' => array($this, 'validate_predefined_values')
 		));
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_text', array(
-		'type' => 'array', 'default' => array(
-		'title' => 'Support my work',
-		'description' => '',
-		'info' => 'Enter Tipping Amount',
-		'button' => 'Tipping now'
-		), 'sanitize_callback' => array($this, 'validate_textarea')
+			'type' => 'array', 'default' => array(
+				'title' => 'Support my work',
+				'description' => '',
+				'info' => 'Enter Tipping Amount',
+				'button' => 'Tipping now'
+			), 'sanitize_callback' => array($this, 'validate_textarea')
 		));
 
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_currency', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_color', array(
-		'type' => 'array', 'default' => array(
-		'button_text' => '#FFFFFF',
-		'background' => '#E6E6E6',
-		'button' => '#FE642E',
-		'title' => '#000000',
-		'description' => '#000000',
-		'tipping' => '#000000',
-		), 'sanitize_callback' => array($this, 'validate_colors')
+			'type' => 'array', 'default' => array(
+				'button_text' => '#FFFFFF',
+				'background' => '#E6E6E6',
+				'button' => '#FE642E',
+				'title' => '#000000',
+				'hf_background'	=> '#1d5aa3',
+				'description' => '#000000',
+				'tipping' => '#000000',
+			), 'sanitize_callback' => array($this, 'validate_colors')
 		));
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_image', array(
-		'type' => 'array', 'default' => array(
-		'logo' => '',
-		'background' => '',
-		), 'sanitize_callback' => array($this, 'validate_images')
+			'type' => 'array', 'default' => array(
+				'logo' => '',
+				'background' => '',
+			), 'sanitize_callback' => array($this, 'validate_images')
 		));
 
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_enter_amount', array('type' => 'string', 'default' => 'false', 'sanitize_callback' => array($this, 'sanitize_mandatory')));
@@ -238,57 +239,56 @@ class Lightning_Paywall_Admin
 		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_box_redirect', array('type' => 'string', 'default' => get_site_url()));
 
 		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_box_collect', array('type' => 'array', 'default' => array(
-		'name' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'email' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'address' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'phone' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
-		'message' => array(
-		'collect' => 'false',
-		'mandatory' => 'false'
-		),
+			'name' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'email' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'address' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'phone' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
+			'message' => array(
+				'collect' => 'false',
+				'mandatory' => 'false'
+			),
 
 		), 'sanitize_callback' => array($this, 'validate_collect_info')));
 
 
 		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_box_text', array(
-		'type' => 'array', 'default' => array(
-		'title' => 'Support my work',
-		'description' => '',
-		'info' => 'Enter Tipping Amount',
-		'button' => 'Tipping now'
-		), 'sanitize_callback' => array($this, 'validate_textarea')
+			'type' => 'array', 'default' => array(
+				'title' => 'Support my work',
+				'description' => '',
+				'info' => 'Enter Tipping Amount',
+				'button' => 'Tipping now'
+			), 'sanitize_callback' => array($this, 'validate_textarea')
 		));
 
 		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_box_currency', array('type' => 'string', 'default' => 'SATS'));
 		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_box_color', array(
-		'type' => 'array', 'default' => array(
-		'button_text' => '#FFFFFF',
-		'background' => '#E6E6E6',
-		'button' => '#FE642E',
-		'title' => '#000000',
-		'description' => '#000000',
-		'tipping' => '#000000',
-		), 'sanitize_callback' => array($this, 'validate_colors')
+			'type' => 'array', 'default' => array(
+				'button_text' => '#FFFFFF',
+				'background' => '#E6E6E6',
+				'button' => '#FE642E',
+				'title' => '#000000',
+				'description' => '#000000',
+				'tipping' => '#000000',
+			), 'sanitize_callback' => array($this, 'validate_colors')
 		));
 		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_box_image', array(
-		'type' => 'array', 'default' => array(
-		'logo' => '',
-		'background' => '',
-		), 'sanitize_callback' => array($this, 'validate_images')
+			'type' => 'array', 'default' => array(
+				'logo' => '',
+				'background' => '',
+			), 'sanitize_callback' => array($this, 'validate_images')
 		));
-
 	}
 	public function validate_images($values)
 	{
@@ -313,6 +313,7 @@ class Lightning_Paywall_Admin
 		$default_values = array(
 			'button_text'		=> '#FFFFFF',
 			'background'		=> '#E6E6E6',
+			'hf_background'		=> '#1d5aa3',
 			'button'			=> '#FE642E',
 			'title'				=> '#000000',
 			'description'		=> '#000000',

@@ -859,22 +859,7 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
-	private function collect_is_enabled($arr)
-	{
 
-		if (!is_array($arr)) {
-			return;
-		}
-
-		foreach ($arr as $key => $value) {
-
-			if ($arr[$key]['collect'] === 'true') {
-
-				return true;
-			}
-		}
-		return false;
-	}
 
 	public static function display_is_enabled($arr)
 	{
@@ -921,7 +906,7 @@ class Lightning_Paywall_Public
 			'widget'		=> 'false',
 		), $atts);
 
-		$dimension = explode('x', $atts['dimension']);
+		$dimension = explode('x', ($atts['dimension'] == '250x300' ? '250x300' : '300x300'));
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
 		$background = wp_get_attachment_image_src($atts['background_id']) ? wp_get_attachment_image_src($atts['background_id'])[0] : $atts['background_id'];
@@ -935,27 +920,27 @@ class Lightning_Paywall_Public
 	?>
 		<style>
 			<?php if ($version === 'widget') : ?>.lnpw_tipping_box_container.lnpw_widget {
-				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : '');
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
 									?>;
-				width: <?php echo $dimension[0] . 'px !important';
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
 						?>;
-				height: <?php echo $dimension[1] . 'px !important';
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
 						?>;
-				background-image: url(<?php echo ($background ? $background : '');
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
 										?>);
 
 			}
 
 
 			#lnpw_tipping__button_lnpw_widget {
-				color: <?php echo $atts['button_text_color'];
+				color: <?php echo esc_html($atts['button_text_color']);
 						?>;
-				background: <?php echo $atts['button_color'];
+				background: <?php echo esc_html($atts['button_color']);
 							?>;
 			}
 
 			#tipping_form_box_widget fieldset div.lnpw_tipping_box_header_container h6 {
-				color: <?php echo $atts['title_text_color'];
+				color: <?php echo esc_html($atts['title_text_color']);
 						?>
 			}
 
@@ -965,43 +950,43 @@ class Lightning_Paywall_Public
 			}
 
 			#tipping_form_box_widget fieldset div.lnpw_tipping_box_info_container p {
-				color: <?php echo $atts['description_color'];
+				color: <?php echo esc_html($atts['description_color']);
 						?>
 			}
 
 			#tipping_form_box_widget fieldset div.lnpw_tipping_box_header_container,
 			#button {
-				background-color: <?php echo $atts['background'];
+				background-color: <?php echo esc_html($atts['background']);
 									?>;
 			}
 
 			#tipping_form_box_widget fieldset h6 {
-				color: <?php echo $atts['tipping_text_color'];
+				color: <?php echo esc_html($atts['tipping_text_color']);
 						?>
 			}
 
 			<?php else : ?>.lnpw_tipping_box_container {
-				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : '');
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
 									?>;
-				width: <?php echo $dimension[0] . 'px !important';
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
 						?>;
-				height: <?php echo $dimension[1] . 'px !important';
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
 						?>;
-				background-image: url(<?php echo ($background ? $background : '');
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
 										?>);
 
 			}
 
 
 			#lnpw_tipping__button {
-				color: <?php echo $atts['button_text_color'];
+				color: <?php echo esc_html($atts['button_text_color']);
 						?>;
-				background: <?php echo $atts['button_color'];
+				background: <?php echo esc_html($atts['button_color']);
 							?>;
 			}
 
 			#tipping_form_box fieldset div.lnpw_tipping_box_header_container div h6 {
-				color: <?php echo $atts['title_text_color'];
+				color: <?php echo esc_html($atts['title_text_color']);
 						?>
 			}
 
@@ -1012,17 +997,17 @@ class Lightning_Paywall_Public
 
 			.lnpw_tipping_box_header_container,
 			#button {
-				background-color: <?php echo $atts['background'];
+				background-color: <?php echo esc_html($atts['background']);
 									?>;
 			}
 
 			#tipping_form_box fieldset div.lnpw_tipping_box_info_container p {
-				color: <?php echo $atts['description_color'];
+				color: <?php echo esc_html($atts['description_color']);
 						?>
 			}
 
 			#tipping_form_box fieldset h6 {
-				color: <?php echo $atts['tipping_text_color'];
+				color: <?php echo esc_html($atts['tipping_text_color']);
 						?>
 			}
 
@@ -1052,7 +1037,7 @@ class Lightning_Paywall_Public
 								<p><?php echo esc_html($atts['description']); ?></p>
 							<?php endif; ?>
 						</div>
-						<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?></h6>
+						<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : ''); ?></h6>
 						<div class="lnpw_tipping_box_amount">
 
 							<div class="<?php echo "lnpw_tipping_free_input {$is_widget}"; ?>">
@@ -1092,6 +1077,76 @@ class Lightning_Paywall_Public
 
 		return ob_get_clean();
 	}
+
+	/**
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	private function getCollect($atts)
+	{
+		return array(
+			array(
+				'id'    => 'name',
+				'label' => 'Full name',
+				'display' => $atts['display_name'] == 'true' ? 'true' : 'false',
+				'mandatory' => $atts['mandatory_name'] == 'true' ? 'true' : 'false'
+			),
+			array(
+				'id'    => 'email',
+				'label' => 'Email',
+				'display' => $atts['display_email'] == 'true' ? 'true' : 'false',
+				'mandatory' => $atts['mandatory_email'] == 'true' ? 'true' : 'false'
+			),
+			array(
+				'id'    => 'address',
+				'label' => 'Address',
+				'display' => $atts['display_address'] == 'true' ? 'true' : 'false',
+				'mandatory' => $atts['mandatory_address'] == 'true' ? 'true' : 'false'
+			),
+			array(
+				'id'    => 'phone',
+				'label' => 'Phone',
+				'display' => $atts['display_phone'] == 'true' ? 'true' : 'false',
+				'mandatory' => $atts['mandatory_phone'] == 'true' ? 'true' : 'false'
+			),
+			array(
+				'id'    => 'message',
+				'label' => 'Message',
+				'display' => $atts['display_message'] == 'true' ? 'true' : 'false',
+				'mandatory' => $atts['mandatory_message'] == 'true' ? 'true' : 'false'
+			),
+		);
+	}
+
+	/**
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	private function getFixedAmount($atts)
+	{
+		return array(
+			'value_1' => array(
+				'enabled' 	=> ($atts['value1_enabled'] == 'true' ? 'true' : 'false'),
+				'currency' => in_array($atts['value1_currency'], Lightning_Paywall_Admin::TIPPING_CURRENCIES) === true ? $atts['value1_currency'] : 'SATS',
+				'amount'	=> esc_html($atts['value1_amount']),
+				'icon'		=> esc_html($atts['value1_icon'])
+			),
+			'value_2' => array(
+				'enabled' 	=> ($atts['value2_enabled'] == 'true' ? 'true' : 'false'),
+				'currency' => in_array($atts['value2_currency'], Lightning_Paywall_Admin::TIPPING_CURRENCIES) === true ? $atts['value2_currency'] : 'SATS',
+				'amount'	=> esc_html($atts['value2_amount']),
+				'icon'		=> esc_html($atts['value2_icon'])
+			),
+			'value_3' => array(
+				'enabled' 	=> ($atts['value3_enabled'] == 'true' ? 'true' : 'false'),
+				'currency' => in_array($atts['value3_currency'], Lightning_Paywall_Admin::TIPPING_CURRENCIES) === true ? $atts['value3_currency'] : 'SATS',
+				'amount'	=> esc_html($atts['value3_amount']),
+				'icon'		=> esc_html($atts['value3_icon'])
+			),
+		);
+	}
 	/**
 	 * @param $atts
 	 *
@@ -1118,6 +1173,7 @@ class Lightning_Paywall_Public
 			'background_id'	=> '',
 			'free_input'	=> 'true',
 			'fixed_background'	=> '#ffa500',
+			'background' => '#1d5aa3',
 			'value1_enabled' => 'false',
 			'value1_amount' => '1000',
 			'value1_currency' => 'SATS',
@@ -1143,66 +1199,14 @@ class Lightning_Paywall_Public
 			'widget'			=> 'false'
 		), $atts);
 
-		$dimension = explode('x', $atts['dimension']);
+		$dimension = explode('x', ($atts['dimension'] == '160x600' ? '160x600' : '600x160'));
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
-		$logo = wp_get_attachment_image_src($atts['logo_id']);
-		$background = wp_get_attachment_image_src($atts['background_id']);
-		$collect = array(
-			array(
-				'id'    => 'name',
-				'label' => 'Full name',
-				'display' => $atts['display_name'],
-				'mandatory' => $atts['mandatory_name']
-			),
-			array(
-				'id'    => 'email',
-				'label' => 'Email',
-				'display' => $atts['display_email'],
-				'mandatory' => $atts['mandatory_email']
-			),
-			array(
-				'id'    => 'address',
-				'label' => 'Address',
-				'display' => $atts['display_address'],
-				'mandatory' => $atts['mandatory_address']
-			),
-			array(
-				'id'    => 'phone',
-				'label' => 'Phone',
-				'display' => $atts['display_phone'],
-				'mandatory' => $atts['mandatory_phone']
-			),
-			array(
-				'id'    => 'message',
-				'label' => 'Message',
-				'display' => $atts['display_message'],
-				'mandatory' => $atts['mandatory_message']
-			),
-
-		);
+		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
+		$background = wp_get_attachment_image_src($atts['background_id']) ? wp_get_attachment_image_src($atts['background_id'])[0] : $atts['background_id'];
+		$collect = $this->getCollect($atts);
 		$collect_data = $this->display_is_enabled($collect);
-		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 
-		$fixed_amount = array(
-			'value_1' => array(
-				'enabled' 	=> $atts['value1_enabled'],
-				'currency' => $atts['value1_currency'],
-				'amount'	=> $atts['value1_amount'],
-				'icon'		=> $atts['value1_icon']
-			),
-			'value_2' => array(
-				'enabled' 	=> $atts['value2_enabled'],
-				'currency' => $atts['value2_currency'],
-				'amount'	=> $atts['value2_amount'],
-				'icon'		=> $atts['value2_icon']
-			),
-			'value_3' => array(
-				'enabled' 	=> $atts['value3_enabled'],
-				'currency' => $atts['value3_currency'],
-				'amount'	=> $atts['value3_amount'],
-				'icon'		=> $atts['value3_icon']
-			),
-		);
+		$fixed_amount = $this->getFixedAmount($atts);
 
 		$first_enabled = array_column($fixed_amount, 'enabled');
 		$d = array_search('true', $first_enabled);
@@ -1221,35 +1225,49 @@ class Lightning_Paywall_Public
 		ob_start();
 	?>
 		<style>
-			<?php if ($version === 'wide') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.wide {
-				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : '');
+			<?php if ($version === 'wide') : ?>.lnpw_skyscraper_banner {
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
+						?>;
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
+						?>;
+			}
+
+			.lnpw_widget.lnpw_skyscraper_tipping_container.wide {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
 									?>;
-				background-image: url(<?php echo ($background ? $background[0] : '');
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
 										?>);
-				width: <?php echo $dimension[0] . 'px !important';
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
 						?>;
-				height: <?php echo $dimension[1] . 'px !important';
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
 						?>;
+			}
+
+
+			.lnpw_skyscraper_header_container.wide,
+			#lnpw_skyscraper_button_wide {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
 			}
 
 			.lnpw_skyscraper_amount_value_1.wide,
 			.lnpw_skyscraper_amount_value_2.wide,
 			.lnpw_skyscraper_amount_value_3.wide,
 			.lnpw_skyscraper_tipping_free_input.wide {
-				background-color: <?php echo $atts['fixed_background'];
+				background-color: <?php echo esc_html($atts['fixed_background']);
 									?>;
 			}
 
 			#lnpw_widget_lnpw_skyscraper_tipping__button_wide,
-			.skyscraper-next-form {
-				color: <?php echo $atts['button_text_color'];
+			#lnpw_skyscraper_button_wide>div>input.lnpw_widget.skyscraper-next-form {
+				color: <?php echo esc_html($atts['button_text_color']);
 						?>;
-				background: <?php echo $atts['button_color'];
+				background: <?php echo esc_html($atts['button_color']);
 							?>;
 			}
 
 			.lnpw_widget.lnpw_skyscraper_header_container.wide h6 {
-				color: <?php echo $atts['title_text_color'];
+				color: <?php echo esc_html($atts['title_text_color']);
 						?>
 			}
 
@@ -1259,20 +1277,20 @@ class Lightning_Paywall_Public
 			}
 
 			.lnpw_widget.lnpw_skyscraper_info_container.wide p {
-				color: <?php echo $atts['description_color'];
+				color: <?php echo esc_html($atts['description_color']);
 						?>
 			}
 
 			.lnpw_widget.lnpw_skyscraper_tipping_info.wide fieldset h6,
 			.lnpw_widget.lnpw_skyscraper_tipping_info.wide h6 {
-				color: <?php echo $atts['tipping_text_color'];
+				color: <?php echo esc_html($atts['tipping_text_color']);
 						?>
 			}
 
 			.lnpw_widget.lnpw_skyscraper_amount_value_1.wide,
 			.lnpw_widget.lnpw_skyscraper_amount_value_2.wide,
 			.lnpw_widget.lnpw_skyscraper_amount_value_3.wide {
-				background: <?php echo $atts['fixed_background'];
+				background: <?php echo esc_html($atts['fixed_background']);
 							?>;
 			}
 
@@ -1284,26 +1302,32 @@ class Lightning_Paywall_Public
 
 
 			<?php elseif ($version === 'high') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.high {
-				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : '');
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
 									?>;
-				background-image: url(<?php echo ($background ? $background[0] : '');
+				background-image: url(<?php echo ($background ? $background : '');
 										?>);
-				width: <?php echo $dimension[0] . 'px !important';
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
 						?>;
-				height: <?php echo $dimension[1] . 'px !important';
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
 						?>;
 			}
 
 			#lnpw_widget_lnpw_skyscraper_tipping__button_high,
-			.skyscraper-next-form.high {
-				color: <?php echo $atts['button_text_color'];
+			#lnpw_skyscraper_button_high>div>input.lnpw_widget.skyscraper-next-form.high {
+				color: <?php echo esc_html($atts['button_text_color']);
 						?>;
-				background: <?php echo $atts['button_color'];
+				background: <?php echo esc_html($atts['button_color']);
 							?>;
 			}
 
+			.lnpw_widget.lnpw_skyscraper_header_container.high,
+			#lnpw_widget_lnpw_skyscraper_button_high {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
+
 			.lnpw_widget.lnpw_skyscraper_header_container.high h6 {
-				color: <?php echo $atts['title_text_color'];
+				color: <?php echo esc_html($atts['title_text_color']);
 						?>
 			}
 
@@ -1311,7 +1335,7 @@ class Lightning_Paywall_Public
 			.lnpw_skyscraper_amount_value_2.high,
 			.lnpw_skyscraper_amount_value_3.high,
 			.lnpw_skyscraper_tipping_free_input.high {
-				background-color: <?php echo $atts['fixed_background'];
+				background-color: <?php echo esc_html($atts['fixed_background']);
 									?>;
 			}
 
@@ -1321,20 +1345,20 @@ class Lightning_Paywall_Public
 			}
 
 			.lnpw_widget.lnpw_skyscraper_info_container.high p {
-				color: <?php echo $atts['description_color'];
+				color: <?php echo esc_html($atts['description_color']);
 						?>
 			}
 
 			.lnpw_widget.lnpw_skyscraper_tipping_info.high fieldset h6,
 			.lnpw_widget.lnpw_skyscraper_tipping_info.high h6 {
-				color: <?php echo $atts['tipping_text_color'];
+				color: <?php echo esc_html($atts['tipping_text_color']);
 						?>
 			}
 
 			.lnpw_widget.lnpw_skyscraper_amount_value_1.high,
 			.lnpw_widget.lnpw_skyscraper_amount_value_2.high,
 			.lnpw_widget.lnpw_skyscraper_amount_value_3.high {
-				background: <?php echo $atts['fixed_background'];
+				background: <?php echo esc_html($atts['fixed_background']);
 							?>;
 
 			}
@@ -1345,13 +1369,20 @@ class Lightning_Paywall_Public
 			}
 
 			<?php else : ?>.lnpw_skyscraper_tipping_container {
-				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : '');
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
 									?>;
-				background-image: url(<?php echo ($background ? $background[0] : '');
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
 										?>);
-				width: <?php echo $dimension[0] . 'px !important';
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
 						?>;
-				height: <?php echo $dimension[1] . 'px !important';
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
+						?>;
+			}
+
+			.lnpw_skyscraper_banner {
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
+						?>;
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
 						?>;
 			}
 
@@ -1359,20 +1390,27 @@ class Lightning_Paywall_Public
 			.lnpw_skyscraper_amount_value_2,
 			.lnpw_skyscraper_amount_value_3,
 			.lnpw_skyscraper_tipping_free_input {
-				background-color: <?php echo $atts['fixed_background'];
+				background-color: <?php echo esc_html($atts['fixed_background']);
 									?>;
 			}
 
-			#lnpw_skyscraper_tipping__button,
-			.skyscraper-next-form {
-				color: <?php echo $atts['button_text_color'];
+			.lnpw_skyscraper_header_container,
+			#lnpw_skyscraper_button {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
+
+			#lnpw_skyscraper_tipping__button_high,
+			#lnpw_skyscraper_tipping__button_wide,
+			#lnpw_skyscraper_button>div>input.skyscraper-next-form {
+				color: <?php echo esc_html($atts['button_text_color']);
 						?>;
-				background: <?php echo $atts['button_color'];
+				background: <?php echo esc_html($atts['button_color']);
 							?>;
 			}
 
 			.lnpw_skyscraper_header_container h6 {
-				color: <?php echo $atts['title_text_color'];
+				color: <?php echo esc_html($atts['title_text_color']);
 						?>
 			}
 
@@ -1382,20 +1420,20 @@ class Lightning_Paywall_Public
 			}
 
 			.lnpw_skyscraper_info_container p {
-				color: <?php echo $atts['description_color'];
+				color: <?php echo esc_html($atts['description_color']);
 						?>
 			}
 
 			.lnpw_skyscraper_tipping_info fieldset h6,
 			.lnpw_skyscraper_tipping_info h6 {
-				color: <?php echo $atts['tipping_text_color'];
+				color: <?php echo esc_html($atts['tipping_text_color']);
 						?>
 			}
 
 			.lnpw_skyscraper_amount_value_1,
 			.lnpw_skyscraper_amount_value_2,
 			.lnpw_skyscraper_amount_value_3 {
-				background: <?php echo $atts['fixed_background'];
+				background: <?php echo esc_html($atts['fixed_background']);
 							?>;
 
 			}
@@ -1414,7 +1452,7 @@ class Lightning_Paywall_Public
 					<div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
 						<?php if ($logo) : ?>
 							<div class="lnpw_logo_wrap">
-								<img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+								<img width="120" height="120" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
 							</div>
 						<?php endif; ?>
 						<?php if (!empty($atts['title'])) : ?>
@@ -1438,7 +1476,7 @@ class Lightning_Paywall_Public
 									<div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
 										<?php if ($logo) : ?>
 											<div class="lnpw_logo_wrap">
-												<img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo[0]); ?> />
+												<img width="120" height="120" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
 											</div>
 										<?php endif; ?>
 										<?php if (!empty($atts['title'])) : ?>
@@ -1455,7 +1493,7 @@ class Lightning_Paywall_Public
 
 								<?php endif; ?>
 							</div>
-							<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : 'Enter Tipping Amount'); ?>
+							<h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : ''); ?>
 							</h6>
 							<div class="<?php echo trim("{$is_widget} lnpw_skyscraper_amount {$is_wide}"); ?>">
 								<?php foreach ($fixed_amount as $key => $value) : ?>
@@ -1465,7 +1503,7 @@ class Lightning_Paywall_Public
 											<div>
 												<input type="radio" class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_default_amount {$is_wide}"); ?>" id="<?php echo $is_widget_id . $key . '_' . $is_wide; ?>" name="<?php echo "{$form_prefix}lnpw_skyscraper_tipping_default_amount_{$is_wide}"; ?>" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
 												<?php if (!empty($fixed_amount[$key]['amount'])) : ?>
-													<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
+													<i class="<?php echo esc_html($fixed_amount[$key]['icon']); ?>"></i>
 												<?php endif; ?>
 											</div>
 											<label for="<?php echo $key; ?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
@@ -1476,7 +1514,7 @@ class Lightning_Paywall_Public
 								<?php endforeach; ?>
 								<?php if ('true' === $atts['free_input']) : ?>
 									<div class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_free_input {$is_wide}"); ?>">
-										<input type="number" id="<?php echo  "{$is_widget_id}lnpw_skyscraper_tipping_amount{$form_suffix}"; ?>" name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_amount_{$is_wide}"; ?>" placeholder="0.00" required />
+										<input type="number" id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_amount{$form_suffix}"; ?>" name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_amount_{$is_wide}"; ?>" placeholder="0.00" required />
 
 
 										<select required name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency_ {$is_wide}"; ?>" id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency{$form_suffix}"; ?>">
@@ -1499,7 +1537,7 @@ class Lightning_Paywall_Public
 
 
 							<div id="<?php echo "{$is_widget_id}lnpw_skyscraper_button{$form_suffix}"; ?>">
-								<input type="hidden" id="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>" name="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>" value=<?php echo $atts['redirect']; ?> />
+								<input type="hidden" id="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>" name="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>" value=<?php echo esc_attr($atts['redirect']); ?> />
 								<?php if ($collect_data == 'true') : ?>
 									<div>
 										<input type="button" name="next" class="<?php echo  trim("{$is_widget} skyscraper-next-form {$is_wide}"); ?>" value="Continue >" />
@@ -1603,66 +1641,15 @@ class Lightning_Paywall_Public
 			'inactive_color'	=> '',
 		), $atts);
 
-		$dimension = explode('x', $atts['dimension']);
+		$dimension = explode('x', '520x600');
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
 
 		$background = wp_get_attachment_image_src($atts['background_id']) ? wp_get_attachment_image_src($atts['background_id'])[0] : $atts['background_id'];
-		$collect = array(
-			array(
-				'id'    => 'name',
-				'label' => 'Full name',
-				'display' => $atts['display_name'],
-				'mandatory' => $atts['mandatory_name']
-			),
-			array(
-				'id'    => 'email',
-				'label' => 'Email',
-				'display' => $atts['display_email'],
-				'mandatory' => $atts['mandatory_email']
-			),
-			array(
-				'id'    => 'address',
-				'label' => 'Address',
-				'display' => $atts['display_address'],
-				'mandatory' => $atts['mandatory_address']
-			),
-			array(
-				'id'    => 'phone',
-				'label' => 'Phone',
-				'display' => $atts['display_phone'],
-				'mandatory' => $atts['mandatory_phone']
-			),
-			array(
-				'id'    => 'message',
-				'label' => 'Message',
-				'display' => $atts['display_message'],
-				'mandatory' => $atts['mandatory_message']
-			),
-
-		);
+		$collect = $this->getCollect($atts);
 		$collect_data = $this->display_is_enabled($collect);
 
-		$fixed_amount = array(
-			'value_1' => array(
-				'enabled' 	=> $atts['value1_enabled'],
-				'currency' => $atts['value1_currency'],
-				'amount'	=> $atts['value1_amount'],
-				'icon'		=> $atts['value1_icon']
-			),
-			'value_2' => array(
-				'enabled' 	=> $atts['value2_enabled'],
-				'currency' => $atts['value2_currency'],
-				'amount'	=> $atts['value2_amount'],
-				'icon'		=> $atts['value2_icon']
-			),
-			'value_3' => array(
-				'enabled' 	=> $atts['value3_enabled'],
-				'currency' => $atts['value3_currency'],
-				'amount'	=> $atts['value3_amount'],
-				'icon'		=> $atts['value3_icon']
-			),
-		);
+		$fixed_amount = $this->getFixedAmount($atts);
 		$first_enabled = array_column($fixed_amount, 'enabled');
 		$d = array_search('true', $first_enabled);
 		$index = 'value' . ($d + 1);
@@ -1672,37 +1659,37 @@ class Lightning_Paywall_Public
 	?>
 		<style>
 			.lnpw_page_tipping_container {
-				background-color: <?php echo ($atts['background_color'] ? $atts['background_color'] : '');
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
 									?>;
-				background-image: url(<?php echo ($background ? $background : '');
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
 										?>);
-				width: <?php echo $dimension[0] . 'px !important';
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
 						?>;
-				height: <?php echo $dimension[1] . 'px !important';
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
 						?>;
 			}
 
 			#lnpw_page_tipping__button,
 			#lnpw_page_button>input.page-next-form,
 			#lnpw_page_button>input.page-previous-form {
-				color: <?php echo $atts['button_text_color'];
+				color: <?php echo esc_html($atts['button_text_color']);
 						?>;
 			}
 
 			#lnpw_page_button {
-				background-color: <?php echo $atts['background'];
+				background-color: <?php echo esc_html($atts['background']);
 									?>;
 			}
 
 			.lnpw_page_header_container h6 {
-				color: <?php echo $atts['title_text_color'];
+				color: <?php echo esc_html($atts['title_text_color']);
 						?>
 			}
 
 
 			.lnpw_page_tipping_info fieldset h6,
 			.lnpw_page_tipping_info h6 {
-				color: <?php echo $atts['tipping_text_color'];
+				color: <?php echo esc_html($atts['tipping_text_color']);
 						?>
 			}
 
@@ -1710,7 +1697,7 @@ class Lightning_Paywall_Public
 			.lnpw_page_amount_value_2,
 			.lnpw_page_amount_value_3,
 			.lnpw_page_tipping_free_input {
-				background-color: <?php echo $atts['fixed_background'];
+				background-color: <?php echo esc_html($atts['fixed_background']);
 									?>;
 
 			}
@@ -1718,22 +1705,22 @@ class Lightning_Paywall_Public
 			.lnpw_page_header_container,
 			#lnpw_page_button>div:nth-child(1)>input,
 			#lnpw_page_button>input.page-next-form {
-				background-color: <?php echo $atts['background'];
+				background-color: <?php echo esc_html($atts['background']);
 									?>;
 			}
 
 			.lnpw_page_bar_container.active {
-				background-color: <?php echo $atts['active_color'];
+				background-color: <?php echo esc_html($atts['active_color']);
 									?>;
 			}
 
 			#lnpw_page_tipping__button {
-				background-color: <?php echo $atts['button_color'];
+				background-color: <?php echo esc_html($atts['button_color']);
 									?>;
 			}
 
 			.lnpw_page_bar_container div {
-				background-color: <?php echo $atts['inactive_color'];
+				background-color: <?php echo esc_html($atts['inactive_color']);
 									?>;
 			}
 		</style>
@@ -1762,7 +1749,7 @@ class Lightning_Paywall_Public
 						</div>
 					<?php endif; ?>
 					<fieldset>
-						<h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : 'Enter Tipping Amount'); ?>
+						<h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : ''); ?>
 						</h6>
 						<div class="lnpw_page_amount">
 							<?php foreach ($fixed_amount as $key => $value) : ?>
@@ -1773,7 +1760,7 @@ class Lightning_Paywall_Public
 											<input type="radio" class="lnpw_page_tipping_default_amount" id="<?php echo "{$key}_page"; ?>" name="lnpw_page_tipping_default_amount" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount']  . ' ' . (!empty($fixed_amount[$key]['currency']) ? $fixed_amount[$key]['currency'] : 'SATS')); ?>">
 											<?php if (!empty($fixed_amount[$key]['amount'])) : ?>
 												<?php if ('true' === $atts['show_icon']) : ?>
-													<i class="<?php echo $fixed_amount[$key]['icon']; ?>"></i>
+													<i class="<?php echo esc_html($fixed_amount[$key]['icon']); ?>"></i>
 												<?php endif; ?>
 											<?php endif; ?>
 										</div>

@@ -146,8 +146,12 @@
 
     $("#skyscraper_tipping_form").submit(function (e) {
       e.preventDefault();
-      var text = $("#lnpw_skyscraper_tipping__button").text();
-      $("#lnpw_skyscraper_tipping__button").html(
+      var text = $(
+        "#lnpw_skyscraper_tipping__button_high, #lnpw_skyscraper_tipping__button_wide"
+      ).text();
+      $(
+        "#lnpw_skyscraper_tipping__button_high, #lnpw_skyscraper_tipping__button_wide"
+      ).html(
         `<span class="tipping-border" role="status" aria-hidden="true"></span>`
       );
       if (lnpw_invoice_id) {
@@ -171,7 +175,9 @@
           message: $("#lnpw_skyscraper_tipping_donor_message").val(),
         },
         success: function (response) {
-          $("#lnpw_skyscraper_tipping__button").html(text);
+          $(
+            "#lnpw_skyscraper_tipping__button_wide,#lnpw_skyscraper_tipping__button_high"
+          ).html(text);
           if (response.success) {
             lnpw_invoice_id = response.data.invoice_id;
             donor = response.data.donor;
@@ -592,121 +598,7 @@
         .val(get_currency(predefined[1]))
         .attr("readonly", true);
     });
-    /* $("#value_1_page, #value_2_page, #value_3_page").change(function () {
-      if ($(this).is(":checked")) {
-        var predefined = $(this).val().split(" ");
-        var converted_icon = fiat_to_crypto(
-          predefined[1],
-          predefined[0],
-          usd,
-          eur,
-          sats
-        );
-        var converted_icon_amount =
-          "~" +
-          fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
-          " " +
-          get_currency(predefined[1]);
-        $("#lnpw_page_converted_amount")
-          .attr("readonly", false)
-          .val(
-            "~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)
-          )
-          .attr("readonly", true);
-        $("#lnpw_page_converted_currency")
-          .attr("readonly", false)
-          .val(get_currency(predefined[1]))
-          .attr("readonly", true);
-      }
-    }); */
 
-    /* $(
-      "#lnpw_widget_value_1_high, #lnpw_widget_value_2_high, #lnpw_widget_value_3_high"
-    ).change(function () {
-      if ($(this).is(":checked")) {
-        var predefined = $(this).val().split(" ");
-        var converted_icon = fiat_to_crypto(
-          predefined[1],
-          predefined[0],
-          usd,
-          eur,
-          sats
-        );
-        var converted_icon_amount =
-          "~" +
-          fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
-          " " +
-          get_currency(predefined[1]);
-        $("#lnpw_widget_lnpw_skyscraper_converted_amount_high")
-          .attr("readonly", false)
-          .val(
-            "~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)
-          )
-          .attr("readonly", true);
-        $("#lnpw_widget_lnpw_skyscraper_converted_currency_high")
-          .attr("readonly", false)
-          .val(get_currency(predefined[1]))
-          .attr("readonly", true);
-      }
-    });
-
-    $(
-      "#lnpw_widget_value_1_wide, #lnpw_widget_value_2_wide, #lnpw_widget_value_3_wide"
-    ).change(function () {
-      if ($(this).is(":checked")) {
-        var predefined = $(this).val().split(" ");
-        var converted_icon = fiat_to_crypto(
-          predefined[1],
-          predefined[0],
-          usd,
-          eur,
-          sats
-        );
-        var converted_icon_amount =
-          "~" +
-          fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
-          " " +
-          get_currency(predefined[1]);
-        $("#lnpw_widget_lnpw_skyscraper_converted_amount_wide")
-          .attr("readonly", false)
-          .val(
-            "~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)
-          )
-          .attr("readonly", true);
-        $("#lnpw_widget_lnpw_skyscraper_converted_currency_wide")
-          .attr("readonly", false)
-          .val(get_currency(predefined[1]))
-          .attr("readonly", true);
-      }
-    });
- */
-    /* $("#value1, #value2, #value3").change(function () {
-      if ($(this).is(":checked")) {
-        var predefined = $(this).val().split(" ");
-        var converted_icon = fiat_to_crypto(
-          predefined[1],
-          predefined[0],
-          usd,
-          eur,
-          sats
-        );
-        var converted_icon_amount =
-          "~" +
-          fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
-          " " +
-          get_currency(predefined[1]);
-        $("#lnpw_converted_amount")
-          .attr("readonly", false)
-          .val(
-            "~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)
-          )
-          .attr("readonly", true);
-        $("#lnpw_converted_currency")
-          .attr("readonly", false)
-          .val(get_currency(predefined[1]))
-          .attr("readonly", true);
-      }
-    }); */
     $(
       ".lnpw_skyscraper_amount_value_1.high, .lnpw_skyscraper_amount_value_2.high, .lnpw_skyscraper_amount_value_3.high"
     ).click(function () {
@@ -1181,229 +1073,7 @@
       $(".lnpw_page_amount_value_3").removeClass("selected");
     });
   });
-  $(document).ready(function () {
-    var form_count = 1,
-      previous_form,
-      next_form,
-      total_forms;
-    total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
-    var freeInput = $("input[name=lnpw_skyscraper_tipping_amount_high]");
-    var fixedAmount = $(
-      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]"
-    );
-    var validationField =
-      fixedAmount.length !== 0 && freeInput.length === 0
-        ? fixedAmount
-        : freeInput;
 
-    $("input.skyscraper-next-form.high").click(function () {
-      if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent().parent();
-        next_form = $(this).parent().parent().parent().next();
-        next_form.show();
-        previous_form.hide();
-      } else {
-        validationField[0].reportValidity();
-      }
-    });
-    $("input.skyscraper-previous-form.high").click(function () {
-      previous_form = $(this).parent().parent().parent();
-      next_form = $(this).parent().parent().parent().prev();
-      next_form.show();
-      previous_form.hide();
-    });
-  });
-
-  $(document).ready(function () {
-    var form_count = 1,
-      previous_form,
-      next_form,
-      total_forms;
-    total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
-    var freeInput = $("input[name=lnpw_skyscraper_tipping_amount_wide]");
-    var fixedAmount = $(
-      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]"
-    );
-    var validationField =
-      fixedAmount.length !== 0 && freeInput.length === 0
-        ? fixedAmount
-        : freeInput;
-
-    $("input.skyscraper-next-form.wide").click(function () {
-      if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent().parent();
-        next_form = $(this).parent().parent().parent().next();
-        next_form.show();
-        previous_form.hide();
-      } else {
-        validationField[0].reportValidity();
-      }
-    });
-    $("input.skyscraper-previous-form.wide").click(function () {
-      previous_form = $(this).parent().parent().parent();
-      next_form = $(this).parent().parent().parent().prev();
-      next_form.show();
-      previous_form.hide();
-    });
-  });
-
-  $(document).ready(function () {
-    var form_count = 1,
-      previous_form,
-      next_form,
-      total_forms;
-    total_forms = $(".lnpw_page_tipping_container fieldset").length;
-    var freeInput = $("#lnpw_page_tipping_amount");
-    var fixedAmount = $(".lnpw_page_tipping_default_amount");
-    var validationField =
-      fixedAmount.length !== 0 && freeInput.length === 0
-        ? fixedAmount
-        : freeInput;
-
-    $("input.page-next-form").click(function () {
-      if (validationField[0].checkValidity()) {
-        $(".lnpw_page_bar_container.bar-1").removeClass("active");
-        $(".lnpw_page_bar_container.bar-2").addClass("active");
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
-        next_form.show();
-        previous_form.hide();
-      } else {
-        validationField[0].reportValidity();
-      }
-    });
-    $("input.page-previous-form").click(function () {
-      $(".lnpw_page_bar_container.bar-2").removeClass("active");
-      $(".lnpw_page_bar_container.bar-1").addClass("active");
-      previous_form = $(this).parent().parent().parent();
-      next_form = $(this).parent().parent().parent().prev();
-      next_form.show();
-      previous_form.hide();
-    });
-  });
-
-  /* $(document).ready(function () {
-    var form_count = 1,
-      previous_form,
-      next_form,
-      total_forms;
-    total_forms = $(
-      ".lnpw_widget.lnpw_skyscraper_tipping_container_high fieldset"
-    ).length;
-    var freeInput = $("#lnpw_widget_lnpw_skyscraper_tipping_amount_high");
-    var fixedAmount = $(
-      ".lnpw_widget.lnpw_skyscraper_tipping_default_amount_high"
-    );
-    var validationField =
-      fixedAmount.length !== 0 && freeInput.length === 0
-        ? fixedAmount
-        : freeInput;
-
-    $(".lnpw_widget.skyscraper-next-form.high").click(function () {
-      if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
-        next_form.show();
-        previous_form.hide();
-      } else {
-        validationField[0].reportValidity();
-      }
-    });
-    $(".lnpw_widget.skyscraper-previous-form.high").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
-      next_form.show();
-      previous_form.hide();
-    });
-  });
-
-  $(document).ready(function () {
-    var form_count = 1,
-      previous_form,
-      next_form,
-      total_forms;
-    total_forms = $(
-      ".lnpw_widget.lnpw_skyscraper_tipping_container_wide fieldset"
-    ).length;
-    var freeInput = $("#lnpw_widget_lnpw_skyscraper_tipping_amount_wide");
-    var fixedAmount = $(
-      ".lnpw_widget.lnpw_skyscraper_tipping_default_amount_wide"
-    );
-    var validationField =
-      fixedAmount.length !== 0 && freeInput.length === 0
-        ? fixedAmount
-        : freeInput;
-
-    $(".lnpw_widget.skyscraper-next-form.wide").click(function () {
-      if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
-        next_form.show();
-        previous_form.hide();
-      } else {
-        validationField[0].reportValidity();
-      }
-    });
-    $(".lnpw_widget.skyscraper-previous-form.wide").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
-      next_form.show();
-      previous_form.hide();
-    });
-  }); */
-
-  /* $(document).ready(function () {
-    var form_count = 1,
-      previous_form,
-      next_form,
-      total_forms;
-    total_forms = $(".lnpw_tipping_box_container.lnpw_widget fieldset").length;
-    
-
-    $("input.next-form_lnpw_widget").click(function () {
-      if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
-        next_form.show();
-        previous_form.hide();
-      } else {
-        validationField[0].reportValidity();
-      }
-    });
-    $("input.previous-form_lnpw_widget").click(function () {
-      previous_form = $(this).parent().parent().parent();
-      next_form = $(this).parent().parent().prev().parent();
-      next_form.show();
-      previous_form.hide();
-    });
-  });
-
-   $(document).ready(function () {
-    var form_count = 1,
-      previous_form,
-      next_form,
-      total_forms;
-    total_forms = $(".lnpw_tipping_box_container fieldset").length;
-    var validationField = $("#lnpw_tipping_amount");
-    
-
-    $("input.next-form").click(function () {
-      if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
-        next_form.show();
-        previous_form.hide();
-      } else {
-        validationField[0].reportValidity();
-      }
-    });
-    $("input.previous-form").click(function () {
-      previous_form = $(this).parent().parent().parent();
-      next_form = $(this).parent().parent().parent().prev();
-      next_form.show();
-      previous_form.hide();
-    });
-  }); */
   $(document).ready(function () {
     var form_count = 1,
       previous_form,
@@ -1468,6 +1138,105 @@
       }
     });
     $("input.lnpw_widget.skyscraper-previous-form.wide").click(function () {
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
+      next_form.show();
+      previous_form.hide();
+    });
+  });
+  $(document).ready(function () {
+    var form_count = 1,
+      previous_form,
+      next_form,
+      total_forms;
+    total_forms = $(".lnpw_page_tipping_container fieldset").length;
+    var freeInput = $("#lnpw_page_tipping_amount");
+    var fixedAmount = $(".lnpw_page_tipping_default_amount");
+    var validationField =
+      fixedAmount.length !== 0 && freeInput.length === 0
+        ? fixedAmount
+        : freeInput;
+
+    $("input.page-next-form").click(function () {
+      if (validationField[0].checkValidity()) {
+        $(".lnpw_page_bar_container.bar-1").removeClass("active");
+        $(".lnpw_page_bar_container.bar-2").addClass("active");
+        previous_form = $(this).parent().parent();
+        next_form = $(this).parent().parent().next();
+        next_form.show();
+        previous_form.hide();
+      } else {
+        validationField[0].reportValidity();
+      }
+    });
+    $("input.page-previous-form").click(function () {
+      $(".lnpw_page_bar_container.bar-2").removeClass("active");
+      $(".lnpw_page_bar_container.bar-1").addClass("active");
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
+      next_form.show();
+      previous_form.hide();
+    });
+  });
+  $(document).ready(function () {
+    var form_count = 1,
+      previous_form,
+      next_form,
+      total_forms;
+    total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
+    var freeInput = $("input[name=lnpw_skyscraper_tipping_amount_high]");
+    var fixedAmount = $(
+      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_high]"
+    );
+    var validationField =
+      fixedAmount.length !== 0 && freeInput.length === 0
+        ? fixedAmount
+        : freeInput;
+
+    $("input.skyscraper-next-form.high").click(function () {
+      if (validationField[0].checkValidity()) {
+        previous_form = $(this).parent().parent().parent();
+        next_form = $(this).parent().parent().parent().next();
+        next_form.show();
+        previous_form.hide();
+      } else {
+        validationField[0].reportValidity();
+      }
+    });
+    $("input.skyscraper-previous-form.high").click(function () {
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
+      next_form.show();
+      previous_form.hide();
+    });
+  });
+
+  $(document).ready(function () {
+    var form_count = 1,
+      previous_form,
+      next_form,
+      total_forms;
+    total_forms = $(".lnpw_skyscraper_tipping_container fieldset").length;
+    var freeInput = $("input[name=lnpw_skyscraper_tipping_amount_wide]");
+    var fixedAmount = $(
+      "input[type=radio][name=lnpw_skyscraper_tipping_default_amount_wide]"
+    );
+    var validationField =
+      fixedAmount.length !== 0 && freeInput.length === 0
+        ? fixedAmount
+        : freeInput;
+
+    $("input.skyscraper-next-form.wide").click(function () {
+      if (validationField[0].checkValidity()) {
+        previous_form = $(this).parent().parent().parent();
+        next_form = $(this).parent().parent().parent().next();
+        next_form.show();
+        previous_form.hide();
+      } else {
+        validationField[0].reportValidity();
+      }
+    });
+    $("input.skyscraper-previous-form.wide").click(function () {
       previous_form = $(this).parent().parent().parent();
       next_form = $(this).parent().parent().parent().prev();
       next_form.show();

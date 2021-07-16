@@ -17,27 +17,32 @@ $background = wp_get_attachment_image_src($image['background']);
 <style>
     .lnpw_tipping_banner_collect_name_mandatory,
     label[for="lnpw_tipping_banner_collect[name][mandatory]"] {
-        visibility: <?php echo $collect['name']['collect'] === 'true' ? '' : 'hidden'; ?>;
+        visibility: <?php echo $collect['name']['collect'] === 'true' ? '' : 'hidden';
+                    ?>;
     }
 
     .lnpw_tipping_banner_collect_email_mandatory,
     label[for="lnpw_tipping_banner_collect[email][mandatory]"] {
-        visibility: <?php echo $collect['email']['collect'] === 'true' ? '' : 'hidden'; ?>;
+        visibility: <?php echo $collect['email']['collect'] === 'true' ? '' : 'hidden';
+                    ?>;
     }
 
     .lnpw_tipping_banner_collect_address_mandatory,
     label[for="lnpw_tipping_banner_collect[address][mandatory]"] {
-        visibility: <?php echo $collect['address']['collect'] === 'true' ? '' : 'hidden'; ?>;
+        visibility: <?php echo $collect['address']['collect'] === 'true' ? '' : 'hidden';
+                    ?>;
     }
 
     .lnpw_tipping_banner_collect_phone_mandatory,
     label[for="lnpw_tipping_banner_collect[phone][mandatory]"] {
-        visibility: <?php echo $collect['phone']['collect'] === 'true' ? '' : 'hidden'; ?>;
+        visibility: <?php echo $collect['phone']['collect'] === 'true' ? '' : 'hidden';
+                    ?>;
     }
 
     .lnpw_tipping_banner_collect_message_mandatory,
     label[for="lnpw_tipping_banner_collect[message][mandatory]"] {
-        visibility: <?php echo $collect['message']['collect'] === 'true' ? '' : 'hidden'; ?>;
+        visibility: <?php echo $collect['message']['collect'] === 'true' ? '' : 'hidden';
+                    ?>;
     }
 </style>
 <div class="tipping_banner_settings">
@@ -80,6 +85,15 @@ $background = wp_get_attachment_image_src($image['background']);
             </div>
             <div class="col-50">
                 <input id="lnpw_tipping_banner_background" class="lnpw_tipping_banner_background" name="lnpw_tipping_banner_color[background]" type="text" value=<?php echo $color['background']; ?> />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-50">
+                <label for="lnpw_tipping_hf_background">Background color</label>
+            </div>
+            <div class="col-50">
+                <input id="lnpw_tipping_hf_background" class="lnpw_tipping_hf_background" name="lnpw_tipping_banner_color[hf_background]" type="text" value=<?php echo $color['hf_background']; ?> />
             </div>
         </div>
         <h3>Description</h3>
