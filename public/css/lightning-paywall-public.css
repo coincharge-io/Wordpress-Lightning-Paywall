@@ -135,17 +135,18 @@ Tipping box
 #lnpw_converted_amount,
 #lnpw_tipping_amount_lnpw_widget,
 #lnpw_converted_amount_lnpw_widget {
-  height: 40px;
-  width: 40%;
+  height: 80%;
+  width: 50%;
   font-size: 15px;
 }
 #lnpw_tipping_currency,
 #lnpw_converted_currency,
 #lnpw_tipping_currency_lnpw_widget,
 #lnpw_converted_currency_lnpw_widget {
-  height: 40px;
-  width: 35%;
+  height: 80%;
+  width: 50%;
   font-size: 15px;
+  color: white !important;
 }
 #tipping_form_box fieldset h6,
 #tipping_form_box_widget fieldset h6 {
@@ -184,13 +185,33 @@ Tipping box
   height: 5%;
   opacity: 0;
 }
-
+.lnpw_tipping_box_amount {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .lnpw_tipping_free_input,
 .lnpw_tipping_converted_values {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.lnpw_tipping_free_input {
+  border-radius: 2em;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+  height: 50px;
+  width: 80%;
+  background-color: orange;
 }
 
+#lnpw_tipping_amount,
+#lnpw_tipping_amount_lnpw_widget {
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+  background-color: white !important;
+}
 .lnpw_tipping_converted_values {
   margin-bottom: 2em;
 }
@@ -264,7 +285,7 @@ Tipping box
 }
 
 .lnpw_skyscraper_tipping_container.high h6 {
-  margin: 1em;
+  margin: 0.4em;
 }
 
 .lnpw_skyscraper_amount {
@@ -530,11 +551,21 @@ Tipping box
 .lnpw_skyscraper_tipping_container.high fieldset {
   padding: 0;
 }
+.lnpw_skyscraper_tipping_container fieldset {
+  margin: 0;
+}
+
 #lnpw_skyscraper_tipping_amount,
 #lnpw_widget_lnpw_skyscraper_tipping_amount_wide,
 #lnpw_widget_lnpw_skyscraper_tipping_amount_high {
   border-top-left-radius: 2em;
   border-bottom-left-radius: 2em;
+  background-color: white !important;
+}
+#lnpw_skyscraper_tipping_currency,
+#lnpw_widget_lnpw_skyscraper_tipping_currency_wide,
+#lnpw_widget_lnpw_skyscraper_tipping_currency_high {
+  color: white !important;
 }
 .lnpw_skyscraper_tipping_container.wide fieldset {
   padding: 0 1em;

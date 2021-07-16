@@ -1463,7 +1463,7 @@ class Lightning_Paywall_Public
         <div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
             <?php if ($logo) : ?>
             <div class="lnpw_logo_wrap">
-                <img width="120" height="120" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+                <img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
             </div>
             <?php endif; ?>
             <?php if (!empty($atts['title'])) : ?>
@@ -1487,7 +1487,7 @@ class Lightning_Paywall_Public
                         <div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
                             <?php if ($logo) : ?>
                             <div class="lnpw_logo_wrap">
-                                <img width="120" height="120" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+                                <img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
                             </div>
                             <?php endif; ?>
                             <?php if (!empty($atts['title'])) : ?>
@@ -1539,7 +1539,7 @@ class Lightning_Paywall_Public
 
 
                             <select required
-                                name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency_ {$is_wide}"; ?>"
+                                name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency_{$is_wide}"; ?>"
                                 id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency{$form_suffix}"; ?>">
                                 <option disabled value="">Select currency</option>
                                 <?php foreach ($supported_currencies as $currency) : ?>
