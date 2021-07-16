@@ -1198,8 +1198,8 @@
 
     $("input.skyscraper-next-form.high").click(function () {
       if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
+        previous_form = $(this).parent().parent().parent();
+        next_form = $(this).parent().parent().parent().next();
         next_form.show();
         previous_form.hide();
       } else {
@@ -1207,8 +1207,8 @@
       }
     });
     $("input.skyscraper-previous-form.high").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
       next_form.show();
       previous_form.hide();
     });
@@ -1231,8 +1231,8 @@
 
     $("input.skyscraper-next-form.wide").click(function () {
       if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
+        previous_form = $(this).parent().parent().parent();
+        next_form = $(this).parent().parent().parent().next();
         next_form.show();
         previous_form.hide();
       } else {
@@ -1240,8 +1240,8 @@
       }
     });
     $("input.skyscraper-previous-form.wide").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
       next_form.show();
       previous_form.hide();
     });
@@ -1423,8 +1423,8 @@
 
     $("input.lnpw_widget.skyscraper-next-form.high").click(function () {
       if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
+        previous_form = $(this).parent().parent().parent();
+        next_form = $(this).parent().parent().parent().next();
         next_form.show();
         previous_form.hide();
       } else {
@@ -1432,8 +1432,8 @@
       }
     });
     $("input.lnpw_widget.skyscraper-previous-form.high").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
       next_form.show();
       previous_form.hide();
     });
@@ -1459,8 +1459,8 @@
 
     $("input.lnpw_widget.skyscraper-next-form.wide").click(function () {
       if (validationField[0].checkValidity()) {
-        previous_form = $(this).parent().parent();
-        next_form = $(this).parent().parent().next();
+        previous_form = $(this).parent().parent().parent();
+        next_form = $(this).parent().parent().parent().next();
         next_form.show();
         previous_form.hide();
       } else {
@@ -1468,8 +1468,8 @@
       }
     });
     $("input.lnpw_widget.skyscraper-previous-form.wide").click(function () {
-      previous_form = $(this).parent().parent();
-      next_form = $(this).parent().parent().prev();
+      previous_form = $(this).parent().parent().parent();
+      next_form = $(this).parent().parent().parent().prev();
       next_form.show();
       previous_form.hide();
     });
