@@ -168,6 +168,15 @@ class Tipping_Banner_High extends WP_Widget
                 value="<?php echo esc_attr($background_color); ?>" type="text" />
         </div>
     </div>
+    <div class="row">
+        <label
+            for="<?php echo esc_attr($this->get_field_id('hf_color')); ?>"><?php echo esc_html__('Header and footer background color', 'text_domain'); ?></label>
+
+        <input id="<?php echo esc_attr($this->get_field_id('hf_color')); ?>" class="widget-tipping-basic-hf_color_high"
+            name="<?php echo esc_attr($this->get_field_name('hf_color')); ?>" type="text"
+            value="<?php echo esc_attr($hf_color); ?>" />
+
+    </div>
     <h3><?php echo esc_html__('Description', 'text_domain'); ?></h3>
 
     <div class="row">
@@ -412,15 +421,7 @@ class Tipping_Banner_High extends WP_Widget
             value="<?php echo esc_attr($button_color); ?>" />
 
     </div>
-    <div class="row">
-        <label
-            for="<?php echo esc_attr($this->get_field_id('hf_color')); ?>"><?php echo esc_html__('Header and footer background color', 'text_domain'); ?></label>
-
-        <input id="<?php echo esc_attr($this->get_field_id('hf_color')); ?>" class="widget-tipping-basic-hf_color_high"
-            name="<?php echo esc_attr($this->get_field_name('hf_color')); ?>" type="text"
-            value="<?php echo esc_attr($hf_color); ?>" />
-
-    </div>
+    
     <h4><?php echo esc_html__('Collect further information', 'text_domain'); ?></h4>
     <div class="row">
         <div class="col-50">

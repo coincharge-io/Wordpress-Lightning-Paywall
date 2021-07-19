@@ -277,6 +277,7 @@ class Lightning_Paywall_Admin
 			'type' => 'array', 'default' => array(
 				'button_text' => '#FFFFFF',
 				'background' => '#E6E6E6',
+				'hf_background'	=> '#1d5aa3',
 				'button' => '#FE642E',
 				'title' => '#000000',
 				'description' => '#000000',

@@ -68,7 +68,7 @@ class Tipping_Box extends WP_Widget
 
         $logo = wp_get_attachment_image_src($logo_id);
         $background = wp_get_attachment_image_src($background_id);
-
+        $hf_color = !empty($instance['hf_color']) ? $instance['hf_color'] : esc_html__('1d5aa3', 'text_domain');
 
 
 ?>
@@ -128,6 +128,15 @@ class Tipping_Box extends WP_Widget
                 name="<?php echo esc_attr($this->get_field_name('background_color')); ?>" type="text"
                 value="<?php echo esc_attr($background_color); ?>" type="text" />
         </div>
+    </div>
+    <div class="row">
+        <label
+            for="<?php echo esc_attr($this->get_field_id('hf_color')); ?>"><?php echo esc_html__('Header and footer background color', 'text_domain'); ?></label>
+
+        <input id="<?php echo esc_attr($this->get_field_id('hf_color')); ?>" class="widget-tipping-basic-box-hf_color"
+            name="<?php echo esc_attr($this->get_field_name('hf_color')); ?>" type="text"
+            value="<?php echo esc_attr($hf_color); ?>" />
+
     </div>
     <h3><?php echo esc_html__('Description', 'text_domain'); ?></h3>
 
@@ -272,15 +281,7 @@ class Tipping_Box extends WP_Widget
             value="<?php echo esc_attr($button_color); ?>" />
 
     </div>
-    <div class="row">
-        <label
-            for="<?php echo esc_attr($this->get_field_id('hf_color')); ?>"><?php echo esc_html__('Header and footer background color', 'text_domain'); ?></label>
-
-        <input id="<?php echo esc_attr($this->get_field_id('hf_color')); ?>" class="widget-tipping-basic-hf_color"
-            name="<?php echo esc_attr($this->get_field_name('hf_color')); ?>" type="text"
-            value="<?php echo esc_attr($hf_color); ?>" />
-
-    </div>
+    
 
 </div>
 <?php
@@ -313,7 +314,7 @@ class Tipping_Box extends WP_Widget
         $instance['hf_color'] = !empty($new_instance['hf_color']) ? wp_strip_all_tags($new_instance['hf_color']) : '';
         $instance['logo_id'] = !empty($new_instance['logo_id']) ? $new_instance['logo_id'] : '';
         $instance['background_id'] = !empty($new_instance['background_id']) ? $new_instance['background_id'] : '';
-
+        $instance['hf_color'] = !empty($new_instance['hf_color']) ? wp_strip_all_tags($new_instance['hf_color']) : '';
 
         return $instance;
     }

@@ -61,6 +61,14 @@ $background = wp_get_attachment_image_src($image['background']);
                     name="lnpw_tipping_box_color[background]" type="text" value=<?php echo $color['background']; ?> />
             </div>
         </div>
+        <div class="row">
+            <div class="col-50">
+                <label for="lnpw_tipping_hf_background">Background color</label>
+            </div>
+            <div class="col-50">
+                <input id="lnpw_tipping_box_hf_background" class="lnpw_tipping_box_hf_background" name="lnpw_tipping_box_color[hf_background]" type="text" value=<?php echo $color['hf_background']; ?> />
+            </div>
+        </div>
         <h3>Description</h3>
 
         <div class="row">
