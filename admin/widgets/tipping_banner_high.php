@@ -50,7 +50,7 @@ class Tipping_Banner_High extends WP_Widget
         value3_currency = '{$instance['value3_currency']}'
         value3_icon = '{$instance['value3_icon']}'
         free_input = '{$instance['free_input']}'
-        fixed_background = '{$instance['fixed_background']}'
+        input_background = '{$instance['fixed_background']}'
         background = '{$instance['hf_color']}'
         widget = 'true']");
     }

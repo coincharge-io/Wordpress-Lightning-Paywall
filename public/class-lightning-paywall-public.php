@@ -1190,7 +1190,7 @@ class Lightning_Paywall_Public
 			'logo_id'		=> '',
 			'background_id'	=> '',
 			'free_input'	=> 'true',
-			'fixed_background'	=> '#ffa500',
+			'input_background'	=> '#ffa500',
 			'background' => '#1d5aa3',
 			'value1_enabled' => 'false',
 			'value1_amount' => '1000',
@@ -1272,7 +1272,7 @@ class Lightning_Paywall_Public
 .lnpw_skyscraper_amount_value_2.wide,
 .lnpw_skyscraper_amount_value_3.wide,
 .lnpw_skyscraper_tipping_free_input.wide {
-    background-color: <?php echo esc_html($atts['fixed_background']);
+    background-color: <?php echo esc_html($atts['input_background']);
     ?>;
 }
 
@@ -1353,7 +1353,7 @@ class Lightning_Paywall_Public
 .lnpw_skyscraper_amount_value_2.high,
 .lnpw_skyscraper_amount_value_3.high,
 .lnpw_skyscraper_tipping_free_input.high {
-    background-color: <?php echo esc_html($atts['fixed_background']);
+    background-color: <?php echo esc_html($atts['input_background']);
     ?>;
 }
 
@@ -1408,7 +1408,7 @@ class Lightning_Paywall_Public
 .lnpw_skyscraper_amount_value_2,
 .lnpw_skyscraper_amount_value_3,
 .lnpw_skyscraper_tipping_free_input {
-    background-color: <?php echo esc_html($atts['fixed_background']);
+    background-color: <?php echo esc_html($atts['input_background']);
     ?>;
 }
 
