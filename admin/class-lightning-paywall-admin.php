@@ -224,6 +224,7 @@ class Lightning_Paywall_Admin
 				'hf_background'	=> '#1d5aa3',
 				'description' => '#000000',
 				'tipping' => '#000000',
+				'input_background' => '#ffa500',
 			), 'sanitize_callback' => array($this, 'validate_colors')
 		));
 		register_setting('lnpw_tipping_banner_settings', 'lnpw_tipping_banner_image', array(
@@ -282,6 +283,7 @@ class Lightning_Paywall_Admin
 				'title' => '#000000',
 				'description' => '#000000',
 				'tipping' => '#000000',
+				'input_background' => '#ffa500',
 			), 'sanitize_callback' => array($this, 'validate_colors')
 		));
 		register_setting('lnpw_tipping_box_settings', 'lnpw_tipping_box_image', array(
@@ -319,6 +321,7 @@ class Lightning_Paywall_Admin
 			'title'				=> '#000000',
 			'description'		=> '#000000',
 			'tipping'			=> '#000000',
+			'input_background' => '#ffa500',
 		);
 
 		if (!is_array($values)) {

@@ -63,7 +63,7 @@ $background = wp_get_attachment_image_src($image['background']);
         </div>
         <div class="row">
             <div class="col-50">
-                <label for="lnpw_tipping_hf_background">Background color</label>
+                <label for="lnpw_tipping_hf_background">Background color for header and footer</label>
             </div>
             <div class="col-50">
                 <input id="lnpw_tipping_box_hf_background" class="lnpw_tipping_box_hf_background" name="lnpw_tipping_box_color[hf_background]" type="text" value=<?php echo $color['hf_background']; ?> />
@@ -133,6 +133,15 @@ $background = wp_get_attachment_image_src($image['background']);
             </div>
             <div class="col-50">
                 <input id="lnpw_tipping_box_redirect" name="lnpw_tipping_box_redirect" value=<?php echo $redirect; ?> />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-50">
+                <label for="lnpw_tipping_box_input_background">Input background color</label>
+            </div>
+            <div class="col-50">
+            <input id="lnpw_tipping_box_input_background" class="lnpw_tipping_box_input_background"
+                    name="lnpw_tipping_box_color[input_background]" type="text" value=<?php echo $color['input_background']; ?> />
             </div>
         </div>
         <h3>Button</h3>

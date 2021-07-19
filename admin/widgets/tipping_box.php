@@ -32,6 +32,7 @@ class Tipping_Box extends WP_Widget
         logo_id = '{$instance['logo_id']}'
         background_id = '{$instance['background_id']}'
         background = '{$instance['hf_color']}'
+        input_background = '{$instance['input_background']}'
         widget = 'true']");
     }
 
@@ -61,7 +62,6 @@ class Tipping_Box extends WP_Widget
         $button_text_color = !empty($instance['button_text_color']) ? $instance['button_text_color'] : esc_html__('#FFFFFF', 'text_domain');
 
         $button_color = !empty($instance['button_color']) ? $instance['button_color'] : esc_html__('#FE642E', 'text_domain');
-        $hf_color = !empty($instance['hf_color']) ? $instance['hf_color'] : esc_html__('1d5aa3', 'text_domain');
 
         $logo_id = !empty($instance['logo_id']) ? $instance['logo_id'] : esc_html__('', 'text_domain');
         $background_id = !empty($instance['background_id']) ? $instance['background_id'] : esc_html__('', 'text_domain');
@@ -69,7 +69,7 @@ class Tipping_Box extends WP_Widget
         $logo = wp_get_attachment_image_src($logo_id);
         $background = wp_get_attachment_image_src($background_id);
         $hf_color = !empty($instance['hf_color']) ? $instance['hf_color'] : esc_html__('1d5aa3', 'text_domain');
-
+        $input_background = !empty($instance['input_background']) ? $instance['input_background'] : esc_html__('#fe642e', 'text_domain');
 
 ?>
 <div class="tipping_box">
@@ -245,6 +245,15 @@ class Tipping_Box extends WP_Widget
             </select>
         </div>
     </div>
+    <div class="row">
+        <div class="col-50">
+            <label
+                for="<?php echo esc_attr($this->get_field_id('input_background')); ?>"><?php echo esc_html__('Background color for free amount', 'text_domain'); ?></label>
+            <input id="<?php echo esc_attr($this->get_field_id('input_background')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('input_background')); ?>" type="text"
+                class="widget-tipping-basic-input_background" value="<?php echo esc_attr($input_background); ?>" />
+        </div>
+    </div>
     <h3><?php echo esc_html__('Button', 'text_domain'); ?></h3>
     <div class="row">
         <div class="col-50">
@@ -315,6 +324,7 @@ class Tipping_Box extends WP_Widget
         $instance['logo_id'] = !empty($new_instance['logo_id']) ? $new_instance['logo_id'] : '';
         $instance['background_id'] = !empty($new_instance['background_id']) ? $new_instance['background_id'] : '';
         $instance['hf_color'] = !empty($new_instance['hf_color']) ? wp_strip_all_tags($new_instance['hf_color']) : '';
+        $instance['input_background'] = !empty($new_instance['input_background']) ? $new_instance['input_background'] : '';
 
         return $instance;
     }

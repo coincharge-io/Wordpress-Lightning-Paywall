@@ -904,6 +904,7 @@ class Lightning_Paywall_Public
 			'button_text'	=> 'Tipping now',
 			'button_text_color'	=> '#FFFFFF',
 			'button_color'	=> '#FE642E',
+			'input_background'	=> '#ffa500',
 			'logo_id'		=> '',
 			'background_id'	=> '',
 			'background' => '#1d5aa3',
@@ -966,7 +967,10 @@ class Lightning_Paywall_Public
 
 #tipping_form_box_widget fieldset h6 {
     color: <?php echo esc_html($atts['tipping_text_color']);
-    ?>
+    ?>;
+}
+.lnpw_tipping_free_input.lnpw_widget{
+	background-color: <?php echo esc_html($atts['input_background']);?>;
 }
 
 <?php else : ?>.lnpw_tipping_box_container {
@@ -1013,6 +1017,9 @@ class Lightning_Paywall_Public
 #tipping_form_box fieldset h6 {
     color: <?php echo esc_html($atts['tipping_text_color']);
     ?>
+}
+.lnpw_tipping_free_input{
+	background-color: <?php echo esc_html($atts['input_background']);?>;
 }
 
 <?php endif;
