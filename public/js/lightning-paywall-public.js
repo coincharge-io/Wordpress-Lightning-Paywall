@@ -147,10 +147,10 @@
     $("#skyscraper_tipping_form").submit(function (e) {
       e.preventDefault();
       var text = $(
-        "#lnpw_skyscraper_tipping__button_high, #lnpw_skyscraper_tipping__button_wide"
+        "#lnpw_skyscraper_tipping__button"
       ).text();
       $(
-        "#lnpw_skyscraper_tipping__button_high, #lnpw_skyscraper_tipping__button_wide"
+        "#lnpw_skyscraper_tipping__button"
       ).html(
         `<span class="tipping-border" role="status" aria-hidden="true"></span>`
       );
@@ -176,8 +176,9 @@
         },
         success: function (response) {
           $(
-            "#lnpw_skyscraper_tipping__button_wide,#lnpw_skyscraper_tipping__button_high"
+            "#lnpw_skyscraper_tipping__button"
           ).html(text);
+          
           if (response.success) {
             lnpw_invoice_id = response.data.invoice_id;
             donor = response.data.donor;

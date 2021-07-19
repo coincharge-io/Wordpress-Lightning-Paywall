@@ -410,7 +410,7 @@ class Lightning_Paywall_Public
 		);
 
 		$response = wp_remote_request($url, $args);
-
+		
 		if (is_wp_error($response)) {
 			return $response;
 		}
@@ -1260,7 +1260,10 @@ class Lightning_Paywall_Public
     height: <?php echo esc_html($dimension[1]) . 'px !important';
     ?>;
 }
-
+.lnpw_widget.lnpw_skyscraper_banner.wide {
+    width: <?php echo esc_html($dimension[0]) . 'px !important';
+    ?>;
+}
 
 .lnpw_skyscraper_header_container.wide,
 #lnpw_skyscraper_button_wide {
@@ -1397,10 +1400,8 @@ class Lightning_Paywall_Public
     ?>;
 }
 
-.lnpw_skyscraper_banner {
+.lnpw_skyscraper_banner.wide {
     width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
     ?>;
 }
 
@@ -1418,8 +1419,7 @@ class Lightning_Paywall_Public
     ?>;
 }
 
-#lnpw_skyscraper_tipping__button_high,
-#lnpw_skyscraper_tipping__button_wide,
+#lnpw_skyscraper_tipping__button,
 #lnpw_skyscraper_button>div>input.skyscraper-next-form {
     color: <?php echo esc_html($atts['button_text_color']);
     ?>;
@@ -1618,7 +1618,7 @@ class Lightning_Paywall_Public
                         </div>
                         <div>
                             <button type="submit"
-                                id=<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button_{$is_wide}"; ?>><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
+                                id=<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button{$form_suffix}"; ?>><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
                         </div>
                     </div>
                 </fieldset>
