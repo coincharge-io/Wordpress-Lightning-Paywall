@@ -81,38 +81,38 @@ class Tipping_Banner_Wide extends WP_Widget
         $button_color = !empty($instance['button_color']) ? $instance['button_color'] : esc_html__('#FE642E', 'text_domain');
 
 
-        $logo_id = !empty($instance['logo_id']) ? $instance['logo_id'] : esc_html__('', 'text_domain');
+        $logo_id = !empty($instance['logo_id']) ? $instance['logo_id'] : esc_html__('https://btcpaywall.com/wp-content/uploads/2021/07/BTCPayWall-logo_square.jpg', 'text_domain');
         $background_id = !empty($instance['background_id']) ? $instance['background_id'] : esc_html__('', 'text_domain');
 
         $logo = wp_get_attachment_image_src($logo_id);
         $background = wp_get_attachment_image_src($background_id);
 
-        $display_name = !empty($instance['display_name']) ? $instance['display_name'] : esc_html__('', 'text_domain');
+        $display_name = !empty($instance['display_name']) ? $instance['display_name'] : esc_html__('true', 'text_domain');
         $mandatory_name = !empty($instance['mandatory_name']) ? $instance['mandatory_name'] : esc_html__('', 'text_domain');
 
-        $display_email = !empty($instance['display_email']) ? $instance['display_email'] : esc_html__('', 'text_domain');
+        $display_email = !empty($instance['display_email']) ? $instance['display_email'] : esc_html__('true', 'text_domain');
         $mandatory_email = !empty($instance['mandatory_email']) ? $instance['mandatory_email'] : esc_html__('', 'text_domain');
 
-        $display_address = !empty($instance['display_address']) ? $instance['display_address'] : esc_html__('', 'text_domain');
+        $display_address = !empty($instance['display_address']) ? $instance['display_address'] : esc_html__('true', 'text_domain');
         $mandatory_address = !empty($instance['mandatory_address']) ? $instance['mandatory_address'] : esc_html__('', 'text_domain');
 
-        $display_phone = !empty($instance['display_phone']) ? $instance['display_phone'] : esc_html__('', 'text_domain');
+        $display_phone = !empty($instance['display_phone']) ? $instance['display_phone'] : esc_html__('true', 'text_domain');
         $mandatory_phone = !empty($instance['mandatory_phone']) ? $instance['mandatory_phone'] : esc_html__('', 'text_domain');
 
-        $display_message = !empty($instance['display_message']) ? $instance['display_message'] : esc_html__('', 'text_domain');
+        $display_message = !empty($instance['display_message']) ? $instance['display_message'] : esc_html__('true', 'text_domain');
         $mandatory_message = !empty($instance['mandatory_message']) ? $instance['mandatory_message'] : esc_html__('', 'text_domain');
 
-        $value1_enabled = !empty($instance['value1_enabled']) ? $instance['value1_enabled'] : esc_html__('', 'text_domain');
+        $value1_enabled = !empty($instance['value1_enabled']) ? $instance['value1_enabled'] : esc_html__('true', 'text_domain');
         $value1_amount = !empty($instance['value1_amount']) ? $instance['value1_amount'] : esc_html__('1000', 'text_domain');
         $value1_icon = !empty($instance['value1_icon']) ? $instance['value1_icon'] : esc_html__('fas fa-coffee', 'text_domain');
         $value1_currency = !empty($instance['value1_currency']) ? $instance['value1_currency'] : esc_html__('', 'text_domain');
 
-        $value2_enabled = !empty($instance['value2_enabled']) ? $instance['value2_enabled'] : esc_html__('', 'text_domain');
+        $value2_enabled = !empty($instance['value2_enabled']) ? $instance['value2_enabled'] : esc_html__('true', 'text_domain');
         $value2_amount = !empty($instance['value2_amount']) ? $instance['value2_amount'] : esc_html__('2000', 'text_domain');
         $value2_icon = !empty($instance['value2_icon']) ? $instance['value2_icon'] : esc_html__('fas fa-beer', 'text_domain');
         $value2_currency = !empty($instance['value2_currency']) ? $instance['value2_currency'] : esc_html__('', 'text_domain');
 
-        $value3_enabled = !empty($instance['value3_enabled']) ? $instance['value3_enabled'] : esc_html__('', 'text_domain');
+        $value3_enabled = !empty($instance['value3_enabled']) ? $instance['value3_enabled'] : esc_html__('true', 'text_domain');
         $value3_amount = !empty($instance['value3_amount']) ? $instance['value3_amount'] : esc_html__('3000', 'text_domain');
         $value3_icon = !empty($instance['value3_icon']) ? $instance['value3_icon'] : esc_html__('fas fa-cocktail', 'text_domain');
         $value3_currency = !empty($instance['value3_currency']) ? $instance['value3_currency'] : esc_html__('', 'text_domain');
@@ -420,7 +420,7 @@ class Tipping_Banner_Wide extends WP_Widget
             value="<?php echo esc_attr($button_color); ?>" />
 
     </div>
-    
+
     <h4><?php echo esc_html__('Collect further information', 'text_domain'); ?></h4>
     <div class="row">
         <div class="col-50">

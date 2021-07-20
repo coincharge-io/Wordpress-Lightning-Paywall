@@ -410,7 +410,7 @@ class Lightning_Paywall_Public
 		);
 
 		$response = wp_remote_request($url, $args);
-		
+
 		if (is_wp_error($response)) {
 			return $response;
 		}
@@ -895,7 +895,7 @@ class Lightning_Paywall_Public
 			'description'	=> '',
 			'currency'		=> 'SATS',
 			'background_color'	=> '#E6E6E6',
-			'title_text_color'	=> '#000000',
+			'title_text_color'	=> '#ffffff',
 			'tipping_text'	=> 'Enter Tipping Amount',
 			'tipping_text_color'	=> '#000000',
 			'redirect'		=> get_site_url(),
@@ -904,8 +904,8 @@ class Lightning_Paywall_Public
 			'button_text'	=> 'Tipping now',
 			'button_text_color'	=> '#FFFFFF',
 			'button_color'	=> '#FE642E',
-			'input_background'	=> '#ffa500',
-			'logo_id'		=> '',
+			'input_background'	=> '#FE642E',
+			'logo_id'		=> 'https://btcpaywall.com/wp-content/uploads/2021/07/BTCPayWall-logo_square.jpg',
 			'background_id'	=> '',
 			'background' => '#1d5aa3',
 			'widget'		=> 'false',
@@ -969,8 +969,10 @@ class Lightning_Paywall_Public
     color: <?php echo esc_html($atts['tipping_text_color']);
     ?>;
 }
-.lnpw_tipping_free_input.lnpw_widget{
-	background-color: <?php echo esc_html($atts['input_background']);?>;
+
+.lnpw_tipping_free_input.lnpw_widget {
+    background-color: <?php echo esc_html($atts['input_background']);
+    ?>;
 }
 
 <?php else : ?>.lnpw_tipping_box_container {
@@ -1018,8 +1020,10 @@ class Lightning_Paywall_Public
     color: <?php echo esc_html($atts['tipping_text_color']);
     ?>
 }
-.lnpw_tipping_free_input{
-	background-color: <?php echo esc_html($atts['input_background']);?>;
+
+.lnpw_tipping_free_input {
+    background-color: <?php echo esc_html($atts['input_background']);
+    ?>;
 }
 
 <?php endif;
@@ -1178,7 +1182,7 @@ class Lightning_Paywall_Public
 			'description'	=> '',
 			'currency'		=> 'SATS',
 			'background_color'	=> '#E6E6E6',
-			'title_text_color'	=> '#000000',
+			'title_text_color'	=> '#ffffff',
 			'tipping_text'	=> 'Enter Tipping Amount',
 			'tipping_text_color'	=> '#000000',
 			'redirect'		=> get_site_url(),
@@ -1187,32 +1191,32 @@ class Lightning_Paywall_Public
 			'button_text'	=> 'Tipping now',
 			'button_text_color'	=> '#FFFFFF',
 			'button_color'	=> '#FE642E',
-			'logo_id'		=> '',
+			'logo_id'		=> 'https://btcpaywall.com/wp-content/uploads/2021/07/BTCPayWall-logo_square.jpg',
 			'background_id'	=> '',
 			'free_input'	=> 'true',
-			'input_background'	=> '#ffa500',
+			'input_background'	=> '#FE642E',
 			'background' => '#1d5aa3',
-			'value1_enabled' => 'false',
+			'value1_enabled' => 'true',
 			'value1_amount' => '1000',
 			'value1_currency' => 'SATS',
 			'value1_icon'	=> 'fas fa-coffee',
-			'value2_enabled' => 'false',
+			'value2_enabled' => 'true',
 			'value2_amount' => '2000',
 			'value2_currency' => 'SATS',
 			'value2_icon'	=> 'fas fa-beer',
-			'value3_enabled' => 'false',
+			'value3_enabled' => 'true',
 			'value3_amount' => '3000',
 			'value3_currency' => 'SATS',
 			'value3_icon'	=> 'fas fa-cocktail',
-			'display_name'	=> 'false',
+			'display_name'	=> 'true',
 			'mandatory_name' => 'false',
-			'display_email'	=> 'false',
+			'display_email'	=> 'true',
 			'mandatory_email' => 'false',
-			'display_phone'	=> 'false',
+			'display_phone'	=> 'true',
 			'mandatory_phone' => 'false',
-			'display_address'	=> 'false',
+			'display_address'	=> 'true',
 			'mandatory_address' => 'false',
-			'display_message'	=> 'false',
+			'display_message'	=> 'true',
 			'mandatory_message' => 'false',
 			'widget'			=> 'false'
 		), $atts);
@@ -1260,6 +1264,7 @@ class Lightning_Paywall_Public
     height: <?php echo esc_html($dimension[1]) . 'px !important';
     ?>;
 }
+
 .lnpw_widget.lnpw_skyscraper_banner.wide {
     width: <?php echo esc_html($dimension[0]) . 'px !important';
     ?>;
@@ -1315,10 +1320,7 @@ class Lightning_Paywall_Public
     ?>;
 }
 
-#powered_by_skyscraper {
-    justify-content: <?php echo $dimension[0]==='160'? 'flex-start': 'center';
-    ?>;
-}
+
 
 
 
@@ -1384,10 +1386,7 @@ class Lightning_Paywall_Public
 
 }
 
-#powered_by_skyscraper {
-    justify-content: <?php echo $dimension[0]==='160'? 'flex-start': 'center';
-    ?>;
-}
+
 
 <?php else : ?>.lnpw_skyscraper_tipping_container {
     background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
@@ -1456,10 +1455,7 @@ class Lightning_Paywall_Public
 
 }
 
-#powered_by_skyscraper {
-    justify-content: <?php echo $dimension[0]==='160'? 'flex-start': 'center';
-    ?>;
-}
+
 
 <?php endif;
 ?>
@@ -1470,20 +1466,19 @@ class Lightning_Paywall_Public
         <div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
             <?php if ($logo) : ?>
             <div class="lnpw_logo_wrap">
-                <img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+                <img width="100" height="100" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
             </div>
             <?php endif; ?>
-            <?php if (!empty($atts['title'])) : ?>
             <div>
+                <?php if (!empty($atts['title'])) : ?>
                 <h6><?php echo esc_html($atts['title']); ?></h6>
+                <?php endif; ?>
+                <?php if (!empty($atts['description'])) : ?>
+                <p><?php echo esc_html($atts['description']); ?></p>
+                <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
-        <div class="<?php echo "{$is_widget} lnpw_skyscraper_info_container {$is_wide}"; ?>">
-            <?php if (!empty($atts['description'])) : ?>
-            <p><?php echo esc_html($atts['description']); ?></p>
-            <?php endif; ?>
-        </div>
+
         <?php endif; ?>
         <div class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_container {$container_suffix}"); ?>">
             <form method="POST" action="" id="<?php echo "{$form_prefix}skyscraper_tipping_form{$form_suffix}"; ?>">
@@ -1494,7 +1489,7 @@ class Lightning_Paywall_Public
                         <div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
                             <?php if ($logo) : ?>
                             <div class="lnpw_logo_wrap">
-                                <img width="160" height="160" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+                                <img width="140" height="140" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
                             </div>
                             <?php endif; ?>
                             <?php if (!empty($atts['title'])) : ?>
@@ -1508,7 +1503,6 @@ class Lightning_Paywall_Public
                             <p><?php echo esc_html($atts['description']); ?></p>
                             <?php endif; ?>
                         </div>
-
                         <?php endif; ?>
                     </div>
                     <h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : ''); ?>
@@ -1650,19 +1644,19 @@ class Lightning_Paywall_Public
 			'title'			=> 'Support my work',
 			'currency'		=> 'SATS',
 			'background_color'	=> '#E6E6E6',
-			'title_text_color'	=> '#000000',
+			'title_text_color'	=> '#ffffff',
 			'tipping_text'	=> 'Enter Tipping Amount',
 			'tipping_text_color'	=> '#000000',
 			'redirect'		=> get_site_url(),
 			'amount'		=> '',
 			'button_text'	=> 'Tipping now',
 			'button_text_color'	=> '#FFFFFF',
-			'button_color'	=> '#f6b330',
-			'logo_id'		=> '',
+			'button_color'	=> '#FE642E',
+			'logo_id'		=> 'https://btcpaywall.com/wp-content/uploads/2021/07/BTCPayWall-logo_square.jpg',
 			'background_id'	=> '',
 			'free_input'	=> 'true',
 			'show_icon'		=> 'true',
-			'fixed_background'	=> '#ffa500',
+			'fixed_background'	=> '#FE642E',
 			'background'	=> '#1d5aa3',
 			'value1_enabled' => 'true',
 			'value1_amount' => '1000',
@@ -1676,15 +1670,15 @@ class Lightning_Paywall_Public
 			'value3_amount' => '3000',
 			'value3_currency' => 'SATS',
 			'value3_icon'	=> 'fas fa-cocktail',
-			'display_name'	=> 'false',
+			'display_name'	=> 'true',
 			'mandatory_name' => 'false',
-			'display_email'	=> 'false',
+			'display_email'	=> 'true',
 			'mandatory_email' => 'false',
-			'display_phone'	=> 'false',
+			'display_phone'	=> 'true',
 			'mandatory_phone' => 'false',
-			'display_address'	=> 'false',
+			'display_address'	=> 'true',
 			'mandatory_address' => 'false',
-			'display_message'	=> 'false',
+			'display_message'	=> 'true',
 			'mandatory_message' => 'false',
 			'step1' 	=> 'Pledge',
 			'active_color'	=> '',
@@ -1783,7 +1777,7 @@ class Lightning_Paywall_Public
             <div class="lnpw_page_header_container">
                 <?php if ($logo) : ?>
                 <div class="lnpw_logo_wrap">
-                    <img width="90" height="90" alt="Tipping page logo" src=<?php echo esc_url($logo); ?> />
+                    <img width="180" height="180" alt="Tipping page logo" src=<?php echo esc_url($logo); ?> />
                 </div>
                 <?php endif; ?>
                 <?php if (!empty($atts['title'])) : ?>
