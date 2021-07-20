@@ -1247,31 +1247,16 @@ class Lightning_Paywall_Public
 		ob_start();
 	?>
 <style>
-<?php if ($version==='wide') : ?>.lnpw_skyscraper_banner {
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
-    ?>;
-}
-
-.lnpw_widget.lnpw_skyscraper_tipping_container.wide {
+<?php if ($version==='wide') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.wide {
     background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
     ?>;
     background-image: url(<?php echo ($background ? esc_html($background): '');
     ?>);
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
-    ?>;
-}
-
-.lnpw_widget.lnpw_skyscraper_banner.wide {
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
 }
 
 .lnpw_skyscraper_header_container.wide,
-#lnpw_skyscraper_button_wide {
+#lnpw_skyscraper_button_wide,
+#lnpw_widget_lnpw_skyscraper_button_wide {
     background-color: <?php echo esc_html($atts['background']);
     ?>;
 }
@@ -1400,8 +1385,10 @@ class Lightning_Paywall_Public
 }
 
 .lnpw_skyscraper_banner.wide {
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
+    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
     ?>;
+    background-image: url(<?php echo ($background ? esc_html($background): '');
+    ?>);
 }
 
 .lnpw_skyscraper_amount_value_1,
@@ -1463,7 +1450,7 @@ class Lightning_Paywall_Public
 <div id="lnpw_page">
     <?php if ($dimension[0] === '600') : ?>
     <div class="<?php echo ltrim("{$is_widget} lnpw_skyscraper_banner {$is_wide}"); ?>">
-        <div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
+        <div class="<?php echo trim("{$is_widget} lnpw_skyscraper_header_container {$is_wide}"); ?>">
             <?php if ($logo) : ?>
             <div class="lnpw_logo_wrap">
                 <img width="100" height="100" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />

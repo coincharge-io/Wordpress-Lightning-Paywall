@@ -69,7 +69,7 @@ class Tipping_Banner_High extends WP_Widget
         $title_text_color = !empty($instance['title_text_color']) ? $instance['title_text_color'] : esc_html__('#000000', 'text_domain');
 
         $tipping_text = !empty($instance['tipping_text']) ? $instance['tipping_text'] : esc_html__('Enter Tipping Amount', 'text_domain');
-        $tipping_text_color = !empty($instance['tipping_text_color']) ? $instance['tipping_text_color'] : esc_html__('#000000', 'text_domain');
+        $tipping_text_color = !empty($instance['tipping_text_color']) ? $instance['tipping_text_color'] : esc_html__('#ffffff', 'text_domain');
         $redirect = !empty($instance['redirect']) ? $instance['redirect'] : esc_html__('', 'text_domain');
         $amount = !empty($instance['amount']) ? $instance['amount'] : esc_html__('', 'text_domain');
         $description_color = !empty($instance['description_color']) ? $instance['description_color'] : esc_html__('#000000', 'text_domain');
@@ -119,7 +119,7 @@ class Tipping_Banner_High extends WP_Widget
         $free_input = !empty($instance['free_input']) ? $instance['free_input'] : esc_html__('true', 'text_domain');
 
         $fixed_background = !empty($instance['fixed_background']) ? $instance['fixed_background'] : esc_html__('#FE642E', 'text_domain');
-        $hf_color = !empty($instance['hf_color']) ? $instance['hf_color'] : esc_html__('1d5aa3', 'text_domain');
+        $hf_color = !empty($instance['hf_color']) ? $instance['hf_color'] : esc_html__('#1d5aa3', 'text_domain');
 ?>
 <div class="tipping_banner">
     <h1>Tipping</h1>
@@ -421,7 +421,7 @@ class Tipping_Banner_High extends WP_Widget
             value="<?php echo esc_attr($button_color); ?>" />
 
     </div>
-    
+
     <h4><?php echo esc_html__('Collect further information', 'text_domain'); ?></h4>
     <div class="row">
         <div class="col-50">

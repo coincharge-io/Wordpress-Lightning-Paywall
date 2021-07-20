@@ -280,12 +280,20 @@ Tipping box
   justify-content: space-evenly;
   height: 100px;
 }
+.lnpw_widget.lnpw_skyscraper_tipping_container.wide {
+  width: 600px !important;
+  height: 100px !important;
+}
 .lnpw_skyscraper_tipping_container fieldset {
   display: flex;
   flex-direction: column;
   border: 0;
   min-width: 0;
   padding: 0;
+}
+.lnpw_widget.lnpw_skyscraper_header_container.wide > .lnpw_logo_wrap img,
+.lnpw_skyscraper_header_container.wide > .lnpw_logo_wrap img {
+  padding: 10px;
 }
 
 .lnpw_skyscraper_tipping_container.high h6 {
@@ -881,6 +889,8 @@ Tipping page
 }
 #powered_by_skyscraper {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #powered_by_skyscraper p {
   margin-top: 0.5em;
@@ -889,6 +899,7 @@ Tipping page
 #powered_by {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #powered_by p {
