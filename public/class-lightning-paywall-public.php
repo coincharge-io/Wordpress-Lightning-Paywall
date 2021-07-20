@@ -755,33 +755,31 @@ class Lightning_Paywall_Public
 		ob_start();
 
 ?>
-<div class="lnpw_pay">
-    <div class="lnpw_pay__preview">
-        <h2><?php echo esc_html($atts['title']); ?></h2>
-        <p><?php echo esc_html($atts['description']); ?></p>
-        <img src=<?php echo esc_url($preview_url); ?> alt="Video preview">
-    </div>
-    <div class="lnpw_pay__content">
-        <h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
-        <p>
-            <?php echo Lightning_Paywall_Public::get_post_info_string() ?>
-        </p>
-    </div>
-    <div class="lnpw_pay__footer">
-        <div>
-            <button type="button" id="lnpw_pay__button"
-                data-post_id="<?php echo  get_the_ID(); ?>"><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
-        </div>
-        <div class="lnpw_pay__loading">
-            <p class="loading"></p>
-        </div>
-        <div class="lnpw_help">
-            <a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/"
-                target="_blank">Help</a>
-        </div>
-    </div>
-</div>
-<?php
+		<div class="lnpw_pay">
+			<div class="lnpw_pay__preview">
+				<h2><?php echo esc_html($atts['title']); ?></h2>
+				<p><?php echo esc_html($atts['description']); ?></p>
+				<img src=<?php echo esc_url($preview_url); ?> alt="Video preview">
+			</div>
+			<div class="lnpw_pay__content">
+				<h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
+				<p>
+					<?php echo Lightning_Paywall_Public::get_post_info_string() ?>
+				</p>
+			</div>
+			<div class="lnpw_pay__footer">
+				<div>
+					<button type="button" id="lnpw_pay__button" data-post_id="<?php echo  get_the_ID(); ?>"><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
+				</div>
+				<div class="lnpw_pay__loading">
+					<p class="loading"></p>
+				</div>
+				<div class="lnpw_help">
+					<a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/" target="_blank">Help</a>
+				</div>
+			</div>
+		</div>
+	<?php
 
 
 		return ob_get_clean();
@@ -806,9 +804,9 @@ class Lightning_Paywall_Public
 		ob_start();
 	?>
 
-<a class="lnpw_pay__download" href=<?php echo esc_url($href) ?> target="_blank" download>Download</a>
+		<a class="lnpw_pay__download" href=<?php echo esc_url($href) ?> target="_blank" download>Download</a>
 
-<?php
+	<?php
 
 
 		return ob_get_clean();
@@ -832,33 +830,31 @@ class Lightning_Paywall_Public
 		ob_start();
 
 	?>
-<div class="lnpw_pay">
-    <div class="lnpw_pay__preview">
-        <h2><?php echo esc_html($atts['title']); ?></h2>
-        <p><?php echo esc_html($atts['description']); ?></p>
-        <img src=<?php echo esc_url($preview_url); ?> alt="Video preview">
-    </div>
-    <div class="lnpw_pay__content">
-        <h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
-        <p>
-            <?php echo Lightning_Paywall_Public::get_post_info_string() ?>
-        </p>
-    </div>
-    <div class="lnpw_pay__footer">
-        <div>
-            <button type="button" id="lnpw_pay__button"
-                data-post_id="<?php echo  get_the_ID(); ?>"><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
-        </div>
-        <div class="lnpw_pay__loading">
-            <p class="loading"></p>
-        </div>
-        <div class="lnpw_help">
-            <a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/"
-                target="_blank">Help</a>
-        </div>
-    </div>
-</div>
-<?php
+		<div class="lnpw_pay">
+			<div class="lnpw_pay__preview">
+				<h2><?php echo esc_html($atts['title']); ?></h2>
+				<p><?php echo esc_html($atts['description']); ?></p>
+				<img src=<?php echo esc_url($preview_url); ?> alt="Video preview">
+			</div>
+			<div class="lnpw_pay__content">
+				<h2><?php echo Lightning_Paywall_Public::get_payblock_header_string() ?></h2>
+				<p>
+					<?php echo Lightning_Paywall_Public::get_post_info_string() ?>
+				</p>
+			</div>
+			<div class="lnpw_pay__footer">
+				<div>
+					<button type="button" id="lnpw_pay__button" data-post_id="<?php echo  get_the_ID(); ?>"><?php echo Lightning_Paywall_Public::get_payblock_button_string() ?></button>
+				</div>
+				<div class="lnpw_pay__loading">
+					<p class="loading"></p>
+				</div>
+				<div class="lnpw_help">
+					<a class="lnpw_help__link" href="https://lightning-paywall.coincharge.io/how-to-pay-the-lightning-paywall/" target="_blank">Help</a>
+				</div>
+			</div>
+		</div>
+	<?php
 
 
 		return ob_get_clean();
@@ -923,179 +919,172 @@ class Lightning_Paywall_Public
 
 		ob_start();
 	?>
-<style>
-<?php if ($version==='widget') : ?>.lnpw_tipping_box_container.lnpw_widget {
-    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
-    ?>;
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
-    ?>;
-    background-image: url(<?php echo ($background ? esc_html($background): '');
-    ?>);
+		<style>
+			<?php if ($version === 'widget') : ?>.lnpw_tipping_box_container.lnpw_widget {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
+									?>;
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
+						?>;
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
+						?>;
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
+										?>);
 
-}
-
-
-#lnpw_tipping__button_lnpw_widget {
-    color: <?php echo esc_html($atts['button_text_color']);
-    ?>;
-    background: <?php echo esc_html($atts['button_color']);
-    ?>;
-}
-
-#tipping_form_box_widget fieldset div.lnpw_tipping_box_header_container h6 {
-    color: <?php echo esc_html($atts['title_text_color']);
-    ?>
-}
-
-.lnpw_tipping_container_info_container {
-    display: <?php echo (empty($atts['description'])) ? 'none': 'block';
-    ?>
-}
-
-#tipping_form_box_widget fieldset div.lnpw_tipping_box_info_container p {
-    color: <?php echo esc_html($atts['description_color']);
-    ?>
-}
-
-#tipping_form_box_widget fieldset div.lnpw_tipping_box_header_container,
-#button {
-    background-color: <?php echo esc_html($atts['background']);
-    ?>;
-}
-
-#tipping_form_box_widget fieldset h6 {
-    color: <?php echo esc_html($atts['tipping_text_color']);
-    ?>;
-}
-
-.lnpw_tipping_free_input.lnpw_widget {
-    background-color: <?php echo esc_html($atts['input_background']);
-    ?>;
-}
-
-<?php else : ?>.lnpw_tipping_box_container {
-    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
-    ?>;
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
-    ?>;
-    background-image: url(<?php echo ($background ? esc_html($background): '');
-    ?>);
-
-}
+			}
 
 
-#lnpw_tipping__button {
-    color: <?php echo esc_html($atts['button_text_color']);
-    ?>;
-    background: <?php echo esc_html($atts['button_color']);
-    ?>;
-}
+			#lnpw_tipping__button_lnpw_widget {
+				color: <?php echo esc_html($atts['button_text_color']);
+						?>;
+				background: <?php echo esc_html($atts['button_color']);
+							?>;
+			}
 
-#tipping_form_box fieldset div.lnpw_tipping_box_header_container div h6 {
-    color: <?php echo esc_html($atts['title_text_color']);
-    ?>
-}
+			#tipping_form_box_widget fieldset div.lnpw_tipping_box_header_container h6 {
+				color: <?php echo esc_html($atts['title_text_color']);
+						?>
+			}
 
-.lnpw_tipping_container_info_container {
-    display: <?php echo (empty($atts['description'])) ? 'none': 'block';
-    ?>
-}
+			.lnpw_tipping_container_info_container {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block';
+							?>
+			}
 
-.lnpw_tipping_box_header_container,
-#button {
-    background-color: <?php echo esc_html($atts['background']);
-    ?>;
-}
+			#tipping_form_box_widget fieldset div.lnpw_tipping_box_info_container p {
+				color: <?php echo esc_html($atts['description_color']);
+						?>
+			}
 
-#tipping_form_box fieldset div.lnpw_tipping_box_info_container p {
-    color: <?php echo esc_html($atts['description_color']);
-    ?>
-}
+			#tipping_form_box_widget fieldset div.lnpw_tipping_box_header_container,
+			#button {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
 
-#tipping_form_box fieldset h6 {
-    color: <?php echo esc_html($atts['tipping_text_color']);
-    ?>
-}
+			#tipping_form_box_widget fieldset h6 {
+				color: <?php echo esc_html($atts['tipping_text_color']);
+						?>;
+			}
 
-.lnpw_tipping_free_input {
-    background-color: <?php echo esc_html($atts['input_background']);
-    ?>;
-}
+			.lnpw_tipping_free_input.lnpw_widget {
+				background-color: <?php echo esc_html($atts['input_background']);
+									?>;
+			}
 
-<?php endif;
-?>
-</style>
+			<?php else : ?>.lnpw_tipping_box_container {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
+									?>;
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
+						?>;
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
+						?>;
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
+										?>);
 
-<div id="lnpw_page">
-    <div class="<?php echo trim("lnpw_tipping_box_container {$is_widget}"); ?>">
-
-        <form method="POST" action="" id="<?php echo $form; ?>">
-            <fieldset>
-                <div class="lnpw_tipping_box_header_container">
-                    <?php if ($logo) : ?>
-                    <div class="lnpw_logo_wrap">
-                        <img width="70" height="70" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
-                    </div>
-                    <?php endif; ?>
-                    <?php if (!empty($atts['title'])) : ?>
-                    <div>
-                        <h6><?php echo esc_html($atts['title']); ?></h6>
-                    </div>
-                    <?php endif; ?>
-                </div>
-                <div class="lnpw_tipping_box_info_container">
-                    <?php if (!empty($atts['description'])) : ?>
-                    <p><?php echo esc_html($atts['description']); ?></p>
-                    <?php endif; ?>
-                </div>
-                <h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : ''); ?></h6>
-                <div class="lnpw_tipping_box_amount">
-
-                    <div class="<?php echo "lnpw_tipping_free_input {$is_widget}"; ?>">
-                        <input type="number" id="<?php echo "lnpw_tipping_amount{$suffix}"; ?>"
-                            name="<?php echo "lnpw_tipping_amount{$suffix}"; ?>" placeholder="0.00" required />
+			}
 
 
-                        <select required name="<?php echo "lnpw_tipping_currency{$suffix}"; ?>"
-                            id="<?php echo "lnpw_tipping_currency{$suffix}"; ?>">
-                            <option disabled value="">Select currency</option>
-                            <?php foreach ($supported_currencies as $currency) : ?>
-                            <option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?>
-                                value="<?php echo $currency; ?>">
-                                <?php echo $currency; ?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
+			#lnpw_tipping__button {
+				color: <?php echo esc_html($atts['button_text_color']);
+						?>;
+				background: <?php echo esc_html($atts['button_color']);
+							?>;
+			}
+
+			#tipping_form_box fieldset div.lnpw_tipping_box_header_container div h6 {
+				color: <?php echo esc_html($atts['title_text_color']);
+						?>
+			}
+
+			.lnpw_tipping_container_info_container {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block';
+							?>
+			}
+
+			.lnpw_tipping_box_header_container,
+			#button {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
+
+			#tipping_form_box fieldset div.lnpw_tipping_box_info_container p {
+				color: <?php echo esc_html($atts['description_color']);
+						?>
+			}
+
+			#tipping_form_box fieldset h6 {
+				color: <?php echo esc_html($atts['tipping_text_color']);
+						?>
+			}
+
+			.lnpw_tipping_free_input {
+				background-color: <?php echo esc_html($atts['input_background']);
+									?>;
+			}
+
+			<?php endif;
+			?>
+		</style>
+
+		<div id="lnpw_page">
+			<div class="<?php echo trim("lnpw_tipping_box_container {$is_widget}"); ?>">
+
+				<form method="POST" action="" id="<?php echo $form; ?>">
+					<fieldset>
+						<div class="lnpw_tipping_box_header_container">
+							<?php if ($logo) : ?>
+								<div class="lnpw_logo_wrap">
+									<img width="70" height="70" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+								</div>
+							<?php endif; ?>
+							<?php if (!empty($atts['title'])) : ?>
+								<div>
+									<h6><?php echo esc_html($atts['title']); ?></h6>
+								</div>
+							<?php endif; ?>
+						</div>
+						<div class="lnpw_tipping_box_info_container">
+							<?php if (!empty($atts['description'])) : ?>
+								<p><?php echo esc_html($atts['description']); ?></p>
+							<?php endif; ?>
+						</div>
+						<h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : ''); ?></h6>
+						<div class="lnpw_tipping_box_amount">
+
+							<div class="<?php echo "lnpw_tipping_free_input {$is_widget}"; ?>">
+								<input type="number" id="<?php echo "lnpw_tipping_amount{$suffix}"; ?>" name="<?php echo "lnpw_tipping_amount{$suffix}"; ?>" placeholder="0.00" required />
 
 
-                    </div>
-                    <div class="lnpw_tipping_converted_values">
-                        <input type="text" id="<?php echo "lnpw_converted_amount{$suffix}"; ?>"
-                            name="lnpw_converted_amount" readonly />
-                        <input type="text" id="<?php echo "lnpw_converted_currency{$suffix}"; ?>"
-                            name="lnpw_converted_currency" readonly />
-                    </div>
-                </div>
-                <input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link"
-                    value=<?php echo $atts['redirect']; ?> />
-                <div id="button">
+								<select required name="<?php echo "lnpw_tipping_currency{$suffix}"; ?>" id="<?php echo "lnpw_tipping_currency{$suffix}"; ?>">
+									<option disabled value="">Select currency</option>
+									<?php foreach ($supported_currencies as $currency) : ?>
+										<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+											<?php echo $currency; ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
 
-                    <button type="submit"
-                        id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
-                </div>
-            </fieldset>
 
-        </form>
-    </div>
-    <div id="powered_by_box">
-        <p>Powered by <a href='https://btcpaywall.com/' target='_blank'>BTCPayWall</a></p>
-    </div>
-</div>
-<?php
+							</div>
+							<div class="lnpw_tipping_converted_values">
+								<input type="text" id="<?php echo "lnpw_converted_amount{$suffix}"; ?>" name="lnpw_converted_amount" readonly />
+								<input type="text" id="<?php echo "lnpw_converted_currency{$suffix}"; ?>" name="lnpw_converted_currency" readonly />
+							</div>
+						</div>
+						<input type="hidden" id="lnpw_redirect_link" name="lnpw_redirect_link" value=<?php echo $atts['redirect']; ?> />
+						<div id="button">
+
+							<button type="submit" id="<?php echo "lnpw_tipping__button{$suffix}" ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
+						</div>
+					</fieldset>
+
+				</form>
+			</div>
+			<div id="powered_by_box">
+				<p>Powered by <a href='https://btcpaywall.com/' target='_blank'>BTCPayWall</a></p>
+			</div>
+		</div>
+	<?php
 
 		return ob_get_clean();
 	}
@@ -1177,7 +1166,7 @@ class Lightning_Paywall_Public
 	public function render_shortcode_skyscraper_tipping($atts)
 	{
 		$atts = shortcode_atts(array(
-			'dimension' 	=> '160x600',
+			'dimension' 	=> '200x600',
 			'title'			=> 'Support my work',
 			'description'	=> '',
 			'currency'		=> 'SATS',
@@ -1220,8 +1209,7 @@ class Lightning_Paywall_Public
 			'mandatory_message' => 'false',
 			'widget'			=> 'false'
 		), $atts);
-
-		$dimension = explode('x', ($atts['dimension'] == '160x600' ? '160x600' : '600x160'));
+		$dimension = explode('x', ($atts['dimension'] == '200x600' ? '200x600' : '600x200'));
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
 		$background = wp_get_attachment_image_src($atts['background_id']) ? wp_get_attachment_image_src($atts['background_id'])[0] : $atts['background_id'];
@@ -1238,380 +1226,355 @@ class Lightning_Paywall_Public
 
 		$is_wide = $dimension[0] === '600' ? 'wide' : 'high';
 		$form_prefix = $is_widget === 'lnpw_widget' ? 'lnpw_widget_' : '';
-		$form_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '160') ? '_high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? '_wide' : '');
+		$form_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? '_high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? '_wide' : '');
 
-		$container_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '160') ? 'high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? 'wide' : '');
+		$container_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? 'high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? 'wide' : '');
 
-		$version = ($is_widget === 'lnpw_widget' && $dimension[0] === '160') ? 'high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? 'wide' : 'basic');
+		$version = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? 'high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? 'wide' : 'basic');
 
 		ob_start();
 	?>
-<style>
-<?php if ($version==='wide') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.wide {
-    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
-    ?>;
-    background-image: url(<?php echo ($background ? esc_html($background): '');
-    ?>);
-}
+		<style>
+			<?php if ($version === 'wide') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.wide {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
+									?>;
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
+										?>);
+			}
 
-.lnpw_skyscraper_header_container.wide,
-#lnpw_skyscraper_button_wide,
-#lnpw_widget_lnpw_skyscraper_button_wide {
-    background-color: <?php echo esc_html($atts['background']);
-    ?>;
-}
+			.lnpw_skyscraper_header_container.wide,
+			#lnpw_skyscraper_button_wide,
+			#lnpw_widget_lnpw_skyscraper_button_wide,
+			#lnpw_widget_lnpw_skyscraper_button_wide>div:nth-child(1)>input {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
 
-.lnpw_skyscraper_amount_value_1.wide,
-.lnpw_skyscraper_amount_value_2.wide,
-.lnpw_skyscraper_amount_value_3.wide,
-.lnpw_skyscraper_tipping_free_input.wide {
-    background-color: <?php echo esc_html($atts['input_background']);
-    ?>;
-}
+			.lnpw_skyscraper_amount_value_1.wide,
+			.lnpw_skyscraper_amount_value_2.wide,
+			.lnpw_skyscraper_amount_value_3.wide,
+			.lnpw_skyscraper_tipping_free_input.wide {
+				background-color: <?php echo esc_html($atts['input_background']);
+									?>;
+			}
 
-#lnpw_widget_lnpw_skyscraper_tipping__button_wide,
-#lnpw_widget_lnpw_skyscraper_button_wide>div>input.lnpw_widget.skyscraper-next-form {
-    color: <?php echo esc_html($atts['button_text_color']);
-    ?>;
-    background: <?php echo esc_html($atts['button_color']);
-    ?>;
-}
+			#lnpw_widget_lnpw_skyscraper_tipping__button_wide,
+			#lnpw_widget_lnpw_skyscraper_button_wide>div>input.lnpw_widget.skyscraper-next-form {
+				color: <?php echo esc_html($atts['button_text_color']);
+						?>;
+				background: <?php echo esc_html($atts['button_color']);
+							?>;
+			}
 
-.lnpw_widget.lnpw_skyscraper_header_container.wide h6 {
-    color: <?php echo esc_html($atts['title_text_color']);
-    ?>
-}
+			.lnpw_widget.lnpw_skyscraper_header_container.wide h6 {
+				color: <?php echo esc_html($atts['title_text_color']);
+						?>
+			}
 
-.lnpw_widget.lnpw_skyscraper_tipping_container.info_container.wide {
-    display: <?php echo (empty($atts['description'])) ? 'none': 'block';
-    ?>
-}
+			.lnpw_widget.lnpw_skyscraper_tipping_container.info_container.wide {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block';
+							?>
+			}
 
-.lnpw_widget.lnpw_skyscraper_info_container.wide p {
-    color: <?php echo esc_html($atts['description_color']);
-    ?>
-}
+			.lnpw_widget.lnpw_skyscraper_info_container.wide p,
+			div.lnpw_widget.lnpw_skyscraper_banner.wide>div.lnpw_widget.lnpw_skyscraper_header_container.wide p {
+				color: <?php echo esc_html($atts['description_color']);
+						?>
+			}
 
-.lnpw_widget.lnpw_skyscraper_tipping_info.wide fieldset h6,
-.lnpw_widget.lnpw_skyscraper_tipping_info.wide h6 {
-    color: <?php echo esc_html($atts['tipping_text_color']);
-    ?>
-}
+			.lnpw_widget.lnpw_skyscraper_tipping_info.wide fieldset h6,
+			.lnpw_widget.lnpw_skyscraper_tipping_info.wide h6,
+			#lnpw_widget_skyscraper_tipping_form_wide>fieldset:nth-child(1)>h6 {
+				color: <?php echo esc_html($atts['tipping_text_color']);
+						?>
+			}
 
-.lnpw_widget.lnpw_skyscraper_amount_value_1.wide,
-.lnpw_widget.lnpw_skyscraper_amount_value_2.wide,
-.lnpw_widget.lnpw_skyscraper_amount_value_3.wide {
-    background: <?php echo esc_html($atts['fixed_background']);
-    ?>;
-}
-
-
-
-
-
-<?php elseif ($version==='high') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.high {
-    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
-    ?>;
-    background-image: url(<?php echo ($background ? $background : '');
-    ?>);
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
-    ?>;
-}
-
-#lnpw_widget_lnpw_skyscraper_tipping__button_high,
-#lnpw_widget_lnpw_skyscraper_button_high>div>input.lnpw_widget.skyscraper-next-form.high {
-    color: <?php echo esc_html($atts['button_text_color']);
-    ?>;
-    background: <?php echo esc_html($atts['button_color']);
-    ?>;
-}
-
-.lnpw_widget.lnpw_skyscraper_header_container.high,
-#lnpw_widget_lnpw_skyscraper_button_high {
-    background-color: <?php echo esc_html($atts['background']);
-    ?>;
-}
-
-.lnpw_widget.lnpw_skyscraper_header_container.high h6 {
-    color: <?php echo esc_html($atts['title_text_color']);
-    ?>
-}
-
-.lnpw_skyscraper_amount_value_1.high,
-.lnpw_skyscraper_amount_value_2.high,
-.lnpw_skyscraper_amount_value_3.high,
-.lnpw_skyscraper_tipping_free_input.high {
-    background-color: <?php echo esc_html($atts['input_background']);
-    ?>;
-}
-
-.lnpw_widget.lnpw_skyscraper_tipping_container.info_container.high {
-    display: <?php echo (empty($atts['description'])) ? 'none': 'block';
-    ?>
-}
-
-.lnpw_widget.lnpw_skyscraper_info_container.high p {
-    color: <?php echo esc_html($atts['description_color']);
-    ?>
-}
-
-.lnpw_widget.lnpw_skyscraper_tipping_info.high fieldset h6,
-.lnpw_widget.lnpw_skyscraper_tipping_info.high h6 {
-    color: <?php echo esc_html($atts['tipping_text_color']);
-    ?>
-}
-
-.lnpw_widget.lnpw_skyscraper_amount_value_1.high,
-.lnpw_widget.lnpw_skyscraper_amount_value_2.high,
-.lnpw_widget.lnpw_skyscraper_amount_value_3.high {
-    background: <?php echo esc_html($atts['fixed_background']);
-    ?>;
-
-}
+			.lnpw_widget.lnpw_skyscraper_amount_value_1.wide,
+			.lnpw_widget.lnpw_skyscraper_amount_value_2.wide,
+			.lnpw_widget.lnpw_skyscraper_amount_value_3.wide {
+				background: <?php echo esc_html($atts['fixed_background']);
+							?>;
+			}
 
 
 
-<?php else : ?>.lnpw_skyscraper_tipping_container {
-    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
-    ?>;
-    background-image: url(<?php echo ($background ? esc_html($background): '');
-    ?>);
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
-    ?>;
-}
 
-.lnpw_skyscraper_banner.wide {
-    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
-    ?>;
-    background-image: url(<?php echo ($background ? esc_html($background): '');
-    ?>);
-}
 
-.lnpw_skyscraper_amount_value_1,
-.lnpw_skyscraper_amount_value_2,
-.lnpw_skyscraper_amount_value_3,
-.lnpw_skyscraper_tipping_free_input {
-    background-color: <?php echo esc_html($atts['input_background']);
-    ?>;
-}
+			<?php elseif ($version === 'high') : ?>.lnpw_widget.lnpw_skyscraper_tipping_container.high {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
+									?>;
+				background-image: url(<?php echo ($background ? $background : '');
+										?>);
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
+						?>;
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
+						?>;
+			}
 
-.lnpw_skyscraper_header_container,
-#lnpw_skyscraper_button {
-    background-color: <?php echo esc_html($atts['background']);
-    ?>;
-}
+			#lnpw_widget_lnpw_skyscraper_tipping__button_high,
+			#lnpw_widget_lnpw_skyscraper_button_high>div>input.lnpw_widget.skyscraper-next-form.high {
+				color: <?php echo esc_html($atts['button_text_color']);
+						?>;
+				background: <?php echo esc_html($atts['button_color']);
+							?>;
+			}
 
-#lnpw_skyscraper_tipping__button,
-#lnpw_skyscraper_button>div>input.skyscraper-next-form {
-    color: <?php echo esc_html($atts['button_text_color']);
-    ?>;
-    background: <?php echo esc_html($atts['button_color']);
-    ?>;
-}
+			.lnpw_widget.lnpw_skyscraper_header_container.high,
+			#lnpw_widget_lnpw_skyscraper_button_high,
+			#lnpw_widget_lnpw_skyscraper_button_high>div:nth-child(1)>input {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
 
-.lnpw_skyscraper_header_container h6 {
-    color: <?php echo esc_html($atts['title_text_color']);
-    ?>
-}
+			.lnpw_widget.lnpw_skyscraper_header_container.high h6 {
+				color: <?php echo esc_html($atts['title_text_color']);
+						?>
+			}
 
-.lnpw_skyscraper_tipping_container.info_container {
-    display: <?php echo (empty($atts['description'])) ? 'none': 'block';
-    ?>
-}
+			.lnpw_skyscraper_amount_value_1.high,
+			.lnpw_skyscraper_amount_value_2.high,
+			.lnpw_skyscraper_amount_value_3.high,
+			.lnpw_skyscraper_tipping_free_input.high {
+				background-color: <?php echo esc_html($atts['input_background']);
+									?>;
+			}
 
-.lnpw_skyscraper_info_container p {
-    color: <?php echo esc_html($atts['description_color']);
-    ?>
-}
+			.lnpw_widget.lnpw_skyscraper_tipping_container.info_container.high {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block';
+							?>
+			}
 
-.lnpw_skyscraper_tipping_info fieldset h6,
-.lnpw_skyscraper_tipping_info h6 {
-    color: <?php echo esc_html($atts['tipping_text_color']);
-    ?>
-}
+			.lnpw_widget.lnpw_skyscraper_info_container.high p,
+			div.lnpw_widget.lnpw_skyscraper_banner.wide>div.lnpw_widget.lnpw_skyscraper_header_container.high p {
+				color: <?php echo esc_html($atts['description_color']);
+						?>
+			}
 
-.lnpw_skyscraper_amount_value_1,
-.lnpw_skyscraper_amount_value_2,
-.lnpw_skyscraper_amount_value_3 {
-    background: <?php echo esc_html($atts['fixed_background']);
-    ?>;
+			.lnpw_widget.lnpw_skyscraper_tipping_info.high fieldset h6,
+			.lnpw_widget.lnpw_skyscraper_tipping_info.high h6,
+			#lnpw_widget_skyscraper_tipping_form_high>fieldset:nth-child(1)>h6 {
+				color: <?php echo esc_html($atts['tipping_text_color']);
+						?>
+			}
 
-}
+			.lnpw_widget.lnpw_skyscraper_amount_value_1.high,
+			.lnpw_widget.lnpw_skyscraper_amount_value_2.high,
+			.lnpw_widget.lnpw_skyscraper_amount_value_3.high {
+				background: <?php echo esc_html($atts['fixed_background']);
+							?>;
+
+			}
 
 
 
-<?php endif;
-?>
-</style>
-<div id="lnpw_page">
-    <?php if ($dimension[0] === '600') : ?>
-    <div class="<?php echo ltrim("{$is_widget} lnpw_skyscraper_banner {$is_wide}"); ?>">
-        <div class="<?php echo trim("{$is_widget} lnpw_skyscraper_header_container {$is_wide}"); ?>">
-            <?php if ($logo) : ?>
-            <div class="lnpw_logo_wrap">
-                <img width="100" height="100" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
-            </div>
-            <?php endif; ?>
-            <div>
-                <?php if (!empty($atts['title'])) : ?>
-                <h6><?php echo esc_html($atts['title']); ?></h6>
-                <?php endif; ?>
-                <?php if (!empty($atts['description'])) : ?>
-                <p><?php echo esc_html($atts['description']); ?></p>
-                <?php endif; ?>
-            </div>
-        </div>
+			<?php else : ?>.lnpw_skyscraper_tipping_container {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
+									?>;
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
+										?>);
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
+						?>;
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
+						?>;
+			}
 
-        <?php endif; ?>
-        <div class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_container {$container_suffix}"); ?>">
-            <form method="POST" action="" id="<?php echo "{$form_prefix}skyscraper_tipping_form{$form_suffix}"; ?>">
-                <fieldset>
-                    <div>
-                        <?php if ($dimension[0] === '160') : ?>
+			.lnpw_skyscraper_banner.wide {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
+									?>;
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
+										?>);
+			}
 
-                        <div class="<?php echo "{$is_widget} lnpw_skyscraper_header_container {$is_wide}"; ?>">
-                            <?php if ($logo) : ?>
-                            <div class="lnpw_logo_wrap">
-                                <img width="140" height="140" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
-                            </div>
-                            <?php endif; ?>
-                            <?php if (!empty($atts['title'])) : ?>
-                            <div>
-                                <h6><?php echo esc_html($atts['title']); ?></h6>
-                            </div>
-                            <?php endif; ?>
-                        </div>
-                        <div class="<?php echo trim("{$is_widget} lnpw_skyscraper_info_container {$is_wide}"); ?>">
-                            <?php if (!empty($atts['description'])) : ?>
-                            <p><?php echo esc_html($atts['description']); ?></p>
-                            <?php endif; ?>
-                        </div>
-                        <?php endif; ?>
-                    </div>
-                    <h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : ''); ?>
-                    </h6>
-                    <div class="<?php echo trim("{$is_widget} lnpw_skyscraper_amount {$is_wide}"); ?>">
-                        <?php foreach ($fixed_amount as $key => $value) : ?>
+			.lnpw_skyscraper_amount_value_1,
+			.lnpw_skyscraper_amount_value_2,
+			.lnpw_skyscraper_amount_value_3,
+			.lnpw_skyscraper_tipping_free_input {
+				background-color: <?php echo esc_html($atts['input_background']);
+									?>;
+			}
 
-                        <?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
-                        <div
-                            class="<?php echo trim($is_widget . ' ' . 'lnpw_skyscraper_amount_' . $key . ' ' . $is_wide); ?>">
-                            <div>
-                                <input type="radio"
-                                    class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_default_amount {$is_wide}"); ?>"
-                                    id="<?php echo $is_widget_id . $key . '_' . $is_wide; ?>"
-                                    name="<?php echo "{$form_prefix}lnpw_skyscraper_tipping_default_amount_{$is_wide}"; ?>"
-                                    <?php echo $key == $index ? 'required' : ''; ?>
-                                    value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
-                                <?php if (!empty($fixed_amount[$key]['amount'])) : ?>
-                                <i class="<?php echo esc_html($fixed_amount[$key]['icon']); ?>"></i>
-                                <?php endif; ?>
-                            </div>
-                            <label
-                                for="<?php echo $key; ?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
+			.lnpw_skyscraper_header_container,
+			#lnpw_skyscraper_button,
+			#lnpw_skyscraper_button>div:nth-child(1)>input {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
 
-                        </div>
-                        <?php endif; ?>
+			#lnpw_skyscraper_tipping__button,
+			#lnpw_skyscraper_button>div>input.skyscraper-next-form {
+				color: <?php echo esc_html($atts['button_text_color']);
+						?>;
+				background: <?php echo esc_html($atts['button_color']);
+							?>;
+			}
 
-                        <?php endforeach; ?>
-                        <?php if ('true' === $atts['free_input']) : ?>
-                        <div class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_free_input {$is_wide}"); ?>">
-                            <input type="number"
-                                id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_amount{$form_suffix}"; ?>"
-                                name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_amount_{$is_wide}"; ?>"
-                                placeholder="0.00" required />
+			.lnpw_skyscraper_header_container h6 {
+				color: <?php echo esc_html($atts['title_text_color']);
+						?>
+			}
+
+			.lnpw_skyscraper_tipping_container.info_container {
+				display: <?php echo (empty($atts['description'])) ? 'none' : 'block';
+							?>
+			}
+
+			.lnpw_skyscraper_info_container p,
+			div.lnpw_skyscraper_banner.wide>div.lnpw_skyscraper_header_container.wide p,
+			div.lnpw_skyscraper_banner.high>div.lnpw_skyscraper_header_container.high p {
+				color: <?php echo esc_html($atts['description_color']);
+						?>
+			}
+
+			.lnpw_skyscraper_tipping_info fieldset h6,
+			.lnpw_skyscraper_tipping_info h6,
+			#skyscraper_tipping_form>fieldset:nth-child(1)>h6 {
+				color: <?php echo esc_html($atts['tipping_text_color']);
+						?>
+			}
+
+			.lnpw_skyscraper_amount_value_1,
+			.lnpw_skyscraper_amount_value_2,
+			.lnpw_skyscraper_amount_value_3 {
+				background: <?php echo esc_html($atts['fixed_background']);
+							?>;
+
+			}
 
 
-                            <select required
-                                name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency_{$is_wide}"; ?>"
-                                id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency{$form_suffix}"; ?>">
-                                <option disabled value="">Select currency</option>
-                                <?php foreach ($supported_currencies as $currency) : ?>
-                                <option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?>
-                                    value="<?php echo $currency; ?>">
-                                    <?php echo $currency; ?>
-                                </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <?php endif; ?>
 
-                        </div>
+			<?php endif;
+			?>
+		</style>
+		<div id="lnpw_page">
+			<?php if ($dimension[0] === '600') : ?>
+				<div class="<?php echo ltrim("{$is_widget} lnpw_skyscraper_banner {$is_wide}"); ?>">
+					<div class="<?php echo trim("{$is_widget} lnpw_skyscraper_header_container {$is_wide}"); ?>">
+						<?php if ($logo) : ?>
+							<div class="lnpw_logo_wrap">
+								<img width="140" height="120" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+							</div>
+						<?php endif; ?>
+						<div>
+							<?php if (!empty($atts['title'])) : ?>
+								<h6><?php echo esc_html($atts['title']); ?></h6>
+							<?php endif; ?>
+							<?php if (!empty($atts['description'])) : ?>
+								<p><?php echo esc_html($atts['description']); ?></p>
+							<?php endif; ?>
+						</div>
+					</div>
 
-                    </div>
-                    <div
-                        class="<?php echo trim("{$is_widget}  lnpw_skyscraper_tipping_converted_values {$is_wide}"); ?>">
-                        <input type="text"
-                            id="<?php echo  "{$is_widget_id}lnpw_skyscraper_converted_amount{$form_suffix}"; ?>"
-                            name="<?php echo "{$is_widget_id}lnpw_skyscraper_converted_amount_{$is_wide}"; ?>"
-                            readonly />
-                        <input type="text"
-                            id="<?php echo  "{$is_widget_id}lnpw_skyscraper_converted_currency{$form_suffix}"; ?>"
-                            name="<?php echo "{$is_widget_id}lnpw_skyscraper_converted_currency_{$is_wide}"; ?>"
-                            readonly />
-                    </div>
+				<?php endif; ?>
+				<div class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_container {$container_suffix}"); ?>">
+					<form method="POST" action="" id="<?php echo "{$form_prefix}skyscraper_tipping_form{$form_suffix}"; ?>">
+						<fieldset>
+							<div>
+								<?php if ($dimension[0] === '200') : ?>
+
+									<div class="<?php echo trim("{$is_widget} lnpw_skyscraper_header_container {$is_wide}"); ?>">
+										<?php if ($logo) : ?>
+											<div class="lnpw_logo_wrap">
+												<img width="140" height="120" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+											</div>
+										<?php endif; ?>
+										<div>
+											<?php if (!empty($atts['title'])) : ?>
+												<h6><?php echo esc_html($atts['title']); ?></h6>
+											<?php endif; ?>
+											<?php if (!empty($atts['description'])) : ?>
+												<p><?php echo esc_html($atts['description']); ?></p>
+											<?php endif; ?>
+										</div>
+									</div>
+								<?php endif; ?>
+							</div>
+							<h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : ''); ?>
+							</h6>
+							<div class="<?php echo trim("{$is_widget} lnpw_skyscraper_amount {$is_wide}"); ?>">
+								<?php foreach ($fixed_amount as $key => $value) : ?>
+
+									<?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
+										<div class="<?php echo trim($is_widget . ' ' . 'lnpw_skyscraper_amount_' . $key . ' ' . $is_wide); ?>">
+											<div>
+												<input type="radio" class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_default_amount {$is_wide}"); ?>" id="<?php echo $is_widget_id . $key . '_' . $is_wide; ?>" name="<?php echo "{$form_prefix}lnpw_skyscraper_tipping_default_amount_{$is_wide}"; ?>" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?>">
+												<?php if (!empty($fixed_amount[$key]['amount'])) : ?>
+													<i class="<?php echo esc_html($fixed_amount[$key]['icon']); ?>"></i>
+												<?php endif; ?>
+											</div>
+											<label for="<?php echo $key; ?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . $fixed_amount[$key]['currency']); ?></label>
+
+										</div>
+									<?php endif; ?>
+
+								<?php endforeach; ?>
+								<?php if ('true' === $atts['free_input']) : ?>
+									<div class="<?php echo trim("{$is_widget} lnpw_skyscraper_tipping_free_input {$is_wide}"); ?>">
+										<input type="number" id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_amount{$form_suffix}"; ?>" name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_amount_{$is_wide}"; ?>" placeholder="0.00" required />
 
 
-                    <div id="<?php echo "{$is_widget_id}lnpw_skyscraper_button{$form_suffix}"; ?>">
-                        <input type="hidden"
-                            id="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>"
-                            name="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>"
-                            value=<?php echo esc_attr($atts['redirect']); ?> />
-                        <?php if ($collect_data == 'true') : ?>
-                        <div>
-                            <input type="button" name="next"
-                                class="<?php echo  trim("{$is_widget} skyscraper-next-form {$is_wide}"); ?>"
-                                value="Continue >" />
-                        </div>
-                        <?php else : ?>
-                        <div>
-                            <button type="submit"
-                                id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button{$form_suffix}"; ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
-                        </div>
-                        <?php endif; ?>
-                    </div>
+										<select required name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency_{$is_wide}"; ?>" id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_currency{$form_suffix}"; ?>">
+											<option disabled value="">Select currency</option>
+											<?php foreach ($supported_currencies as $currency) : ?>
+												<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+													<?php echo $currency; ?>
+												</option>
+											<?php endforeach; ?>
+										</select>
+									<?php endif; ?>
 
-                </fieldset>
-                <?php if ($collect_data == 'true') : ?>
-                <fieldset>
-                    <div class="<?php echo ltrim("{$is_widget} lnpw_skyscraper_donor_information {$is_wide}"); ?>">
-                        <?php foreach ($collect as $key => $value) : ?>
-                        <?php if ($collect[$key]['display'] == 'true') : ?>
-                        <div
-                            class="<?php echo "{$is_widget} lnpw_skyscraper_tipping_donor_{$collect[$key]['label']}_wrap {$is_wide}"; ?>">
+									</div>
 
-                            <input type="text" placeholder="<?php echo $collect[$key]['label']; ?>"
-                                id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_donor_{$collect[$key]['id']}_{$is_wide}"; ?>"
-                                name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_donor_{$collect[$key]['label']}_{$is_wide}"; ?>"
-                                <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
-                        </div>
-                        <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <div id="<?php echo ltrim("{$is_widget_id}lnpw_skyscraper_button{$form_suffix}"); ?>">
-                        <div>
-                            <input type="button" name="previous"
-                                class="<?php echo trim("{$form_prefix} skyscraper-previous-form {$is_wide}"); ?>"
-                                value="< Previous" />
-                        </div>
-                        <div>
-                            <button type="submit"
-                                id=<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button{$form_suffix}"; ?>><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
-                        </div>
-                    </div>
-                </fieldset>
-                <?php endif; ?>
-            </form>
-        </div>
-    </div>
-    <div id="powered_by_skyscraper">
-        <p>Powered by <a href='https://btcpaywall.com/' target='_blank'>BTCPayWall</a></p>
-    </div>
-</div>
-<?php
+							</div>
+							<div class="<?php echo trim("{$is_widget}  lnpw_skyscraper_tipping_converted_values {$is_wide}"); ?>">
+								<input type="text" id="<?php echo  "{$is_widget_id}lnpw_skyscraper_converted_amount{$form_suffix}"; ?>" name="<?php echo "{$is_widget_id}lnpw_skyscraper_converted_amount_{$is_wide}"; ?>" readonly />
+								<input type="text" id="<?php echo  "{$is_widget_id}lnpw_skyscraper_converted_currency{$form_suffix}"; ?>" name="<?php echo "{$is_widget_id}lnpw_skyscraper_converted_currency_{$is_wide}"; ?>" readonly />
+							</div>
+
+
+							<div id="<?php echo "{$is_widget_id}lnpw_skyscraper_button{$form_suffix}"; ?>">
+								<input type="hidden" id="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>" name="<?php echo  "{$is_widget_id}lnpw_skyscraper_redirect_link_{$is_wide}"; ?>" value=<?php echo esc_attr($atts['redirect']); ?> />
+								<?php if ($collect_data == 'true') : ?>
+									<div>
+										<input type="button" name="next" class="<?php echo  trim("{$is_widget} skyscraper-next-form {$is_wide}"); ?>" value="Continue >" />
+									</div>
+								<?php else : ?>
+									<div>
+										<button type="submit" id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button{$form_suffix}"; ?>"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
+									</div>
+								<?php endif; ?>
+							</div>
+
+						</fieldset>
+						<?php if ($collect_data == 'true') : ?>
+							<fieldset>
+								<div class="<?php echo ltrim("{$is_widget} lnpw_skyscraper_donor_information {$is_wide}"); ?>">
+									<?php foreach ($collect as $key => $value) : ?>
+										<?php if ($collect[$key]['display'] == 'true') : ?>
+											<div class="<?php echo "{$is_widget} lnpw_skyscraper_tipping_donor_{$collect[$key]['label']}_wrap {$is_wide}"; ?>">
+
+												<input type="text" placeholder="<?php echo $collect[$key]['label']; ?>" id="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_donor_{$collect[$key]['id']}_{$is_wide}"; ?>" name="<?php echo "{$is_widget_id}lnpw_skyscraper_tipping_donor_{$collect[$key]['label']}_{$is_wide}"; ?>" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
+											</div>
+										<?php endif; ?>
+									<?php endforeach; ?>
+								</div>
+								<div id="<?php echo ltrim("{$is_widget_id}lnpw_skyscraper_button{$form_suffix}"); ?>">
+									<div>
+										<input type="button" name="previous" class="<?php echo trim("{$form_prefix} skyscraper-previous-form {$is_wide}"); ?>" value="< Previous" />
+									</div>
+									<div>
+										<button type="submit" id=<?php echo "{$is_widget_id}lnpw_skyscraper_tipping__button{$form_suffix}"; ?>><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
+									</div>
+								</div>
+							</fieldset>
+						<?php endif; ?>
+					</form>
+				</div>
+				</div>
+				<div id="powered_by_skyscraper">
+					<p>Powered by <a href='https://btcpaywall.com/' target='_blank'>BTCPayWall</a></p>
+				</div>
+		</div>
+	<?php
 
 		return ob_get_clean();
 	}
@@ -1689,213 +1652,198 @@ class Lightning_Paywall_Public
 
 		ob_start();
 	?>
-<style>
-.lnpw_page_tipping_container {
-    background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
-    ?>;
-    background-image: url(<?php echo ($background ? esc_html($background): '');
-    ?>);
-    width: <?php echo esc_html($dimension[0]) . 'px !important';
-    ?>;
-    height: <?php echo esc_html($dimension[1]) . 'px !important';
-    ?>;
-}
+		<style>
+			.lnpw_page_tipping_container {
+				background-color: <?php echo ($atts['background_color'] ? esc_html($atts['background_color']) : '');
+									?>;
+				background-image: url(<?php echo ($background ? esc_html($background) : '');
+										?>);
+				width: <?php echo esc_html($dimension[0]) . 'px !important';
+						?>;
+				height: <?php echo esc_html($dimension[1]) . 'px !important';
+						?>;
+			}
 
-#lnpw_page_tipping__button,
-#lnpw_page_button>input.page-next-form,
-#lnpw_page_button>input.page-previous-form {
-    color: <?php echo esc_html($atts['button_text_color']);
-    ?>;
-}
+			#lnpw_page_tipping__button,
+			#lnpw_page_button>input.page-next-form,
+			#lnpw_page_button>input.page-previous-form {
+				color: <?php echo esc_html($atts['button_text_color']);
+						?>;
+			}
 
-#lnpw_page_button {
-    background-color: <?php echo esc_html($atts['background']);
-    ?>;
-}
+			#lnpw_page_button {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
 
-.lnpw_page_header_container h6 {
-    color: <?php echo esc_html($atts['title_text_color']);
-    ?>
-}
-
-
-.lnpw_page_tipping_info fieldset h6,
-.lnpw_page_tipping_info h6 {
-    color: <?php echo esc_html($atts['tipping_text_color']);
-    ?>
-}
-
-.lnpw_page_amount_value_1,
-.lnpw_page_amount_value_2,
-.lnpw_page_amount_value_3,
-.lnpw_page_tipping_free_input {
-    background-color: <?php echo esc_html($atts['fixed_background']);
-    ?>;
-
-}
-
-.lnpw_page_header_container,
-#lnpw_page_button>div:nth-child(1)>input,
-#lnpw_page_button>input.page-next-form {
-    background-color: <?php echo esc_html($atts['background']);
-    ?>;
-}
-
-.lnpw_page_bar_container.active {
-    background-color: <?php echo esc_html($atts['active_color']);
-    ?>;
-}
-
-#lnpw_page_tipping__button,
-#lnpw_page_button>input.page-next-form {
-    background-color: <?php echo esc_html($atts['button_color']);
-    ?>;
-}
-
-.lnpw_page_bar_container div {
-    background-color: <?php echo esc_html($atts['inactive_color']);
-    ?>;
-}
-</style>
-
-<div id="lnpw_page">
-    <div class="lnpw_page_tipping_container">
-        <form method="POST" action="" id="page_tipping_form">
-            <div class="lnpw_page_header_container">
-                <?php if ($logo) : ?>
-                <div class="lnpw_logo_wrap">
-                    <img width="180" height="180" alt="Tipping page logo" src=<?php echo esc_url($logo); ?> />
-                </div>
-                <?php endif; ?>
-                <?php if (!empty($atts['title'])) : ?>
-                <div>
-                    <h6><?php echo esc_html($atts['title']); ?></h6>
-                </div>
-                <?php endif; ?>
-            </div>
-            <?php if ($collect_data == 'true') : ?>
-            <div class='lnpw_page_bar_container'>
-                <div class='lnpw_page_bar_container bar-1 active'>
-                    <?php echo (!empty($atts['step1']) ? esc_html($atts['step1']) : '1.Pledge'); ?></div>
-                <div class='lnpw_page_bar_container bar-2'>
-                    <?php echo (!empty($atts['step2']) ? esc_html($atts['step2']) : '2.Info'); ?></div>
-            </div>
-            <?php endif; ?>
-            <fieldset>
-                <h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : ''); ?>
-                </h6>
-                <div class="lnpw_page_amount">
-                    <?php foreach ($fixed_amount as $key => $value) : ?>
-
-                    <?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
-                    <div class="<?php echo 'lnpw_page_amount_' . $key; ?>">
-                        <div>
-                            <input type="radio" class="lnpw_page_tipping_default_amount"
-                                id="<?php echo "{$key}_page"; ?>" name="lnpw_page_tipping_default_amount"
-                                <?php echo $key == $index ? 'required' : ''; ?>
-                                value="<?php echo esc_html($fixed_amount[$key]['amount']  . ' ' . (!empty($fixed_amount[$key]['currency']) ? $fixed_amount[$key]['currency'] : 'SATS')); ?>">
-                            <?php if (!empty($fixed_amount[$key]['amount'])) : ?>
-                            <?php if ('true' === $atts['show_icon']) : ?>
-                            <i class="<?php echo esc_html($fixed_amount[$key]['icon']); ?>"></i>
-                            <?php endif; ?>
-                            <?php endif; ?>
-                        </div>
-                        <label
-                            for="<?php echo "{$key}_page" ?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . (!empty($fixed_amount[$key]['currency']) ? $fixed_amount[$key]['currency'] : 'SATS')); ?></label>
-
-                    </div>
-                    <?php endif; ?>
-
-                    <?php endforeach; ?>
-                    <?php if ('true' === $atts['free_input']) : ?>
-                    <div class="lnpw_page_tipping_free_input">
-                        <input type="number" id="lnpw_page_tipping_amount" name="lnpw_page_tipping_amount"
-                            placeholder="0.00" required />
+			.lnpw_page_header_container h6 {
+				color: <?php echo esc_html($atts['title_text_color']);
+						?>
+			}
 
 
-                        <select required name="lnpw_page_tipping_currency" id="lnpw_page_tipping_currency">
-                            <option disabled value="">Select currency</option>
-                            <?php foreach ($supported_currencies as $currency) : ?>
-                            <option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?>
-                                value="<?php echo $currency; ?>">
-                                <?php echo $currency; ?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <?php endif; ?>
+			.lnpw_page_tipping_info fieldset h6,
+			.lnpw_page_tipping_info h6 {
+				color: <?php echo esc_html($atts['tipping_text_color']);
+						?>
+			}
 
-                </div>
-                <?php if ('true' === $atts['free_input'] && $collect === 'false') : ?>
-                <div class="lnpw_page_tipping_free_input">
-                    <input type="number" id="lnpw_page_tipping_amount" name="lnpw_page_tipping_amount"
-                        placeholder="0.00" required />
+			.lnpw_page_amount_value_1,
+			.lnpw_page_amount_value_2,
+			.lnpw_page_amount_value_3,
+			.lnpw_page_tipping_free_input {
+				background-color: <?php echo esc_html($atts['fixed_background']);
+									?>;
+
+			}
+
+			.lnpw_page_header_container,
+			#lnpw_page_button>div:nth-child(1)>input {
+				background-color: <?php echo esc_html($atts['background']);
+									?>;
+			}
+
+			.lnpw_page_bar_container.active {
+				background-color: <?php echo esc_html($atts['active_color']);
+									?>;
+			}
+
+			#lnpw_page_tipping__button,
+			#lnpw_page_button>input.page-next-form {
+				background-color: <?php echo esc_html($atts['button_color']);
+									?>;
+			}
+
+			.lnpw_page_bar_container div {
+				background-color: <?php echo esc_html($atts['inactive_color']);
+									?>;
+			}
+		</style>
+
+		<div id="lnpw_page">
+			<div class="lnpw_page_tipping_container">
+				<form method="POST" action="" id="page_tipping_form">
+					<div class="lnpw_page_header_container">
+						<?php if ($logo) : ?>
+							<div class="lnpw_logo_wrap">
+								<img width="180" height="180" alt="Tipping page logo" src=<?php echo esc_url($logo); ?> />
+							</div>
+						<?php endif; ?>
+						<?php if (!empty($atts['title'])) : ?>
+							<div>
+								<h6><?php echo esc_html($atts['title']); ?></h6>
+							</div>
+						<?php endif; ?>
+					</div>
+					<?php if ($collect_data == 'true') : ?>
+						<div class='lnpw_page_bar_container'>
+							<div class='lnpw_page_bar_container bar-1 active'>
+								<?php echo (!empty($atts['step1']) ? esc_html($atts['step1']) : '1.Pledge'); ?></div>
+							<div class='lnpw_page_bar_container bar-2'>
+								<?php echo (!empty($atts['step2']) ? esc_html($atts['step2']) : '2.Info'); ?></div>
+						</div>
+					<?php endif; ?>
+					<fieldset>
+						<h6><?php echo (!empty($atts['tipping_text']) ? esc_html($atts['tipping_text']) : ''); ?>
+						</h6>
+						<div class="lnpw_page_amount">
+							<?php foreach ($fixed_amount as $key => $value) : ?>
+
+								<?php if ($fixed_amount[$key]['enabled'] === 'true') : ?>
+									<div class="<?php echo 'lnpw_page_amount_' . $key; ?>">
+										<div>
+											<input type="radio" class="lnpw_page_tipping_default_amount" id="<?php echo "{$key}_page"; ?>" name="lnpw_page_tipping_default_amount" <?php echo $key == $index ? 'required' : ''; ?> value="<?php echo esc_html($fixed_amount[$key]['amount']  . ' ' . (!empty($fixed_amount[$key]['currency']) ? $fixed_amount[$key]['currency'] : 'SATS')); ?>">
+											<?php if (!empty($fixed_amount[$key]['amount'])) : ?>
+												<?php if ('true' === $atts['show_icon']) : ?>
+													<i class="<?php echo esc_html($fixed_amount[$key]['icon']); ?>"></i>
+												<?php endif; ?>
+											<?php endif; ?>
+										</div>
+										<label for="<?php echo "{$key}_page" ?>"><?php echo esc_html($fixed_amount[$key]['amount'] . ' ' . (!empty($fixed_amount[$key]['currency']) ? $fixed_amount[$key]['currency'] : 'SATS')); ?></label>
+
+									</div>
+								<?php endif; ?>
+
+							<?php endforeach; ?>
+							<?php if ('true' === $atts['free_input']) : ?>
+								<div class="lnpw_page_tipping_free_input">
+									<input type="number" id="lnpw_page_tipping_amount" name="lnpw_page_tipping_amount" placeholder="0.00" required />
 
 
-                    <select required name="lnpw_page_tipping_currency" id="lnpw_page_tipping_currency">
-                        <option disabled value="">Select currency</option>
-                        <?php foreach ($supported_currencies as $currency) : ?>
-                        <option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?>
-                            value="<?php echo $currency; ?>">
-                            <?php echo $currency; ?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <?php endif; ?>
+									<select required name="lnpw_page_tipping_currency" id="lnpw_page_tipping_currency">
+										<option disabled value="">Select currency</option>
+										<?php foreach ($supported_currencies as $currency) : ?>
+											<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+												<?php echo $currency; ?>
+											</option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							<?php endif; ?>
 
-                <div class="lnpw_page_tipping_converted_values">
-                    <input type="text" id="lnpw_page_converted_amount" name="lnpw_page_converted_amount" readonly />
-                    <input type="text" id="lnpw_page_converted_currency" name="lnpw_page_converted_currency" readonly />
-                </div>
+						</div>
+						<?php if ('true' === $atts['free_input'] && $collect === 'false') : ?>
+							<div class="lnpw_page_tipping_free_input">
+								<input type="number" id="lnpw_page_tipping_amount" name="lnpw_page_tipping_amount" placeholder="0.00" required />
 
 
-                <div id="lnpw_page_button">
-                    <input type="hidden" id="lnpw_page_redirect_link" name="lnpw_page_redirect_link"
-                        value=<?php echo $atts['redirect']; ?> />
-                    <?php if ($collect_data == 'true') : ?>
-                    <input type="button" name="next" class="page-next-form" value="continue >" />
-                    <?php else : ?>
-                    <button type="submit"
-                        id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
-                    <?php endif; ?>
-                </div>
+								<select required name="lnpw_page_tipping_currency" id="lnpw_page_tipping_currency">
+									<option disabled value="">Select currency</option>
+									<?php foreach ($supported_currencies as $currency) : ?>
+										<option <?php echo $atts['currency'] === $currency ? 'selected' : ''; ?> value="<?php echo $currency; ?>">
+											<?php echo $currency; ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endif; ?>
 
-            </fieldset>
-            <?php if ($collect_data == 'true') : ?>
-            <fieldset>
-                <div class="lnpw_page_donor_information">
-                    <?php foreach ($collect as $key => $value) : ?>
-                    <?php if ($collect[$key]['display'] == 'true') : ?>
-                    <div class="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}_wrap"; ?>">
+						<div class="lnpw_page_tipping_converted_values">
+							<input type="text" id="lnpw_page_converted_amount" name="lnpw_page_converted_amount" readonly />
+							<input type="text" id="lnpw_page_converted_currency" name="lnpw_page_converted_currency" readonly />
+						</div>
 
-                        <input type="text" placeholder="<?php echo esc_html($collect[$key]['label']); ?>"
-                            id="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}"; ?>"
-                            name="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['label']}"; ?>"
-                            <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
-                    </div>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <div id="lnpw_page_button">
-                    <div>
-                        <input type="button" name="previous" class="page-previous-form" value="< previous" />
-                    </div>
-                    <div>
-                        <button type="submit"
-                            id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
-                    </div>
-                </div>
-            </fieldset>
-            <?php endif; ?>
-        </form>
-    </div>
-</div>
-<div id="powered_by">
-    <p>Powered by <a href='https://btcpaywall.com/' target='_blank'>BTCPayWall</a></p>
-</div>
-</div>
-<?php
+
+						<div id="lnpw_page_button">
+							<input type="hidden" id="lnpw_page_redirect_link" name="lnpw_page_redirect_link" value=<?php echo $atts['redirect']; ?> />
+							<?php if ($collect_data == 'true') : ?>
+								<input type="button" name="next" class="page-next-form" value="continue >" />
+							<?php else : ?>
+								<button type="submit" id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
+							<?php endif; ?>
+						</div>
+
+					</fieldset>
+					<?php if ($collect_data == 'true') : ?>
+						<fieldset>
+							<div class="lnpw_page_donor_information">
+								<?php foreach ($collect as $key => $value) : ?>
+									<?php if ($collect[$key]['display'] == 'true') : ?>
+										<div class="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}_wrap"; ?>">
+
+											<input type="text" placeholder="<?php echo esc_html($collect[$key]['label']); ?>" id="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['id']}"; ?>" name="<?php echo "lnpw_page_tipping_donor_{$collect[$key]['label']}"; ?>" <?php echo $collect[$key]['mandatory'] === 'true' ? 'required' : ''; ?> />
+										</div>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</div>
+							<div id="lnpw_page_button">
+								<div>
+									<input type="button" name="previous" class="page-previous-form" value="< previous" />
+								</div>
+								<div>
+									<button type="submit" id="lnpw_page_tipping__button"><?php echo (!empty($atts['button_text']) ? esc_html($atts['button_text']) : 'Tip'); ?></button>
+								</div>
+							</div>
+						</fieldset>
+					<?php endif; ?>
+				</form>
+			</div>
+		</div>
+		<div id="powered_by">
+			<p>Powered by <a href='https://btcpaywall.com/' target='_blank'>BTCPayWall</a></p>
+		</div>
+		</div>
+	<?php
 
 		return ob_get_clean();
 	}
@@ -1920,9 +1868,9 @@ class Lightning_Paywall_Public
 		ob_start();
 
 	?>
-<div class="lnpw_store">
-    <?php foreach ($myposts as $post) : setup_postdata($post); ?>
-    <?php
+		<div class="lnpw_store">
+			<?php foreach ($myposts as $post) : setup_postdata($post); ?>
+				<?php
 				$gutenberg = $this->extract_gutenberg_preview($post);
 				$elementor = $this->extract_elementor_preview($post);
 				$bakery = $this->extract_bakery_preview($post, 'lnpw_start_video');
@@ -1930,22 +1878,22 @@ class Lightning_Paywall_Public
 				$integrated = $this->integrate_preview_functions($gutenberg, $elementor, $bakery, $shortcode);
 
 				if (null !== $integrated) : ?>
-    <div class="lnpw_store_video">
-        <div class="lnpw_store_video_preview">
-            <img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
-        </div>
-        <div class="lnpw_store_video_information">
-            <a href="<?php the_permalink($post); ?>">
-                <h5><?php echo esc_html($integrated['title']); ?></h5>
+					<div class="lnpw_store_video">
+						<div class="lnpw_store_video_preview">
+							<img src="<?php echo esc_url($integrated['preview']) ?>" alt="Video preview" />
+						</div>
+						<div class="lnpw_store_video_information">
+							<a href="<?php the_permalink($post); ?>">
+								<h5><?php echo esc_html($integrated['title']); ?></h5>
 
-                <h6><?php echo esc_html($integrated['description']); ?></h6>
-            </a>
-        </div>
-    </div>
-    <?php endif; ?>
-    <?php endforeach;
+								<h6><?php echo esc_html($integrated['description']); ?></h6>
+							</a>
+						</div>
+					</div>
+				<?php endif; ?>
+			<?php endforeach;
 			wp_reset_postdata(); ?>
-</div>
+		</div>
 <?php
 
 		return ob_get_clean();

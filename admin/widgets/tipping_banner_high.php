@@ -13,7 +13,7 @@ class Tipping_Banner_High extends WP_Widget
 
     public function widget($args, $instance)
     {
-        echo do_shortcode("[lnpw_tipping_skyscraper dimension='160x600' title = '{$instance['title']}' description	= '{$instance['description']}'
+        echo do_shortcode("[lnpw_tipping_skyscraper dimension='200x600' title = '{$instance['title']}' description	= '{$instance['description']}'
         currency = '{$instance['currency']}'
         background_color = '{$instance['background_color']}'
         title_text_color = '{$instance['title_text_color']}'
@@ -213,7 +213,7 @@ class Tipping_Banner_High extends WP_Widget
                 for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php echo esc_html__('Title:', 'text_domain'); ?></label>
             <textarea id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>"
-                type="text"><?php echo esc_attr($title); ?></textarea>
+                type="text"><?php echo esc_html($title); ?></textarea>
         </div>
         <div class="col-50">
             <label
@@ -230,7 +230,7 @@ class Tipping_Banner_High extends WP_Widget
                 for="<?php echo esc_attr($this->get_field_id('description')); ?>"><?php echo esc_html__('Description:', 'text_domain'); ?></label>
             <textarea id="<?php echo esc_attr($this->get_field_id('description')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('description')); ?>"
-                type="text"><?php echo esc_attr($description); ?></textarea>
+                type="text"><?php echo esc_html($description); ?></textarea>
         </div>
         <div class="col-50">
             <label
@@ -247,7 +247,7 @@ class Tipping_Banner_High extends WP_Widget
                 for="<?php echo esc_attr($this->get_field_id('tipping_text')); ?>"><?php echo esc_html__('Tipping text', 'text_domain'); ?></label>
             <textarea id="<?php echo esc_attr($this->get_field_id('tipping_text')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('tipping_text')); ?>"
-                type="text"><?php echo esc_attr($tipping_text); ?></textarea>
+                type="text"><?php echo esc_html($tipping_text); ?></textarea>
         </div>
         <div class="col-50">
             <label
@@ -392,8 +392,8 @@ class Tipping_Banner_High extends WP_Widget
                 for="<?php echo esc_attr($this->get_field_id('button_text')); ?>"><?php echo esc_html__('Button text', 'text_domain'); ?></label>
 
             <textarea id="<?php echo esc_attr($this->get_field_id('button_text')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('button_text')); ?>" type="text"
-                value="<?php echo esc_attr($button_text); ?>"><?php echo esc_attr($button_text); ?></textarea>
+                name="<?php echo esc_attr($this->get_field_name('button_text')); ?>"
+                type="text"><?php echo esc_html($button_text); ?></textarea>
         </div>
     </div>
     <div class="row">
