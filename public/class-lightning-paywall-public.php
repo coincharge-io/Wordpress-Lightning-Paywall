@@ -1171,7 +1171,7 @@ class Lightning_Paywall_Public
 	public function render_shortcode_skyscraper_tipping($atts)
 	{
 		$atts = shortcode_atts(array(
-			'dimension' 	=> '200x600',
+			'dimension' 	=> '200x500',
 			'title'			=> 'Support my work',
 			'description'	=> '',
 			'currency'		=> 'SATS',
@@ -1214,7 +1214,7 @@ class Lightning_Paywall_Public
 			'mandatory_message' => 'false',
 			'widget'			=> 'false'
 		), $atts);
-		$dimension = explode('x', ($atts['dimension'] == '200x600' ? '200x600' : '600x200'));
+		$dimension = explode('x', ($atts['dimension'] == '200x500' ? '200x500' : '600x200'));
 		$supported_currencies = Lightning_Paywall_Admin::TIPPING_CURRENCIES;
 		$logo = wp_get_attachment_image_src($atts['logo_id']) ? wp_get_attachment_image_src($atts['logo_id'])[0] : $atts['logo_id'];
 		$background = wp_get_attachment_image_src($atts['background_id']) ? wp_get_attachment_image_src($atts['background_id'])[0] : $atts['background_id'];
@@ -1233,7 +1233,7 @@ class Lightning_Paywall_Public
 		$form_prefix = $is_widget === 'lnpw_widget' ? 'lnpw_widget_' : '';
 		$form_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? '_high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? '_wide' : '');
 		$width = $dimension[0] === '600' ? '70' : '180';
-		$height = $dimension[0] === '600' ? '70' : '100';
+		$height = $dimension[0] === '600' ? '70' : '180';
 		$container_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? 'high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? 'wide' : '');
 
 		$version = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? 'high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? 'wide' : 'basic');

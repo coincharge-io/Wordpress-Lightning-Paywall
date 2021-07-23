@@ -67,10 +67,10 @@ class Tipping_Banner_Wide extends WP_Widget
         $currency = !empty($instance['currency']) ? $instance['currency'] : esc_html__('SATS', 'text_domain');
 
         $background_color = !empty($instance['background_color']) ? $instance['background_color'] : esc_html__('#E6E6E6', 'text_domain');
-        $title_text_color = !empty($instance['title_text_color']) ? $instance['title_text_color'] : esc_html__('#000000', 'text_domain');
+        $title_text_color = !empty($instance['title_text_color']) ? $instance['title_text_color'] : esc_html__('#FFFFFF', 'text_domain');
 
         $tipping_text = !empty($instance['tipping_text']) ? $instance['tipping_text'] : esc_html__('Enter Tipping Amount', 'text_domain');
-        $tipping_text_color = !empty($instance['tipping_text_color']) ? $instance['tipping_text_color'] : esc_html__('#ffffff', 'text_domain');
+        $tipping_text_color = !empty($instance['tipping_text_color']) ? $instance['tipping_text_color'] : esc_html__('#000000', 'text_domain');
         $redirect = !empty($instance['redirect']) ? $instance['redirect'] : esc_html__('', 'text_domain');
         $amount = !empty($instance['amount']) ? $instance['amount'] : esc_html__('', 'text_domain');
         $description_color = !empty($instance['description_color']) ? $instance['description_color'] : esc_html__('#000000', 'text_domain');
