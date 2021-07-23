@@ -135,8 +135,9 @@ class Tipping_Banner_High extends WP_Widget
         </div>
         <div class="col-50">
             <?php if ($background) : ?>
-            <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image_high"
-                name="lnpw_tipping_button_image_background"><img width="100" height="100" alt="Tipping box background"
+            <button id="lnpw_tipping_button_image_background_banner_high"
+                class="widget-tipping-basic-upload_box_image_high" name="lnpw_tipping_button_image_background"><img
+                    width="100" height="100" alt="Tipping box background"
                     src="<?php echo $background[0]; ?>" /></a></button>
             <button class="widget-tipping-basic-remove_box_image_high">
                 <?php echo esc_html__('Remove', 'text_domain'); ?></button>
@@ -145,7 +146,8 @@ class Tipping_Banner_High extends WP_Widget
                 name="<?php echo esc_attr($this->get_field_name('background_id')); ?>" type="text"
                 value="<?php echo esc_attr($background_id); ?>" />
             <?php else : ?>
-            <button id="lnpw_tipping_button_image_background" class="widget-tipping-basic-upload_box_image_high"
+            <button id="lnpw_tipping_button_image_background_banner_high"
+                class="widget-tipping-basic-upload_box_image_high"
                 name="lnpw_tipping_button_image_background"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
             <button class="widget-tipping-basic-remove_box_image_high"
                 style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>
@@ -186,7 +188,7 @@ class Tipping_Banner_High extends WP_Widget
         </div>
         <div class="col-50">
             <?php if ($logo_id) : ?>
-            <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo_high"
+            <button id="lnpw_tipping_button_image_banner_high" class="widget-tipping-basic-upload_box_logo_high"
                 name="lnpw_tipping_button_image"><img width="100" height="100" alt="Tipping box logo"
                     src="<?php echo $logo[0]; ?>" /></a></button>
             <button
@@ -196,7 +198,7 @@ class Tipping_Banner_High extends WP_Widget
                 name="<?php echo esc_attr($this->get_field_name('logo_id')); ?>" type="text"
                 value="<?php echo esc_attr($logo_id); ?>" />
             <?php else : ?>
-            <button id="lnpw_tipping_button_image" class="widget-tipping-basic-upload_box_logo_high"
+            <button id="lnpw_tipping_button_image_banner_high" class="widget-tipping-basic-upload_box_logo_high"
                 name="lnpw_tipping_button_image"><?php echo esc_html__('Upload', 'text_domain'); ?></button>
             <button class="widget-tipping-basic-remove_box_image_high"
                 style="display:none"><?php echo esc_html__('Remove', 'text_domain'); ?></button>

@@ -1035,19 +1035,17 @@ class Lightning_Paywall_Public
                 <div class="lnpw_tipping_box_header_container">
                     <?php if ($logo) : ?>
                     <div id="lnpw_box_logo_wrap">
-                        <img width="70" height="70" alt="Tipping logo" src=<?php echo esc_url($logo); ?> />
+                        <img width="70" height="70" alt="Tipping logo" src="<?php echo esc_url($logo); ?>" />
                     </div>
                     <?php endif; ?>
-                    <?php if (!empty($atts['title'])) : ?>
                     <div>
+                        <?php if (!empty($atts['title'])) : ?>
                         <h6><?php echo esc_html($atts['title']); ?></h6>
+                        <?php endif; ?>
+                        <?php if (!empty($atts['description'])) : ?>
+                        <p><?php echo esc_html($atts['description']); ?></p>
+                        <?php endif; ?>
                     </div>
-                    <?php endif; ?>
-                </div>
-                <div class="lnpw_tipping_box_info_container">
-                    <?php if (!empty($atts['description'])) : ?>
-                    <p><?php echo esc_html($atts['description']); ?></p>
-                    <?php endif; ?>
                 </div>
                 <h6><?php echo (!empty($atts['tipping_text']) ? $atts['tipping_text'] : ''); ?></h6>
                 <div class="lnpw_tipping_box_amount">
@@ -1235,7 +1233,7 @@ class Lightning_Paywall_Public
 		$is_wide = $dimension[0] === '600' ? 'wide' : 'high';
 		$form_prefix = $is_widget === 'lnpw_widget' ? 'lnpw_widget_' : '';
 		$form_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? '_high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? '_wide' : '');
-		$width = $dimension[0] === '600' ? '70' : '100';
+		$width = $dimension[0] === '600' ? '70' : '180';
 		$height = $dimension[0] === '600' ? '70' : '100';
 		$container_suffix = ($is_widget === 'lnpw_widget' && $dimension[0] === '200') ? 'high' : (($is_widget === 'lnpw_widget' && $dimension[0] === '600') ? 'wide' : '');
 
