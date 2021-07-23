@@ -146,12 +146,8 @@
 
     $("#skyscraper_tipping_form").submit(function (e) {
       e.preventDefault();
-      var text = $(
-        "#lnpw_skyscraper_tipping__button"
-      ).text();
-      $(
-        "#lnpw_skyscraper_tipping__button"
-      ).html(
+      var text = $("#lnpw_skyscraper_tipping__button").text();
+      $("#lnpw_skyscraper_tipping__button").html(
         `<span class="tipping-border" role="status" aria-hidden="true"></span>`
       );
       if (lnpw_invoice_id) {
@@ -175,10 +171,8 @@
           message: $("#lnpw_skyscraper_tipping_donor_message").val(),
         },
         success: function (response) {
-          $(
-            "#lnpw_skyscraper_tipping__button"
-          ).html(text);
-          
+          $("#lnpw_skyscraper_tipping__button").html(text);
+
           if (response.success) {
             lnpw_invoice_id = response.data.invoice_id;
             donor = response.data.donor;
@@ -436,7 +430,7 @@
       //var converted_amount = '~' + fiat_to_crypto(currency, amount, usd, eur, sats)+ ' '+get_currency(currency)
       $("#lnpw_converted_amount")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(currency, amount, usd, eur, sats))
+        .val(fiat_to_crypto(currency, amount, usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_converted_currency")
         .attr("readonly", false)
@@ -451,23 +445,9 @@
       //var converted_amount = '~' + fiat_to_crypto(currency, amount, usd, eur, sats)+ ' '+get_currency(currency)
       $("#lnpw_converted_amount_lnpw_widget")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(currency, amount, usd, eur, sats))
+        .val(fiat_to_crypto(currency, amount, usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_converted_currency_lnpw_widget")
-        .attr("readonly", false)
-        .val(get_currency(currency))
-        .attr("readonly", true);
-    });
-
-    $("#lnpw_skyscraper_tipping_amount").on("input", function () {
-      var currency = $("#lnpw_skyscraper_tipping_currency").val();
-      var amount = $(this).val();
-      var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
-      $("#lnpw_skyscraper_converted_amount")
-        .attr("readonly", false)
-        .val("~" + fiat_to_crypto(currency, amount, usd, eur, sats))
-        .attr("readonly", true);
-      $("#lnpw_skyscraper_converted_currency")
         .attr("readonly", false)
         .val(get_currency(currency))
         .attr("readonly", true);
@@ -479,7 +459,7 @@
       var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
       $("#lnpw_page_converted_amount")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(currency, amount, usd, eur, sats))
+        .val(fiat_to_crypto(currency, amount, usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_page_converted_currency")
         .attr("readonly", false)
@@ -497,7 +477,7 @@
         var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
         $("#lnpw_widget_lnpw_skyscraper_converted_amount_high")
           .attr("readonly", false)
-          .val("~" + fiat_to_crypto(currency, amount, usd, eur, sats))
+          .val(fiat_to_crypto(currency, amount, usd, eur, sats))
           .attr("readonly", true);
         $("#lnpw_widget_lnpw_skyscraper_converted_currency_high")
           .attr("readonly", false)
@@ -516,7 +496,7 @@
         var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
         $("#lnpw_widget_lnpw_skyscraper_converted_amount_wide")
           .attr("readonly", false)
-          .val("~" + fiat_to_crypto(currency, amount, usd, eur, sats))
+          .val(fiat_to_crypto(currency, amount, usd, eur, sats))
           .attr("readonly", true);
         $("#lnpw_widget_lnpw_skyscraper_converted_currency_wide")
           .attr("readonly", false)
@@ -524,7 +504,19 @@
           .attr("readonly", true);
       }
     );
-
+    $("#lnpw_skyscraper_tipping_amount").on("input", function () {
+      var currency = $("#lnpw_skyscraper_tipping_currency").val();
+      var amount = $(this).val();
+      var converted = fiat_to_crypto(currency, amount, usd, eur, sats);
+      $("#lnpw_skyscraper_converted_amount")
+        .attr("readonly", false)
+        .val(fiat_to_crypto(currency, amount, usd, eur, sats))
+        .attr("readonly", true);
+      $("#lnpw_skyscraper_converted_currency")
+        .attr("readonly", false)
+        .val(get_currency(currency))
+        .attr("readonly", true);
+    });
     $("#value_1, #value_2, #value_3").change(function () {
       if ($(this).is(":checked")) {
         var predefined = $(this).val().split(" ");
@@ -536,15 +528,12 @@
           sats
         );
         var converted_icon_amount =
-          "~" +
           fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
           " " +
           get_currency(predefined[1]);
         $("#lnpw_skyscraper_converted_amount")
           .attr("readonly", false)
-          .val(
-            "~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats)
-          )
+          .val(fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
           .attr("readonly", true);
         $("#lnpw_skyscraper_converted_currency")
           .attr("readonly", false)
@@ -586,13 +575,12 @@
         sats
       );
       var converted_icon_amount =
-        "~" +
         fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
         " " +
         get_currency(predefined[1]);
       $("#lnpw_page_converted_amount")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .val(fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_page_converted_currency")
         .attr("readonly", false)
@@ -634,13 +622,12 @@
         sats
       );
       var converted_icon_amount =
-        "~" +
         fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
         " " +
         get_currency(predefined[1]);
       $("#lnpw_skyscraper_converted_amount")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .val(fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_skyscraper_converted_currency")
         .attr("readonly", false)
@@ -682,13 +669,12 @@
         sats
       );
       var converted_icon_amount =
-        "~" +
         fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
         " " +
         get_currency(predefined[1]);
       $("#lnpw_skyscraper_converted_amount")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .val(fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_skyscraper_converted_currency")
         .attr("readonly", false)
@@ -748,13 +734,12 @@
         sats
       );
       var converted_icon_amount =
-        "~" +
         fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
         " " +
         get_currency(predefined[1]);
       $("#lnpw_widget_lnpw_skyscraper_converted_amount_high")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .val(fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_widget_lnpw_skyscraper_converted_currency_high")
         .attr("readonly", false)
@@ -814,13 +799,12 @@
         sats
       );
       var converted_icon_amount =
-        "~" +
         fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats) +
         " " +
         get_currency(predefined[1]);
       $("#lnpw_widget_lnpw_skyscraper_converted_amount_wide")
         .attr("readonly", false)
-        .val("~" + fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
+        .val(fiat_to_crypto(predefined[1], predefined[0], usd, eur, sats))
         .attr("readonly", true);
       $("#lnpw_widget_lnpw_skyscraper_converted_currency_wide")
         .attr("readonly", false)

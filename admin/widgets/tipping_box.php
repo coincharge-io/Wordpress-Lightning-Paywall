@@ -69,7 +69,7 @@ class Tipping_Box extends WP_Widget
         $logo = wp_get_attachment_image_src($logo_id);
         $background = wp_get_attachment_image_src($background_id);
         $hf_color = !empty($instance['hf_color']) ? $instance['hf_color'] : esc_html__('#1d5aa3', 'text_domain');
-        $input_background = !empty($instance['input_background']) ? $instance['input_background'] : esc_html__('#fe642e', 'text_domain');
+        $input_background = !empty($instance['input_background']) ? $instance['input_background'] : esc_html__('#f6b330', 'text_domain');
 
 ?>
 <div class="tipping_box">
@@ -207,8 +207,8 @@ class Tipping_Box extends WP_Widget
             <label
                 for="<?php echo esc_attr($this->get_field_id('tipping_text')); ?>"><?php echo esc_html__('Tipping text', 'text_domain'); ?></label>
             <textarea id="<?php echo esc_attr($this->get_field_id('tipping_text')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('tipping_text')); ?>" type="text"
-                ><?php echo esc_html($tipping_text); ?></textarea>
+                name="<?php echo esc_attr($this->get_field_name('tipping_text')); ?>"
+                type="text"><?php echo esc_html($tipping_text); ?></textarea>
         </div>
         <div class="col-50">
             <label
