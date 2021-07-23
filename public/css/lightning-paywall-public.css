@@ -467,10 +467,11 @@ div.lnpw_skyscraper_header_container.wide > div:nth-child(2) > h6 {
   border: none;
   background: transparent;
 }
-
+.lnpw_skyscraper_header_container.high h6 {
+  margin-top: 20px;
+}
 .lnpw_skyscraper_tipping_amount,
 .lnpw_skyscraper_tipping_converted_values,
-.lnpw_skyscraper_header_container h6,
 .lnpw_skyscraper_info_container p {
   display: flex;
   align-items: center;
