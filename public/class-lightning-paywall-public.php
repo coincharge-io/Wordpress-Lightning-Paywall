@@ -920,7 +920,6 @@ class Lightning_Paywall_Public
 		$form = $is_widget === 'lnpw_widget' ? 'tipping_form_box_widget' : 'tipping_form_box';
 		$suffix = $is_widget === 'lnpw_widget' ? '_lnpw_widget' : '';
 		$version = $atts['widget'] === 'true' ? 'widget' : 'basic';
-
 		ob_start();
 	?>
 <style>

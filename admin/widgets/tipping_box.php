@@ -63,7 +63,7 @@ class Tipping_Box extends WP_Widget
 
         $button_color = !empty($instance['button_color']) ? $instance['button_color'] : esc_html__('#FE642E', 'text_domain');
 
-        $logo_id = !empty($instance['logo_id']) ? $instance['logo_id'] : esc_html__('', 'text_domain');
+        $logo_id = !empty($instance['logo_id']) ? $instance['logo_id'] : esc_html__('https://btcpaywall.com/wp-content/uploads/2021/07/BTCPayWall-logo_square.jpg', 'text_domain');
         $background_id = !empty($instance['background_id']) ? $instance['background_id'] : esc_html__('', 'text_domain');
 
         $logo = wp_get_attachment_image_src($logo_id);
